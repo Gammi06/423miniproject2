@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject2.domain.wanteds.WantedsDao">
+
+	<select id="findAllByPosition" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT w.id, w.position_code_id, w.career_code_id, w.company_id, w.title, w.detail, w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name, c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		WHERE w.position_code_id = #{positionCodeId}
+		ORDER BY w.view_count DESC
+		LIMIT 8
+		</select>
+
+	<select id="findAllHot" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id, w.position_code_id,
+		w.career_code_id, w.company_id, w.title, w.detail, w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name, c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id
+		= c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON
+		l.wanted_id = w.id
+		WHERE w.enddate > NOW()
+		ORDER BY total_count DESC
+		LIMIT 8
+	</select>
+
+	<select id="findBestHot" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id, w.position_code_id,
+		w.career_code_id, w.company_id, w.title, w.detail, w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name, c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id
+		= c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON
+		l.wanted_id = w.id
+		WHERE w.enddate > NOW()
+		ORDER BY total_count DESC
+		LIMIT 1
+	</select>
+	
+	<select id="findAllWanteds" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsManageDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id, w.career_code_id, p.name positionName, c.name careerName, if(w.enddate > NOW(), '채용중', '마감') state
+		FROM wanteds w
+		LEFT OUTER JOIN positions_code p
+		ON p.id = w.position_code_id
+		LEFT OUTER JOIN careers_code c
+		ON c.id = w.career_code_id
+		WHERE w.company_id = #{companyId}
+	</select>
+	
+	<select id="findAllByCareer" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsManageDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.career_code_id, c.name, if(w.enddate > NOW(), '채용중', '마감') state
+		FROM wanteds w
+		INNER JOIN careers_code c
+		ON c.id = w.career_code_id
+		WHERE w.company_id = #{companyId}
+		AND w.career_code_id = #{careerCodeId}
+	</select>
+	
+	<select id="findAllByPositionToCompany" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsManageDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id , p.name, if(w.enddate > NOW(), '모집중', '마감') state
+		FROM wanteds w
+		INNER JOIN positions_code p
+		ON p.id = w.position_code_id
+		WHERE w.company_id = #{companyId}
+		AND w.position_code_id = #{positionCodeId}
+	</select>
+	
+	<select id="findByBoth" resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsManageDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id, w.career_code_id, c.name, p.name, if(w.enddate > NOW(), '모집중', '마감') state
+		FROM wanteds w
+		LEFT OUTER JOIN positions_code p
+		ON p.id = w.position_code_id
+		LEFT OUTER JOIN careers_code c
+		ON c.id = w.career_code_id
+		WHERE w.company_id = #{companyId}
+		AND w.position_code_id = #{positionCodeId}
+		AND w.career_code_id = #{careerCodeId}
+	</select>
+	
+	<select id="paging" resultType="site.metacoding.miniproject2.web.dto.response.companys.PagingDto">
+		SELECT totalCount, totalPage, currentPage,
+		if(currentPage =
+		0, 1, 0) first,
+		if(currentPage = totalPage - 1, 1, 0) last
+		FROM
+		(
+		SELECT COUNT(*) totalCount, CEIL(COUNT(*)/5) totalPage,
+		#{page} currentPage, 0 FIRST, 0 last
+		FROM wanteds
+		) result
+	</select>
+
+</mapper>

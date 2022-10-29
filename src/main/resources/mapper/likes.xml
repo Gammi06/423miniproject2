@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject1.domain.likes.LikesDao">
+
+	<select id="findlikes" resultType="site.metacoding.miniproject1.web.dto.request.likes.LikesRespListDto">
+		SELECT w.company_id,w.* ,if(enddate>NOW(),'모집중','마감') state,
+		c.company_name, c.photo, l.user_id
+		FROM wanteds w LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN likes l
+		ON l.wanted_id= w.id
+		WHERE l.user_id = #{id}
+	</select>
+
+	<insert id ="insert">
+		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{id}, NOW())
+	</insert>
+    
+</mapper>

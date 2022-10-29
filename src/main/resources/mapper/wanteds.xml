@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject2.domain.wanteds.WantedsDao">
+
+	<select id="findAllByCompanyId"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id,
+		w.position_code_id,
+		w.career_code_id, w.company_id, w.title, w.detail,
+		w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name,
+		c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id
+		= c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY
+		wanted_id) l
+		ON
+		l.wanted_id = w.id
+		WHERE w.enddate > NOW() AND c.id = #{id}
+		ORDER BY RAND()
+		LIMIT 8
+	</select>
+	
+	<select id="findByIdToDetail"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedDetailDto">
+		SELECT w.id, pc.name position_code_name, w.position_code_id, cc.name career_code_name,
+		w.title, w.detail, w.view_count, w.created, w.enddate, c.photo,
+		c.company_name, c.id company_id, c.region_code_name
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN positions_code pc
+		ON w.position_code_id = pc.id
+		LEFT OUTER JOIN careers_code cc
+		ON w.career_code_id = cc.id
+		WHERE w.id = #{id}
+	</select>
+
+	<select id="paging"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.PagingDto">
+		SELECT totalCount, totalPage, currentPage,
+		if(currentPage = 0, 1, 0) FIRST,
+		if(currentPage = totalPage - 1, 1, 0) LAST
+		FROM
+		(
+		SELECT COUNT(*) totalCount, CEIL(COUNT(*)/16) totalPage,
+		0 currentPage, 0 FIRST, 0 LAST
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN positions_code pc
+		ON w.position_code_id = pc.id
+		LEFT OUTER JOIN careers_code cc
+		ON w.career_code_id = cc.id
+		WHERE w.enddate > NOW()
+		<if test="keywordDto != null">
+			<if test="keywordDto.positionsCodeNames != null and keywordDto.positionsCodeNames != '전체'">
+				AND pc.name = #{keywordDto.positionsCodeNames}
+			</if>
+			<if test="keywordDto.regionsCodeNames != null and keywordDto.regionsCodeNames != '전체'">
+				AND c.region_code_name = #{keywordDto.regionsCodeNames}
+			</if>
+			<if test="keywordDto.CarrerCodeNames != null and keywordDto.CarrerCodeNames != '전체'">
+				AND cc.name = #{keywordDto.CarrerCodeNames}
+			</if>
+			<if test="keywordDto.skillsCodeNames != null">
+				
+			</if>
+		</if>
+		) result
+	</select>
+
+	<select id="findAllToSort"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id,
+		w.position_code_id, w.career_code_id, w.company_id, w.title, w.detail,
+		w.view_count, w.created, w.enddate, c.company_name, c.region_code_name, c.photo,
+		pc.name, cc.name
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON l.wanted_id = w.id
+		LEFT OUTER JOIN positions_code pc
+		ON w.position_code_id = pc.id
+		LEFT OUTER JOIN careers_code cc
+		ON w.career_code_id = cc.id
+		WHERE w.enddate > NOW()
+		<if test="keywordDto != null">
+			<if test="keywordDto.positionsCodeNames != null and keywordDto.positionsCodeNames != '전체'">
+				AND pc.name = #{keywordDto.positionsCodeNames}
+			</if>
+			<if test="keywordDto.regionsCodeNames != null and keywordDto.regionsCodeNames != '전체'">
+				AND c.region_code_name = #{keywordDto.regionsCodeNames}
+			</if>
+			<if test="keywordDto.CarrerCodeNames != null and keywordDto.CarrerCodeNames != '전체'">
+				AND cc.name = #{keywordDto.CarrerCodeNames}
+			</if>
+			<if test="keywordDto.skillsCodeNames != null and keywordDto.skillsCodeNames.size() != 0">
+				<foreach collection='keywordDto.skillsCodeNames' index="index">
+					<if test="keywordDto.skillsCodeNames.get(index) != null">
+						AND (
+						SELECT distinct(skills_code_id)
+						FROM myskills mk
+						LEFT OUTER JOIN skills_code sc
+						ON mk.skills_code_id = sc.id
+						WHERE mk.wanted_id = w.id
+						AND sc.name = #{keywordDto.skillsCodeNames.get(index)}
+					</if>
+				</foreach>
+			</if>
+		</if>
+		ORDER BY w.created DESC
+		OFFSET #{keywordDto.startNum} ROWS FETCH NEXT 16 ROWS ONLY
+	</select>
+
+	<select id="findAllLike"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id,
+		w.position_code_id, w.career_code_id, w.company_id, w.title, w.detail,
+		w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name,
+		c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON l.wanted_id = w.id
+		WHERE w.enddate > NOW() AND l.user_id = #{userId}
+		ORDER BY RAND()
+		LIMIT 4
+	</select>
+
+	<select id="findAllByposition"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT w.id, w.position_code_id, w.career_code_id,
+		w.company_id, w.title, w.detail, w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name, c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		WHERE w.position_code_id = #{positionCodeId}
+		ORDER BY RAND()
+		LIMIT 8
+	</select>
+
+	<select id="findAllHot"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id,
+		w.position_code_id,
+		w.career_code_id, w.company_id, w.title, w.detail,
+		w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name,
+		c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON l.wanted_id = w.id
+		WHERE w.enddate > NOW()
+		ORDER BY total_count DESC
+		LIMIT 8
+	</select>
+
+	<select id="findBestHot"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id,
+		w.position_code_id,
+		w.career_code_id, w.company_id, w.title, w.detail,
+		w.view_count, w.created, w.enddate,
+		c.company_name, c.region_code_name,
+		c.photo
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON l.wanted_id = w.id
+		WHERE w.enddate > NOW()
+		ORDER BY total_count DESC
+		LIMIT 1
+	</select>
+
+</mapper>
