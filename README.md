@@ -1,7 +1,8 @@
 # 미니 프로젝트 2
 
 ### 의존성 주입
-웹소켓, Redis 추가 예정 초기 개발단계에서는 MariaDB 사용함
+- 웹소켓, Redis 추가 예정
+- 초기 개발단계에서는 MariaDB 사용함
 
 ```sql
 Spring Boot DevTools-
@@ -13,8 +14,14 @@ Spring Web
 
 ### 라이브러리 추가
 ```sql
-implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
-implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.65'
+implementation 'javax.servlet:jstl:1.2'
+implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.65'
+implementation 'org.springframework.boot:spring-boot-starter-websocket'
+implementation 'org.webjars:webjars-locator-core'
+implementation 'org.webjars:sockjs-client:1.0.2'
+implementation 'org.webjars:stomp-websocket:2.3.3'
+implementation 'org.webjars:bootstrap:3.3.7'
+implementation 'org.webjars:jquery:3.1.1-1'
 ```
 
 ### 테이블 생성 (MariaDB)
@@ -580,6 +587,6 @@ UPDATE users SET company_id = 2 WHERE id = 6;
 UPDATE users SET company_id = 3 WHERE id = 7;
 UPDATE users SET company_id = 4 WHERE id = 8;
 UPDATE users SET company_id = 5 WHERE id = 3;
-```
 
 COMMIT;
+```
