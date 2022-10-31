@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+	runtimeOnly 'com.h2database:h2'
+	implementation 'com.auth0:java-jwt:3.10.3'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	compileOnly 'org.projectlombok:lombok'
@@ -26,8 +28,6 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'javax.servlet:jstl:1.2'
-	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.65'
 
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.webjars:webjars-locator-core'
