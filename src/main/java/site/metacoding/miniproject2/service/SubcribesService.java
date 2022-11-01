@@ -1,17 +1,43 @@
 package site.metacoding.miniproject2.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
+import site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto;
 
 @RequiredArgsConstructor
 @Service
 public class SubcribesService {
     private final SubcribesDao subcribesDao;
 
-    public void subcribesListPage(Integer id) {
-        subcribesDao.subcribesListPage(id);
+    @Transactional(readOnly = true)
+    public List<SubscribesListRespDto> subcribesListPage(Integer id) {
+        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(id);
+
+        List<SubscribesListRespDto> subscribesListRespDto = new ArrayList<>();
+        for (SubscribesListRespDto subcribes : subcribesList) {
+            subscribesListRespDto.add(new SubscribesListRespDto(subcribes));
+        }
+        return subcribesList;
     }
 
 }
+
+/*
+ * @Transactional(readOnly = true)
+ * public List<BoardAllRespDto> findAll() {
+ * List<Board> boardList = boardRepository.findAll();
+ * 
+ * List<BoardAllRespDto> boardAllRespDtoList = new ArrayList<>();
+ * for (Board board : boardList) {
+ * boardAllRespDtoList.add(new BoardAllRespDto(board));
+ * }
+ * 
+ * return boardAllRespDtoList;
+ * }
+ */
