@@ -6,17 +6,20 @@ import site.metacoding.miniproject2.domain.applys.Applys;
 
 public class ApplyReqDto {
 
+    /* >>>> 승현 작업함 <<<< */
     @Getter
     @Setter
-    public class ApplyUserReqDto {
+    public static class ApplyUserReqDto {
         private Integer wantedId;
         private Integer resumeId;
 
-        public Applys ToEntity() {
+        public Applys toEntity() {
             return Applys.builder()
                     .wantedId(wantedId)
                     .resumeId(resumeId)
                     .build();
         }
     }
+
+    /* >>>> <<<< */
 }
