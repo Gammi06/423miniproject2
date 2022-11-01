@@ -10,18 +10,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Users {
     private Integer id;
-	private String userId;
-	private String userPassword;
-	private String userName;
-	private Integer age;
-	private String phoneNumber;
-	private String email;
-	private String photo;
-	private String positionCodeName;
-	private Integer positionCodeId;
-	private Integer companyId;
-	private Integer mycareerId;
-	private Timestamp created;
+    private String userId;
+    private String userPassword;
+    private String userName;
+    private Integer age;
+    private String phoneNumber;
+    private String email;
+    private String photo;
+    private String positionCodeName;
+    private Integer positionCodeId;
+    private Integer companyId;
+    private Integer mycareerId;
+    private Timestamp created;
 
     @Builder
     public Users(Integer id, String userId, String userPassword, String userName, Integer age, String phoneNumber,
