@@ -33,7 +33,7 @@ public class LikesRespDto {
 
     @Setter
     @Getter
-    public static class LikeFideByIdRespDto {
+    public static class LikeFindByIdRespDto {
         private Integer id;
         private Integer userId;
         private Integer wantedId;
