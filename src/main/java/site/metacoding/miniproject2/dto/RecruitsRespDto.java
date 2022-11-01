@@ -36,8 +36,8 @@ public class RecruitsRespDto {
     public class RecruitsManageRespDto {
         private Integer id;
         private Integer companysId;
-        private String career;
-        private String position;
+        private String careerCodeId;
+        private String positionCodeId;
         private String resumeTitle;
         private String resumeIntro;
         private String state;
