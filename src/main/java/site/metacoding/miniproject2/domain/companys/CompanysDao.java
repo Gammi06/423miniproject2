@@ -1,10 +1,12 @@
 package site.metacoding.miniproject2.domain.companys;
 
+import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
+
 public interface CompanysDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
-    public void findByIdToDetail(Integer id);
+    public CompanyDetailRespDto findByIdToDetail(Integer id);
 
-    public void insert();
+    public void insert(Companys companys);
 
-    public void findByIdCompanysNumber(String companyNumber);
+    public Companys findByIdCompanysNumber(String companyNumber);
 }
