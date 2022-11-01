@@ -2,7 +2,6 @@ package site.metacoding.miniproject2.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.domain.educations.Educations;
 import site.metacoding.miniproject2.domain.users.Users;
 
 public class UsersReqDto {
@@ -64,7 +63,7 @@ public class UsersReqDto {
         private Integer positionCodeId;
         private Integer mycareerId;
         private Integer skillsCodeId;
-        // 학력은 DTO 가져오기
+        // 학력은 DTO 가져오기 (이건 Education에서 dto 만들고 가져오기)
         private String intro; // 간단 소개글 (Resunes)
 
     }
