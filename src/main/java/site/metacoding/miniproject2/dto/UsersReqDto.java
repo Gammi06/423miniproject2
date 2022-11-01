@@ -6,18 +6,6 @@ import site.metacoding.miniproject2.domain.educations.Educations;
 import site.metacoding.miniproject2.domain.users.Users;
 
 public class UsersReqDto {
-    private Integer id;
-    private String userId;
-    private String userPassword;
-    private String userName;
-    private Integer age;
-    private String phoneNumber;
-    private String email;
-    private String photo;
-    private String positionCodeName;
-    private Integer positionCodeId;
-    private Integer companyId;
-    private Integer mycareerId;
 
     /* >>>>> 성유 작업함 <<<<< */
     @Getter
