@@ -34,3 +34,5 @@ public class WantedsReqDto {
     }
 
 }
+
+/* >>>> 수현 작업 종료 <<<< */

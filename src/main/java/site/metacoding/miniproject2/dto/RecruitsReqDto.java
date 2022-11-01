@@ -6,3 +6,5 @@ package site.metacoding.miniproject2.dto;
 public class RecruitsReqDto {
 
 }
+
+/* >>>> 수현 작업 종료 <<<< */

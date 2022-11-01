@@ -16,8 +16,6 @@ public class WantedsRespDto {
      * 삭제
      */
 
-    @NoArgsConstructor
-    @AllArgsConstructor
     @Setter
     @Getter
     public class WantedDetailRespDto {
@@ -42,8 +40,6 @@ public class WantedsRespDto {
      * mySkills : ui를 위한 dto인것 같아서 삭제
      */
 
-    @NoArgsConstructor
-    @AllArgsConstructor
     @Setter
     @Getter
     public class WantedsListRespDto {
