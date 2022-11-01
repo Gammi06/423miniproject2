@@ -24,7 +24,8 @@ public class LikesService {
         return null;
     }
 
-    public void deleteLike(Integer id) {
+    public void deleteById(Integer id) {
+        likesDao.deleteById(id);
     }
 
 }

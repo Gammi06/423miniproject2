@@ -12,7 +12,7 @@ public interface LikesDao {
 
     public void insert();
 
-    public void delete(Integer id);
+    public void deleteById(Integer id);
 
     /* >>>> 승현 작업 종료 <<<< */
 }
