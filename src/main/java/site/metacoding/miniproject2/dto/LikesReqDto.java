@@ -21,6 +21,7 @@ public class LikesReqDto {
 					.build();
 		}
 	}
+	
 	/* >>>> <<<< */
 
 }

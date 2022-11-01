@@ -1,15 +1,19 @@
 package site.metacoding.miniproject2.dto;
 
+import java.sql.Timestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
 public class LikesRespDto {
 
     /* >>>> 승현 작업함 <<<< */
+
+    /* 기존 작업자 : 지원 */
     @Setter
     @Getter
-    public static class LikeWantedInfoRespDto {
-        private Integer Id;
+    public static class LikeRespDto {
+        private Integer id;
         private String title;
         private Integer companysId;
         private String companyName;
@@ -27,5 +31,14 @@ public class LikesRespDto {
      * /////////////////////////////////////////
      */
 
-    /* >>>> <<<< */
+    @Setter
+    @Getter
+    public static class LikeFideByIdRespDto {
+        private Integer id;
+        private Integer userId;
+        private Integer wantedId;
+        private Timestamp created;
+    }
+
+    /* >>>> 승현 작업 종료 <<<< */
 }
