@@ -6,6 +6,7 @@ import lombok.Setter;
 /*>>>>>>지원 작업함<<<<<<< */
 /*기존 작업자 승현 */
 public class MySkillsReqDto {
+
     @Setter
     @Getter
     public static class WantedsSkillsRespDto {
@@ -16,3 +17,4 @@ public class MySkillsReqDto {
     }
 
 }
+/* >>>>>>>>지원 작업 종료<<<<<<<<<<< */
