@@ -8,28 +8,28 @@ public class CodesRespDto {
 
 	@Setter
 	@Getter
-	public class CareersCodeRespDto {
+	public static class CareersCodeRespDto {
 		private Integer id;
 		private String name;
 	}
 
 	@Setter
 	@Getter
-	public class PositionsCodeRespDto {
+	public static class PositionsCodeRespDto {
 		private Integer id;
 		private String name;
 	}
 
 	@Setter
 	@Getter
-	public class SkillsCodeRespDto {
+	public static class SkillsCodeRespDto {
 		private Integer id;
 		private String name;
 	}
 
 	@Setter
 	@Getter
-	public class RegionsCodeRespDto {
+	public static class RegionsCodeRespDto {
 		private Integer id;
 		private String name;
 	}

@@ -9,7 +9,7 @@ public class ResumesRespDto {
 
     @Setter
     @Getter
-    public class ResumeListRespDto {
+    public static class ResumeListRespDto {
         private Integer id;
         private String title;
         private Timestamp created;
