@@ -7,9 +7,6 @@ import lombok.Setter;
 
 public class LikesRespDto {
 
-    /* >>>> 승현 작업함 <<<< */
-
-    /* 기존 작업자 : 지원 */
     @Setter
     @Getter
     public static class LikeRespDto {
@@ -40,5 +37,4 @@ public class LikesRespDto {
         private Timestamp created;
     }
 
-    /* >>>> 승현 작업 종료 <<<< */
 }

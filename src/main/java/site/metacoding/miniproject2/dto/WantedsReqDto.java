@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 
-/* >>>> 수현 작업함  <<<< */
-
-/* 기존 작업자 : 수현 */
 public class WantedsReqDto {
 
     @Setter
@@ -34,5 +31,3 @@ public class WantedsReqDto {
     }
 
 }
-
-/* >>>> 수현 작업 종료 <<<< */
