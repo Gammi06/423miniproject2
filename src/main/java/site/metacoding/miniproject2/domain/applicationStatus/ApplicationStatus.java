@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class ApplicationStatus {
     private Integer id;
     private Integer wantedId;
+    private Integer resumeId;
     private Integer state;
     private Timestamp created;
 

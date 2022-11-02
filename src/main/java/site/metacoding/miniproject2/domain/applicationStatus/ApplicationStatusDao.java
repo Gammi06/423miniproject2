@@ -19,5 +19,4 @@ public interface ApplicationStatusDao {
 
     public void findFinal();
 
-    public void findRequest();
 }
