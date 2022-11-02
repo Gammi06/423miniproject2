@@ -32,8 +32,27 @@ public class CompaysReqDto {
                     .memberCount(memberCount)
                     .build();
         }
-
     }
 
+    @Setter
+    @Getter
+    public static class CompanysUpdateReqpDto {
+        private String companyName;
+        private String address;
+        private String email;
+        private String regionCodeName;
+        private Integer memberCount;
+
+        public Companys toEntity() {
+            return Companys.builder()
+                    .companyName(companyName)
+                    .address(address)
+                    .email(email)
+                    .regionCodeName(regionCodeName)
+                    .memberCount(memberCount)
+                    .build();
+        }
+    }
 }
+
 /* 지원 작업 종료 */

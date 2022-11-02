@@ -9,7 +9,7 @@
 		WHERE id = #{id}
 	</select>
 
-	<insert id="insert">
+	<insert id="Companyinsert">
 		INSERT INTO companys(company_name, address, email,
 		company_number, photo, region_code_name, intro, years, member_count,
 		created)
@@ -20,5 +20,19 @@
 	<select id="findByIdCompanysNumber" resultType="site.metacoding.miniproject2.domain.companys.Companys">
 		SELECT * FROM companys WHERE company_number = #{CompanysNumber}
 	</select>
+
+	<update id="Companyupdate">
+		UPDATE companys set 
+		company_name= #{companysName},
+		adress= #{address}, 
+		email=#{email}, 
+		region_code_name=#{regionCodeName},
+		member_count=#{memberCount} 
+		where id=#{id}
+	</update>
+
+	<delete id="Companydelete">
+		DELETE FROM companys WHERE id = #{id}
+	</delete>
 
 </mapper>
