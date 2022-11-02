@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
@@ -15,7 +14,6 @@ import site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto;
 public class SubcribesService {
     private final SubcribesDao subcribesDao;
 
-    @Transactional(readOnly = true)
     public List<SubscribesListRespDto> subcribesListPage(Integer id) {
         List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(id);
 

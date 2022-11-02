@@ -9,7 +9,7 @@
 		WHERE id = #{id}
 	</select>
 
-	<insert id="Companyinsert">
+	<insert id="insert">
 		INSERT INTO companys(company_name, address, email,
 		company_number, photo, region_code_name, intro, years, member_count,
 		created)
@@ -21,7 +21,7 @@
 		SELECT * FROM companys WHERE company_number = #{CompanysNumber}
 	</select>
 
-	<update id="Companyupdate">
+	<update id="updateCompanys">
 		UPDATE companys set 
 		company_name= #{companysName},
 		adress= #{address}, 
@@ -31,7 +31,7 @@
 		where id=#{id}
 	</update>
 
-	<delete id="Companydelete">
+	<delete id="deleteCompanys">
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
 
