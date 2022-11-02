@@ -10,4 +10,24 @@ import site.metacoding.miniproject2.domain.recruits.RecruitsDao;
 public class RecruitsService {
 
     private final RecruitsDao recruitsDao;
+
+    public void insert() {
+        recruitsDao.insert();
+    }
+
+    public void findAll() {
+        recruitsDao.findAll();
+    }
+
+    public void findById() {
+        recruitsDao.findById();
+    }
+
+    public void updateById() {
+        recruitsDao.updateById();
+    }
+
+    public void deleteById() {
+        recruitsDao.deleteById();
+    }
 }
