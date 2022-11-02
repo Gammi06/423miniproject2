@@ -23,5 +23,4 @@ public class MyCareersRespDto {
         private Integer id;
         private Integer userId;
     }
-
 }
