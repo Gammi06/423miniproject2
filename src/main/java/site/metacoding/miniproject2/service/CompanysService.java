@@ -14,16 +14,13 @@ import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 public class CompanysService {
 
     private final CompanysDao companysDao;
-<<<<<<< HEAD
+
     private final WantedsService wantedsService;
-=======
->>>>>>> dc3cf471786d0be5da0f302f681cc8b5d85ab078
 
     public void Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
         companysDao.insert(companysInsertReqDto);
     }
 
-<<<<<<< HEAD
     public void Companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
         // 1. 영속화
         CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
@@ -33,15 +30,11 @@ public class CompanysService {
         }
         // companysTitleReqDtoPS.updateCompanys(companysUpdateReqDto);// 변경 -> 내일 물어보기
         companysDao.updateChangeCompanys(companysTitleReqDtoPS);// 수행
-=======
-    public void Companyupdate(CompanysUpdateReqDto companysUpdateReqDto) {
-        companysDao.updateCompanys(companysUpdateReqDto);
->>>>>>> dc3cf471786d0be5da0f302f681cc8b5d85ab078
+
     }
 
-    public void Companydelete(Integer id) {
+    public void deleteCompanys(Integer id) {
         companysDao.deleteCompanys(id);
-<<<<<<< HEAD
     } // 서비스 확인해보기
 
     // public CompanyDetailWithWantedsListRespDto
@@ -55,9 +48,7 @@ public class CompanysService {
     // // 이부분 물어보기
     // return companyDetailWithWantedsListDtoPS;
     // }
-=======
-    }
->>>>>>> dc3cf471786d0be5da0f302f681cc8b5d85ab078
+    // }
 
     public CompanyDetailRespDto findByIdToDetail(Integer id) {
         CompanyDetailRespDto companyDetailRespDtoPS = companysDao.findByIdToDetail(id);
@@ -76,8 +67,4 @@ public class CompanysService {
             return true;
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dc3cf471786d0be5da0f302f681cc8b5d85ab078
