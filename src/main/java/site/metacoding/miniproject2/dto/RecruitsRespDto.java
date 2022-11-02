@@ -29,11 +29,12 @@ public class RecruitsRespDto {
         private String userName;
         private Timestamp date;
         private String position;
+        private Integer positionsCodeId;
     }
 
     @Setter
     @Getter
-    public class RecruitsManageRespDto {
+    public class RecruitsWantedsManageRespDto {
         private Integer id;
         private Integer companysId;
         private String careerCodeId;

@@ -1,3 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.metacoding.miniproject2.domain.recruits.RecruitsDao"></mapper>
+<mapper namespace="site.metacoding.miniproject2.domain.recruits.RecruitsDao">
+    <select id="findApplyManage" resultType="site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsApplyManageRespDto">
+        SELECT w.title, w.created, IF(enddate>NOW(), '모집중', '마감') AS status
+        FROM wanteds w
+        INNER JOIN companys c
+        ON c.id = w.company_id;
+        WHERE c.id = #{companysId}
+    </select>
+
+    <select id="findRecommend" resultType="site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsRecommendRespDto">
+        SELECT p.name, r.title, u.user_name, r.created
+        FROM resumes r
+        LEFT OUTER JOIN users u
+        ON r.user_id = u.id
+        LEFT OUTER JOIN positions_code p
+        ON p.id = r.positions_code_id
+        WHERE p.id = #{positionsCodeId}
+    </select>
+</mapper>
