@@ -17,8 +17,11 @@ public interface WantedsDao {
 
     public List<WantedListRespDto> findAllByPositionCodeId(Integer positionCodeId);
 
-    /* ///////// 삭제 예정 내역 //////// */
+    public void findByBoth();
 
+    public void insert();
+
+    /* ///////// 삭제 예정 내역 //////// */
     // public void findAllByPosition();
     // public void findAllHot();
     // public void findBestHot();
@@ -31,8 +34,4 @@ public interface WantedsDao {
     // public void findAllToSort();
     // public void findAllLike();
     // public void findAllByposition();
-
-    public void findByBoth();
-
-    public void insert();
 }
