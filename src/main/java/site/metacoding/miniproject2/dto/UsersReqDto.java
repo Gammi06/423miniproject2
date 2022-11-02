@@ -1,8 +1,11 @@
 package site.metacoding.miniproject2.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.users.Users;
+import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
 
 public class UsersReqDto {
 
@@ -70,7 +73,7 @@ public class UsersReqDto {
         private Integer positionCodeId;
         private Integer mycareerId;
         private Integer skillsCodeId;
-        // 학력은 DTO 가져오기 (이건 Education에서 dto 만들고 가져오기)
+        private List<EducationsListRespDto> educationsListRespDtos;
         private String intro; // 간단 소개글 (Resunes)
 
     }

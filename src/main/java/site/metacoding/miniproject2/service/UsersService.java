@@ -22,8 +22,8 @@ public class UsersService {
         usersDao.update();
     }
 
-    public void updateByPassword() {
-        usersDao.updateByPassword(null);
+    public void updatePassword() {
+        usersDao.updatePassword(null);
     }
 
     public void deleteById() {
@@ -32,6 +32,10 @@ public class UsersService {
 
     public void insert() {
         usersDao.insert();
+    }
+
+    public void updateProfile() {
+        usersDao.updateProfile();
     }
 
 }

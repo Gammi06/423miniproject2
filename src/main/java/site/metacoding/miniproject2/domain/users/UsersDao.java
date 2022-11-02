@@ -9,11 +9,11 @@ public interface UsersDao {
 
     public void update(); // 계정설정-기본정보 수정
 
-    public void updateByPassword(String password); // 비밀번호 변경
+    public void updatePassword(String password); // 비밀번호 변경
 
     public void deleteById(Integer id); // 회원탈퇴
 
     public void insert(); // 회원가입
 
-    // 프로필 수정
+    public void updateProfile();// 프로필 수정
 }
