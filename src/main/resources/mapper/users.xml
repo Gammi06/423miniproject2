@@ -27,4 +27,9 @@
 		DELETE FROM users WHERE id = #{id}
 	</delete>
 
+	<insert id="insert">
+		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
+		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{photo}, #{positionCodeId}, #{companyId}, #{mycareerId}, NOW())
+	</insert>
+
 </mapper>
