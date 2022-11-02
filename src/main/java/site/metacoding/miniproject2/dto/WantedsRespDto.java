@@ -11,7 +11,7 @@ import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
 public class WantedsRespDto {
 
-    //   /////////////////// 승현 사용 Dto /////////////////////
+    // ////////////////// 승현 사용 Dto /////////////////////
     @Setter
     @Getter
     public static class SearchDto {
@@ -78,7 +78,7 @@ public class WantedsRespDto {
 
     }
 
-    //   /////////////////// 수현 사용 Dto /////////////////////
+    // ////////////////// 수현 사용 Dto /////////////////////
     @Setter
     @Getter
     public static class WantedsManageRespDto {
