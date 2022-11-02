@@ -58,7 +58,7 @@ public class UsersReqDto {
          * ////////////////////////////
          */
 
-        public Users toEdit() {
+        public Users toEntity() {
             return Users.builder()
                     .email(email)
                     .phoneNumber(phoneNumber)
