@@ -16,9 +16,10 @@ public class ApplicationStatus {
     private Timestamp created;
 
     @Builder
-    public ApplicationStatus(Integer id, Integer wantedId, Integer state, Timestamp created) {
+    public ApplicationStatus(Integer id, Integer wantedId, Integer resumeId, Integer state, Timestamp created) {
         this.id = id;
         this.wantedId = wantedId;
+        this.resumeId = resumeId;
         this.state = state;
         this.created = created;
     }
