@@ -33,6 +33,10 @@ public interface WantedsDao {
 
     public void insert();
 
+    public void updateById();
+
+    public void deleteById();
+
     // public void findAllHot();
 
     // public void findBestHot();

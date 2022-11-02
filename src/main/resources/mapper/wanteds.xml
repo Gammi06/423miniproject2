@@ -8,6 +8,17 @@
 		VALUES(#{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay},#{enddate}, NOW())
 	</insert>
 
+	<update id="updateById">
+		Update wanteds SET title = #{wantedTitle}, detail = #{wantedDetail},
+		position_code_id = #{positionCodeId}, career_code_id = #{careerCodeId},
+		pay = #{pay}, enddate = #{enddate}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteById">
+		DELETE FROM wanteds WHERE id = #{id}
+	</delete>
+
 	<!-- 수현 작업 완료 이 밑으로는 쿼리 안건드렸습니다~!-->
 
 	<select id="findAllByCompanyId"
