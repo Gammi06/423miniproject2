@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.wanteds.WantedsDao">
+	<!-- 수현 작업 시작 -->
+
+	<insert id="insert">
+		INSERT INTO wanteds(title, detail, position_code_id, career_code_id, pay, enddate, created)
+		VALUES(#{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay},#{enddate}, NOW())
+	</insert>
+
+	<!-- 수현 작업 완료 이 밑으로는 쿼리 안건드렸습니다~!-->
 
 	<select id="findAllByCompanyId"
 		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
@@ -24,7 +32,7 @@
 		ORDER BY RAND()
 		LIMIT 8
 	</select>
-	
+
 	<select id="findByIdToDetail"
 		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedDetailDto">
 		SELECT w.id, pc.name position_code_name, w.position_code_id, cc.name career_code_name,
@@ -67,9 +75,7 @@
 			<if test="keywordDto.CarrerCodeNames != null and keywordDto.CarrerCodeNames != '전체'">
 				AND cc.name = #{keywordDto.CarrerCodeNames}
 			</if>
-			<if test="keywordDto.skillsCodeNames != null">
-				
-			</if>
+			<if test="keywordDto.skillsCodeNames != null"></if>
 		</if>
 		) result
 	</select>
