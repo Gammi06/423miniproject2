@@ -17,7 +17,6 @@ public class Users {
     private String phoneNumber;
     private String email;
     private String photo;
-    private String positionCodeName;
     private Integer positionCodeId;
     private Integer companyId;
     private Integer mycareerId;
@@ -35,10 +34,15 @@ public class Users {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.photo = photo;
-        this.positionCodeName = positionCodeName;
         this.positionCodeId = positionCodeId;
         this.companyId = companyId;
         this.mycareerId = mycareerId;
         this.created = created;
     }
+    /*
+     * //////////////////////////////////
+     * positionCodeName이 원래 존재했지만 중복으로 필요하지 않기 때문에 삭제
+     * //////////////////////////////////
+     */
+
 }
