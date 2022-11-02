@@ -36,4 +36,27 @@ public interface WantedsDao {
     // public void findAllByposition();
 
     public void findByBoth();
+<<<<<<< HEAD
+=======
+
+    // public void paging();
+
+    public void findAllByCompanyId();
+
+    public void findByIdToDetail();
+
+    // public void paging();
+
+    public void findAllToSort();
+
+    public void findAllLike();
+
+    public void findAllByposition();
+
+    public void insert();
+
+    // public void findAllHot();
+
+    // public void findBestHot();
+>>>>>>> 984a514d5216534bcb4497c9b967168f909ef8e3
 }
