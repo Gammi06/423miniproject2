@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.companys.Companys;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
-import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqpDto;
+import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 
 @RequiredArgsConstructor
@@ -16,11 +16,11 @@ public class CompanysService {
     private final CompanysDao companysDao;
 
     public void Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
-        companysDao.insert(companysInsertReqDto.toEntity());
+        companysDao.insert(companysInsertReqDto);
     }
 
-    public void Companyupdate(CompanysUpdateReqpDto companysUpdateReqDto) {
-        companysDao.updateCompanys(companysUpdateReqDto.toEntity());
+    public void Companyupdate(CompanysUpdateReqDto companysUpdateReqDto) {
+        companysDao.updateCompanys(companysUpdateReqDto);
     }
 
     public void Companydelete(Integer id) {

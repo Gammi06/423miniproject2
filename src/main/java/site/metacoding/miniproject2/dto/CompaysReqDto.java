@@ -36,7 +36,7 @@ public class CompaysReqDto {
 
     @Setter
     @Getter
-    public static class CompanysUpdateReqpDto {
+    public static class CompanysUpdateReqDto {
         private String companyName;
         private String address;
         private String email;

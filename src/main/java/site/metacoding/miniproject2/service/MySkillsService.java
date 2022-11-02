@@ -12,7 +12,7 @@ public class MySkillsService {
     private final MySkillsDao mySkillsDao;
 
     public void insert(WantedsSkillsRespDto wantedsSkillsRespDto) {
-        mySkillsDao.insertMySkills(wantedsSkillsRespDto.toEntity());
+        mySkillsDao.insertMySkills(wantedsSkillsRespDto);
     }
 
 }
