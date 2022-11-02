@@ -34,8 +34,8 @@ public class SubribesRespDto {
                         this.state = state;
                 }
 
-                public void add(SubscribesListRespDto subscribesListRespDto) {
-                }
+                // public void add(SubscribesListRespDto subscribesListRespDto) {
+                // }
 
         }
 

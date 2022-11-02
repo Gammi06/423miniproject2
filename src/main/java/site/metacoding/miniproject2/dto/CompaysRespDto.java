@@ -1,9 +1,12 @@
 package site.metacoding.miniproject2.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsManageRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
 /*기존 작업자 승현/수현 */
@@ -19,6 +22,14 @@ public class CompaysRespDto {
         private String regionCodeName;
         private Integer memberCount;
         private String intro;
+    }
+
+    @Getter
+    @Setter
+    public static class CompanyDetailWithWantedsListRespDto {
+        private CompanyDetailRespDto companyDetailRespDto;
+        // private List<WantedsListDto> wantedsListDtos;
+        // private List<WantedsListRespDto> wantedsListRespDtos;-> 이부분 물어보기
     }
 
     @NoArgsConstructor
@@ -51,6 +62,8 @@ public class CompaysRespDto {
     @Setter
     public static class PagingWantedsManageRespDto {
         private PagingRespDto pagingDto;
+        // private List<WantedsManageRespDto> wantedsManageDtos; ->이부분 물어보기
+
     }
 
 }
@@ -59,9 +72,10 @@ public class CompaysRespDto {
  * >>>>>>>>지원 작업 종료<<<<<<<<<<<
  * List<WantedsListDto> wantedsListDtos; : Dto2개 연결이라서 삭제
  * photo; : api 컨롤러 사용이라서 삭제
- * CompanyDetailWithWantedsListRespDto 는 CompanyDetailRespDto와 같이 같아서 삭제
+ * CompanyDetailWithWantedsListRespDto 는 CompanyDetailRespDto와 같이 같아서 삭제 -> 필요해서
+ * 다시 넣어둠 물어보고 삭제예정
  * PagingRespDto pagingDto; PagingRespDto와 같아서 삭제.
  * PagingWantedsManageRespDto안에 같이 포함이 되어있어서 삭제예정
  * List<WantedsManageDto> :Dto2개 연결이라서 삭제
- * 
+ *
  */

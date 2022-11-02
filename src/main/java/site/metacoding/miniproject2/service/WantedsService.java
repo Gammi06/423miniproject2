@@ -14,4 +14,5 @@ public class WantedsService {
     public void insert() {
         wantedsDao.insert();
     }
+
 }

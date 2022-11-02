@@ -14,18 +14,38 @@ import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 public class CompanysService {
 
     private final CompanysDao companysDao;
+    private final WantedsService wantedsService;
 
     public void Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
         companysDao.insert(companysInsertReqDto);
     }
 
-    public void Companyupdate(CompanysUpdateReqDto companysUpdateReqDto) {
-        companysDao.updateCompanys(companysUpdateReqDto);
+    public void Companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
+        // 1. 영속화
+        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
+
+        if (companysTitleReqDtoPS == null) {
+            throw new RuntimeException(id + "의 게시글을 찾을 수 없습니다.");
+        }
+        // companysTitleReqDtoPS.updateCompanys(companysUpdateReqDto);// 변경 -> 내일 물어보기
+        companysDao.updateChangeCompanys(companysTitleReqDtoPS);// 수행
     }
 
     public void Companydelete(Integer id) {
         companysDao.deleteCompanys(id);
-    }
+    } // 서비스 확인해보기
+
+    // public CompanyDetailWithWantedsListRespDto
+    // findByIdToDetailWithWantedsList(Integer id) {
+    // if (findByIdToDetail(id) == null)
+    // return null;
+    // CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new
+    // CompanyDetailWithWantedsListRespDto();
+    // companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
+    // companyDetailWithWantedsListDtoPS.setWantedsListDtos(wantedsService.findAllByCompanyId(id));
+    // // 이부분 물어보기
+    // return companyDetailWithWantedsListDtoPS;
+    // }
 
     public CompanyDetailRespDto findByIdToDetail(Integer id) {
         CompanyDetailRespDto companyDetailRespDtoPS = companysDao.findByIdToDetail(id);
