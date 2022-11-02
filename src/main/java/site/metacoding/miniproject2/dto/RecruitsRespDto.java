@@ -28,21 +28,21 @@ public class RecruitsRespDto {
         private String resumeTitle;
         private String userName;
         private Timestamp date;
-        private String position;
+        private String positionName;
         private Integer positionsCodeId;
     }
 
-    @Setter
-    @Getter
-    public class RecruitsWantedsManageRespDto {
-        private Integer id;
-        private Integer companysId;
-        private String careerCodeId;
-        private String positionCodeId;
-        private String resumeTitle;
-        private String resumeIntro;
-        private String state;
-    }
+    // @Setter
+    // @Getter
+    // public class WantedsRecruitsManageRespDto {
+    // private Integer id;
+    // private Integer companysId;
+    // private String careerCodeId;
+    // private String positionCodeId;
+    // private String resumeTitle;
+    // private String resumeIntro;
+    // private String state;
+    // } -> wantedsResp로 넘길 예정
 }
 
 /* >>>> 수현 작업 종료 <<<< */
