@@ -11,6 +11,7 @@ public interface CompanysDao {
 
     public void insert(CompanysInsertReqDto companysInsertReqDto);
 
+<<<<<<< HEAD
     public void updateChangeCompanys(CompanysTitleReqDto companysTitleReqDtoPS);// 변경
 
     public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto);// 수행
@@ -21,6 +22,12 @@ public interface CompanysDao {
 
     public void findAllByCompanyId(Integer id);
 
+=======
+    public void updateCompanys(CompanysUpdateReqDto CompanysUpdateReqDto);
+
+    public void deleteCompanys(Integer id);
+
+>>>>>>> dc3cf471786d0be5da0f302f681cc8b5d85ab078
     public CompanysTitleReqDto findByIdCompanysNumber(String companyNumber);
 
 }
