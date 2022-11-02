@@ -5,5 +5,7 @@ public interface MyCareersDao {
 
     public void findAll();
 
-    public void findById();
+    public void findById(Integer id);
+
+    public void insert();
 }

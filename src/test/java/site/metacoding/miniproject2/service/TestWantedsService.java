@@ -2,6 +2,7 @@ package site.metacoding.miniproject2.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,15 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 @RequiredArgsConstructor
 @Service
 public class TestWantedsService {
-    private final WantedsDao wantedsDao;
-    private final ApplysDao applysDao;
-    private final LikesDao likesDao;
+
+    @Autowired
+    private WantedsDao wantedsDao;
+
+    @Autowired
+    private ApplysDao applysDao;
+
+    @Autowired
+    private LikesDao likesDao;
 
     public void insert() {
         wantedsDao.insert();

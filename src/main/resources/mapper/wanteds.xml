@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.wanteds.WantedsDao">
+	<!-- 수현 작업 시작 -->
+
+	<insert id="insert">
+		INSERT INTO wanteds(title, detail, position_code_id, career_code_id, pay, enddate, created)
+		VALUES(#{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay},#{enddate}, NOW())
+	</insert>
+
+	<!-- 수현 작업 완료 이 밑으로는 쿼리 안건드렸습니다~!-->
 
 	<select id="findById"
 		resultType="site.metacoding.miniproject2.dto.WantedDetailRespDto">
 		SELECT w.id, pc.name, cc.name, w.title,
 		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
+<<<<<<< HEAD
+=======
+		LEFT OUTER JOIN companys c
+		ON w.company_id
+		= c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY
+		wanted_id) l
+		ON
+		l.wanted_id = w.id
+		WHERE w.enddate > NOW() AND c.id = #{id}
+		ORDER BY RAND()
+		LIMIT 8
+	</select>
+
+	<select id="findByIdToDetail"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedDetailDto">
+		SELECT w.id, pc.name position_code_name, w.position_code_id, cc.name career_code_name,
+		w.title, w.detail, w.view_count, w.created, w.enddate, c.photo,
+		c.company_name, c.id company_id, c.region_code_name
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+>>>>>>> 5337b40c55c28a9f5b091d0ff8489180d9e9fb59
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
 		LEFT OUTER JOIN careers_code cc
@@ -14,7 +47,67 @@
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
 		WHERE w.enddate > NOW()
+<<<<<<< HEAD
 		AND w.id = #{id}
+=======
+		<if test="keywordDto != null">
+			<if test="keywordDto.positionsCodeNames != null and keywordDto.positionsCodeNames != '전체'">
+				AND pc.name = #{keywordDto.positionsCodeNames}
+			</if>
+			<if test="keywordDto.regionsCodeNames != null and keywordDto.regionsCodeNames != '전체'">
+				AND c.region_code_name = #{keywordDto.regionsCodeNames}
+			</if>
+			<if test="keywordDto.CarrerCodeNames != null and keywordDto.CarrerCodeNames != '전체'">
+				AND cc.name = #{keywordDto.CarrerCodeNames}
+			</if>
+			<if test="keywordDto.skillsCodeNames != null"></if>
+		</if>
+		) result
+	</select>
+
+	<select id="findAllToSort"
+		resultType="site.metacoding.miniproject2.web.dto.response.wanteds.WantedsListDto">
+		SELECT l.like_count + w.view_count total_count ,w.id,
+		w.position_code_id, w.career_code_id, w.company_id, w.title, w.detail,
+		w.view_count, w.created, w.enddate, c.company_name, c.region_code_name, c.photo,
+		pc.name, cc.name
+		FROM wanteds w
+		LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN
+		(SELECT *, COUNT(user_id) like_count FROM likes
+		GROUP BY wanted_id) l
+		ON l.wanted_id = w.id
+		LEFT OUTER JOIN positions_code pc
+		ON w.position_code_id = pc.id
+		LEFT OUTER JOIN careers_code cc
+		ON w.career_code_id = cc.id
+		WHERE w.enddate > NOW()
+		<if test="keywordDto != null">
+			<if test="keywordDto.positionsCodeNames != null and keywordDto.positionsCodeNames != '전체'">
+				AND pc.name = #{keywordDto.positionsCodeNames}
+			</if>
+			<if test="keywordDto.regionsCodeNames != null and keywordDto.regionsCodeNames != '전체'">
+				AND c.region_code_name = #{keywordDto.regionsCodeNames}
+			</if>
+			<if test="keywordDto.CarrerCodeNames != null and keywordDto.CarrerCodeNames != '전체'">
+				AND cc.name = #{keywordDto.CarrerCodeNames}
+			</if>
+			<if test="keywordDto.skillsCodeNames != null and keywordDto.skillsCodeNames.size() != 0">
+				<foreach collection='keywordDto.skillsCodeNames' index="index">
+					<if test="keywordDto.skillsCodeNames.get(index) != null">
+						AND (
+						SELECT distinct(skills_code_id)
+						FROM myskills mk
+						LEFT OUTER JOIN skills_code sc
+						ON mk.skills_code_id = sc.id
+						WHERE mk.wanted_id = w.id
+						AND sc.name = #{keywordDto.skillsCodeNames.get(index)}
+					</if>
+				</foreach>
+			</if>
+		</if>
+>>>>>>> 5337b40c55c28a9f5b091d0ff8489180d9e9fb59
 		ORDER BY w.created DESC
 	</select>
 

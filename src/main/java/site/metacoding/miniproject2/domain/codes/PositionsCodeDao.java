@@ -1,8 +1,11 @@
 package site.metacoding.miniproject2.domain.codes;
 
+/* >>>> 연지 작업함 <<<< */
 public interface PositionsCodeDao {
-    // 이름 규칙에 맞는 메서드명으로 생성해주세요.
+
     public void findAll();
 
-    public void findById();
+    public void findById(Integer id);
+
 }
+/* >>>> 연지 작업함 <<<< */
