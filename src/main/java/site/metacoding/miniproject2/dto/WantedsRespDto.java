@@ -3,19 +3,15 @@ package site.metacoding.miniproject2.dto;
 import java.sql.Timestamp;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
 public class WantedsRespDto {
-    /*
-     * 작업자: 수현
-     * AllWantedsListDto, PagingDto, PagingWantedsListDto, WantedDetailAndCompanyDto
-     * 삭제
-     */
 
-    /* 작업자 승현: Dto 내부 수정함 */
-
+    //   /////////////////// 승현 사용 Dto /////////////////////
     @Setter
     @Getter
     public static class SearchDto {
@@ -24,6 +20,24 @@ public class WantedsRespDto {
         private String regionCodeName;
         private String careerCodeName;
         private List<String> skillCodeName;
+
+        @Builder
+        public SearchDto(Integer sortType, String positionCodeName, String regionCodeName, String careerCodeName,
+                List<String> skillCodeName) {
+            this.sortType = sortType;
+            this.positionCodeName = positionCodeName;
+            this.regionCodeName = regionCodeName;
+            this.careerCodeName = careerCodeName;
+            this.skillCodeName = skillCodeName;
+        }
+    }
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    public static class MyLikeWantedRespDto {
+        private Integer wantedId;
+        private Integer userId;
     }
 
     @Setter
@@ -64,8 +78,7 @@ public class WantedsRespDto {
 
     }
 
-    /* //////////////////// */
-
+    //   /////////////////// 수현 사용 Dto /////////////////////
     @Setter
     @Getter
     public static class WantedsManageRespDto {
@@ -83,5 +96,4 @@ public class WantedsRespDto {
         private String state; // 모집중/마감
     }
 
-    /* 작업자 승현: KeywordRespDto 삭제함 : view를 위한 값이라 판단하여 삭제함 */
 }

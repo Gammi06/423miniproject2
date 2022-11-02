@@ -11,17 +11,21 @@ public interface WantedsDao {
 
     public WantedDetailRespDto findById(Integer id);
 
-    public List<WantedListRespDto> findAll(SearchDto searchDto);
+    public List<WantedListRespDto> findAll();
+
+    public List<WantedListRespDto> findAllOrdered(SearchDto searchDto);
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId);
 
-    public List<WantedListRespDto> findAllByPositionCodeId(Integer positionCodeId);
+    public List<WantedListRespDto> findAllByPositionCodeName(String positionCodeName);
+
+    public List<WantedListRespDto> findAllByLike(Integer userId);
 
     public void findByBoth();
 
     public void insert();
 
-    /* ///////// 삭제 예정 내역 //////// */
+    /* ///////// 삭제 내역 //////// */
     // public void findAllByPosition();
     // public void findAllHot();
     // public void findBestHot();

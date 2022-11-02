@@ -21,11 +21,11 @@ public class WantedsService {
     }
 
     public List<WantedListRespDto> findAll(SearchDto searchDto) {
-        if (searchDto.getSortType().equals(null) ||
-                searchDto.getSortType().equals(0))
-            searchDto.setSortType(1);
-
-        List<WantedListRespDto> wantedList = wantedsDao.findAll(searchDto);
+        if (searchDto == null) {
+            List<WantedListRespDto> wantedList = wantedsDao.findAll();
+            return wantedList;
+        }
+        List<WantedListRespDto> wantedList = wantedsDao.findAllOrdered(searchDto);
         return wantedList;
     }
 
@@ -40,9 +40,11 @@ public class WantedsService {
         return wantedList;
     }
 
-    public List<WantedListRespDto> findAllByPositionCodeId(Integer positionCodeId) {
+    public List<WantedListRespDto> findAllByPosition(Integer positionCodeId) {
         // position의 findById 추가하기
-        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeId(positionCodeId);
+        // id를 string으로 바꾸는 코드 추가하기
+        String positionCodeName = null;
+        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeName(positionCodeName);
         return wantedList;
     }
 }

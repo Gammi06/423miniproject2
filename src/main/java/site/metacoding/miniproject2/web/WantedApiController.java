@@ -9,22 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
-import site.metacoding.miniproject2.service.ApplyService;
-import site.metacoding.miniproject2.service.LikesService;
-import site.metacoding.miniproject2.service.notWantedService;
+import site.metacoding.miniproject2.service.WantedsService;
 
 @RequiredArgsConstructor
 @RestController
 public class WantedApiController {
 
-    // private final WantedService wantedService;
-    private final notWantedService wantedService;
-    private final LikesService likesService;
-    private final ApplyService applyService;
+    private final WantedsService wantedsService;
+    // private final LikesService likesService;
+    // private final ApplyService applyService;
 
     @GetMapping("/api/wanted")
     public List<WantedListRespDto> findAll(SearchDto searchDto) {
-        return wantedService.findAll(searchDto);
+        return wantedsService.findAll(searchDto);
     }
 
     @GetMapping("/api/wanted/{id}")
