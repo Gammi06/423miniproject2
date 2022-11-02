@@ -1,12 +1,32 @@
 package site.metacoding.miniproject2.dto;
 
+import java.sql.Timestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.companys.Companys;
 
 /*>>>>>>지원 작업함<<<<<<< */
 /*기존 작업자 지원 */
+
 public class CompaysReqDto {
+
+    @Setter
+    @Getter
+    public static class CompanysTitleReqDto {
+        private Integer id;
+        private String companyName;
+        private String address;
+        private String email;
+        private String companyNumber;
+        private String photo;
+        private String regionCodeName;
+        private String intro;
+        private Integer years;
+        private Integer memberCount;
+        private Timestamp created;
+
+    }
 
     @Setter
     @Getter
@@ -53,6 +73,7 @@ public class CompaysReqDto {
                     .build();
         }
     }
+
 }
 
 /* 지원 작업 종료 */

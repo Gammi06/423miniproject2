@@ -3,9 +3,9 @@ package site.metacoding.miniproject2.service;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.miniproject2.domain.companys.Companys;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 
@@ -37,8 +37,8 @@ public class CompanysService {
     }
 
     public boolean companyNumberDoubleCheck(String companyNumber) {// 사업자 번호 중복체크
-        Companys CompanysPS = companysDao.findByIdCompanysNumber(companyNumber);
-        if (CompanysPS == null) {
+        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanysNumber(companyNumber);
+        if (companysTitleReqDtoPS == null) {
             return false;
         } else {
             return true;

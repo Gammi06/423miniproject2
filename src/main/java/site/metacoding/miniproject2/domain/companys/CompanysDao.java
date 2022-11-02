@@ -1,6 +1,7 @@
 package site.metacoding.miniproject2.domain.companys;
 
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 
@@ -14,6 +15,6 @@ public interface CompanysDao {
 
     public void deleteCompanys(Integer id);
 
-    public Companys findByIdCompanysNumber(String companyNumber);
+    public CompanysTitleReqDto findByIdCompanysNumber(String companyNumber);
 
 }
