@@ -52,6 +52,7 @@ public class CompaysRespDto {
     public static class PagingWantedsManageRespDto {
         private PagingRespDto pagingDto;
     }
+
 }
 
 /*

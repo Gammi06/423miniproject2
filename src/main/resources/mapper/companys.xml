@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.companys.CompanysDao">
 
-	<select id="findByIdToDetail" resultType="site.metacoding.miniproject2.web.dto.response.companys.CompanyDetailDto">
+	<select id="findByIdToDetail" resultType="site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto">
 		SELECT c.id, c.company_name, c.address, c.email,
 		c.region_code_name, c.member_count, c.intro
 		FROM companys c
@@ -17,8 +17,22 @@
 		NULL, #{regionCodeName}, #{intro}, #{years}, #{memberCount}, NOW())
 	</insert>
 
-	<select id="findByIdCompanysNumber" resultType="site.metacoding.miniproject2.domain.companys.Companys">
+	<select id="findByIdCompanysNumber" resultType=" site.metacoding.miniproject2.domain.companys.CompanysDao">
 		SELECT * FROM companys WHERE company_number = #{CompanysNumber}
 	</select>
+
+	<update id="updateCompanys">
+		UPDATE companys set 
+		company_name= #{companysName},
+		adress= #{address}, 
+		email=#{email}, 
+		region_code_name=#{regionCodeName},
+		member_count=#{memberCount} 
+		where id=#{id}
+	</update>
+
+	<delete id="deleteCompanys">
+		DELETE FROM companys WHERE id = #{id}
+	</delete>
 
 </mapper>

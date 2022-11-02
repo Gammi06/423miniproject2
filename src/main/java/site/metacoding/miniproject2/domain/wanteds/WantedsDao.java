@@ -31,6 +31,8 @@ public interface WantedsDao {
 
     public void findAllByposition();
 
+    public void insert();
+
     // public void findAllHot();
 
     // public void findBestHot();
