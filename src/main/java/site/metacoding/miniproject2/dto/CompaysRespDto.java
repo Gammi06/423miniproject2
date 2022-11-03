@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsManageRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
@@ -28,8 +29,10 @@ public class CompaysRespDto {
     @Setter
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
-        // private List<WantedsListDto> wantedsListDtos;
-        // private List<WantedsListRespDto> wantedsListRespDtos;-> 이부분 물어보기
+        private List<WantedsListRespDto> wantedsListRespDtos;
+
+        public void setWantedsListDtos(Object findByIdCompanyId) {
+        }
     }
 
     @NoArgsConstructor
@@ -62,7 +65,7 @@ public class CompaysRespDto {
     @Setter
     public static class PagingWantedsManageRespDto {
         private PagingRespDto pagingDto;
-        // private List<WantedsManageRespDto> wantedsManageDtos; ->이부분 물어보기
+        private List<WantedsManageRespDto> wantedsManageDtos;
 
     }
 
