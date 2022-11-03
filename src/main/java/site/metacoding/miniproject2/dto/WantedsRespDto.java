@@ -9,10 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
-/* >>>> 수현 작업함  <<<< */
-
-/* 기존 작업자 : 승현 */
 public class WantedsRespDto {
+
     // ////////////////// 승현 사용 Dto /////////////////////
     @Setter
     @Getter
@@ -99,9 +97,9 @@ public class WantedsRespDto {
     @Getter
     public static class WantedsRecruitsManageCareersRespDto {
         private Integer id;
+        private Integer companyId;
         private Integer careerCodeId;
         private String careerName;
-        private Integer companyId;
         private String title;
         private String detail;
         private String state;
@@ -111,14 +109,12 @@ public class WantedsRespDto {
     @Getter
     public static class WantedsRecruitsManagePositionsRespDto {
         private Integer id;
+        private Integer companyId;
         private Integer positionCodeId;
         private String positionName;
-        private Integer companyId;
         private String title;
         private String detail;
         private String state;
     }
 
 }
-
-/* >>>> 수현 작업종료 <<<< */
