@@ -69,8 +69,8 @@ public class CompanysService {
     }
 
     /* 수현 작업시작 */
-    public void updateCompanysPhoto(Integer id) {
-        companysDao.updateCompanysPhoto(id); // sessionUser 올라오면 수정
+    public void updateCompanysIntro(Integer id) {
+        companysDao.updateCompanysIntro(id); // sessionUser 올라오면 수정
     }
     /* 수현 작업종료 */
 }
