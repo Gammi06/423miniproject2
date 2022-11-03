@@ -83,19 +83,40 @@ public class WantedsRespDto {
     // ////////////////// 수현 사용 Dto /////////////////////
     @Setter
     @Getter
-    public static class WantedsManageRespDto {
+    public static class WantedsRecruitsManageRespDto {
         private Integer id;
+        private Integer companyId;
         private Integer positionCodeId;
         private String positionName;
         private Integer careerCodeId;
         private String careerName;
-        private Integer companyId;
-        private Integer no;
-        private String companyName;
         private String title;
         private String detail;
-        private Timestamp enddate;
         private String state; // 모집중/마감
+    }
+
+    @Setter
+    @Getter
+    public static class WantedsRecruitsManageCareersRespDto {
+        private Integer id;
+        private Integer careerCodeId;
+        private String careerName;
+        private Integer companyId;
+        private String title;
+        private String detail;
+        private String state;
+    }
+
+    @Setter
+    @Getter
+    public static class WantedsRecruitsManagePositionsRespDto {
+        private Integer id;
+        private Integer positionCodeId;
+        private String positionName;
+        private Integer companyId;
+        private String title;
+        private String detail;
+        private String state;
     }
 
 }
