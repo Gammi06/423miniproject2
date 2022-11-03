@@ -14,14 +14,14 @@ import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailWithWantedsListRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
 
 @RequiredArgsConstructor
 @Service
 public class CompanysService {
 
-    private final SubcribesDao subcribesDao;
     private final CompanysDao companysDao;
+    private final SubcribesDao subcribesDao;
     private final WantedsService wantedsService;
 
     /* 지원 작업 시작 */
@@ -53,7 +53,7 @@ public class CompanysService {
             return null;
         CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
         companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
-        companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findByIdCompanyId(id));
+        companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findAllByCompanyId(id));
         return companyDetailWithWantedsListDtoPS;
     }
 

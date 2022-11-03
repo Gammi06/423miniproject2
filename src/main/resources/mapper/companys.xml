@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.companys.CompanysDao">
 
-	<select id="findByIdToDetail" resultType="site.metacoding.miniproject2.dto.CompaysRespDto">
+	<select id="findByIdToDetail" resultType="site.metacoding.miniproject2.dto.CompaysRespDto.CompaysRespDto">
 		SELECT c.id, c.company_name, c.address, c.email,
 		c.region_code_name, c.member_count, c.intro
 		FROM companys c

@@ -19,8 +19,8 @@ import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @RequiredArgsConstructor
