@@ -26,10 +26,6 @@ implementation 'org.webjars:jquery:3.1.1-1'
 
 ### 테이블 생성 (MariaDB)
 ```sql
-CREATE USER '9doit'@'%' IDENTIFIED BY '423206';
-CREATE DATABASE 9doitdb;
-GRANT ALL PRIVILEGES ON 9doitdb.* TO '9doit'@'%';
-
 USE 9doitdb;
 
 DROP TABLE users;
@@ -61,13 +57,14 @@ CREATE TABLE users (
    email VARCHAR(20),
    photo BLOB,
    position_code_id INT,
-   company_id INT,
    mycareer_id INT,
-   created TIMESTAMP
+   created TIMESTAMP,
+   role VARCHAR(20) DEFAULT '일반'
 );
 
 CREATE TABLE companys (
    id INT PRIMARY KEY AUTO_INCREMENT,
+   users_id INT NOT NULL,
    company_name VARCHAR(20) NOT NULL,
    address VARCHAR(100) NOT NULL,
    email VARCHAR(20) NOT NULL,
@@ -210,39 +207,39 @@ CREATE TABLE recruits (
 
 ### 더미데이터 생성 (MariaDB)
 ```sql
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('garam1234', '1234', '박가람', 26, '01011112222', 'garam12@naver.com', NULL, 4, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('Lzm1992', '1234', '이재모', 80, '01024551478', 'Lzm1992@hanmail.com', NULL, NULL, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('lazyIn94', '1234', '한가인', 29, '01034567890', 'lazyIn94@naver.com', NULL, 2, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('hand0728', '1234', '손재영', 35, '01022223333', 'hand0728@naver.com', NULL, 3, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('dragon5k', '1234', '김용오', 32, '01035567770', 'dragon5k@naver.com', NULL, 2, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('samsung1', '1234', '이건희', 82, '01023998293', 'samsung1@samsung.com', NULL, NULL, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('goodLg', '1234', '구광모', 44, '01928382992', 'goodLg@lg.com', NULL, NULL, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('apple', '1234', '스티븐잡스', 58, '0828112456', 'apple@apple.com', NULL, NULL, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('kongG', '1234', '홍콩지', 27, '01098776543', 'kongG@nate.com', NULL, 2, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('1DongA', '1234', '한동아', 20, '01098722921', '1DongA@gmail.com', NULL, 4, NULL, NULL, NOW());
-INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-VALUES('newSui', '1234', '신류이수', 31, '01056821345', 'newSui@gmail.com', NULL, 3, NULL, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('garam1234', '1234', '박가람', 26, '01011112222', 'garam12@naver.com', NULL, 4, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('Lzm1992', '1234', '이재모', 80, '01024551478', 'Lzm1992@hanmail.com', NULL, NULL, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('lazyIn94', '1234', '한가인', 29, '01034567890', 'lazyIn94@naver.com', NULL, 2, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('hand0728', '1234', '손재영', 35, '01022223333', 'hand0728@naver.com', NULL, 3, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('dragon5k', '1234', '김용오', 32, '01035567770', 'dragon5k@naver.com', NULL, 2, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('samsung1', '1234', '이건희', 82, '01023998293', 'samsung1@samsung.com', NULL, NULL, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('goodLg', '1234', '구광모', 44, '01928382992', 'goodLg@lg.com', NULL, NULL, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('apple', '1234', '스티븐잡스', 58, '0828112456', 'apple@apple.com', NULL, NULL, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('kongG', '1234', '홍콩지', 27, '01098776543', 'kongG@nate.com', NULL, 2, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('1DongA', '1234', '한동아', 20, '01098722921', '1DongA@gmail.com', NULL, 4, NULL, NOW());
+INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, mycareer_id, created)
+VALUES('newSui', '1234', '신류이수', 31, '01056821345', 'newSui@gmail.com', NULL, 3, NULL, NOW());
 
-INSERT INTO companys(company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
-VALUES('이재모피자', '부산광역시 중구 광복중앙로 31', 'Lzm1992@hanmail.com', '98700123456', NULL, '부산', '정성 가득한 피자를 만듭니다.', 1992, 20, NOW());
-INSERT INTO companys(company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
-VALUES('삼성', '서울특별시 서초구 서초대로74길 4', 'samsung1@samsung.com', '1234567890', NULL, '서울', '전자제품, 가전제품, 종합 반도체와 디스플레이 사업을 하는 기업', 1969, 117498, NOW());
-INSERT INTO companys(company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
-VALUES('LG전자', '서울특별시 영등포구 여의대로 128', 'goodLg@lg.com', '4567890123', NULL, '서울', '전자제품, 가전제품, 종합 반도체와 디스플레이 사업을 하는 기업', 1958, 34751, NOW());
-INSERT INTO companys(company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
-VALUES('애플코리아', '서울특별시 강남구 영동대로 517', 'apple@apple.com', '1230987654', NULL, '서울', '세련된 인테리어의 공간에서 iPhone, iPad 등을 판매하는 Apple 소매점입니다.', 1998, 130000, NOW());
-INSERT INTO companys(company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
-VALUES('굿디자인', '광주 서구 상무자유로 8-3', 'lazyIn94@naver.com', '4561237890', NULL, '광주', '좋은 디자인을 만들어냅니다.', 2015, 32, NOW());
+INSERT INTO companys(users_id, company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
+VALUES(2, '이재모피자', '부산광역시 중구 광복중앙로 31', 'Lzm1992@hanmail.com', '98700123456', NULL, '부산', '정성 가득한 피자를 만듭니다.', 1992, 20, NOW());
+INSERT INTO companys(users_id, company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
+VALUES(6, '삼성', '서울특별시 서초구 서초대로74길 4', 'samsung1@samsung.com', '1234567890', NULL, '서울', '전자제품, 가전제품, 종합 반도체와 디스플레이 사업을 하는 기업', 1969, 117498, NOW());
+INSERT INTO companys(users_id, company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
+VALUES(7, 'LG전자', '서울특별시 영등포구 여의대로 128', 'goodLg@lg.com', '4567890123', NULL, '서울', '전자제품, 가전제품, 종합 반도체와 디스플레이 사업을 하는 기업', 1958, 34751, NOW());
+INSERT INTO companys(users_id, company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
+VALUES(8, '애플코리아', '서울특별시 강남구 영동대로 517', 'apple@apple.com', '1230987654', NULL, '서울', '세련된 인테리어의 공간에서 iPhone, iPad 등을 판매하는 Apple 소매점입니다.', 1998, 130000, NOW());
+INSERT INTO companys(users_id, company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
+VALUES(3, '굿디자인', '광주 서구 상무자유로 8-3', 'lazyIn94@naver.com', '4561237890', NULL, '광주', '좋은 디자인을 만들어냅니다.', 2015, 32, NOW());
 
 INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created)
 VALUES(1, 4, '프론트 개발자인 박가람입니다.', '박가람씨의 잘 쓰여진 자기소개서, 우리 회사에 입사시키면 일을 열심히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
@@ -582,11 +579,11 @@ INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 13, '모�
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 15, '모집중',NOW());
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 23, '모집중',NOW());
 
-UPDATE users SET company_id = 1 WHERE id = 2;
-UPDATE users SET company_id = 2 WHERE id = 6;
-UPDATE users SET company_id = 3 WHERE id = 7;
-UPDATE users SET company_id = 4 WHERE id = 8;
-UPDATE users SET company_id = 5 WHERE id = 3;
+UPDATE users SET role='회사' WHERE id = 2;
+UPDATE users SET role='회사' WHERE id = 6;
+UPDATE users SET role='회사' WHERE id = 7;
+UPDATE users SET role='회사' WHERE id = 8;
+UPDATE users SET role='회사' WHERE id = 3;
 
 COMMIT;
 ```
