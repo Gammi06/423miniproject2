@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
+//import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsManageRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
@@ -29,7 +29,7 @@ public class CompaysRespDto {
     @Setter
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
-        private List<WantedsListRespDto> wantedsListRespDtos;
+        //private List<WantedsListRespDto> wantedsListRespDtos;
 
         public void setWantedsListDtos(Object findByIdCompanyId) {
         }

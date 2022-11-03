@@ -1,11 +1,13 @@
 package site.metacoding.miniproject2.domain.codes;
 
-/* >>>> 연지 작업함 <<<< */
+import java.util.List;
+
+import site.metacoding.miniproject2.dto.CodesRespDto.RegionsCodeRespDto;
+
 public interface RegionsCodeDao {
 
-    public void findAll();
+    public List<RegionsCodeRespDto> findAll();
 
-    public void findById(Integer id);
+    public RegionsCodeRespDto findById(Integer id);
 
 }
-/* >>>> 연지 작업함 <<<< */
