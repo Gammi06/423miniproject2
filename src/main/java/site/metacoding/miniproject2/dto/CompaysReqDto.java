@@ -77,6 +77,20 @@ public class CompaysReqDto {
         }
     }
 
+    /* 수현 작업함 */
+    @Setter
+    @Getter
+    public static class CompanysUpdatePhotoReqDto {
+        private String intro;
+
+        public Companys toEntity() {
+            return Companys.builder()
+                    .intro(intro)
+                    .build();
+        }
+    }
+    /* 수현 작업 종료 */
+
 }
 
 /* 지원 작업 종료 */

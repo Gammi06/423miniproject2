@@ -9,7 +9,18 @@ public class WantedsReqDto {
 
     @Setter
     @Getter
-    public class WantedsSaveReqDto {
+    public static class WantedsSaveReqDto {
+        private String wantedTitle;
+        private String wantedDetail;
+        private Integer positionCodeId;
+        private Integer careerCodeId;
+        private String pay;
+        private Timestamp endDate;
+    }
+
+    @Setter
+    @Getter
+    public static class WantedsUpdateReqDto {
         private String wantedTitle;
         private String wantedDetail;
         private Integer positionCodeId;
