@@ -22,7 +22,7 @@ public class RecruitsRespDto {
 
     @Setter
     @Getter
-    public static class RecruitsRecommendRespDto {
+    public static class RecruitsRecommendByPositionRespDto {
         private Integer id;
         private Integer companysId;
         private String resumeTitle;
@@ -30,6 +30,16 @@ public class RecruitsRespDto {
         private Timestamp date;
         private String positionName;
         private Integer positionsCodeId;
+    }
+
+    @Setter
+    @Getter
+    public static class RecruitsRecommendRespDto {
+        private Integer id;
+        private Integer companysId;
+        private String resumeTitle;
+        private String userName;
+        private Timestamp date;
     }
 
 }
