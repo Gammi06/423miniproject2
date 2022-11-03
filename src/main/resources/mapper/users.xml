@@ -3,12 +3,12 @@
 <mapper namespace="site.metacoding.miniproject2.domain.users.UsersDao">
 	
 	<select id="findByUserId"
-		resultType="site.metacoding.miniproject2.domain.users.Users">
+		resultType="site.metacoding.miniproject2.domain.users.LoginReqDto">
 		SELECT * FROM users WHERE user_id = #{userId}
 	</select>
 
 	<select id="findById"
-		resultType="site.metacoding.miniproject2.domain.users.Users">
+		resultType="site.metacoding.miniproject2.domain.users.InfoRespDto">
 		SELECT * FROM users WHERE id = #{id}
 	</select>
 
@@ -27,7 +27,12 @@
 		DELETE FROM users WHERE id = #{id}
 	</delete>
 
-	<insert id="insert">
+	<select id="findAllUserId" resultType="site.metacoding.miniproject2.domain.users.UsersInfoRespDto"></select>
+
+	<update id="updateProfile"></update>
+
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="userId">
 		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
 		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{photo}, #{positionCodeId}, #{companyId}, #{mycareerId}, NOW())
 	</insert>
