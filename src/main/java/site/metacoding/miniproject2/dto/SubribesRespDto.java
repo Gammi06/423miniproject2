@@ -22,5 +22,5 @@ public class SubribesRespDto {
 /*
  * datePart,day :겹치는 내용
  * private Timestamp currnetTimestamp; :현재시간 필요하지 않으듯 해서 삭제
- * SubscribesListRespDto -> CompaysRespDto 로 위치 변경했습니다.
+ * SubscribesListRespDto -> CompaysRespDto 로 위치 변경했습니다.//
  */
