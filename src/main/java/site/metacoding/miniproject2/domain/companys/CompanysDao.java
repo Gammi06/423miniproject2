@@ -27,4 +27,6 @@ public interface CompanysDao {
     public void updateCompanysIntro(Integer id);
 
     public CompanysInsertRespDto findById(Integer id);
+
+    public void updateCompanysIntro(Integer id);
 }
