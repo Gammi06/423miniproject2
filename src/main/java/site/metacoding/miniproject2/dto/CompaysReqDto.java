@@ -66,6 +66,9 @@ public class CompaysReqDto {
                     .memberCount(memberCount)
                     .build();
         }
+
+        public void setSessionUsers(SessionUsers sessionUsers) {
+        }
     }
 
     @Setter
@@ -85,6 +88,9 @@ public class CompaysReqDto {
                     .regionCodeName(regionCodeName)
                     .memberCount(memberCount)
                     .build();
+        }
+
+        public static void setId(Integer id) {
         }
     }
 

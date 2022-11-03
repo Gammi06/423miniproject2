@@ -18,8 +18,9 @@ public class CompanysService {
 
     private final WantedsService wantedsService;
 
-    public void Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
+    public CompanysInsertReqDto Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
         companysDao.insert(companysInsertReqDto);
+        return companysInsertReqDto;
     }
 
     public void Companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {

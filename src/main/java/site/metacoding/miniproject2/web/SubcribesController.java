@@ -17,7 +17,7 @@ public class SubcribesController {
 
     private final SubcribesService subcribesService;
 
-    @GetMapping("/subscribes/{id}")
+    @GetMapping("s/api/subscribes/{id}")
     public String subscribesform(@PathVariable Integer id, Model model) {
         List<SubscribesListRespDto> subcribesList = subcribesService.subcribesListPage(id);
         model.addAttribute("subcribesList", subcribesList);
