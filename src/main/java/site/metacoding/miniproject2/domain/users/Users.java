@@ -20,6 +20,7 @@ public class Users {
     private Integer positionCodeId;
     private Integer companyId;
     private Integer mycareerId;
+    private String role;
     private Timestamp created;
 
     @Builder
