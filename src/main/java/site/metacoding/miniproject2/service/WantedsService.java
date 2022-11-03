@@ -14,4 +14,9 @@ public class WantedsService {
     public void insert() {
         wantedsDao.insert();
     }
+
+    public Object findByIdCompanyId(Integer id) {
+        return null;
+    }
+
 }

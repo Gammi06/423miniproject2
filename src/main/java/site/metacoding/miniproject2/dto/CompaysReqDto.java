@@ -26,6 +26,9 @@ public class CompaysReqDto {
         private Integer memberCount;
         private Timestamp created;
 
+        public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto) {
+        }
+
     }
 
     @Setter
