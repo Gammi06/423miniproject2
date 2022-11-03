@@ -6,17 +6,7 @@ import site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsApplyManageRespD
 import site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsRecommendRespDto;
 
 public interface RecruitsDao {
-    public void insert();
+    public List<RecruitsApplyManageRespDto> findApplyManage(Integer companysId);
 
-    public void findAll();
-
-    public void findById();
-
-    public void updateById();
-
-    public void deleteById();
-
-    public List<RecruitsApplyManageRespDto> findApplyManage();
-
-    public List<RecruitsRecommendRespDto> findRecommend();
+    public List<RecruitsRecommendRespDto> findRecommend(Integer companysId);
 }
