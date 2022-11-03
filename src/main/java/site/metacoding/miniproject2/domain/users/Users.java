@@ -18,14 +18,14 @@ public class Users {
     private String email;
     private String photo;
     private Integer positionCodeId;
-    private Integer companyId;
     private Integer mycareerId;
     private Timestamp created;
+    private String role; // '일반'(디폴트) , '회사'
 
     @Builder
     public Users(Integer id, String userId, String userPassword, String userName, Integer age, String phoneNumber,
-            String email, String photo, String positionCodeName, Integer positionCodeId, Integer companyId,
-            Integer mycareerId, Timestamp created) {
+            String email, String photo, String positionCodeName, Integer positionCodeId,
+            Integer mycareerId, Timestamp created, String role) {
         this.id = id;
         this.userId = userId;
         this.userPassword = userPassword;
@@ -35,9 +35,9 @@ public class Users {
         this.email = email;
         this.photo = photo;
         this.positionCodeId = positionCodeId;
-        this.companyId = companyId;
         this.mycareerId = mycareerId;
         this.created = created;
+        this.role = role;
     }
     /*
      * //////////////////////////////////

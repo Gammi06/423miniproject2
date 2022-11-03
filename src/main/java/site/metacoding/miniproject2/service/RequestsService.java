@@ -1,9 +1,13 @@
 package site.metacoding.miniproject2.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.requests.RequestsDao;
+import site.metacoding.miniproject2.dto.RequestsRespDto.RequestsInfoRespDto;
+import site.metacoding.miniproject2.dto.RequestsRespDto.RequestsListRespDto;
 
 @RequiredArgsConstructor
 @Service
@@ -11,7 +15,10 @@ public class RequestsService {
 
     private final RequestsDao requestsDao;
 
-    public void findRequest() {
-        requestsDao.findRequest();
+    public RequestsListRespDto findRequests(Integer id, String keyword) {
+        List<RequestsInfoRespDto> requestsInfoRespDtos = requestsDao.findRequests(id, keyword);
+        RequestsListRespDto requestsListRespDto = new RequestsListRespDto(requestsInfoRespDtos);
+        requestsListRespDto.setKeyword(keyword);
+        return requestsListRespDto;
     }
 }

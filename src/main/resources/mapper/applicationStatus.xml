@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject2.domain.applicationStatus.ApplicationStatusDao">
+
+    <select id="findAllCounts"
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusAllCountRespDto">
+        SELECT count((IFNULL(state, 0))) AS statusAll,
+        (SELECT
+        count((IFNULL(state, 0))) AS statusC
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id} AND state = 0 ) statusC,
+        (SELECT count((IFNULL(state, 0))) AS statusFinal
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id} AND state = 1) statusFinal
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id}
+    </select>
+
+    <select id="findAllInfos"
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusAllInfoRespDto">
+        SELECT apps.id id, apps.wanted_id wantedId,
+        apps.resume_id resumeId,
+        apps.state state,
+        apps.created created, wan.position_code_id
+        positionCodeId,
+        wan.company_id companyId, com.company_name
+        companyName,
+        poco.name positionCodeName,
+        res.user_id userId
+        FROM application_status apps
+        INNER JOIN wanteds wan
+        ON apps.wanted_id = wan.id
+        INNER JOIN companys com
+        ON wan.company_id = com.id
+        INNER JOIN positions_code poco
+        ON wan.position_code_id = poco.id
+        INNER JOIN resumes res
+        ON apps.resume_id = res.id
+        WHERE res.user_id = #{id}
+        <if test="keyword != null">
+            AND com.company_name LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        ORDER BY apps.id DESC
+    </select>
+
+    <select id="findWaitingCounts"
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusWaitingCountRespDto">
+        SELECT count((IFNULL(state, 0))) AS statusAll,
+        (SELECT
+        count((IFNULL(state, 0))) AS statusC
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id} AND state = 0 ) statusC,
+        (SELECT count((IFNULL(state, 0))) AS statusFinal
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id} AND state = 1) statusFinal
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id}
+    </select>
+
+    <select id="findWaitingInfos"
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusWaitingInfoRespDto">
+        SELECT apps.id id, apps.wanted_id wantedId,
+        apps.resume_id resumeId,
+        apps.state state,
+        apps.created created, wan.position_code_id
+        positionCodeId,
+        wan.company_id companyId, com.company_name
+        companyName,
+        poco.name positionCodeName,
+        res.user_id userId
+        FROM application_status apps
+        INNER JOIN wanteds wan
+        ON
+        apps.wanted_id = wan.id
+        INNER JOIN companys com
+        ON wan.company_id =
+        com.id
+        INNER JOIN positions_code poco
+        ON wan.position_code_id = poco.id
+        INNER JOIN resumes res
+        ON apps.resume_id = res.id
+        WHERE res.user_id = #{id} AND apps.state = 0
+        <if test="keyword != null">
+            AND com.company_name LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        ORDER BY apps.id DESC
+    </select>
+
+    <select id="findFinalCounts"
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusFinalCountRespDto">
+        SELECT count((IFNULL(state, 0))) AS statusAll,
+        (SELECT
+        count((IFNULL(state, 0))) AS statusC
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id} AND state = 0 ) statusC,
+        (SELECT count((IFNULL(state, 0))) AS statusFinal
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id} AND state = 1) statusFinal
+        FROM application_status appst
+        INNER JOIN resumes res
+        ON appst.resume_id = res.id
+        WHERE res.user_id = #{id}
+    </select>
+
+    <select id="findFinalInfos"
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusFinalInfoRespDto">
+        SELECT apps.id id, apps.wanted_id wantedId,
+        apps.resume_id resumeId,
+        apps.state state,
+        apps.created created, wan.position_code_id
+        positionCodeId,
+        wan.company_id companyId, com.company_name
+        companyName,
+        poco.name positionCodeName,
+        res.user_id userId
+        FROM application_status apps
+        INNER JOIN wanteds wan
+        ON
+        apps.wanted_id = wan.id
+        INNER JOIN companys com
+        ON wan.company_id =
+        com.id
+        INNER JOIN positions_code poco
+        ON wan.position_code_id = poco.id
+        INNER JOIN resumes res
+        ON apps.resume_id = res.id
+        WHERE res.user_id = #{id} AND apps.state = 1
+        <if test="keyword != null">
+            AND com.company_name LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        ORDER BY apps.id DESC
+    </select>
+</mapper>

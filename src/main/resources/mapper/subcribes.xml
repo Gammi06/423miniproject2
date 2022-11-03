@@ -3,7 +3,7 @@
 <mapper namespace="site.metacoding.miniproject2.domain.subcribes.SubcribesDao">
 
 	<select id="subcribesListPage"
-		resultType="site.metacoding.miniproject2.web.dto.response.SubscribesRespListDto">
+		resultType="site.metacoding.miniproject2.dto.SubribesRespDto">
 		SELECT w.company_id,w.* ,if(enddate>NOW(),'모집중','마감') state,
 		c.company_name, s.user_id
 		FROM wanteds w LEFT OUTER JOIN companys c
@@ -12,5 +12,22 @@
 		ON s.company_id= w.id
 		WHERE s.user_id = #{id};
 	</select>
+
+	<!-- 승현 작업함 -->
+	
+	<select id="findById"
+		resultType="site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto">
+		SELECT * FROM subcribes WHERE id = #{id}
+	</select>
+
+	<insert id="insert">
+		INSERT INTO subcribes(user_id, company_id, created) VALUES (#{userId}, #{wantedId}, NOW())
+	</insert>
+
+	<delete id="deleteById">
+		DELETE FROM subcribes WHERE id = #{id}
+	</delete>
+
+	<!-- 승현 작업 종료-->
 
 </mapper>

@@ -1,13 +1,35 @@
 package site.metacoding.miniproject2.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+//import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
 /*기존 작업자 승현/수현 */
 public class CompaysRespDto {
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+    public static class CompanysInsertRespDto {
+        private Integer id;
+        private String companyName;
+        private String address;
+        private String email;
+        private String companyNumber;
+        private String regionCodeName;
+        private String intro;
+        private Integer years;
+        private Integer memberCount;
+        private Integer usersId;
+
+    }
 
     @Getter
     @Setter
@@ -19,6 +41,14 @@ public class CompaysRespDto {
         private String regionCodeName;
         private Integer memberCount;
         private String intro;
+    }
+
+    @Getter
+    @Setter
+    public static class CompanyDetailWithWantedsListRespDto {
+        private CompanyDetailRespDto companyDetailRespDto;
+        private List<WantedListRespDto> wantedsListRespDtos;
+
     }
 
     @NoArgsConstructor
@@ -47,20 +77,16 @@ public class CompaysRespDto {
         private boolean isFirst; // getter가 만들어지면 isFirst() 이름으로 만들어짐. -> el에서는 first로 찾음
     }
 
-    @Getter
-    @Setter
-    public static class PagingWantedsManageRespDto {
-        private PagingRespDto pagingDto;
-    }
 }
 
 /*
  * >>>>>>>>지원 작업 종료<<<<<<<<<<<
  * List<WantedsListDto> wantedsListDtos; : Dto2개 연결이라서 삭제
  * photo; : api 컨롤러 사용이라서 삭제
- * CompanyDetailWithWantedsListRespDto 는 CompanyDetailRespDto와 같이 같아서 삭제
+ * CompanyDetailWithWantedsListRespDto 는 CompanyDetailRespDto와 같이 같아서 삭제 -> 필요해서
+ * 다시 넣어둠 물어보고 삭제예정
  * PagingRespDto pagingDto; PagingRespDto와 같아서 삭제.
  * PagingWantedsManageRespDto안에 같이 포함이 되어있어서 삭제예정
  * List<WantedsManageDto> :Dto2개 연결이라서 삭제
- * 
+ *
  */
