@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
@@ -20,16 +19,6 @@ public class WantedsRespDto {
         private String regionCodeName;
         private String careerCodeName;
         private List<String> skillCodeName;
-
-        @Builder
-        public SearchDto(Integer sortType, String positionCodeName, String regionCodeName, String careerCodeName,
-                List<String> skillCodeName) {
-            this.sortType = sortType;
-            this.positionCodeName = positionCodeName;
-            this.regionCodeName = regionCodeName;
-            this.careerCodeName = careerCodeName;
-            this.skillCodeName = skillCodeName;
-        }
     }
 
     @Setter

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 
 public class WantedsReqDto {
 
@@ -17,17 +16,6 @@ public class WantedsReqDto {
         private Integer careerCodeId;
         private String pay;
         private Timestamp endDate;
-
-        public Wanteds toEntity() {
-            return Wanteds.builder()
-                    .title(wantedTitle)
-                    .detail(wantedDetail)
-                    .positionCodeId(positionCodeId)
-                    .careerCodeId(careerCodeId)
-                    .pay(pay)
-                    .enddate(endDate)
-                    .build();
-        }
     }
 
 }
