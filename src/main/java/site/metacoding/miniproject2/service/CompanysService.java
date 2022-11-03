@@ -9,6 +9,7 @@ import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailWithWantedsListRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
 
 @RequiredArgsConstructor
 @Service
@@ -18,9 +19,10 @@ public class CompanysService {
 
     private final WantedsService wantedsService;
 
-    public CompanysInsertReqDto Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
-        companysDao.insert(companysInsertReqDto);
-        return companysInsertReqDto;
+    public CompanysInsertRespDto companyinsert(CompanysInsertReqDto companysinsertReqDto) {
+        companysDao.insert(companysinsertReqDto);
+        CompanysInsertRespDto companysInsertRespDto = companysDao.findById(companysinsertReqDto.getId());
+        return companysInsertRespDto;
     }
 
     public void Companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {

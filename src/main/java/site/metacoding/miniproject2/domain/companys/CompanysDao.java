@@ -4,6 +4,7 @@ import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
 
 public interface CompanysDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
@@ -11,7 +12,7 @@ public interface CompanysDao {
 
     public void insert(CompanysInsertReqDto companysInsertReqDto);
 
-    public void updateChangeCompanys(CompanysTitleReqDto companysTitleReqDto);// 변경
+    public void updateChangeCompanys(CompanysTitleReqDto companysTitleReqDtoPS);// 변경
 
     public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto);// 수행
 
@@ -23,4 +24,7 @@ public interface CompanysDao {
 
     public CompanysTitleReqDto findByIdCompanysNumber(String companyNumber);
 
+    public void insert();
+
+    public CompanysInsertRespDto findById(Integer id);
 }

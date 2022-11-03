@@ -26,25 +26,15 @@ public class CompaysReqDto {
         private Integer memberCount;
         private Timestamp created;
 
-        CompanysTitleReqDto(String companyName, String address, String email, String companyNumber, String photo,
-                String regionCodeName,
-                String intro, Integer years, Integer memberCount, Timestamp created) {
-            this.companyName = companyName;
-            this.address = address;
-            this.email = email;
-            this.companyNumber = companyNumber;
-            this.photo = photo;
-            this.regionCodeName = regionCodeName;
-            this.intro = intro;
-            this.years = years;
-            this.memberCount = memberCount;
-            this.created = created;
+        public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto) {
         }
+
     }
 
     @Setter
     @Getter
     public static class CompanysInsertReqDto {
+        private Integer id;
         private String companyName;
         private String address;
         private String email;
@@ -53,22 +43,38 @@ public class CompaysReqDto {
         private String intro;
         private Integer years;
         private Integer memberCount;
+        private Integer usersId;
 
-        public Companys toEntity() {
-            return Companys.builder()
-                    .companyName(companyName)
-                    .address(address)
-                    .email(email)
-                    .companyNumber(companyNumber)
-                    .regionCodeName(regionCodeName)
-                    .intro(intro)
-                    .years(years)
-                    .memberCount(memberCount)
-                    .build();
+        public CompanysInsertReqDto(Companys companys) {
+            this.id = companys.getId();
+            this.companyName = companys.getCompanyName();
+            this.address = companys.getAddress();
+            this.email = companys.getEmail();
+            this.companyNumber = companys.getCompanyNumber();
+            this.regionCodeName = companys.getRegionCodeName();
+            this.intro = companys.getIntro();
+            this.years = companys.getYears();
+            this.memberCount = companys.getMemberCount();
+            this.usersId = companys.getUsersId();
         }
 
-        public void setSessionUsers(SessionUsers sessionUsers) {
-        }
+        // public Companys toEntity() {
+        // return Companys.builder()
+        // .id(id)
+        // .companyName(companyName)
+        // .address(address)
+        // .email(email)
+        // .companyNumber(companyNumber)
+        // .regionCodeName(regionCodeName)
+        // .intro(intro)
+        // .years(years)
+        // .memberCount(memberCount)
+        // .usersId(usersId)
+        // .build();
+        // }
+
+        // public void setSessionUsers(SessionUsers sessionUsers) {
+        // }
     }
 
     @Setter
@@ -89,10 +95,21 @@ public class CompaysReqDto {
                     .memberCount(memberCount)
                     .build();
         }
+    }
 
-        public static void setId(Integer id) {
+    /* 수현 작업함 */
+    @Setter
+    @Getter
+    public static class CompanysUpdatePhotoReqDto {
+        private String intro;
+
+        public Companys toEntity() {
+            return Companys.builder()
+                    .intro(intro)
+                    .build();
         }
     }
+    /* 수현 작업 종료 */
 
 }
 

@@ -9,12 +9,9 @@
 		WHERE id = #{id}
 	</select>
 
-	<insert id="insert">
-		INSERT INTO companys(company_name, address, email,
-		company_number, photo, region_code_name, intro, years, member_count,
-		created)
-		VALUES(#{companyName},#{address}, #{email}, #{companyNumber},
-		NULL, #{regionCodeName}, #{intro}, #{years}, #{memberCount}, NOW())
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO companys(users_id, company_name, address, email, company_number, photo, region_code_name, intro, years, member_count, created)
+		VALUES(#{userId}, #{companyName},#{address}, #{email}, #{companyNumber}, NULL, #{regionCodeName}, #{intro}, #{years}, #{memberCount}, NOW())		
 	</insert>
 
 	<select id="findByIdCompanysNumber" resultType="site.metacoding.miniproject2.domain.companys.CompanysDao">
@@ -34,5 +31,9 @@
 	<delete id="deleteCompanys">
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
+
+	<select id="findById" resultType="site.metacoding.miniproject2.dto$CompanysInsertRespDto">
+		select * from companys where id = #{id}
+	</select>
 
 </mapper>

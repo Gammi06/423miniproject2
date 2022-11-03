@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.service.CompanysService;
 
@@ -26,11 +27,11 @@ public class CompanysController {
 
     // 회사가입
     @PostMapping("s/api/companys")
-    public @ResponseBody CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
+    public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        companysInsertReqDto.setSessionUsers(sessionUsers);
-        CompanysInsertReqDto companysInsertRespDto = companysService.Companyinsert(companysInsertReqDto);
-        return new CMRespDto<>(1, "회사정보등록성공", null);
+        companysInsertReqDto.setUsersId(sessionUsers.getId());
+        CompanysInsertRespDto companysInsertRespDto = companysService.companyinsert(companysInsertReqDto);
+        return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
     }
 
     // 사업자 번호 중복체크
@@ -44,8 +45,7 @@ public class CompanysController {
     @PutMapping("s/api/companys/{id}")
     public @ResponseBody CMRespDto<?> CompanyupdateId(@PathVariable Integer id,
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        CompanysUpdateReqDto.setId(id);
+        companysService.Companyupdate(id, companysUpdateReqDto);
         return new CMRespDto<>(1, "회사정보수정성공", null);
     }
 

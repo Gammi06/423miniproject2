@@ -13,4 +13,21 @@
 		WHERE s.user_id = #{id};
 	</select>
 
+	<!-- 승현 작업함 -->
+	
+	<select id="findById"
+		resultType="site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto">
+		SELECT * FROM subcribes WHERE id = #{id}
+	</select>
+
+	<insert id="insert">
+		INSERT INTO subcribes(user_id, company_id, created) VALUES (#{userId}, #{wantedId}, NOW())
+	</insert>
+
+	<delete id="deleteById">
+		DELETE FROM subcribes WHERE id = #{id}
+	</delete>
+
+	<!-- 승현 작업 종료-->
+
 </mapper>
