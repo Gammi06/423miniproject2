@@ -74,19 +74,19 @@ public class CompaysReqDto {
         }
     }
 
+    /* 수현 작업함 */
     @Setter
     @Getter
     public static class CompanysUpdatePhotoReqDto {
-        private String photo;
         private String intro;
 
         public Companys toEntity() {
             return Companys.builder()
                     .intro(intro)
-                    .photo(photo)
                     .build();
         }
     }
+    /* 수현 작업 종료 */
 
 }
 

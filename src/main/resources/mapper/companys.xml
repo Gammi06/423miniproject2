@@ -37,7 +37,6 @@
 
 	<update id="updateCompanysPhoto">
 		UPDATE companys SET
-		photo = #{photo},
 		intro = #{intro}
 		where id=#{id}
 	</update>
