@@ -1,22 +1,27 @@
 package site.metacoding.miniproject2.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
+import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailWithWantedsListRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
 
 @RequiredArgsConstructor
 @Service
 public class CompanysService {
 
     private final CompanysDao companysDao;
-
+    private final SubcribesDao subcribesDao;
     private final WantedsService wantedsService;
 
     public CompanysInsertRespDto companyinsert(CompanysInsertReqDto companysinsertReqDto) {
@@ -25,7 +30,7 @@ public class CompanysService {
         return companysInsertRespDto;
     }
 
-    public void Companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
+    public void updateCompany(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
         CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
 
         if (companysTitleReqDtoPS == null) {
@@ -47,7 +52,7 @@ public class CompanysService {
             return null;
         CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
         companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
-        companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findByIdCompanyId(id));
+        companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findAllByCompanyId(id));
         return companyDetailWithWantedsListDtoPS;
     }
 
@@ -68,4 +73,16 @@ public class CompanysService {
             return true;
         }
     }
+
+    // 구독한 리스트 보기
+    public List<SubscribesListRespDto> subcribesListPage(Integer id) {
+        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(id);
+
+        List<SubscribesListRespDto> subscribesListRespDto = new ArrayList<>();
+        for (SubscribesListRespDto subcribes : subcribesList) {
+            subscribesListRespDto.add(new SubscribesListRespDto(subcribes));
+        }
+        return subcribesList;
+    }
+    // SubcribesService 삭제후 CompanysService로 옮김
 }

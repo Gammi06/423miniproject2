@@ -58,7 +58,4 @@ public class WantedsService {
         return wantedList;
     }
 
-    public List<WantedListRespDto> findByIdCompanyId(Integer id) {
-        return null;
-    }
 }
