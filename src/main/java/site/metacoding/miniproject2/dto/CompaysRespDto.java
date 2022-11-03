@@ -45,6 +45,13 @@ public class CompaysRespDto {
 
     @Getter
     @Setter
+    public static class CompanysNumberCheck {
+        private String companyNumber;
+
+    }
+
+    @Getter
+    @Setter
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
         private List<WantedListRespDto> wantedsListRespDtos;
