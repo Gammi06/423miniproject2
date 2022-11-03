@@ -3,16 +3,15 @@ package site.metacoding.miniproject2.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.users.Users;
 import site.metacoding.miniproject2.domain.users.UsersDao;
-import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto;
+import site.metacoding.miniproject2.dto.UsersReqDto.JoinReqDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoAllRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.JoinRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 
@@ -21,15 +20,20 @@ import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 public class UsersService {
     private final UsersDao usersDao;
 
-    @Transactional
-    public SessionUsers findByUserId(LoginReqDto loginReqDto) {
-        Users usersPS = usersDao.findByUserId(loginReqDto.getId());
-        if (usersPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
-            return new SessionUsers(usersPS);
-        } else {
-            throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
-        }
+    public JoinRespDto insert(JoinReqDto joinReqDto) {
+        Users users = joinReqDto.toEntity();
+        usersDao.insert(users);
+        return new JoinRespDto(users);
     }
+
+    // public SessionUsers findByUserId(LoginReqDto loginReqDto) {
+    // Users usersPS = usersDao.findByUserId(loginReqDto.getId());
+    // if (usersPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
+    // return null;
+    // } else {
+    // throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
+    // }
+    // }
 
     public void findById() {
         usersDao.findById(null);
@@ -39,16 +43,12 @@ public class UsersService {
         usersDao.update();
     }
 
-    public void updatePassword() {
-        usersDao.updatePassword(null);
+    public void updateByPassword() {
+        usersDao.updateByPassword(null);
     }
 
     public void deleteById() {
         usersDao.deleteById(null);
-    }
-
-    public void insert() {
-        usersDao.insert();
     }
 
     public void updateProfile() {
