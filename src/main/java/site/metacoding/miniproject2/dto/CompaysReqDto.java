@@ -100,7 +100,7 @@ public class CompaysReqDto {
     /* 수현 작업함 */
     @Setter
     @Getter
-    public static class CompanysUpdatePhotoReqDto {
+    public static class CompanysUpdateIntroReqDto {
         private String intro;
 
         public Companys toEntity() {

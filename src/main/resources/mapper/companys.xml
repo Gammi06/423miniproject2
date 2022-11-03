@@ -32,23 +32,16 @@
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
 
-	<null
-		<null
-			<null
-				<null
-					<null
-						<null
-							<HEAD
-								<select id="findById" resultType="site.metacoding.miniproject2.dto$CompanysInsertRespDto">
+
+	<select id="findById" resultType="site.metacoding.miniproject2.dto$CompanysInsertRespDto">
 		select * from companys where id = #{id}
 	</select>
-								=======
-								<!-- 수현 작업함 -->
-								<update id="updateCompanysPhoto">
+	=======
+	<!-- 수현 작업함 -->
+	<update id="updateCompanysIntro">
 		UPDATE companys SET
 		intro = #{intro}
 		where id=#{id}
 	</update>
-								<!-- 수현 작업완료 -->
-								>>>>>>> 443d20b14595a8b8c5190d1e00246cb54cedfdfd
+	<!-- 수현 작업완료 -->
 </mapper>

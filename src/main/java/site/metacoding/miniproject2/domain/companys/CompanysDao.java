@@ -24,7 +24,9 @@ public interface CompanysDao {
 
     public CompanysTitleReqDto findByIdCompanysNumber(String companyNumber);
 
-    public void insert();
+    public void updateCompanysIntro(Integer id);
 
     public CompanysInsertRespDto findById(Integer id);
+
+    public void updateCompanysIntro(Integer id);
 }
