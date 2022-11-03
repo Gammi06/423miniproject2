@@ -31,8 +31,6 @@ public class CompaysRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
         private List<WantedsListRespDto> wantedsListRespDtos;
 
-        public void setWantedsListDtos(Object findByIdCompanyId) {
-        }
     }
 
     @NoArgsConstructor

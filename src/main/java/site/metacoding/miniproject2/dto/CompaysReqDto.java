@@ -26,9 +26,20 @@ public class CompaysReqDto {
         private Integer memberCount;
         private Timestamp created;
 
-        public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto) {
+        CompanysTitleReqDto(String companyName, String address, String email, String companyNumber, String photo,
+                String regionCodeName,
+                String intro, Integer years, Integer memberCount, Timestamp created) {
+            this.companyName = companyName;
+            this.address = address;
+            this.email = email;
+            this.companyNumber = companyNumber;
+            this.photo = photo;
+            this.regionCodeName = regionCodeName;
+            this.intro = intro;
+            this.years = years;
+            this.memberCount = memberCount;
+            this.created = created;
         }
-
     }
 
     @Setter

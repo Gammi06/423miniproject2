@@ -11,7 +11,7 @@ public interface CompanysDao {
 
     public void insert(CompanysInsertReqDto companysInsertReqDto);
 
-    public void updateChangeCompanys(CompanysTitleReqDto companysTitleReqDtoPS);// 변경
+    public void updateChangeCompanys(CompanysTitleReqDto companysTitleReqDto);// 변경
 
     public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto);// 수행
 
