@@ -98,4 +98,8 @@ public class WantedsService {
         List<WantedListRespDto> wantedList = wantedsDao.findAllByLike(userId);
         return wantedList;
     }
+
+    public List<WantedListRespDto> findByIdCompanyId(Integer id) {
+        return null;
+    }
 }
