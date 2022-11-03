@@ -12,7 +12,7 @@ public class RecruitsRespDto {
 
     @Setter
     @Getter
-    public class RecruitsApplyManageRespDto {
+    public static class RecruitsApplyManageRespDto {
         private Integer id;
         private Integer companysId;
         private String wantedTitle;
@@ -22,26 +22,26 @@ public class RecruitsRespDto {
 
     @Setter
     @Getter
-    public class RecruitsRecommendRespDto {
+    public static class RecruitsRecommendByPositionRespDto {
         private Integer id;
         private Integer companysId;
         private String resumeTitle;
         private String userName;
         private Timestamp date;
-        private String position;
+        private String positionName;
+        private Integer positionsCodeId;
     }
 
     @Setter
     @Getter
-    public class RecruitsManageRespDto {
+    public static class RecruitsRecommendRespDto {
         private Integer id;
         private Integer companysId;
-        private String careerCodeId;
-        private String positionCodeId;
         private String resumeTitle;
-        private String resumeIntro;
-        private String state;
+        private String userName;
+        private Timestamp date;
     }
+
 }
 
 /* >>>> 수현 작업 종료 <<<< */

@@ -40,4 +40,4 @@ public class ResumesService {
     }
 
 }
-/* >>>> 연지 작업함 <<<< */
+/* >>>> 연지 작업종료 <<<< */

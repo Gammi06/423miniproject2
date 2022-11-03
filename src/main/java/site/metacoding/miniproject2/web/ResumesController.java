@@ -1,4 +1,4 @@
-package site.metacoding.miniproject2;
+package site.metacoding.miniproject2.web;
 
 import java.util.List;
 

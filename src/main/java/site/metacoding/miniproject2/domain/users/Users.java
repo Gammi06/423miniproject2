@@ -17,16 +17,15 @@ public class Users {
     private String phoneNumber;
     private String email;
     private String photo;
-    private String positionCodeName;
     private Integer positionCodeId;
-    private Integer companyId;
     private Integer mycareerId;
     private Timestamp created;
+    private String role; // '일반'(디폴트) , '회사'
 
     @Builder
     public Users(Integer id, String userId, String userPassword, String userName, Integer age, String phoneNumber,
-            String email, String photo, String positionCodeName, Integer positionCodeId, Integer companyId,
-            Integer mycareerId, Timestamp created) {
+            String email, String photo, String positionCodeName, Integer positionCodeId,
+            Integer mycareerId, Timestamp created, String role) {
         this.id = id;
         this.userId = userId;
         this.userPassword = userPassword;
@@ -35,10 +34,15 @@ public class Users {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.photo = photo;
-        this.positionCodeName = positionCodeName;
         this.positionCodeId = positionCodeId;
-        this.companyId = companyId;
         this.mycareerId = mycareerId;
         this.created = created;
+        this.role = role;
     }
+    /*
+     * //////////////////////////////////
+     * positionCodeName이 원래 존재했지만 중복으로 필요하지 않기 때문에 삭제
+     * //////////////////////////////////
+     */
+
 }

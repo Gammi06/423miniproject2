@@ -1,30 +1,46 @@
 package site.metacoding.miniproject2.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.users.Users;
+import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
 
 public class UsersReqDto {
 
     /* >>>>> 성유 작업함 <<<<< */
     @Getter
     @Setter
-    public static class LoginReqDto { // 로그인
+    public static class LoginReqDto {
         private Integer id;
         private String userId;
-        private String userPassword;
+        private String userPassword; // 비밀번호 숨기기
+    }
+
+    @Getter
+    @Setter
+    public static class AuthReqDto {
+        private Integer id;
+        private String userId;
+        private String userPassword; // 비밀번호 숨기기
+        private String role;
     }
 
     @Getter
     @Setter
     public static class JoinReqDto { // 회원가입
         private String userId;
-        private String userPassword;
+        private String userPassword; // 비밀번호 숨기기
         private String userName;
         private Integer age;
         private String phoneNumber;
         private String email;
-        private String photo;
+        /*
+         * ////////////////////////////
+         * photo: 이번에는 restController를 사용하기 때문에 삭제
+         * ////////////////////////////
+         */
 
         public Users toEntity() {
             return Users.builder()
@@ -34,7 +50,6 @@ public class UsersReqDto {
                     .age(age)
                     .phoneNumber(phoneNumber)
                     .email(email)
-                    .photo(photo)
                     .build();
         }
     }
@@ -42,14 +57,18 @@ public class UsersReqDto {
     @Getter
     @Setter
     public static class EditReqDto { // 기본정보 수정
-        private String photo;
         private String userName;
         private String email;
         private String phoneNumber;
 
-        public Users toEdit() {
+        /*
+         * ////////////////////////////
+         * photo: 이번에는 restController를 사용하기 때문에 삭제
+         * ////////////////////////////
+         */
+
+        public Users toEntity() {
             return Users.builder()
-                    .photo(photo)
                     .email(email)
                     .phoneNumber(phoneNumber)
                     .build();
@@ -63,7 +82,7 @@ public class UsersReqDto {
         private Integer positionCodeId;
         private Integer mycareerId;
         private Integer skillsCodeId;
-        // 학력은 DTO 가져오기 (이건 Education에서 dto 만들고 가져오기)
+        private List<EducationsListRespDto> educationsListRespDtos;
         private String intro; // 간단 소개글 (Resunes)
 
     }

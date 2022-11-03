@@ -1,12 +1,12 @@
 package site.metacoding.miniproject2.domain.codes;
 
-/* >>>> 연지 작업함 <<<< */
+import java.util.List;
+
+import site.metacoding.miniproject2.dto.CodesRespDto.CareersCodeRespDto;
+
 public interface CareersCodeDao {
-    // Dto 생성 및 mapper 수정 필요함
 
-    public void findAll();
+    public List<CareersCodeRespDto> findAll();
 
-    public void findById(Integer id);
-
+    public CareersCodeRespDto findById(Integer id);
 }
-/* >>>> 연지 작업함 <<<< */
