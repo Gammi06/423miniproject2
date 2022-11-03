@@ -37,7 +37,7 @@
 		SELECT us.id, us.user_id, us.user_password,
 		us.user_name, US.AGE,
 		us.phone_number, us.email, us.photo,
-		us.position_code_id,us.company_id,
+		us.position_code_id,
 		us.mycareer_id, us.created, pc.name positionCodeName
 		FROM users us
 		LEFT OUTER JOIN positions_code pc
