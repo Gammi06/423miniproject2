@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject2.domain.requests.RequestsDao">
+
+	<select id="findRequests" resultType="site.metacoding.miniproject2.dto.RequestsRespDto.RequestsInfoRespDto">
+		SELECT req.id, req.resume_id, req.wanted_id, req.status, req.created,
+		wan.position_code_id, wan.career_code_id, wan.company_id,
+		com.company_name,
+		poco.name positionCodeName
+		FROM requests req
+		INNER JOIN wanteds wan
+		ON req.wanted_id = wan.id
+		INNER JOIN companys com
+		ON wan.company_id=com.id
+		INNER JOIN positions_code poco
+		ON wan.position_code_id = poco.id
+		INNER JOIN resumes res
+		ON req.resume_id = res.id
+		WHERE res.user_id = #{id}
+		<if test="keyword != null">
+			AND com.company_name LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		ORDER BY req.id DESC
+	</select>
+
+</mapper>
