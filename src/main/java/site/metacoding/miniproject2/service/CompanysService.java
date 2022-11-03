@@ -16,8 +16,6 @@ public class CompanysService {
 
     private final CompanysDao companysDao;
 
-    private final WantedsService wantedsService;
-
     public void Companyinsert(CompanysInsertReqDto companysInsertReqDto) {
         companysDao.insert(companysInsertReqDto);
     }
@@ -43,7 +41,7 @@ public class CompanysService {
             return null;
         CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
         companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
-        //companyDetailWithWantedsListDtoPS.setWantedsListDtos(wantedsService.findByIdCompanyId(id));
+        // companyDetailWithWantedsListDtoPS.setWantedsListDtos(wantedsService.findByIdCompanyId(id));
         // 이부분 물어보기
         return companyDetailWithWantedsListDtoPS;
     }
@@ -65,4 +63,10 @@ public class CompanysService {
             return true;
         }
     }
+
+    /* 수현 작업시작 */
+    public void updateCompanysPhoto(Integer id) {
+        companysDao.updateCompanysPhoto(id); // sessionUser 올라오면 수정
+    }
+    /* 수현 작업종료 */
 }
