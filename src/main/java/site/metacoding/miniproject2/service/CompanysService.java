@@ -43,7 +43,7 @@ public class CompanysService {
             return null;
         CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
         companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
-        companyDetailWithWantedsListDtoPS.setWantedsListDtos(wantedsService.findByIdCompanyId(id));
+        //companyDetailWithWantedsListDtoPS.setWantedsListDtos(wantedsService.findByIdCompanyId(id));
         // 이부분 물어보기
         return companyDetailWithWantedsListDtoPS;
     }

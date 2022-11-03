@@ -6,4 +6,5 @@
 	INSERT INTO myskills(user_id, resume_id, wanted_id, skills_code_id) 
 	VALUES (#{userId},#{resumeId},#{wantedId},#{skillsCodeId})
 	</insert>
+	
 </mapper>

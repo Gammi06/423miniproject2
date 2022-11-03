@@ -6,20 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class LikesRespDto {
-
-    /* >>>> 승현 작업함 <<<< */
-
-    /* 기존 작업자 : 지원 */
-    @Setter
-    @Getter
-    public static class LikeRespDto {
-        private Integer id;
-        private String title;
-        private Integer companysId;
-        private String companyName;
-        private String state;
-    }
-
     /*
      * /////////////////////////////////////////
      * LikeListRespDto 삭제 내용:
@@ -40,5 +26,4 @@ public class LikesRespDto {
         private Timestamp created;
     }
 
-    /* >>>> 승현 작업 종료 <<<< */
 }
