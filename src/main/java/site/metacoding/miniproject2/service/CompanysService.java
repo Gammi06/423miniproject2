@@ -16,7 +16,7 @@ import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
 public class CompanysService {
 
     private final CompanysDao companysDao;
-    private final WantedsService wantedsService;
+    private final WantedsService wantedsService; // 쌤이 서비스에서 서비스 쓰지 말랬다고 알려주기
 
     public CompanysInsertRespDto companyinsert(CompanysInsertReqDto companysinsertReqDto) {
         companysDao.insert(companysinsertReqDto);
