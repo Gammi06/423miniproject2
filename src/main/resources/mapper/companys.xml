@@ -35,7 +35,4 @@
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
 
-	<!-- 승현 작업 -->
-	
-	<!-- 승현 작업 종료 -->
 </mapper>

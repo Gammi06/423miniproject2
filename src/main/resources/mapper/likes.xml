@@ -15,5 +15,11 @@
 	<insert id ="insert">
 		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{wantedId}, NOW())
 	</insert>
+
+	<!-- 승현 작업함 -->
+	<delete id="delete">
+		DELETE FROM likes WHERE id = #{id}
+	</delete>
+	<!-- 승현 작업함 -->
     
 </mapper>
