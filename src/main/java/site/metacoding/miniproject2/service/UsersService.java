@@ -25,7 +25,7 @@ public class UsersService {
     public SessionUsers findByUserId(LoginReqDto loginReqDto) {
         Users usersPS = usersDao.findByUserId(loginReqDto.getId());
         if (usersPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
-            return new SessionUsers(usersPS);
+            return null;
         } else {
             throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
         }
