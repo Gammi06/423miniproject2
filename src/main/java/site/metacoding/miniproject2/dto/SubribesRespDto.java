@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /*기존 작업자 지원 */
 public class SubribesRespDto {
