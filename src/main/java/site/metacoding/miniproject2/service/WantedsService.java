@@ -57,12 +57,4 @@ public class WantedsService {
         List<WantedListRespDto> wantedList = wantedsDao.findAllByLike(userId);
         return wantedList;
     }
-
-    public void wantedInsertLike(Integer userId) {
-        likesDao.insert();
-    }
-
-    public void wantedInsertApply(Integer userId) {
-        applysDao.insert();
-    }
 }

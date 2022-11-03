@@ -6,18 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class LikesRespDto {
-
-    /* 공고 목록인거 같은데 왜 여기 있는지? => 지원이한테 물어보기 */
-    @Setter
-    @Getter
-    public static class LikeRespDto {
-        private Integer id;
-        private String title;
-        private Integer companysId;
-        private String companyName;
-        private String state;
-    }
-
     /*
      * /////////////////////////////////////////
      * LikeListRespDto 삭제 내용:

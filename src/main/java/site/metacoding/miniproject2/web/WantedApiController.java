@@ -49,12 +49,10 @@ public class WantedApiController {
     @PostMapping("/s/api/wanted/{userId}/like")
     public void wantedInsertLike(@PathVariable Integer userId) {
         // userId에 유저 아이디값 넣어주기
-        wantedsService.wantedInsertLike(userId);
     }
 
     @PostMapping("/s/api/wanted/{userId}/apply")
     public void wantedInsertApply(@PathVariable Integer userId) {
         // userId에 유저 아이디값 넣어주기
-        wantedsService.wantedInsertApply(userId);
     }
 }
