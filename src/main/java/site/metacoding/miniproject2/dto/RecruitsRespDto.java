@@ -12,7 +12,7 @@ public class RecruitsRespDto {
 
     @Setter
     @Getter
-    public class RecruitsApplyManageRespDto {
+    public static class RecruitsApplyManageRespDto {
         private Integer id;
         private Integer companysId;
         private String wantedTitle;
@@ -22,7 +22,7 @@ public class RecruitsRespDto {
 
     @Setter
     @Getter
-    public class RecruitsRecommendRespDto {
+    public static class RecruitsRecommendRespDto {
         private Integer id;
         private Integer companysId;
         private String resumeTitle;
@@ -34,7 +34,7 @@ public class RecruitsRespDto {
 
     // @Setter
     // @Getter
-    // public class WantedsRecruitsManageRespDto {
+    // public static class WantedsRecruitsManageRespDto {
     // private Integer id;
     // private Integer companysId;
     // private String careerCodeId;

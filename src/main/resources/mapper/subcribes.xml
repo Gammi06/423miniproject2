@@ -3,7 +3,7 @@
 <mapper namespace="site.metacoding.miniproject2.domain.subcribes.SubcribesDao">
 
 	<select id="subcribesListPage"
-		resultType="site.metacoding.miniproject2.web.dto.response.SubscribesRespListDto">
+		resultType="site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto">
 		SELECT w.company_id,w.* ,if(enddate>NOW(),'모집중','마감') state,
 		c.company_name, s.user_id
 		FROM wanteds w LEFT OUTER JOIN companys c
