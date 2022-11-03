@@ -16,7 +16,6 @@ import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
 public class CompanysService {
 
     private final CompanysDao companysDao;
-
     private final WantedsService wantedsService;
 
     public CompanysInsertRespDto companyinsert(CompanysInsertReqDto companysinsertReqDto) {
@@ -68,4 +67,10 @@ public class CompanysService {
             return true;
         }
     }
+
+    /* 수현 작업시작 */
+    public void updateCompanysPhoto(Integer id) {
+        companysDao.updateCompanysPhoto(id); // sessionUser 올라오면 수정
+    }
+    /* 수현 작업종료 */
 }
