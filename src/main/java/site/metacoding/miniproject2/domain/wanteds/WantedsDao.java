@@ -21,13 +21,19 @@ public interface WantedsDao {
 
     public List<WantedListRespDto> findAllByLike(Integer userId);
 
-    public void findByBoth();
-
     public void insert();
 
-    public void updateById();
+    public void updateById(Integer id);
 
-    public void deleteById();
+    public void deleteById(Integer id);
+
+    public void findByCompanysId(Integer companyId);
+
+    public void findByCareersId(Integer companyId, Integer careerCodeId);
+
+    public void findByPositionsId();
+
+    public void findByBothIds();
 
     // public void findAllHot();
     // public void findBestHot();

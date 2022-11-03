@@ -35,10 +35,12 @@
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
 
+	<!-- 수현 작업함 -->
 	<update id="updateCompanysPhoto">
 		UPDATE companys SET
 		intro = #{intro}
 		where id=#{id}
 	</update>
+	<!-- 수현 작업완료 -->
 
 </mapper>
