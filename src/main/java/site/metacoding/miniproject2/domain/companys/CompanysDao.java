@@ -11,10 +11,18 @@ public interface CompanysDao {
 
     public void insert(CompanysInsertReqDto companysInsertReqDto);
 
-    public void updateCompanys(CompanysUpdateReqDto CompanysUpdateReqDto);
+    public void updateChangeCompanys(CompanysTitleReqDto companysTitleReqDtoPS);// 변경
+
+    public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto);// 수행
 
     public void deleteCompanys(Integer id);
 
+    public CompanysTitleReqDto findByIdCompanyId(Integer id);
+
+    public void findAllByCompanyId(Integer id);
+
     public CompanysTitleReqDto findByIdCompanysNumber(String companyNumber);
+
+    public void updateCompanysPhoto(Integer id);
 
 }

@@ -26,6 +26,9 @@ public class CompaysReqDto {
         private Integer memberCount;
         private Timestamp created;
 
+        public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto) {
+        }
+
     }
 
     @Setter
@@ -73,6 +76,20 @@ public class CompaysReqDto {
                     .build();
         }
     }
+
+    /* 수현 작업함 */
+    @Setter
+    @Getter
+    public static class CompanysUpdatePhotoReqDto {
+        private String intro;
+
+        public Companys toEntity() {
+            return Companys.builder()
+                    .intro(intro)
+                    .build();
+        }
+    }
+    /* 수현 작업 종료 */
 
 }
 

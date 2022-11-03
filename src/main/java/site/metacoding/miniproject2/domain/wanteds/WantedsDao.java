@@ -1,39 +1,49 @@
 package site.metacoding.miniproject2.domain.wanteds;
 
+import java.util.List;
+
+import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
+
 public interface WantedsDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
 
-    public void findAllByPosition();
+    public WantedDetailRespDto findById(Integer id);
 
-    // public void findAllHot();
+    public List<WantedListRespDto> findAll();
 
-    public void findBestHot();
+    public List<WantedListRespDto> findAllOrdered(SearchDto searchDto);
 
-    public void findAllWanteds();
+    public List<WantedListRespDto> findAllByCompanyId(Integer companyId);
 
-    public void findAllByCareer();
+    public List<WantedListRespDto> findAllByPositionCodeName(String positionCodeName);
 
-    public void findAllByPositionToCompany();
-
-    public void findByBoth();
-
-    // public void paging();
-
-    public void findAllByCompanyId();
-
-    public void findByIdToDetail();
-
-    // public void paging();
-
-    public void findAllToSort();
-
-    public void findAllLike();
-
-    public void findAllByposition();
+    public List<WantedListRespDto> findAllByLike(Integer userId);
 
     public void insert();
 
-    // public void findAllHot();
+    public void updateById(Integer id);
 
+    public void deleteById(Integer id);
+
+    public void findByCompanysId(Integer companyId);
+
+    public void findByCareersId(Integer companyId, Integer careerCodeId);
+
+    public void findByPositionsId();
+
+    public void findByBothIds();
+
+    // public void findAllHot();
     // public void findBestHot();
+    // public void findAllWanteds();
+    // public void findAllByCareer();
+    // public void findAllByPositionToCompany();
+    // public void findAllByCompanyId();
+    // public void findByIdToDetail();
+    // public void paging();
+    // public void findAllToSort();
+    // public void findAllLike();
+    // public void findAllByposition();
 }

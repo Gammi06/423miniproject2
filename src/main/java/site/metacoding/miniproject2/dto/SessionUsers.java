@@ -2,6 +2,7 @@ package site.metacoding.miniproject2.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import site.metacoding.miniproject2.dto.UsersReqDto.AuthReqDto;
 
 @Setter

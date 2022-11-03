@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Companys {
     private Integer id;
+    private Integer usersId;
     private String companyName;
     private String address;
     private String email;
@@ -22,9 +23,11 @@ public class Companys {
     private Timestamp created;
 
     @Builder
-    public Companys(Integer id, String companyName, String address, String email, String companyNumber, String photo,
+    public Companys(Integer id, Integer usersId, String companyName, String address, String email,
+            String companyNumber, String photo,
             String regionCodeName, String intro, Integer years, Integer memberCount, Timestamp created) {
         this.id = id;
+        this.usersId = usersId;
         this.companyName = companyName;
         this.address = address;
         this.email = email;

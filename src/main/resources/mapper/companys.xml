@@ -11,10 +11,10 @@
 
 	<insert id="insert">
 		INSERT INTO companys(company_name, address, email,
-		company_number, photo, region_code_name, intro, years, member_count,
+		company_number, region_code_name, intro, years, member_count,
 		created)
 		VALUES(#{companyName},#{address}, #{email}, #{companyNumber},
-		NULL, #{regionCodeName}, #{intro}, #{years}, #{memberCount}, NOW())
+		#{regionCodeName}, #{intro}, #{years}, #{memberCount}, NOW())
 	</insert>
 
 	<select id="findByIdCompanysNumber" resultType=" site.metacoding.miniproject2.domain.companys.CompanysDao">
@@ -34,5 +34,13 @@
 	<delete id="deleteCompanys">
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
+
+	<!-- 수현 작업함 -->
+	<update id="updateCompanysPhoto">
+		UPDATE companys SET
+		intro = #{intro}
+		where id=#{id}
+	</update>
+	<!-- 수현 작업완료 -->
 
 </mapper>

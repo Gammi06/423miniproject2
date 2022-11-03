@@ -1,9 +1,13 @@
 package site.metacoding.miniproject2.domain.codes;
 
+import java.util.List;
+
+import site.metacoding.miniproject2.dto.CodesRespDto.SkillsCodeRespDto;
+
 public interface SkillsCodeDao {
-    // 이름 규칙에 맞는 메서드명으로 생성해주세요.
 
-    public void findAll();
+    public List<SkillsCodeRespDto> findAll();
 
-    public void findById();
+    public SkillsCodeRespDto findById(Integer id);
+
 }

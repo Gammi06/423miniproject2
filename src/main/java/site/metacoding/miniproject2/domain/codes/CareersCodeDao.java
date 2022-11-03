@@ -1,9 +1,12 @@
 package site.metacoding.miniproject2.domain.codes;
 
-public interface CareersCodeDao {
-    // 이름 규칙에 맞는 메서드명으로 생성해주세요.
-    // Dto 생성 및 mapper 수정 필요함
-    public void findAll();
+import java.util.List;
 
-    public void findByID(Integer id);
+import site.metacoding.miniproject2.dto.CodesRespDto.CareersCodeRespDto;
+
+public interface CareersCodeDao {
+
+    public List<CareersCodeRespDto> findAll();
+
+    public CareersCodeRespDto findById(Integer id);
 }
