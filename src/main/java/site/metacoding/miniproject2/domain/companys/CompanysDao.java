@@ -23,4 +23,6 @@ public interface CompanysDao {
 
     public CompanysTitleReqDto findByIdCompanysNumber(String companyNumber);
 
+    public void updateCompanysPhoto(Integer id);
+
 }
