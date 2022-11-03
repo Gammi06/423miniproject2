@@ -14,7 +14,7 @@ public class RequestsApiController {
 
     private final RequestsService requestsService;
 
-    @GetMapping("/proposal/{id}")
+    @GetMapping("/s/proposal/{id}")
     public CMRespDto<?> findRequests(@PathVariable Integer id, String keyword) {
         return new CMRespDto<>(1, "성공", requestsService.findRequests(id, keyword));
     }

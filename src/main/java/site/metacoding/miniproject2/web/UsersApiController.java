@@ -28,7 +28,7 @@ public class UsersApiController {
     }
 
     // 서현 작업
-    @GetMapping("/mypage/{id}")
+    @GetMapping("/s/mypage/{id}")
     public CMRespDto<?> findAllInfo(@PathVariable Integer id) {
         return new CMRespDto<>(1, "성공", usersService.findAllInfo(id));
     }
