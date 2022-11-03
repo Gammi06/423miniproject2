@@ -75,7 +75,7 @@
 		ON cc.id = w.career_code_id
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
-		WHERE w.enddate < NOW()
+		WHERE w.enddate > NOW()
 		AND pc.name = #{positionCodeName}
 		ORDER BY w.created DESC
 	</select>
