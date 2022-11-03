@@ -19,7 +19,6 @@ public class ApplyService {
 
     public void insert(ApplyUserReqDto applyUserReqDto) {
         applysDao.insert(applyUserReqDto);
-
     }
 
     public void deleteById(Integer id) {
