@@ -13,7 +13,7 @@
 	</select>
 
 	<insert id ="insert">
-		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{id}, NOW())
+		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{wantedId}, NOW())
 	</insert>
     
 </mapper>
