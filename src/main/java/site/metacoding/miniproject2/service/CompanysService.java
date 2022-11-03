@@ -85,4 +85,11 @@ public class CompanysService {
         return subcribesList;
     }
     // SubcribesService 삭제후 CompanysService로 옮김
+
+
+    /* 수현 작업시작 */
+    public void updateCompanysPhoto(Integer id) {
+        companysDao.updateCompanysPhoto(id); // sessionUser 올라오면 수정
+    }
+    /* 수현 작업종료 */
 }
