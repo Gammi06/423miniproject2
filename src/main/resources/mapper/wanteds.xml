@@ -8,10 +8,61 @@
 		VALUES(#{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay},#{enddate}, NOW())
 	</insert>
 
+	<update id="updateById">
+		Update wanteds SET title = #{wantedTitle}, detail = #{wantedDetail},
+		position_code_id = #{positionCodeId}, career_code_id = #{careerCodeId},
+		pay = #{pay}, enddate = #{enddate}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteById">
+		DELETE FROM wanteds WHERE id = #{id}
+	</delete>
+
+	<select id="findByCompanysId" resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id, w.career_code_id, p.name positionName, c.name careerName, if(w.enddate > NOW(), '채용중', '마감') state
+		FROM wanteds w
+		LEFT OUTER JOIN positions_code p
+		ON p.id = w.position_code_id
+		LEFT OUTER JOIN careers_code c
+		ON c.id = w.career_code_id
+		WHERE w.company_id = #{companyId}
+	</select>
+
+	<select id="findByCareersId" resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCareersRespDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.career_code_id, c.name, if(w.enddate > NOW(), '채용중', '마감') state
+		FROM wanteds w
+		INNER JOIN careers_code c
+		ON c.id = w.career_code_id
+		WHERE w.company_id = #{companyId}
+		AND w.career_code_id = #{careerCodeId}
+	</select>
+
+	<select id="findByPositionsId" resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id , p.name, if(w.enddate > NOW(), '모집중', '마감') state
+		FROM wanteds w
+		INNER JOIN positions_code p
+		ON p.id = w.position_code_id
+		WHERE w.company_id = #{companyId}
+		AND w.position_code_id = #{positionCodeId}
+	</select>
+
+	<select id="findByBothIds" resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto">
+		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id, w.career_code_id, c.name, p.name, if(w.enddate > NOW(), '모집중', '마감') state
+		FROM wanteds w
+		LEFT OUTER JOIN positions_code p
+		ON p.id = w.position_code_id
+		LEFT OUTER JOIN careers_code c
+		ON c.id = w.career_code_id
+		WHERE w.company_id = #{companyId}
+		AND w.position_code_id = #{positionCodeId}
+		AND w.career_code_id = #{careerCodeId}
+	</select>
+
 	<!-- 수현 작업 완료 이 밑으로는 쿼리 안건드렸습니다~!-->
 
 	<select id="findById"
-		resultType="site.metacoding.miniproject2.dto.WantedDetailRespDto">
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto">
 		SELECT w.id, pc.name, cc.name, w.title,
 		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
@@ -27,7 +78,7 @@
 	</select>
 
 	<select id="findAll"
-		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto">
 		SELECT w.id, pc.name, cc.name, w.title,
 		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
@@ -41,7 +92,7 @@
 		ORDER BY w.created DESC
 	</select>
 
-<!--
+	<!--
 	구현예정
 	<select id="findAllOrdered"
 		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
@@ -49,7 +100,7 @@
 -->
 
 	<select id="findAllByCompanyId"
-		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto">
 		SELECT w.id, pc.name, cc.name, w.title,
 		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
@@ -65,7 +116,7 @@
 	</select>
 
 	<select id="findAllByPositionCodeName"
-		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto">
 		SELECT w.id, pc.name, cc.name, w.title,
 		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
@@ -81,7 +132,7 @@
 	</select>
 
 	<select id="findAllByLike"
-		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto">
 		SELECT w.id, pc.name, cc.name, w.title,
 		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w

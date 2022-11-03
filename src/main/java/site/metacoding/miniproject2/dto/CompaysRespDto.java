@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 //import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsManageRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
 /*기존 작업자 승현/수현 */
@@ -29,7 +28,7 @@ public class CompaysRespDto {
     @Setter
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
-        //private List<WantedsListRespDto> wantedsListRespDtos;
+        // private List<WantedsListRespDto> wantedsListRespDtos;
 
         public void setWantedsListDtos(Object findByIdCompanyId) {
         }
@@ -59,14 +58,6 @@ public class CompaysRespDto {
         private Integer currentPage;
         private boolean isLast; // getter가 만들어지면 isLast() 이름으로 만들어짐. -> el에서는 last로 찾음
         private boolean isFirst; // getter가 만들어지면 isFirst() 이름으로 만들어짐. -> el에서는 first로 찾음
-    }
-
-    @Getter
-    @Setter
-    public static class PagingWantedsManageRespDto {
-        private PagingRespDto pagingDto;
-        private List<WantedsManageRespDto> wantedsManageDtos;
-
     }
 
 }
