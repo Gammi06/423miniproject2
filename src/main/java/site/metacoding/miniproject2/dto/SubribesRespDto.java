@@ -18,10 +18,9 @@ public class SubribesRespDto {
                 private Integer wantedsId;
                 private String companyName;
                 private Timestamp created;// 공고시작시간
-                private Timestamp enddate;// 공고끝나는시간
+                private Timestamp enddate;// 공고끝나는시간.
                 private String state;
 
-                // 내일 보고 수정
                 public SubscribesListRespDto(SubscribesListRespDto subcribes) {
                         this.id = id;
                         this.companysId = companysId;

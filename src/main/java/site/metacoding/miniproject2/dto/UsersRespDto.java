@@ -5,11 +5,32 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import site.metacoding.miniproject2.domain.users.Users;
 import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
 
 public class UsersRespDto {
 
     /* >>>>> 성유 작업함 <<<<< */
+    @Getter
+    @Setter
+    public static class JoinRespDto {
+        private String userId;
+        private String userPassword;
+        private String userName;
+        private Integer age;
+        private String phoneNumber;
+        private String email;
+
+        public JoinRespDto(Users users) {
+            this.userId = users.getUserId();
+            this.userPassword = users.getUserPassword();
+            this.userName = users.getUserName();
+            this.age = users.getAge();
+            this.phoneNumber = users.getPhoneNumber();
+            this.email = users.getEmail();
+        }
+    }
+
     @Getter
     @Setter
     public static class EditRespDto { // 기본정보 수정
@@ -29,6 +50,7 @@ public class UsersRespDto {
         private String intro; // 간단 소개글 (Resunes)
 
     }
+
     /* >>>>> 성유 작업 종료<<<<< */
 
     /* >>>>> 서현 작업함 <<<<< */

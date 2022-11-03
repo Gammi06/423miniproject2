@@ -12,10 +12,19 @@ public class UsersReqDto {
     /* >>>>> 성유 작업함 <<<<< */
     @Getter
     @Setter
-    public static class LoginReqDto { // 로그인
+    public static class LoginReqDto {
         private Integer id;
         private String userId;
         private String userPassword; // 비밀번호 숨기기
+    }
+
+    @Getter
+    @Setter
+    public static class AuthReqDto {
+        private Integer id;
+        private String userId;
+        private String userPassword; // 비밀번호 숨기기
+        private String role;
     }
 
     @Getter
