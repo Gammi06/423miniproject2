@@ -9,7 +9,7 @@
         WHERE c.id = #{companysId}
     </select>
 
-    <select id="findRecommend" resultType="site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsRecommendByPositionRespDto">
+    <select id="findRecommendByPosition" resultType="site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsRecommendByPositionRespDto">
         SELECT p.name, r.title, u.user_name, r.created
         FROM resumes r
         LEFT OUTER JOIN users u
