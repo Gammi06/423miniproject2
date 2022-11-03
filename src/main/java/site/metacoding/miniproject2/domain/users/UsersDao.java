@@ -3,7 +3,7 @@ package site.metacoding.miniproject2.domain.users;
 public interface UsersDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
 
-    public void findByUserId(Integer usersId); // 로그인
+    public Users findByUserId(Integer usersId); // 로그인
 
     public void findById(Integer id);
 
