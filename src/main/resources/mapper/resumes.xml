@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject2.domain.resumes.ResumesDao">
+
+	<!-- >>>> 연지 작업함 <<<< -->
+	<insert id="insert">
+		SELECT u.id, r.title, u.user_name, u.email, u.phone_number, r.intro
+		FROM users u LEFT OUTER JOIN resumes r
+   		ON r.user_id = u.id
+	</insert>
+
+	<select id="findAll" resultType="site.metacoding.miniproject2.dto.ResumeListRespDto">
+		SELECT id, title, created, status_id FROM resumes
+		WHERE user_id = #{id}
+	</select>
+
+	<select id="findById" resultType="site.metacoding.miniproject2.dto.ResumeListRespDto">
+		SELECT id, user_id, positions_code_id, title, intro, status_id, created 
+		FROM resumes
+		WHERE id = #{id}
+	</select>
+
+	<update id="updateById">
+		SELECT r.id, r.title, u.photo, u.user_name, u.email, u.phone_number, r.intro
+		FROM resumes r
+		LEFT OUTER JOIN users u
+		ON r.user_id = u.id
+		WHERE r.id = #{id}
+	</update>
+
+	<delete id="deleteById">
+		DELETE FROM resumes WHERE id = #{id}
+	</delete>
+	<!-- >>>> 연지 작업함 <<<< -->
+
+</mapper>

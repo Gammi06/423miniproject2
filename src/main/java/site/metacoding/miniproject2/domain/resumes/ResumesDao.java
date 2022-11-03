@@ -5,7 +5,7 @@ import java.util.List;
 /* >>>> 연지 작업함 <<<< */
 public interface ResumesDao {
 
-    public void insert();
+    public void insert(Resumes resumes);
 
     public List<Resumes> findAll();
 
