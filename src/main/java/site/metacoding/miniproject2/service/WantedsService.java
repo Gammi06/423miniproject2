@@ -24,7 +24,6 @@ public class WantedsService {
         wantedsDao.insert();
     }
 
-<<<<<<< HEAD
     public List<WantedListRespDto> findAll(SearchDto searchDto) {
         if (searchDto == null) {
             List<WantedListRespDto> wantedList = wantedsDao.findAll();
@@ -66,10 +65,4 @@ public class WantedsService {
     public void wantedInsertApply(Integer userId) {
         applysDao.insert();
     }
-=======
-    public Object findByIdCompanyId(Integer id) {
-        return null;
-    }
-
->>>>>>> bbee574fa276c1902bdd4bb53e40f4f785c29958
 }
