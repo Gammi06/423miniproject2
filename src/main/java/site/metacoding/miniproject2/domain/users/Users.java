@@ -19,6 +19,7 @@ public class Users {
     private String photo;
     private Integer positionCodeId;
     private Integer mycareerId;
+    private String role;
     private Timestamp created;
     private String role; // '일반'(디폴트) , '회사'
 

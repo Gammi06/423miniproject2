@@ -29,6 +29,7 @@ public class UsersRespDto {
         private String intro; // 간단 소개글 (Resunes)
 
     }
+    
     /* >>>>> 성유 작업 종료<<<<< */
 
     /* >>>>> 서현 작업함 <<<<< */
