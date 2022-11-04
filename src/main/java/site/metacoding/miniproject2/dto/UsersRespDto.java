@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.users.Users;
 import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
+import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersEditRespDto;
+import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
 public class UsersRespDto {
 
@@ -52,6 +54,7 @@ public class UsersRespDto {
     @Getter
     @Setter
     public static class EditRespDto { // 기본정보 수정
+        private Integer id;
         private String userName;
         private String email;
         private String phoneNumber;
@@ -60,13 +63,13 @@ public class UsersRespDto {
     @Getter
     @Setter
     public static class ProfileEditRespDto { // 프로필 수정
+        private Integer id;
         private String positionCodeName;
-        private Integer positionCodeId;
-        private Integer mycareerId;
-        private Integer skillsCodeId;
+        private String careersCodeName;
+        private List<WantedsSkillsRespDto> wantedsSkillsRespDtos;
+        private List<MyCareersEditRespDto> myCareersEditRespDtos;
         private List<EducationsListRespDto> educationsListRespDtos;
-        private String intro; // 간단 소개글 (Resunes)
-
+        private String intro;
     }
 
     /* >>>>> 성유 작업 종료<<<<< */

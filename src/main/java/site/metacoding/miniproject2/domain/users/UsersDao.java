@@ -8,6 +8,7 @@ import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
 
 public interface UsersDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
@@ -15,7 +16,7 @@ public interface UsersDao {
     // 성유 작업 시작
     public Users findByUserId(Integer usersId); // 로그인
 
-    public void findById(Integer id);
+    public List<UsersInfoRespDto> findById(Integer id);
 
     public void update(); // 계정설정-기본정보 수정
 
@@ -25,7 +26,7 @@ public interface UsersDao {
 
     public void updateProfile();// 프로필 수정
 
-    public Optional<AuthReqDto> findAllUserId(String userId);
+    public List<AuthReqDto> findAllUserId(String userId);
 
     public void insert(Users users);
     // 성유 작업 종료
