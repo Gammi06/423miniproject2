@@ -43,9 +43,9 @@ public class CompanysController {
 
     // 회사정보 수정/인증 필요
     @PutMapping("s/api/companys/{id}")
-    public @ResponseBody CMRespDto<?> CompanyupdateId(@PathVariable Integer id,
+    public @ResponseBody CMRespDto<?> companyupdateId(@PathVariable Integer id,
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
-        companysService.Companyupdate(id, companysUpdateReqDto);
+        companysService.companyupdate(id, companysUpdateReqDto);
         return new CMRespDto<>(1, "회사정보수정성공", null);
     }
 

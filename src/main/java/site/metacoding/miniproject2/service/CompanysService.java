@@ -30,7 +30,7 @@ public class CompanysService {
         return companysInsertRespDto;
     }
 
-    public void Companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
+    public void companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
         CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
 
         if (companysTitleReqDtoPS == null) {
@@ -89,7 +89,7 @@ public class CompanysService {
     }
 
     public void insertSubcribes(SubcribesInsertReqDto insertReqDto) {
-        //if 파인드 어쩌고해서 있는지 체크하기
+        // if 파인드 어쩌고해서 있는지 체크하기
         subcribesDao.insert(insertReqDto);
     }
 
