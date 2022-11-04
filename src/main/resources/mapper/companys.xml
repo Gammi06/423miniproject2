@@ -15,7 +15,7 @@
 	</insert>
 
 	<select id="findByIdCompanysNumber" resultType="site.metacoding.miniproject2.dto.CompanysRespDto$CompanysNumberCheckRespDto">
-		SELECT * FROM companys WHERE company_number = #{CompanysNumber}
+		SELECT * FROM companys WHERE company_number = #{CompanyNumber}
 	</select>
 
 	<select id="findByIdCompanyId" resultType="site.metacoding.miniproject2.dto.CompanysReqDto$CompanysTitleReqDto">

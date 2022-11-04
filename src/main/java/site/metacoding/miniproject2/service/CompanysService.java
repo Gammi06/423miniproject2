@@ -16,6 +16,7 @@ import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailWithWantedsListRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
@@ -64,8 +65,8 @@ public class CompanysService {
     }
 
     public boolean companyNumberDoubleCheck(String companyNumber) {// 사업자 번호 중복체크
-        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanysNumber(companyNumber);
-        if (companysTitleReqDtoPS == null) {
+        CompanysNumberCheckRespDto companysNumberCheckRespDto = companysDao.findByIdCompanysNumber(companyNumber);
+        if (companysNumberCheckRespDto == null) {
             return false;
         } else {
             return true;
