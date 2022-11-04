@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.applys.ApplysDao;
+import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.likes.LikesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
@@ -26,6 +27,7 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageResp
 @Service
 public class WantedsService {
 
+    private final PositionsCodeDao positionsCodeDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
     private final ApplysDao applysDao;
@@ -88,6 +90,9 @@ public class WantedsService {
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId) {
         // company의 findById 추가하기
+        if (companysDao.findByIdToDetail(companyId) == null) {
+            throw new RuntimeException("해당 아이디의 기업(" + companyId + ")이 존재하지 않습니다.");
+        }
         List<WantedListRespDto> wantedList = wantedsDao.findAllByCompanyId(companyId);
         return wantedList;
     }
@@ -96,11 +101,11 @@ public class WantedsService {
         return companysDao.findByIdToDetail(id);
     }
 
-    public List<WantedListRespDto> findAllByPositionCodeName(String positionCodeId) {
-        // position의 findById 추가하기
-        // id를 string으로 바꾸는 코드 추가하기
-        String positionCodeName = null;
-        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeName(positionCodeName);
+    public List<WantedListRespDto> findAllByPositionCodename(String positionCodename) {
+        if (positionsCodeDao.findByCodename(positionCodename) == null) {
+            throw new RuntimeException("해당 포지션(" + positionCodename + ")이 존재하지 않습니다.");
+        }
+        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeName(positionCodename);
         return wantedList;
     }
 

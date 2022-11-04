@@ -13,18 +13,12 @@
 		WHERE l.user_id = #{id}
 	</select>
 
-	<select id="findById"
-		resultType="site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto">
-		SELECT * FROM likes
-		WHERE id = #{id}
-	</select>
-
 	<insert id ="insert">
 		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{wantedId}, NOW())
 	</insert>
 
 	<delete id="deleteById">
-		DELETE FROM likes WHERE id = #{id}
+		DELETE FROM likes WHERE user_id = #{userId} AND wanted_id = #{wantedId}
 	</delete>
     
 </mapper>
