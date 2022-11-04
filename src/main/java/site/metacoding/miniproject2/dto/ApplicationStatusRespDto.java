@@ -14,7 +14,7 @@ public class ApplicationStatusRespDto {
 
     @Setter
     @Getter
-    public class ApplicationStatusAllCountRespDto {
+    public static class ApplicationStatusAllCountRespDto {
         private Integer id;
         private Integer statusAll;
         private Integer statusC;
@@ -23,7 +23,7 @@ public class ApplicationStatusRespDto {
 
     @Setter
     @Getter
-    public class ApplicationStatusAllInfoRespDto {
+    public static class ApplicationStatusAllInfoRespDto {
         private Integer id;
         private Integer wantedId;
         private Integer resumeId;
@@ -54,7 +54,7 @@ public class ApplicationStatusRespDto {
 
     @Setter
     @Getter
-    public class ApplicationStatusWaitingCountRespDto {
+    public static class ApplicationStatusWaitingCountRespDto {
         private Integer id;
         private Integer statusAll;
         private Integer statusC;
@@ -63,7 +63,7 @@ public class ApplicationStatusRespDto {
 
     @Setter
     @Getter
-    public class ApplicationStatusWaitingInfoRespDto {
+    public static class ApplicationStatusWaitingInfoRespDto {
         private Integer id;
         private Integer wantedId;
         private Integer resumeId;
@@ -95,7 +95,7 @@ public class ApplicationStatusRespDto {
 
     @Setter
     @Getter
-    public class ApplicationStatusFinalCountRespDto {
+    public static class ApplicationStatusFinalCountRespDto {
         private Integer id;
         private Integer statusAll;
         private Integer statusC;
@@ -104,7 +104,7 @@ public class ApplicationStatusRespDto {
 
     @Setter
     @Getter
-    public class ApplicationStatusFinalInfoRespDto {
+    public static class ApplicationStatusFinalInfoRespDto {
         private Integer id;
         private Integer wantedId;
         private Integer resumeId;
