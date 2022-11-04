@@ -26,6 +26,6 @@ public class LikesController {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         likeFindByIdRespDto.setUserId(sessionUsers.getId());
         LikeFindByIdRespDto likesList = likesService.findById(id);
-        return new CMRespDto<>(1, "구독페이지 보기", likesList);
+        return new CMRespDto<>(1, "좋아요페이지 보기", likesList);
     }
 }

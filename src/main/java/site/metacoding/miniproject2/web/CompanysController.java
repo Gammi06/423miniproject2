@@ -30,7 +30,7 @@ public class CompanysController {
 
     /* 지원 작업 */
     // 회사가입
-    @PostMapping("s/api/companys/{id}")
+    @PostMapping("/s/api/companys/{id}")
 
     public CMRespDto<?> insert(CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
@@ -47,7 +47,7 @@ public class CompanysController {
     }
 
     // 회사정보 수정/인증 필요
-    @PutMapping("s/api/companys/{id}")
+    @PutMapping("/s/api/companys/{id}")
     public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
             CompanysUpdateReqDto companysUpdateReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
@@ -57,7 +57,7 @@ public class CompanysController {
     }
 
     // 회사 정보 삭제 /인증 필요
-    @DeleteMapping("s/api/companys/{id}")
+    @DeleteMapping("/s/api/companys/{id}")
     public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysService.deleteCompanys(sessionUsers.getId());
@@ -65,7 +65,7 @@ public class CompanysController {
     }
 
     /* 구독페이지 */
-    @GetMapping("s/subscribes/{id}")
+    @GetMapping("/s/subscribes/{id}")
     public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer id,
             SubscribesListRespDto subscribesListRespDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");

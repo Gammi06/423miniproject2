@@ -14,7 +14,7 @@
 		VALUES(#{userId}, #{companyName},#{address}, #{email}, #{companyNumber}, NULL, #{regionCodeName}, #{intro}, #{years}, #{memberCount}, NOW())		
 	</insert>
 
-	<select id="findByIdCompanysNumber" resultType="site.metacoding.miniproject2.dto.CompaysRespDto.CompanysNumberCheckRespDto">
+	<select id="findByIdCompanysNumber" resultType="site.metacoding.miniproject2.dto.CompanysRespDto$CompanysNumberCheckRespDto">
 		SELECT * FROM companys WHERE company_number = #{CompanysNumber}
 	</select>
 
