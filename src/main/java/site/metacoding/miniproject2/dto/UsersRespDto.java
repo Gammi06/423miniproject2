@@ -74,7 +74,7 @@ public class UsersRespDto {
     /* >>>>> 서현 작업함 <<<<< */
     @Setter
     @Getter
-    public class InfoRespDto {
+    public static class InfoRespDto {
         private Integer id;
         private String userName;
         private String phoneNumber;
@@ -85,7 +85,7 @@ public class UsersRespDto {
 
     @Setter
     @Getter
-    public class InfoCountRespDto {
+    public static class InfoCountRespDto {
         private Integer id;
         private Integer statusAll;
         private Integer likesCount;
@@ -95,7 +95,7 @@ public class UsersRespDto {
 
     @Setter
     @Getter
-    public class RecommendByPositionRespDto {
+    public static class RecommendByPositionRespDto {
         private Integer id;
         private Integer no;
         private String companyName;
@@ -105,7 +105,7 @@ public class UsersRespDto {
 
     @Setter
     @Getter
-    public class StatusCountRespDto {
+    public static class StatusCountRespDto {
         private Integer id;
         private Integer statusAll;
         private Integer statusC;
