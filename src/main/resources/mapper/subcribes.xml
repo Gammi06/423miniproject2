@@ -11,7 +11,7 @@
 		ON w.company_id = c.id
 		LEFT OUTER JOIN subscribes s
 		ON s.company_id= w.id
-		WHERE s.user_id = #{id};
+		WHERE s.user_id = #{id}
 	</select>
 	<!--지원 작업 종료-->
 

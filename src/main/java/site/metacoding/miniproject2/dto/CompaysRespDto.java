@@ -46,7 +46,7 @@ public class CompaysRespDto {
 
     @Getter
     @Setter
-    public static class CompanysNumberCheck {
+    public static class CompanysNumberCheckRespDto {
         private String companyNumber;
 
     }
@@ -89,6 +89,7 @@ public class CompaysRespDto {
     @Setter
     public static class SubscribesListRespDto {
         private Integer id;
+        private Integer usersId;
         private Integer companysId;
         private Integer wantedsId;
         private String companyName;

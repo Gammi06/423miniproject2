@@ -3,7 +3,7 @@
 <mapper namespace="site.metacoding.miniproject1.domain.likes.LikesDao">
 
 	<!-- 공고 관련인지 지원이한테 물어보기 -->
-	<select id="findlikes" resultType="site.metacoding.miniproject1.web.dto.request.likes.LikesRespListDto">
+	<select id="findlikes" resultType="site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto">
 		SELECT w.company_id,w.* ,if(enddate>NOW(),'모집중','마감') state,
 		c.company_name, c.photo, l.user_id
 		FROM wanteds w LEFT OUTER JOIN companys c
@@ -19,12 +19,12 @@
 		WHERE id = #{id}
 	</select>
 
-	<insert id ="insert">
+	<insert id="insert">
 		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{wantedId}, NOW())
 	</insert>
 
 	<delete id="deleteById">
 		DELETE FROM likes WHERE id = #{id}
 	</delete>
-    
+
 </mapper>

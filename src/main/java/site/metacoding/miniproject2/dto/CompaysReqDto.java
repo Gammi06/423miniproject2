@@ -15,6 +15,7 @@ public class CompaysReqDto {
     @Getter
     public static class CompanysTitleReqDto {
         private Integer id;
+        private Integer usersId;
         private String companyName;
         private String address;
         private String email;
@@ -80,6 +81,7 @@ public class CompaysReqDto {
     @Setter
     @Getter
     public static class CompanysUpdateReqDto {
+        private Integer usersId;
         private String companyName;
         private String address;
         private String email;
