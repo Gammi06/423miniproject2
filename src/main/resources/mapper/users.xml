@@ -3,12 +3,20 @@
 <mapper namespace="site.metacoding.miniproject2.domain.users.UsersDao">
 	<!-- 성유 작업 시작 -->
 	<select id="findByUserId"
+<<<<<<< HEAD
 		resultType="site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto">
+=======
+		resultType="site.metacoding.miniproject2.dto.UsersReqDto$LoginReqDto">
+>>>>>>> aadc1a476b5e68e8532e1498f9eed1b954bca23b
 		SELECT * FROM users WHERE user_id = #{userId}
 	</select>
 
 	<select id="findById"
+<<<<<<< HEAD
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto">
+=======
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$UsersInfoRespDto">
+>>>>>>> aadc1a476b5e68e8532e1498f9eed1b954bca23b
 		SELECT * FROM users WHERE id = #{id}
 	</select>
 
@@ -27,7 +35,11 @@
 		DELETE FROM users WHERE id = #{id}
 	</delete>
 
+<<<<<<< HEAD
 	<select id="findAllUserId" resultType="site.metacoding.miniproject2.dto.UsersReqDto.AuthReqDto">
+=======
+	<select id="findAllUserId" resultType="site.metacoding.miniproject2.dto.UsersReqDto$AuthReqDto">
+>>>>>>> aadc1a476b5e68e8532e1498f9eed1b954bca23b
 		SELECT c.id companyId, c.company_name, u.id usersId, u.user_id
 		FROM companys c
 		INNER JOIN users u 
@@ -45,7 +57,7 @@
 	<!-- 성유 작업 완료 -->
 
 	<select id="findInfo"
-	resultType="site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto">
+	resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoRespDto">
 		SELECT us.id, us.user_id, us.user_password,
 		us.user_name, US.AGE,
 		us.phone_number, us.email, us.photo,
@@ -58,7 +70,7 @@
 	</select>
 
 	<select id="findInfoCounts"
-	resultType="site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto">
+	resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoCountRespDto">
 		SELECT count((IFNULL(state, 0))) AS statusAll,
 		(SELECT count((IFNULL(wanted_id, 0))) AS likesCount
 		FROM likes
@@ -78,7 +90,7 @@
 	</select>
 
 	<select id="findByPosition"
-		resultType="site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto">
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$RecommendByPositionRespDto">
 		SELECT @ROWNUM :=@ROWNUM+1 AS no, comrec.*
 		FROM (SELECT com.id, com.company_name, com.address, com.email,
 		com.company_number, com.photo,
@@ -99,7 +111,7 @@
 	</select>
 
 	<select id="findByPositionIfNull"
-		resultType="site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto">
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$RecommendByPositionRespDto">
 		SELECT @ROWNUM :=@ROWNUM+1 AS no, comrec.*
 		FROM (SELECT com.id, com.company_name, com.address, com.email,
 		com.company_number, com.photo,
@@ -118,7 +130,7 @@
 	</select>
 
 	<select id="findStatusCounts"
-        resultType="site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto">
+        resultType="site.metacoding.miniproject2.dto.UsersRespDto$StatusCountRespDto">
         SELECT count((IFNULL(state, 0))) AS statusAll,
         (SELECT
         count((IFNULL(state, 0))) AS statusC

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.requests.RequestsDao">
 
-	<select id="findRequests" resultType="site.metacoding.miniproject2.dto.RequestsRespDto.RequestsInfoRespDto">
+	<select id="findRequests" resultType="site.metacoding.miniproject2.dto.RequestsRespDto$RequestsInfoRespDto">
 		SELECT req.id, req.resume_id, req.wanted_id, req.status, req.created,
 		wan.position_code_id, wan.career_code_id, wan.company_id,
 		com.company_name,

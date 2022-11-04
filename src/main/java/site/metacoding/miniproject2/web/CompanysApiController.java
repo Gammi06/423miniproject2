@@ -1,7 +1,10 @@
 package site.metacoding.miniproject2.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,24 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
-import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
-import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
-import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @RequiredArgsConstructor
 @RestController
-public class CompanysController {
+public class CompanysApiController {
     private final CompanysService companysService;
     private final HttpSession session;;
 
+    /* 지원 작업 */
     // 회사가입
     @PostMapping("s/api/companys")
     public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(sessionUsers.getId());
-        CompanysInsertRespDto companysInsertRespDto = companysService.companyinsert(companysInsertReqDto);
+        CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
         return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
     }
 
@@ -43,9 +49,9 @@ public class CompanysController {
 
     // 회사정보 수정/인증 필요
     @PutMapping("s/api/companys/{id}")
-    public @ResponseBody CMRespDto<?> CompanyupdateId(@PathVariable Integer id,
+    public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
-        companysService.Companyupdate(id, companysUpdateReqDto);
+        companysService.updateCompany(id, companysUpdateReqDto);
         return new CMRespDto<>(1, "회사정보수정성공", null);
     }
 
@@ -56,4 +62,21 @@ public class CompanysController {
         return new CMRespDto<>(1, "회사정보삭제", null);
     }
 
+    /* 구독페이지 */
+    @GetMapping("s/api/subscribes/{id}")
+    public String subscribesform(@PathVariable Integer id, Model model) {
+        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);
+        model.addAttribute("subcribesList", subcribesList);
+        return "subscribes/subscribes";
+    }
+    /* 지원 작업 완료 */
+
+    /* 수현 작업 시작 */
+    @PutMapping("/s/api/companys/{id}/edit/intro")
+    public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
+            CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        companysService.updateCompanysIntro(id, companysUpdateIntroReqDto);
+        return new CMRespDto<>(1, "성공", null);
+    }
+    /* 수현 작업 완료 */
 }

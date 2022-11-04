@@ -3,7 +3,7 @@
 <mapper namespace="site.metacoding.miniproject2.domain.applicationStatus.ApplicationStatusDao">
 
     <select id="findAllCounts"
-        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusAllCountRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto$ApplicationStatusAllCountRespDto">
         SELECT count((IFNULL(state, 0))) AS statusAll,
         (SELECT
         count((IFNULL(state, 0))) AS statusC
@@ -23,7 +23,7 @@
     </select>
 
     <select id="findAllInfos"
-        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusAllInfoRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto$ApplicationStatusAllInfoRespDto">
         SELECT apps.id id, apps.wanted_id wantedId,
         apps.resume_id resumeId,
         apps.state state,
@@ -50,7 +50,7 @@
     </select>
 
     <select id="findWaitingCounts"
-        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusWaitingCountRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto$ApplicationStatusWaitingCountRespDto">
         SELECT count((IFNULL(state, 0))) AS statusAll,
         (SELECT
         count((IFNULL(state, 0))) AS statusC
@@ -70,7 +70,7 @@
     </select>
 
     <select id="findWaitingInfos"
-        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusWaitingInfoRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto$ApplicationStatusWaitingInfoRespDto">
         SELECT apps.id id, apps.wanted_id wantedId,
         apps.resume_id resumeId,
         apps.state state,
@@ -99,7 +99,7 @@
     </select>
 
     <select id="findFinalCounts"
-        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusFinalCountRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto$ApplicationStatusFinalCountRespDto">
         SELECT count((IFNULL(state, 0))) AS statusAll,
         (SELECT
         count((IFNULL(state, 0))) AS statusC
@@ -119,7 +119,7 @@
     </select>
 
     <select id="findFinalInfos"
-        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusFinalInfoRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplicationStatusRespDto$ApplicationStatusFinalInfoRespDto">
         SELECT apps.id id, apps.wanted_id wantedId,
         apps.resume_id resumeId,
         apps.state state,

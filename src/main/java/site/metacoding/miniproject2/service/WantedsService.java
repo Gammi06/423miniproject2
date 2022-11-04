@@ -6,8 +6,13 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.applys.ApplysDao;
+import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.likes.LikesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
+import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.dto.ApplyRespDto.ApplyFindByIdRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
+import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
@@ -21,6 +26,7 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageResp
 @Service
 public class WantedsService {
 
+    private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
     private final ApplysDao applysDao;
     private final LikesDao likesDao;
@@ -65,6 +71,7 @@ public class WantedsService {
 
     /* 수현 작업 종료 */
 
+    /* 승현 작업 시작 */
     public List<WantedListRespDto> findAll(SearchDto searchDto) {
         if (searchDto == null) {
             List<WantedListRespDto> wantedList = wantedsDao.findAll();
@@ -85,6 +92,10 @@ public class WantedsService {
         return wantedList;
     }
 
+    public CompanyDetailRespDto findByIdCompanyId(Integer id) {
+        return companysDao.findByIdToDetail(id);
+    }
+
     public List<WantedListRespDto> findAllByPositionCodeName(String positionCodeId) {
         // position의 findById 추가하기
         // id를 string으로 바꾸는 코드 추가하기
@@ -95,11 +106,14 @@ public class WantedsService {
 
     public List<WantedListRespDto> findAllByLike(Integer userId) {
         // 유저있는지 확인
+        // SessionUsers principal =
         List<WantedListRespDto> wantedList = wantedsDao.findAllByLike(userId);
         return wantedList;
     }
 
-    public List<WantedListRespDto> findByIdCompanyId(Integer id) {
-        return null;
+    public ApplyFindByIdRespDto findByApplyId(Integer id) {
+        return applysDao.findById(id);
     }
+
+    /* 승현 작업 종료 */
 }
