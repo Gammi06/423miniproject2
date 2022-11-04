@@ -37,13 +37,13 @@ public class CompanysService {
     }
 
     public void updateCompany(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
-        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
 
+        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
         if (companysTitleReqDtoPS == null) {
             throw new RuntimeException(id + "의 회사정보를 찾을 수 없습니다.");
         }
-        companysDao.updateCompanys(companysUpdateReqDto);// 변경
         companysDao.updateChangeCompanys(companysTitleReqDtoPS);// 수행.
+        companysDao.updateCompanys(companysUpdateReqDto);// 변경
     }
 
     public void deleteCompanys(Integer id) {

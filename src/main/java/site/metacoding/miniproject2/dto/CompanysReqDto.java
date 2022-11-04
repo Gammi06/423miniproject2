@@ -28,9 +28,6 @@ public class CompanysReqDto {
         private Integer memberCount;
         private Timestamp created;
 
-        public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto) {
-        }
-
     }
 
     @NoArgsConstructor

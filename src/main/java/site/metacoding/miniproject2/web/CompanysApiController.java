@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class CompanysApiController {
     /* 지원 작업 */
     // 회사가입
     @PostMapping("/s/api/companys/{id}")
-    public CMRespDto<?> insert(@PathVariable Integer id, CompanysInsertReqDto companysInsertReqDto) {
+    public CMRespDto<?> insert(@PathVariable Integer id, @RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(id);
         CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
@@ -48,9 +49,8 @@ public class CompanysApiController {
     // 회사정보 수정/인증 필요
     @PutMapping("/s/api/companys/{id}")
     public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
-            CompanysUpdateReqDto companysUpdateReqDto) {
+            @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        companysUpdateReqDto.setUsersId(sessionUsers.getId());
         companysService.updateCompany(id, companysUpdateReqDto);
         return new CMRespDto<>(1, "회사정보수정성공", null);
     }

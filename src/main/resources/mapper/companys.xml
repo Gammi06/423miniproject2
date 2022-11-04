@@ -18,15 +18,31 @@
 		SELECT * FROM companys WHERE company_number = #{CompanysNumber}
 	</select>
 
-	<update id="updateChangeCompanys">
+	<select id="findByIdCompanyId" resultType="site.metacoding.miniproject2.dto.CompanysReqDto$CompanysTitleReqDto">
+		SELECT * FROM companys WHERE id = #{Id}
+	</select>
+
+	<update id="updateCompanys">	
 		UPDATE companys set 
-		company_name= #{companysName},
-		adress= #{address}, 
+		company_name= #{companyName},
+		address= #{address}, 
 		email=#{email}, 
 		region_code_name=#{regionCodeName},
 		member_count=#{memberCount} 
-		where id=#{id}
+		where users_Id=#{usersId}
 	</update>
+	<!--수정하기-->
+
+	<update id="updateChangeCompanys">
+		UPDATE companys set 
+		company_name= #{companyName},
+		address= #{address}, 
+		email=#{email}, 
+		region_code_name=#{regionCodeName},
+		member_count=#{memberCount} 
+		where  users_Id=#{usersId}
+	</update>
+	<!--수정하기-->
 
 	<delete id="deleteCompanys">
 		DELETE FROM companys WHERE id = #{id}
