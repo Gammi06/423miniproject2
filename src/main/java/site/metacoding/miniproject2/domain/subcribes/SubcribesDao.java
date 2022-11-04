@@ -2,6 +2,8 @@ package site.metacoding.miniproject2.domain.subcribes;
 
 import java.util.List;
 
+import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
+import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto;
 
 public interface SubcribesDao {
@@ -15,9 +17,9 @@ public interface SubcribesDao {
 
     /* 승현 작업함 */
 
-    public void findById(Integer id);
+    public SubribesFindByIdRespDto findById(Integer id);
 
-    public void insert();
+    public void insert(SubcribesInsertReqDto subcribesInsertReqDto);
 
     public void deleteById(Integer id);
 

@@ -46,15 +46,9 @@ public interface WantedsDao {
             @Param("careerCodeId") Integer careerCodeId,
             @Param("positionCodeId") Integer positionCodeId);
 
+    /* ///////// 삭제 내역 //////// */
+    // public void findAllByPosition();
     // public void findAllHot();
+
     // public void findBestHot();
-    // public void findAllWanteds();
-    // public void findAllByCareer();
-    // public void findAllByPositionToCompany();
-    // public void findAllByCompanyId();
-    // public void findByIdToDetail();
-    // public void paging();
-    // public void findAllToSort();
-    // public void findAllLike();
-    // public void findAllByposition();
 }

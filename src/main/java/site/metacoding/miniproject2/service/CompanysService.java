@@ -4,19 +4,25 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
+import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
+import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailWithWantedsListRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
+import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
 
 @RequiredArgsConstructor
 @Service
 public class CompanysService {
 
+    private final SubcribesDao subcribesDao;
     private final CompanysDao companysDao;
-    private final WantedsService wantedsService;
+    private final WantedsDao wantedsDao;
+    private final WantedsService wantedsService; // 쌤이 서비스에서 서비스 쓰지 말랬다고 알려주기
 
     public CompanysInsertRespDto companyinsert(CompanysInsertReqDto companysinsertReqDto) {
         companysDao.insert(companysinsertReqDto);
@@ -46,7 +52,7 @@ public class CompanysService {
             return null;
         CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
         companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
-        companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findByIdCompanyId(id));
+        // companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findByIdCompanyId(id));
         return companyDetailWithWantedsListDtoPS;
     }
 
@@ -73,5 +79,23 @@ public class CompanysService {
     public void updateCompanysIntro(Integer id) {
         companysDao.updateCompanysIntro(id); // sessionUser 올라오면 수정
     }
+
     /* 수현 작업종료 */
+
+    /* 승현 작업 시작 */
+
+    public SubribesFindByIdRespDto findBySubcribesId(Integer id) {
+        return subcribesDao.findById(id);
+    }
+
+    public void insertSubcribes(SubcribesInsertReqDto insertReqDto) {
+        //if 파인드 어쩌고해서 있는지 체크하기
+        subcribesDao.insert(insertReqDto);
+    }
+
+    public void deleteSubcribes(Integer id) {
+        subcribesDao.deleteById(id);
+    }
+
+    /* 승현 작업 종료 */
 }
