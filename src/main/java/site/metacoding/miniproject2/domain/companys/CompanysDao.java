@@ -2,6 +2,7 @@ package site.metacoding.miniproject2.domain.companys;
 
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysTitleReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
@@ -26,5 +27,5 @@ public interface CompanysDao {
 
     public CompanysInsertRespDto findById(Integer id);
 
-    public void updateCompanysIntro(Integer id);
+    public void updateCompanysIntro(CompanysUpdateIntroReqDto companysUpdateIntroReqDto);
 }
