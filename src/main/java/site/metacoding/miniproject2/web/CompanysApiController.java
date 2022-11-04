@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
@@ -24,14 +24,13 @@ import site.metacoding.miniproject2.service.CompanysService;
 
 @RequiredArgsConstructor
 @RestController
-public class CompanysController {
+public class CompanysApiController {
     private final CompanysService companysService;
     private final HttpSession session;
 
     /* 지원 작업 */
     // 회사가입
     @PostMapping("/s/api/companys/{id}")
-
     public CMRespDto<?> insert(CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(sessionUsers.getId());
@@ -73,5 +72,14 @@ public class CompanysController {
         List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }
+    /* 지원 작업 완료 */
 
-} /* 지원 작업 완료 */
+    /* 수현 작업 시작 */
+    @PutMapping("/s/api/companys/{id}/edit/intro")
+    public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
+            CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        companysService.updateCompanysIntro(id, companysUpdateIntroReqDto);
+        return new CMRespDto<>(1, "성공", null);
+    }
+    /* 수현 작업 완료 */
+}

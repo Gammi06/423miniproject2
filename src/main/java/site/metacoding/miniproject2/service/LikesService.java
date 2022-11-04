@@ -18,6 +18,7 @@ public class LikesService {
     }
 
     public void insert(LikesInsertReqDto likesInsertReqDto) {
+
         likesDao.insert(likesInsertReqDto);
     }
 

@@ -20,11 +20,10 @@ public class LikesApiController {
     private final HttpSession session;
     private final LikesService likesService;
 
-    @GetMapping("s/likes/{id}")
+    @GetMapping("/s/likes/{id}")
     public @ResponseBody CMRespDto<?> likeslist(@PathVariable Integer id, LikeFindByIdRespDto likeFindByIdRespDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         LikeFindByIdRespDto likeFindByIdRespDtos = likesService.findById(id);
         return new CMRespDto<>(1, "좋아요페이지 보기", likeFindByIdRespDtos);
     }
-
 }

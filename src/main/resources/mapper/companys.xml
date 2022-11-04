@@ -44,5 +44,4 @@
 		where id=#{id}
 	</update>
 	<!-- 수현 작업완료 -->
-
 </mapper>
