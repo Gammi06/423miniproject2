@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
@@ -18,6 +19,7 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCare
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class WantedsService {

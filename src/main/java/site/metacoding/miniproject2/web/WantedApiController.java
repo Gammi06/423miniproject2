@@ -26,31 +26,31 @@ public class WantedApiController {
     /* 승현 작업 시작 */
 
     // 공고 전체 목록 보기
-    @GetMapping("/api/wanted")
+    @GetMapping("/wanted")
     public CMRespDto<?> findAll(SearchDto searchDto) {
         return new CMRespDto<>(1, "성공", wantedsService.findAll(searchDto));
     }
 
     // 공고 상세보기
-    @GetMapping("/api/wanted/{wantedId}")
+    @GetMapping("/wanted/{wantedId}")
     public CMRespDto<?> findById(@PathVariable Integer wantedId) {
         return new CMRespDto<>(1, "성공", wantedsService.findById(wantedId));
     }
 
     // 좋아요 한 공고 목록 보기
-    @GetMapping("/s/api/wanted/{userId}/like")
+    @GetMapping("/s/wanted/{userId}/like")
     public CMRespDto<?> findAllByLike(@PathVariable Integer userId) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(userId));
     }
 
     // 포지션 별 공고 목록 보기
-    @GetMapping("/api/wanted/position/{positionCodeName}")
+    @GetMapping("/wanted/position/{positionCodeName}")
     public CMRespDto<?> findAllByPositionCodeName(@PathVariable String positionCodeName) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByPositionCodename(positionCodeName));
     }
 
     // 회사의 공고 목록 보기
-    @GetMapping("/api/wanted/position/{companyId}")
+    @GetMapping("/wanted/position/{companyId}")
     public CMRespDto<?> findAllByCompanyId(@PathVariable Integer companyId) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByCompanyId(companyId));
     }
