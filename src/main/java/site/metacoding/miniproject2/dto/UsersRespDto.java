@@ -1,5 +1,6 @@
 package site.metacoding.miniproject2.dto;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.Getter;
@@ -11,6 +12,23 @@ import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
 public class UsersRespDto {
 
     /* >>>>> 성유 작업함 <<<<< */
+    @Getter
+    @Setter
+    public static class UsersInfoRespDto { // findById (이것만 Users 적음)
+        private Integer id;
+        private String userId;
+        private String userPassword;
+        private String userName;
+        private Integer age;
+        private String phoneNumber;
+        private String email;
+        private String photo;
+        private Integer positionCodeId;
+        private Integer mycareerId;
+        private Timestamp created;
+        private String role;
+    }
+
     @Getter
     @Setter
     public static class JoinRespDto {

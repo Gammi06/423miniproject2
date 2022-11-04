@@ -2,7 +2,9 @@ package site.metacoding.miniproject2.domain.subcribes;
 
 import java.util.List;
 
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubscribesListRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
+import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
+import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
 
 public interface SubcribesDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
@@ -15,9 +17,9 @@ public interface SubcribesDao {
 
     /* 승현 작업함 */
 
-    public void findById(Integer id);
+    public SubribesFindByIdRespDto findById(Integer id);
 
-    public void insert();
+    public void insert(SubcribesInsertReqDto subcribesInsertReqDto);
 
     public void deleteById(Integer id);
 

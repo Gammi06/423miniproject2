@@ -97,7 +97,7 @@
 	<select id="findAllOrdered"
 		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
 	</select>
--->
+	-->
 
 	<select id="findAllByCompanyId"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto">
