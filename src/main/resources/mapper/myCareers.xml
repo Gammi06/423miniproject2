@@ -3,12 +3,12 @@
 <mapper namespace="site.metacoding.miniproject2.domain.myCareers.MyCareersDao">
 
 <select id="findAll" 
-resultType="site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersResumRespDto">
+resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersResumRespDto">
 
 </select>
 
 <select id="findById" 
-resultType="site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersEditRespDto">
+resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersEditRespDto">
 
 </select>
 

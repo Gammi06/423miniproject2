@@ -3,7 +3,7 @@
 <mapper namespace="site.metacoding.miniproject2.domain.applys.ApplysDao">
 
 	<select id="findById" 
-        resultType="site.metacoding.miniproject2.dto.ApplyRespDto.ApplyFindByIdRespDto">
+        resultType="site.metacoding.miniproject2.dto.ApplyRespDto$ApplyFindByIdRespDto">
         SELECT id, wanted_id, resume_id, status, created FROM applys WHERE id = #{id}
     </select>
 

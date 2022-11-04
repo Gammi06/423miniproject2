@@ -9,7 +9,7 @@ import site.metacoding.miniproject2.domain.companys.Companys;
 /*>>>>>>지원 작업함<<<<<<< */
 /*기존 작업자 지원 */
 
-public class CompaysReqDto {
+public class CompanysReqDto {
 
     @Setter
     @Getter
