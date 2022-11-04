@@ -35,7 +35,7 @@ public class CompanysService {
         return companysInsertRespDto;
     }
 
-    public void companyupdate(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
+    public void updateCompany(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
         CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
 
         if (companysTitleReqDtoPS == null) {
@@ -50,15 +50,6 @@ public class CompanysService {
         if (companysTitleReqDtoPS == null) {
             companysDao.deleteCompanys(id);
         }
-    }
-
-    public CompanyDetailWithWantedsListRespDto findByIdToDetailWithWantedsList(Integer id) {
-        if (findByIdToDetail(id) == null)
-            return null;
-        CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
-        companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
-        // companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findByIdCompanyId(id));
-        return companyDetailWithWantedsListDtoPS;
     }
 
     public CompanyDetailRespDto findByIdToDetail(Integer id) {
@@ -91,6 +82,14 @@ public class CompanysService {
     // SubcribesService 삭제후 CompanysService로 옮김
 
     /* 지원 작업 종료 */
+    public CompanyDetailWithWantedsListRespDto findByIdToDetailWithWantedsList(Integer id) {
+        if (findByIdToDetail(id) == null)
+            return null;
+        CompanyDetailWithWantedsListRespDto companyDetailWithWantedsListDtoPS = new CompanyDetailWithWantedsListRespDto();
+        companyDetailWithWantedsListDtoPS.setCompanyDetailRespDto(findByIdToDetail(id));
+        // companyDetailWithWantedsListDtoPS.setWantedsListRespDtos(wantedsService.findByIdCompanyId(id));
+        return companyDetailWithWantedsListDtoPS;
+    }
 
     /* 수현 작업시작 */
 

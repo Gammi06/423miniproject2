@@ -29,6 +29,7 @@ public class CompanysController {
     private final CompanysService companysService;
     private final HttpSession session;;
 
+    /* 지원 작업 */
     // 회사가입
     @PostMapping("s/api/companys")
     public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
@@ -47,9 +48,9 @@ public class CompanysController {
 
     // 회사정보 수정/인증 필요
     @PutMapping("s/api/companys/{id}")
-    public @ResponseBody CMRespDto<?> companyupdateId(@PathVariable Integer id,
+    public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
-        companysService.companyupdate(id, companysUpdateReqDto);
+        companysService.updateCompany(id, companysUpdateReqDto);
         return new CMRespDto<>(1, "회사정보수정성공", null);
     }
 
@@ -67,5 +68,5 @@ public class CompanysController {
         model.addAttribute("subcribesList", subcribesList);
         return "subscribes/subscribes";
     }
-
+    /* 지원 작업 완료 */
 }
