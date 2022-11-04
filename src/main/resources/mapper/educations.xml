@@ -5,9 +5,9 @@
 	<!-- >>>> 연지 작업함 <<<< -->
 	<insert id="insert"></insert>
 
-	<select id="findAll" resultType="site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto"></select>
+	<select id="findAll" resultType="site.metacoding.miniproject2.dto.EducationsRespDto$EducationsListRespDto"></select>
 
-	<select id="findById" resultType="site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto"></select>
+	<select id="findById" resultType="site.metacoding.miniproject2.dto.EducationsRespDto$EducationsListRespDto"></select>
 
 	<update id="updateById"></update>
 

@@ -11,7 +11,7 @@ import site.metacoding.miniproject2.domain.likes.LikesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.ApplyRespDto.ApplyFindByIdRespDto;
-import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
