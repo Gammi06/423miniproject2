@@ -1,5 +1,7 @@
 package site.metacoding.miniproject2.web;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
 import site.metacoding.miniproject2.service.WantedsService;
@@ -27,11 +30,10 @@ public class WantedApiController {
 
     // 공고 전체 목록 보기
     @GetMapping("/wanted")
-    public CMRespDto<?> findAll(SearchDto searchDto) {
-        return new CMRespDto<>(1, "성공", wantedsService.findAll(searchDto));
+    public List<WantedListRespDto> findAll(SearchDto searchDto) {
+        return wantedsService.findAll(searchDto);
     }
 
-    // 공고 상세보기
     @GetMapping("/wanted/{wantedId}")
     public CMRespDto<?> findById(@PathVariable Integer wantedId) {
         return new CMRespDto<>(1, "성공", wantedsService.findById(wantedId));

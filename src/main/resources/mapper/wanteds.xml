@@ -63,8 +63,9 @@
 
 	<select id="findById"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedDetailRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, IF(w.enddate > NOW(), '모집중', '마감') AS status,
+		pc.name positionCodeName, cc.name careerCodeName, w.title, w.detail, w.view_count,
+		c.company_name, c.region_code_name, w.created, w.enddate
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
@@ -72,8 +73,7 @@
 		ON cc.id = w.career_code_id
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
-		WHERE w.enddate > NOW()
-		AND w.id = #{id}
+		WHERE w.id = #{id}
 		ORDER BY w.created DESC
 	</select>
 

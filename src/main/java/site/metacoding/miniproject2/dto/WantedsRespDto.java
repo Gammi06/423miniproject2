@@ -56,7 +56,7 @@ public class WantedsRespDto {
     @Getter
     public static class WantedDetailRespDto {
         private Integer id;
-        private String state; // 모집중/마감
+        private String status; // 모집중/마감
         private String positionCodeName;
         private String careerCodeName;
         private String title;
@@ -64,9 +64,9 @@ public class WantedsRespDto {
         private Integer viewCount;
         private String companyName;
         private String regionCodeName;
-        private List<WantedsSkillsRespDto> mySkills;
-        private Integer likeCount;
-        private LikeDto mylikes;
+        // private List<WantedsSkillsRespDto> mySkills;
+        // private Integer likeCount;
+        // private LikeDto mylikes;
         private Timestamp created;
         private Timestamp enddate;
 

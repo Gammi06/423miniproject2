@@ -69,6 +69,7 @@ public class WantedsService {
     /* 수현 작업 종료 */
 
     /* 승현 작업 시작 */
+
     public List<WantedListRespDto> findAll(SearchDto searchDto) {
         if (searchDto == null) {
             List<WantedListRespDto> wantedList = wantedsDao.findAll();
@@ -80,7 +81,11 @@ public class WantedsService {
 
     public WantedDetailRespDto findById(Integer id) {
         WantedDetailRespDto wantedPS = wantedsDao.findById(id);
-        return wantedPS;
+        if (wantedPS == null) {
+            throw new RuntimeException("해당 아이디의 공고가 없습니다.");
+        }
+        return wantedsDao.findById(id);
+        // return wantedsDao.findById(id);
     }
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId) {
