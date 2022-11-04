@@ -8,6 +8,7 @@ import lombok.Setter;
 public class ApplyRespDto {
 
     /* >>>> 승현 작업함 <<<< */
+    
     @Getter
     @Setter
     public static class ApplyFindByIdRespDto {
@@ -17,5 +18,6 @@ public class ApplyRespDto {
         private String status;
         private Timestamp created;
     }
+
     /* >>>> <<<< */
 }

@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
+import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
 import site.metacoding.miniproject2.service.WantedsService;
 
@@ -19,6 +21,9 @@ public class WantedApiController {
 
     private final WantedsService wantedsService;
     private final LikesService likesService;
+    private final ApplyService applyService;
+
+    /* 승현 작업 시작 */
 
     // 공고 전체 목록 보기
     @GetMapping("/api/wanted")
@@ -68,9 +73,10 @@ public class WantedApiController {
 
     // 지원하기 추가하기
     @PostMapping("/s/api/wanted/{id}/apply")
-    public void wantedInsertApply(@PathVariable Integer id) {
-        // userId에 유저 아이디값 넣어주기
+    public CMRespDto<?> insertApply(@PathVariable Integer id, ApplyUserReqDto applyUserReqDto) {
+        applyService.insert(applyUserReqDto);
+        return new CMRespDto<>(1, "성공", null);
     }
 
-    // 지원하기
+    /* 승현 작업 종료 */
 }

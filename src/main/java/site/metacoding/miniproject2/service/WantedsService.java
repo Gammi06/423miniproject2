@@ -10,10 +10,7 @@ import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.likes.LikesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
-import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.ApplyRespDto.ApplyFindByIdRespDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanyDetailRespDto;
-import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
@@ -30,8 +27,6 @@ public class WantedsService {
     private final PositionsCodeDao positionsCodeDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
-    private final ApplysDao applysDao;
-    private final LikesDao likesDao;
 
     /* 수현 작업 시작 */
     public void save(WantedsSaveReqDto wantedsSaveReqDto) {
@@ -114,10 +109,6 @@ public class WantedsService {
         // SessionUsers principal =
         List<WantedListRespDto> wantedList = wantedsDao.findAllByLike(userId);
         return wantedList;
-    }
-
-    public ApplyFindByIdRespDto findByApplyId(Integer id) {
-        return applysDao.findById(id);
     }
 
     /* 승현 작업 종료 */
