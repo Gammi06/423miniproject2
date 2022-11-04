@@ -32,18 +32,13 @@ public class UsersReqDto {
 
     @Getter
     @Setter
-    public static class JoinReqDto { // 회원가입
+    public static class JoinReqDto {
         private String userId;
         private String userPassword; // 비밀번호 숨기기
         private String userName;
         private Integer age;
         private String phoneNumber;
         private String email;
-        /*
-         * ////////////////////////////
-         * photo: 이번에는 restController를 사용하기 때문에 삭제
-         * ////////////////////////////
-         */
 
         public Users toEntity() {
             return Users.builder()
@@ -59,7 +54,7 @@ public class UsersReqDto {
 
     @Getter
     @Setter
-    public static class EditReqDto { // 기본정보 수정
+    public static class EditReqDto {
         private Integer id;
         private String userName;
         private String email;
@@ -76,7 +71,7 @@ public class UsersReqDto {
 
     @Getter
     @Setter
-    public static class ProfileEditRepDto { // 프로필 수정
+    public static class ProfileEditRepDto {
         private Integer id;
         private String positionCodeName;
         private String careersCodeName;
@@ -84,6 +79,19 @@ public class UsersReqDto {
         private List<MyCareersEditRespDto> myCareersEditRespDtos;
         private List<EducationsListRespDto> educationsListRespDtos;
         private String intro;
+
+        public ProfileEditRepDto(Integer id, String positionCodeName, String careersCodeName,
+                List<WantedsSkillsRespDto> wantedsSkillsRespDtos, List<MyCareersEditRespDto> myCareersEditRespDtos,
+                List<EducationsListRespDto> educationsListRespDtos, String intro) {
+            this.id = id;
+            this.positionCodeName = positionCodeName;
+            this.careersCodeName = careersCodeName;
+            this.wantedsSkillsRespDtos = wantedsSkillsRespDtos;
+            this.myCareersEditRespDtos = myCareersEditRespDtos;
+            this.educationsListRespDtos = educationsListRespDtos;
+            this.intro = intro;
+        }
+
     }
 
     @Getter

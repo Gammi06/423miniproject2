@@ -27,9 +27,5 @@ public interface CompanysDao {
 
     public CompanysInsertRespDto findById(Integer id);
 
-<<<<<<< HEAD
-    public void updateCompanysIntro(Integer id);
-=======
     public void updateCompanysIntro(CompanysUpdateIntroReqDto companysUpdateIntroReqDto);
->>>>>>> aadc1a476b5e68e8532e1498f9eed1b954bca23b
 }

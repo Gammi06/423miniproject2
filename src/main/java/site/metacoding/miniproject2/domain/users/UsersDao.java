@@ -1,7 +1,6 @@
 package site.metacoding.miniproject2.domain.users;
 
 import java.util.List;
-import java.util.Optional;
 
 import site.metacoding.miniproject2.dto.UsersReqDto.AuthReqDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
