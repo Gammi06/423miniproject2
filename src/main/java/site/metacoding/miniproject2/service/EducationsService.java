@@ -33,4 +33,4 @@ public class EducationsService {
     }
 
 }
-/* >>>> 연지 작업함 <<<< */
+/* >>>> 연지 작업종료 <<<< */
