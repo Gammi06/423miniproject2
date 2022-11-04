@@ -1,7 +1,10 @@
 package site.metacoding.miniproject2.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.service.CompanysService;
 
@@ -30,7 +34,7 @@ public class CompanysController {
     public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(sessionUsers.getId());
-        CompanysInsertRespDto companysInsertRespDto = companysService.companyinsert(companysInsertReqDto);
+        CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
         return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
     }
 
@@ -54,6 +58,14 @@ public class CompanysController {
     public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
         companysService.deleteCompanys(id);
         return new CMRespDto<>(1, "회사정보삭제", null);
+    }
+
+    /* 구독페이지 */
+    @GetMapping("s/api/subscribes/{id}")
+    public String subscribesform(@PathVariable Integer id, Model model) {
+        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);
+        model.addAttribute("subcribesList", subcribesList);
+        return "subscribes/subscribes";
     }
 
 }
