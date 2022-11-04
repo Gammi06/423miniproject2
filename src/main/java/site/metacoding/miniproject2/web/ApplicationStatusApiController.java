@@ -14,17 +14,17 @@ public class ApplicationStatusApiController {
 
     private final ApplicationStatusService applicationStatusService;
 
-    @GetMapping("/s/applicationstatusall/{id}")
+    @GetMapping("/s/allapplicationstatus/{id}")
     public CMRespDto<?> findAllList(@PathVariable Integer id, String keyword) {
         return new CMRespDto<>(1, "성공", applicationStatusService.findAllList(id, keyword));
     }
 
-    @GetMapping("/s/applicationstoatusall/{id}")
+    @GetMapping("/s/waitingapplicationstatus/{id}")
     public CMRespDto<?> findWaitingList(@PathVariable Integer id, String keyword) {
         return new CMRespDto<>(1, "성공", applicationStatusService.findWaitingList(id, keyword));
     }
 
-    @GetMapping("/s/applicationstatusall/{id}")
+    @GetMapping("/s/finalapplicationstatus/{id}")
     public CMRespDto<?> findFinalList(@PathVariable Integer id, String keyword) {
         return new CMRespDto<>(1, "성공", applicationStatusService.findFinalList(id, keyword));
     }
