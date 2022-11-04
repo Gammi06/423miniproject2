@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
@@ -25,7 +26,7 @@ import site.metacoding.miniproject2.service.CompanysService;
 
 @RequiredArgsConstructor
 @RestController
-public class CompanysController {
+public class CompanysApiController {
     private final CompanysService companysService;
     private final HttpSession session;;
 
@@ -69,4 +70,13 @@ public class CompanysController {
         return "subscribes/subscribes";
     }
     /* 지원 작업 완료 */
+
+    /* 수현 작업 시작 */
+    @PutMapping("/s/api/companys/{id}/edit/intro")
+    public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
+            CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        companysService.updateCompanysIntro(id, companysUpdateIntroReqDto);
+        return new CMRespDto<>(1, "성공", null);
+    }
+    /* 수현 작업 완료 */
 }
