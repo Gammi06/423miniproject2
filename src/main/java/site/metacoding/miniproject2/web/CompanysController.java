@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
-import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysInsertReqDto;
-import site.metacoding.miniproject2.dto.CompaysReqDto.CompanysUpdateReqDto;
-import site.metacoding.miniproject2.dto.CompaysRespDto.CompanysInsertRespDto;
-import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.service.CompanysService;
 
@@ -32,7 +32,7 @@ public class CompanysController {
     // 회사가입
     @PostMapping("s/api/companys/{id}")
 
-    public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
+    public CMRespDto<?> insert(CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(sessionUsers.getId());
         CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
@@ -49,7 +49,7 @@ public class CompanysController {
     // 회사정보 수정/인증 필요
     @PutMapping("s/api/companys/{id}")
     public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
-            @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
+            CompanysUpdateReqDto companysUpdateReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysUpdateReqDto.setUsersId(sessionUsers.getId());
         companysService.updateCompany(id, companysUpdateReqDto);
@@ -67,7 +67,7 @@ public class CompanysController {
     /* 구독페이지 */
     @GetMapping("s/subscribes/{id}")
     public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer id,
-            @RequestBody SubscribesListRespDto subscribesListRespDto) {
+            SubscribesListRespDto subscribesListRespDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         subscribesListRespDto.setUsersId(sessionUsers.getId());
         List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);

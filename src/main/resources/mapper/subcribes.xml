@@ -4,7 +4,7 @@
 
 	<!--지원 작업-->
 	<select id="subcribesListPage"
-		resultType="site.metacoding.miniproject2.dto.CompaysRespDto.">
+		resultType="site.metacoding.miniproject2.dto.CompaynsRespDto$SubscribesListRespDto">
 	  SELECT w.company_id,w.* ,if(enddate>NOW(),'모집중','마감') state,
 		c.company_name, s.user_id
 		FROM wanteds w LEFT OUTER JOIN companys c

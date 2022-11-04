@@ -12,7 +12,7 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
 /*기존 작업자 승현/수현 */
-public class CompaysRespDto {
+public class CompanysRespDto {
 
     @AllArgsConstructor
     @NoArgsConstructor

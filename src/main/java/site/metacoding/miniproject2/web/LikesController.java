@@ -22,8 +22,7 @@ public class LikesController {
     private final LikesService likesService;
 
     @GetMapping("s/likes/{id}")
-    public @ResponseBody CMRespDto<?> likeslist(@PathVariable Integer id,
-            @RequestBody LikeFindByIdRespDto likeFindByIdRespDto) {
+    public @ResponseBody CMRespDto<?> likeslist(@PathVariable Integer id, LikeFindByIdRespDto likeFindByIdRespDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         likeFindByIdRespDto.setUserId(sessionUsers.getId());
         LikeFindByIdRespDto likesList = likesService.findById(id);
