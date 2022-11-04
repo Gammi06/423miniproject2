@@ -5,15 +5,15 @@ import java.util.List;
 /* >>>> 연지 작업함 <<<< */
 public interface ResumesDao {
 
-    public void insert(Resumes resumes);
+    public int insert(Resumes resumes);
 
     public List<Resumes> findAll();
 
     public Resumes findById(Integer id);
 
-    public void updateById(Integer id, Resumes resumes);
+    public int updateById(Integer id, Resumes resumes);
 
-    public void deleteById(Integer id);
+    public int deleteById(Integer id);
 
 }
 /* >>>> 연지 작업종료 <<<< */
