@@ -44,7 +44,7 @@ public class CompanysApiController {
     public @ResponseBody CMRespDto<Boolean> companyNumberSameCheck(String companyNumber) {
         boolean isSame = companysService.companyNumberDoubleCheck(companyNumber);
         return new CMRespDto<>(1, "사업자 번호 중복 체크 성공", isSame);
-    }
+    }// 마지막 테스트 / ajax
 
     // 회사정보 수정/인증 필요
     @PutMapping("/s/api/companys/{id}")
