@@ -1,5 +1,6 @@
 package site.metacoding.miniproject2.dto;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -7,10 +8,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 //import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 
 /*>>>>>>지원 작업함<<<<<<<*/
 /*기존 작업자 승현/수현 */
 public class CompaysRespDto {
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+    public static class CompanysInsertRespDto {
+        private Integer id;
+        private String companyName;
+        private String address;
+        private String email;
+        private String companyNumber;
+        private String regionCodeName;
+        private String intro;
+        private Integer years;
+        private Integer memberCount;
+        private Integer usersId;
+
+    }
 
     @Getter
     @Setter
@@ -26,12 +46,17 @@ public class CompaysRespDto {
 
     @Getter
     @Setter
+    public static class CompanysNumberCheck {
+        private String companyNumber;
+
+    }
+
+    @Getter
+    @Setter
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
-        // private List<WantedsListRespDto> wantedsListRespDtos;
+        private List<WantedListRespDto> wantedsListRespDtos;
 
-        public void setWantedsListDtos(Object findByIdCompanyId) {
-        }
     }
 
     @NoArgsConstructor
@@ -58,6 +83,29 @@ public class CompaysRespDto {
         private Integer currentPage;
         private boolean isLast; // getter가 만들어지면 isLast() 이름으로 만들어짐. -> el에서는 last로 찾음
         private boolean isFirst; // getter가 만들어지면 isFirst() 이름으로 만들어짐. -> el에서는 first로 찾음
+    }
+
+    @Getter
+    @Setter
+    public static class SubscribesListRespDto {
+        private Integer id;
+        private Integer companysId;
+        private Integer wantedsId;
+        private String companyName;
+        private Timestamp created;// 공고시작시간
+        private Timestamp enddate;// 공고끝나는시간
+        private String state;
+
+        public SubscribesListRespDto(SubscribesListRespDto subcribes) {
+            this.id = id;
+            this.companysId = companysId;
+            this.wantedsId = wantedsId;
+            this.companyName = companyName;
+            this.created = created;
+            this.enddate = enddate;
+            this.state = state;
+        }
+
     }
 
 }

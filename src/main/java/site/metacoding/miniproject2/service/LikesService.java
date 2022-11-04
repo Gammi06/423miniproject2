@@ -12,11 +12,7 @@ import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
 public class LikesService {
 
     private final LikesDao likesDao;
-
-    public void findLikes() {
-
-    }
-
+    
     public LikeFindByIdRespDto findById(Integer id) {
         return likesDao.findById(id);
     }

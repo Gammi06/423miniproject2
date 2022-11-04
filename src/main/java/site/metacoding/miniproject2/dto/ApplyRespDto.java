@@ -10,11 +10,11 @@ public class ApplyRespDto {
     /* >>>> 승현 작업함 <<<< */
     @Getter
     @Setter
-    public static class ApplyListRespDto {
+    public static class ApplyFindByIdRespDto {
         private Integer id;
         private Integer wantedId;
         private Integer resumeId;
-        private Integer status;
+        private String status;
         private Timestamp created;
     }
     /* >>>> <<<< */

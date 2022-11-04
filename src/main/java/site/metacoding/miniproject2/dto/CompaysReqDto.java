@@ -34,6 +34,7 @@ public class CompaysReqDto {
     @Setter
     @Getter
     public static class CompanysInsertReqDto {
+        private Integer id;
         private String companyName;
         private String address;
         private String email;
@@ -42,19 +43,38 @@ public class CompaysReqDto {
         private String intro;
         private Integer years;
         private Integer memberCount;
+        private Integer usersId;
 
-        public Companys toEntity() {
-            return Companys.builder()
-                    .companyName(companyName)
-                    .address(address)
-                    .email(email)
-                    .companyNumber(companyNumber)
-                    .regionCodeName(regionCodeName)
-                    .intro(intro)
-                    .years(years)
-                    .memberCount(memberCount)
-                    .build();
+        public CompanysInsertReqDto(Companys companys) {
+            this.id = companys.getId();
+            this.companyName = companys.getCompanyName();
+            this.address = companys.getAddress();
+            this.email = companys.getEmail();
+            this.companyNumber = companys.getCompanyNumber();
+            this.regionCodeName = companys.getRegionCodeName();
+            this.intro = companys.getIntro();
+            this.years = companys.getYears();
+            this.memberCount = companys.getMemberCount();
+            this.usersId = companys.getUsersId();
         }
+
+        // public Companys toEntity() {
+        // return Companys.builder()
+        // .id(id)
+        // .companyName(companyName)
+        // .address(address)
+        // .email(email)
+        // .companyNumber(companyNumber)
+        // .regionCodeName(regionCodeName)
+        // .intro(intro)
+        // .years(years)
+        // .memberCount(memberCount)
+        // .usersId(usersId)
+        // .build();
+        // }
+
+        // public void setSessionUsers(SessionUsers sessionUsers) {
+        // }
     }
 
     @Setter
@@ -75,12 +95,12 @@ public class CompaysReqDto {
                     .memberCount(memberCount)
                     .build();
         }
-    }
+    }/* 지원 작업 종료 */
 
     /* 수현 작업함 */
     @Setter
     @Getter
-    public static class CompanysUpdatePhotoReqDto {
+    public static class CompanysUpdateIntroReqDto {
         private String intro;
 
         public Companys toEntity() {
@@ -92,5 +112,3 @@ public class CompaysReqDto {
     /* 수현 작업 종료 */
 
 }
-
-/* 지원 작업 종료 */

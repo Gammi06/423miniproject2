@@ -3,12 +3,12 @@
 <mapper namespace="site.metacoding.miniproject2.domain.wanteds.WantedsDao">
 	<!-- 수현 작업 시작 -->
 
-	<insert id="insert">
+	<insert id="save">
 		INSERT INTO wanteds(title, detail, position_code_id, career_code_id, pay, enddate, created)
 		VALUES(#{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay},#{enddate}, NOW())
 	</insert>
 
-	<update id="updateById">
+	<update id="update">
 		Update wanteds SET title = #{wantedTitle}, detail = #{wantedDetail},
 		position_code_id = #{positionCodeId}, career_code_id = #{careerCodeId},
 		pay = #{pay}, enddate = #{enddate}
@@ -97,7 +97,7 @@
 	<select id="findAllOrdered"
 		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
 	</select>
--->
+	-->
 
 	<select id="findAllByCompanyId"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto">
