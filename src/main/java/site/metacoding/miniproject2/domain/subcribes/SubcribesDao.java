@@ -2,7 +2,7 @@ package site.metacoding.miniproject2.domain.subcribes;
 
 import java.util.List;
 
-import site.metacoding.miniproject2.dto.CompaysRespDto.SubscribesListRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
 
