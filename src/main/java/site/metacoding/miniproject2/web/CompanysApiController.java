@@ -26,7 +26,7 @@ import site.metacoding.miniproject2.service.CompanysService;
 
 @RequiredArgsConstructor
 @RestController
-public class CompanysController {
+public class CompanysApiController {
     private final CompanysService companysService;
     private final HttpSession session;;
 
