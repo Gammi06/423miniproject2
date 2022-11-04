@@ -70,7 +70,7 @@ public class CompanysApiController {
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }// 로그인 해서 테스트 돌리기
 
-    /* 지원 작업 완료 */
+    /* 지원 작업 완료 **/
 
     /* 수현 작업 시작 */
     @PutMapping("/s/api/companys/{id}/edit/intro")
