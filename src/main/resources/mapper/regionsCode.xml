@@ -3,12 +3,12 @@
 <mapper namespace="site.metacoding.miniproject2.domain.codes.RegionsCodeDao">
 
 	<select id="findAll"
-		resultType="site.metacoding.miniproject2.dto.CodesRespDto.RegionsCodeRespDto">
+		resultType="site.metacoding.miniproject2.dto.CodesRespDto$RegionsCodeRespDto">
 		SELECT * FROM regions_code
 	</select>
 	
 	<select id="findById"
-		resultType="site.metacoding.miniproject2.dto.CodesRespDto.RegionsCodeRespDto">
+		resultType="site.metacoding.miniproject2.dto.CodesRespDto$RegionsCodeRespDto">
 		SELECT * FROM regions_code WHERE id = #{id}
 	</select>
 	
