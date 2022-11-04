@@ -85,6 +85,7 @@ public class CompanysRespDto {
         private boolean isFirst; // getter가 만들어지면 isFirst() 이름으로 만들어짐. -> el에서는 first로 찾음
     }
 
+    @NoArgsConstructor
     @Getter
     @Setter
     public static class SubscribesListRespDto {
@@ -97,14 +98,15 @@ public class CompanysRespDto {
         private Timestamp enddate;// 공고끝나는시간
         private String state;
 
-        public SubscribesListRespDto(SubscribesListRespDto subcribes) {
-            this.id = id;
-            this.companysId = companysId;
-            this.wantedsId = wantedsId;
-            this.companyName = companyName;
-            this.created = created;
-            this.enddate = enddate;
-            this.state = state;
+        public SubscribesListRespDto(SubscribesListRespDto subscribesListRespDto) {
+            this.id = subscribesListRespDto.getId();
+            this.usersId = subscribesListRespDto.getUsersId();
+            this.companysId = subscribesListRespDto.getCompanysId();
+            this.wantedsId = subscribesListRespDto.getWantedsId();
+            this.companyName = subscribesListRespDto.getCompanyName();
+            this.created = subscribesListRespDto.getCreated();
+            this.enddate = subscribesListRespDto.getEnddate();
+            this.state = subscribesListRespDto.getState();
         }
 
     }

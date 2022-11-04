@@ -3,6 +3,7 @@ package site.metacoding.miniproject2.dto;
 import java.sql.Timestamp;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.companys.Companys;
 
@@ -32,6 +33,7 @@ public class CompanysReqDto {
 
     }
 
+    @NoArgsConstructor
     @Setter
     @Getter
     public static class CompanysInsertReqDto {

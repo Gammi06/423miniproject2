@@ -31,9 +31,9 @@ public class CompanysApiController {
     /* 지원 작업 */
     // 회사가입
     @PostMapping("/s/api/companys/{id}")
-    public CMRespDto<?> insert(CompanysInsertReqDto companysInsertReqDto) {
+    public CMRespDto<?> insert(@PathVariable Integer id, CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        companysInsertReqDto.setUsersId(sessionUsers.getId());
+        companysInsertReqDto.setUsersId(id);
         CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
         return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
     }
@@ -65,13 +65,12 @@ public class CompanysApiController {
 
     /* 구독페이지 */
     @GetMapping("/s/subscribes/{id}")
-    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer id,
-            SubscribesListRespDto subscribesListRespDto) {
+    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer id) {// id는 테스트할려고 넣음
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        subscribesListRespDto.setUsersId(sessionUsers.getId());
         List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
-    }
+    }// 로그인 해서 테스트 돌리기
+
     /* 지원 작업 완료 */
 
     /* 수현 작업 시작 */
