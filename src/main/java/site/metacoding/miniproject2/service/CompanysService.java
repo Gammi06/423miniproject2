@@ -15,6 +15,7 @@ import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailWithWantedsListRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
@@ -48,11 +49,14 @@ public class CompanysService {
         return companysTitleReqDtoPS;
     }
 
-    public void deleteCompanys(Integer id) {
-        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
-        if (companysTitleReqDtoPS != null) {
+    public CompanysDeleteRespDto deleteCompanys(Integer id) {
+        CompanysDeleteRespDto companysDeleteRespDto = companysDao.findWantedCompanys(id);
+        companysDeleteRespDto.setWantedNameListCompany(companysDao.deleteWantedTitleCompanys(id));
+        if (companysDeleteRespDto != null) {
+            companysDao.deleteWantedCompanys(id);
             companysDao.deleteCompanys(id);
         }
+        return companysDeleteRespDto;
     }
 
     public CompanyDetailRespDto findByIdToDetail(Integer id) {

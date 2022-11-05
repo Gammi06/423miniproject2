@@ -34,6 +34,14 @@ public class CompanysRespDto {
 
     @Getter
     @Setter
+    public static class CompanysDeleteRespDto {
+        private Integer id;
+        private String companyName;
+        List <String> wantedNameListCompany;
+    }
+
+    @Getter
+    @Setter
     public static class CompanyDetailRespDto {
         private Integer id;
         private String companyName;
@@ -56,7 +64,6 @@ public class CompanysRespDto {
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
         private List<WantedListRespDto> wantedsListRespDtos;
-
     }
 
     @NoArgsConstructor

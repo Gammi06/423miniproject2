@@ -44,10 +44,23 @@
 	</update>
 	<!--수정하기-->
 
+	<!-- 회사삭제-->
 	<delete id="deleteCompanys">
 		DELETE FROM companys WHERE id = #{id}
 	</delete>
 
+	<delete id="deleteWantedCompanys">
+		DELETE FROM wanteds WHERE company_id = #{id}
+	</delete>
+
+	<select id="findWantedCompanys" resultType="site.metacoding.miniproject2.dto.CompanysRespDto$CompanysDeleteRespDto">
+		SELECT id, Company_name FROM companys WHERE id =#{id}
+	</select>
+
+	<select id="deleteWantedTitleCompanys" resultType="String">
+		SELECT title FROM wanteds WHERE company_id = #{id}
+	</select>
+	<!-- 회사삭제 완료 -->
 
 	<select id="findById" resultType="site.metacoding.miniproject2.dto.CompanysRespDto$CompanysInsertRespDto">
 		select * from companys where id = #{id}
