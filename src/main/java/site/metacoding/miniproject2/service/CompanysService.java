@@ -50,10 +50,12 @@ public class CompanysService {
 
     public void deleteCompanys(Integer id) {
         CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
-        if (companysTitleReqDtoPS == null) {
+        if (companysTitleReqDtoPS != null) {
             companysDao.deleteCompanys(id);
         }
     }
+
+
 
     public CompanyDetailRespDto findByIdToDetail(Integer id) {
         CompanyDetailRespDto companyDetailRespDtoPS = companysDao.findByIdToDetail(id);
