@@ -49,7 +49,7 @@ public class WantedsRespDto {
         private String title;
         private String companyName;
         private String regionCodeName;
-        private String state; // 모집중/마감
+        private String status; // 모집중/마감
     }
 
     @Setter

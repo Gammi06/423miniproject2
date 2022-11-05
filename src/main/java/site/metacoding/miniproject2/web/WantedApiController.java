@@ -45,8 +45,9 @@ public class WantedApiController {
 
     // 좋아요 한 공고 목록 보기
     @GetMapping("/s/wanted/{userId}/like")
-    public CMRespDto<?> findAllByLike(@PathVariable Integer userId) {
-        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(userId));
+    public List<WantedListRespDto> findAllByLike(@PathVariable Integer userId) {
+        
+        return wantedsService.findAllByLike(userId);
     }
 
     // 포지션 별 공고 목록 보기

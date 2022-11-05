@@ -85,7 +85,6 @@ public class WantedsService {
             throw new RuntimeException("해당 아이디의 공고가 없습니다.");
         }
         return wantedsDao.findById(id);
-        // return wantedsDao.findById(id);
     }
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId) {
@@ -110,10 +109,7 @@ public class WantedsService {
     }
 
     public List<WantedListRespDto> findAllByLike(Integer userId) {
-        // 유저있는지 확인
-        // SessionUsers principal =
-        List<WantedListRespDto> wantedList = wantedsDao.findAllByLike(userId);
-        return wantedList;
+        return wantedsDao.findAllByLike(userId);
     }
 
     /* 승현 작업 종료 */

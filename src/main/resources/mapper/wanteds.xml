@@ -133,8 +133,8 @@
 
 	<select id="findAllByLike"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
