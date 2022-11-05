@@ -55,8 +55,6 @@ public class CompanysService {
         }
     }
 
-
-
     public CompanyDetailRespDto findByIdToDetail(Integer id) {
         CompanyDetailRespDto companyDetailRespDtoPS = companysDao.findByIdToDetail(id);
         if (companyDetailRespDtoPS == null) {
