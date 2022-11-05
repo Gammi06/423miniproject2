@@ -11,6 +11,11 @@ spring:
     username: 9doit
     password: 423206
 
+    output:
+    ansi:
+      enabled: always
+
 logging:
   level:
-    '[org.springframework.boot.web]': INFO
+    '[org.hibernate.SQL]': DEBUG
+    '[site.metacoding.miniproject2]': DEBUG

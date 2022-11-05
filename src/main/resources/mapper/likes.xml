@@ -13,7 +13,7 @@
 	</insert>
 
 	<delete id="deleteById">
-		DELETE FROM likes WHERE id = #{id}
+		DELETE FROM likes WHERE user_id = #{userId} AND wanted_id = #{wantedId}
 	</delete>
 
 </mapper>
