@@ -8,6 +8,7 @@ import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCareersRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto;
@@ -47,6 +48,9 @@ public interface WantedsDao {
         public List<WantedsRecruitsManageRespDto> findByBothIds(@Param("companyId") Integer companyId,
                         @Param("careerCodeId") Integer careerCodeId,
                         @Param("positionCodeId") Integer positionCodeId);
+        /* 지원 작업 */
+
+        public List<WantedLisLikestRespDto> findLikeList(Integer userId);
 
         /* ///////// 삭제 내역 //////// */
         // public void findAllByPosition();

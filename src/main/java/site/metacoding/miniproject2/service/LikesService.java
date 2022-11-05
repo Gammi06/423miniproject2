@@ -8,8 +8,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.likes.LikesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
-import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 
 @RequiredArgsConstructor
 @Service
@@ -19,8 +18,8 @@ public class LikesService {
     private final WantedsDao wantedsDao;
 
     /* 지원 작업 */
-    public List<WantedListRespDto> findById(Integer userId) {
-        return wantedsDao.findAllByLike(userId);
+    public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
+        return wantedsDao.findLikeList(userId);
     }
     /* 지원 작업종료 */
 
@@ -42,10 +41,6 @@ public class LikesService {
             throw new RuntimeException("해당 공고에는 좋아요를 하지 않았습니다.");
         }
         likesDao.delete(likesInsertReqDto);
-    }
-
-    public List<WantedListRespDto> findAllByLike(Integer id) {
-        return null;
     }
 
 }

@@ -154,5 +154,16 @@
 	</select>
 
 	<!-- 승현 작업 종료 -->
+	<!--지원작업!-->
+	<select id="findLikeList"
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedLisLikestRespDto">
+		SELECT w.company_id,w.title,w.detail,w.company_id,w.created,w.enddate,if(enddate>NOW(),'모집중','마감') status,
+		c.company_name,l.user_id
+		FROM wanteds w LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN likes l
+		ON l.wanted_id= w.id
+		WHERE l.user_id = #{id}
+		</select>
 
 </mapper>

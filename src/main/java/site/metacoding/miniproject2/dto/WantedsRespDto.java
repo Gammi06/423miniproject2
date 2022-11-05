@@ -105,4 +105,17 @@ public class WantedsRespDto {
         private String state;
     }
 
+    /* 지원 작업!! */
+    @Setter
+    @Getter
+    public static class WantedLisLikestRespDto {// likes
+        private Integer companyId;
+        private Integer userId;
+        private String title;
+        private String detail;
+        private String companyName;
+        private Timestamp created;
+        private Timestamp enddate;
+        private String status;
+    }
 }
