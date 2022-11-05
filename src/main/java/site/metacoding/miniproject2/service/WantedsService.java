@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
+import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
@@ -25,6 +26,7 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageResp
 public class WantedsService {
 
     private final PositionsCodeDao positionsCodeDao;
+    private final MySkillsDao mySkillsDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
 
@@ -70,13 +72,8 @@ public class WantedsService {
 
     /* 승현 작업 시작 */
 
-    public List<WantedListRespDto> findAll(SearchDto searchDto) {
-        if (searchDto == null) {
-            List<WantedListRespDto> wantedList = wantedsDao.findAll();
-            return wantedList;
-        }
-        List<WantedListRespDto> wantedList = wantedsDao.findAllOrdered(searchDto);
-        return wantedList;
+    public List<WantedListRespDto> findAll() {
+        return wantedsDao.findAll();
     }
 
     public WantedDetailRespDto findById(Integer id) {
@@ -84,11 +81,12 @@ public class WantedsService {
         if (wantedPS == null) {
             throw new RuntimeException("해당 아이디의 공고가 없습니다.");
         }
-        return wantedsDao.findById(id);
+        wantedsDao.updateViewCount(id);
+        wantedPS.setMySkills(mySkillsDao.findAll(id));
+        return wantedPS;
     }
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId) {
-        // company의 findById 추가하기
         if (companysDao.findByIdToDetail(companyId) == null) {
             throw new RuntimeException("해당 아이디의 기업(" + companyId + ")이 존재하지 않습니다.");
         }
@@ -100,12 +98,16 @@ public class WantedsService {
         return companysDao.findByIdToDetail(id);
     }
 
-    public List<WantedListRespDto> findAllByPositionCodename(String positionCodename) {
-        if (positionsCodeDao.findByCodename(positionCodename) == null) {
-            throw new RuntimeException("해당 포지션(" + positionCodename + ")이 존재하지 않습니다.");
+    public List<WantedListRespDto> findAllByPositionCodeId(Integer id) {
+        if (positionsCodeDao.findById(id) == null) {
+            throw new RuntimeException("해당 포지션(" + id + ")이 존재하지 않습니다.");
         }
-        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeName(positionCodename);
+        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeId(id);
         return wantedList;
+    }
+
+    public List<WantedListRespDto> findAllBySearch(SearchDto searchDto) {
+        return wantedsDao.findAllBySearch(searchDto);
     }
 
     public List<WantedListRespDto> findAllByLike(Integer userId) {

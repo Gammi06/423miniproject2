@@ -14,41 +14,43 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePosi
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto;
 
 public interface WantedsDao {
-    // 이름 규칙에 맞는 메서드명으로 생성해주세요.
+        // 이름 규칙에 맞는 메서드명으로 생성해주세요.
 
-    public WantedDetailRespDto findById(Integer id);
+        public void updateViewCount(Integer id);
 
-    public List<WantedListRespDto> findAll();
+        public WantedDetailRespDto findById(Integer id);
 
-    public List<WantedListRespDto> findAllOrdered(SearchDto searchDto);
+        public List<WantedListRespDto> findAll();
 
-    public List<WantedListRespDto> findAllByCompanyId(Integer companyId);
+        public List<WantedListRespDto> findAllByCompanyId(Integer companyId);
 
-    public List<WantedListRespDto> findAllByPositionCodeName(String positionCodeName);
+        public List<WantedListRespDto> findAllByPositionCodeId(Integer positionCodeId);
 
-    public List<WantedListRespDto> findAllByLike(Integer userId);
+        public List<WantedListRespDto> findAllByLike(Integer userId);
 
-    public void save(WantedsSaveReqDto wantedsSaveReqDto);
+        public List<WantedListRespDto> findAllBySearch(SearchDto searchDto);
 
-    public void update(WantedsUpdateReqDto wantedsUpdateReqDto);
+        public void save(WantedsSaveReqDto wantedsSaveReqDto);
 
-    public void deleteById(Integer id);
+        public void update(WantedsUpdateReqDto wantedsUpdateReqDto);
 
-    public List<WantedsRecruitsManageRespDto> findByCompanysId(Integer companyId);
+        public void deleteById(Integer id);
 
-    public List<WantedsRecruitsManageCareersRespDto> findByCareersId(@Param("companyId") Integer companyId,
-            @Param("careerCodeId") Integer careerCodeId);
+        public List<WantedsRecruitsManageRespDto> findByCompanysId(Integer companyId);
 
-    public List<WantedsRecruitsManagePositionsRespDto> findByPositionsId(@Param("companyId") Integer companyId,
-            @Param("positionCodeId") Integer positionCodeId);
+        public List<WantedsRecruitsManageCareersRespDto> findByCareersId(@Param("companyId") Integer companyId,
+                        @Param("careerCodeId") Integer careerCodeId);
 
-    public List<WantedsRecruitsManageRespDto> findByBothIds(@Param("companyId") Integer companyId,
-            @Param("careerCodeId") Integer careerCodeId,
-            @Param("positionCodeId") Integer positionCodeId);
+        public List<WantedsRecruitsManagePositionsRespDto> findByPositionsId(@Param("companyId") Integer companyId,
+                        @Param("positionCodeId") Integer positionCodeId);
 
-    /* ///////// 삭제 내역 //////// */
-    // public void findAllByPosition();
-    // public void findAllHot();
+        public List<WantedsRecruitsManageRespDto> findByBothIds(@Param("companyId") Integer companyId,
+                        @Param("careerCodeId") Integer careerCodeId,
+                        @Param("positionCodeId") Integer positionCodeId);
 
-    // public void findBestHot();
+        /* ///////// 삭제 내역 //////// */
+        // public void findAllByPosition();
+        // public void findAllHot();
+
+        // public void findBestHot();
 }

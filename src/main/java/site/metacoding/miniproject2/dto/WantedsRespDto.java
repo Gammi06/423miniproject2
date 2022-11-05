@@ -4,10 +4,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
+import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedGetSkillRespDto;
 
 public class WantedsRespDto {
 
@@ -16,20 +15,9 @@ public class WantedsRespDto {
     @Getter
     public static class SearchDto {
         private Integer sortType;
-        private String positionCodeName;
-        private String regionCodeName;
-        private String careerCodeName;
-        private List<String> skillCodeName;
-
-        @Builder
-        public SearchDto(Integer sortType, String positionCodeName, String regionCodeName, String careerCodeName,
-                List<String> skillCodeName) {
-            this.sortType = sortType;
-            this.positionCodeName = positionCodeName;
-            this.regionCodeName = regionCodeName;
-            this.careerCodeName = careerCodeName;
-            this.skillCodeName = skillCodeName;
-        }
+        private Integer regionCodeId;
+        private Integer careerCodeId;
+        private List<Integer> skillCode;
     }
 
     @Setter
@@ -64,8 +52,8 @@ public class WantedsRespDto {
         private Integer viewCount;
         private String companyName;
         private String regionCodeName;
-        // private List<WantedsSkillsRespDto> mySkills;
-        // private Integer likeCount;
+        private List<WantedGetSkillRespDto> mySkills;
+        private Integer likeCount;
         // private LikeDto mylikes;
         private Timestamp created;
         private Timestamp enddate;

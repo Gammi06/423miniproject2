@@ -2,6 +2,8 @@ package site.metacoding.miniproject2.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
+import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
@@ -29,13 +32,14 @@ public class WantedApiController {
     private final WantedsService wantedsService;
     private final LikesService likesService;
     private final ApplyService applyService;
+    private final HttpSession session;
 
     /* 승현 작업 시작 */
 
     // 공고 전체 목록 보기
     @GetMapping("/wanted")
-    public List<WantedListRespDto> findAll(SearchDto searchDto) {
-        return wantedsService.findAll(searchDto);
+    public List<WantedListRespDto> findAll() {
+        return wantedsService.findAll();
     }
 
     @GetMapping("/wanted/{wantedId}")
@@ -43,21 +47,25 @@ public class WantedApiController {
         return new CMRespDto<>(1, "성공", wantedsService.findById(wantedId));
     }
 
-    // 좋아요 한 공고 목록 보기
-    @GetMapping("/s/wanted/{userId}/like")
-    public List<WantedListRespDto> findAllByLike(@PathVariable Integer userId) {
-        
-        return wantedsService.findAllByLike(userId);
+    // !!!! 로그인 테스트 필요 !!!!
+    @GetMapping("/s/wanted/like")
+    public CMRespDto<?> findAllByLike() {
+        SessionUsers principal = (SessionUsers) session.getAttribute("sessionUsers");
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(principal.getId()));
     }
 
-    // 포지션 별 공고 목록 보기
-    @GetMapping("/wanted/position/{positionCodeName}")
-    public CMRespDto<?> findAllByPositionCodeName(@PathVariable String positionCodeName) {
-        return new CMRespDto<>(1, "성공", wantedsService.findAllByPositionCodename(positionCodeName));
+    @GetMapping("/wanted/position/position/{id}")
+    public CMRespDto<?> findAllByPositionCodeId(@PathVariable Integer id) {
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByPositionCodeId(id));
     }
 
-    // 회사의 공고 목록 보기
-    @GetMapping("/wanted/position/{companyId}")
+    // 검색하기
+    @GetMapping("/wanted/search")
+    public List<WantedListRespDto> findAllBySearch(SearchDto searchDto) {
+        return wantedsService.findAllBySearch(searchDto);
+    }
+
+    @GetMapping("/wanted/position/company/{companyId}")
     public CMRespDto<?> findAllByCompanyId(@PathVariable Integer companyId) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByCompanyId(companyId));
     }
