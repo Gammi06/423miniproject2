@@ -80,7 +80,6 @@
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
 		WHERE w.id = #{wantedId}
-		ORDER BY w.created DESC
 	</select>
 
 	<select id="findAll"
