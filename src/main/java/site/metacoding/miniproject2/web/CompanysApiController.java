@@ -31,7 +31,7 @@ public class CompanysApiController {
 
     /* 지원 작업 */
     // 회사가입
-    @PostMapping("/s/api/companys/{id}")
+    @PostMapping("/s/api/companys/{id}/add")
     public CMRespDto<?> insert(@PathVariable Integer id, @RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(id);
@@ -55,7 +55,7 @@ public class CompanysApiController {
     }
 
     // 회사 정보 삭제 /인증 필요.
-    @DeleteMapping("/s/api/companys/{id}")
+    @DeleteMapping("/s/api/companys/{id}/delete")
     public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysService.deleteCompanys(id);
@@ -63,7 +63,7 @@ public class CompanysApiController {
     }
 
     /* 구독페이지 */
-    @GetMapping("/s/subscribes/{userId}")
+    @GetMapping("/s/subscribes/{userId}/mypage")
     public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer userId) {// id는 테스트할려고 넣음
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(userId);
