@@ -105,7 +105,7 @@ public class WantedsRespDto {
         private String state;
     }
 
-    /* 지원 작업!! */
+    /* 지원 작업 */
     @Setter
     @Getter
     public static class WantedLisLikestRespDto {// likes
@@ -118,4 +118,6 @@ public class WantedsRespDto {
         private Timestamp enddate;
         private String status;
     }
+    /* 지원 작업 종료*/
+
 }

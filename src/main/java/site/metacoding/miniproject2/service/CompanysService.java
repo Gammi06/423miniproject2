@@ -73,8 +73,8 @@ public class CompanysService {
         }
     }
 
-    public List<SubscribesListRespDto> subcribesListPage(Integer id) {
-        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(id);
+    public List<SubscribesListRespDto> subcribesListPage(Integer userId) {
+        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(userId);
 
         List<SubscribesListRespDto> subscribesListRespDto = new ArrayList<>();
         for (SubscribesListRespDto subcribes : subcribesList) {
@@ -83,8 +83,8 @@ public class CompanysService {
         return subcribesList;
     }
     // SubcribesService 삭제후 CompanysService로 옮김
-
     /* 지원 작업 종료 */
+
     public CompanyDetailWithWantedsListRespDto findByIdToDetailWithWantedsList(Integer id) {
         if (findByIdToDetail(id) == null)
             return null;

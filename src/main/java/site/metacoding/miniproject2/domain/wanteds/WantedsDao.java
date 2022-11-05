@@ -48,9 +48,10 @@ public interface WantedsDao {
         public List<WantedsRecruitsManageRespDto> findByBothIds(@Param("companyId") Integer companyId,
                         @Param("careerCodeId") Integer careerCodeId,
                         @Param("positionCodeId") Integer positionCodeId);
-        /* 지원 작업 */
 
+        /* 지원 작업 */
         public List<WantedLisLikestRespDto> findLikeList(Integer userId);
+        /* 지원작업종료 */
 
         /* ///////// 삭제 내역 //////// */
         // public void findAllByPosition();

@@ -63,10 +63,10 @@ public class CompanysApiController {
     }
 
     /* 구독페이지 */
-    @GetMapping("/s/subscribes/{id}")
-    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer id) {// id는 테스트할려고 넣음
+    @GetMapping("/s/subscribes/{userId}")
+    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer userId) {// id는 테스트할려고 넣음
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);
+        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(userId);
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }// 로그인 해서 테스트 돌리기
 

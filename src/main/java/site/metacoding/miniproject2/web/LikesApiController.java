@@ -22,7 +22,7 @@ public class LikesApiController {
     private final LikesService likesService;
 
     /* 지원 작업 */
-    @GetMapping("/s/likes/{userId}")
+    @GetMapping("/s/likes/{userId}/mypage")
     public CMRespDto<?> findLikeList(@PathVariable Integer userId) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         List<WantedLisLikestRespDto> WantedListRespDto = likesService.findLikeList(userId);
