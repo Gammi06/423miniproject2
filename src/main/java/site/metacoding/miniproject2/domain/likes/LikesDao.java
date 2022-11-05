@@ -8,11 +8,11 @@ public interface LikesDao {
 
     /* 승현 작업함 */
 
-    public LikeFindByIdRespDto findById(Integer id);
+    public LikeFindByIdRespDto findByLike(LikesInsertReqDto likesInsertReqDto);
 
     public void insert(LikesInsertReqDto likesInsertReqDto);
 
-    public void deleteById(Integer id);
+    public void delete(LikesInsertReqDto likesInsertReqDto);
 
     /* 승현 작업 종료 */
 }

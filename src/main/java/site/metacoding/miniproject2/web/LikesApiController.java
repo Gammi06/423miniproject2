@@ -21,12 +21,18 @@ public class LikesApiController {
     private final LikesService likesService;
 
     /* 지원 작업 */
-    @GetMapping("/s/likes/{id}")
-    public @ResponseBody CMRespDto<?> likeslist(@PathVariable Integer id, LikeFindByIdRespDto likeFindByIdRespDto) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        LikeFindByIdRespDto likeFindByIdRespDtos = likesService.findById(id);
-        return new CMRespDto<>(1, "좋아요페이지 보기", likeFindByIdRespDtos);
-    }
+
+    /*
+     * @GetMapping("/s/likes/{id}")
+     * public @ResponseBody CMRespDto<?> likeslist(@PathVariable Integer id,
+     * LikeFindByIdRespDto likeFindByIdRespDto) {
+     * SessionUsers sessionUsers = (SessionUsers)
+     * session.getAttribute("sessionUsers");
+     * LikeFindByIdRespDto likeFindByIdRespDtos = likesService.findById(id);
+     * return new CMRespDto<>(1, "좋아요페이지 보기", likeFindByIdRespDtos);
+     * }
+     */
+
     /* 지원 작업 완료! */
 
 }

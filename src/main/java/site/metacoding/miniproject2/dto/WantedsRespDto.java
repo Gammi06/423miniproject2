@@ -4,10 +4,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
+import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedGetSkillRespDto;
 
 public class WantedsRespDto {
 
@@ -16,20 +15,9 @@ public class WantedsRespDto {
     @Getter
     public static class SearchDto {
         private Integer sortType;
-        private String positionCodeName;
-        private String regionCodeName;
-        private String careerCodeName;
-        private List<String> skillCodeName;
-
-        @Builder
-        public SearchDto(Integer sortType, String positionCodeName, String regionCodeName, String careerCodeName,
-                List<String> skillCodeName) {
-            this.sortType = sortType;
-            this.positionCodeName = positionCodeName;
-            this.regionCodeName = regionCodeName;
-            this.careerCodeName = careerCodeName;
-            this.skillCodeName = skillCodeName;
-        }
+        private Integer regionCodeId;
+        private Integer careerCodeId;
+        private List<Integer> skillCode;
     }
 
     @Setter
@@ -49,14 +37,14 @@ public class WantedsRespDto {
         private String title;
         private String companyName;
         private String regionCodeName;
-        private String state; // 모집중/마감
+        private String status; // 모집중/마감
     }
 
     @Setter
     @Getter
     public static class WantedDetailRespDto {
         private Integer id;
-        private String state; // 모집중/마감
+        private String status; // 모집중/마감
         private String positionCodeName;
         private String careerCodeName;
         private String title;
@@ -64,9 +52,9 @@ public class WantedsRespDto {
         private Integer viewCount;
         private String companyName;
         private String regionCodeName;
-        private List<WantedsSkillsRespDto> mySkills;
+        private List<WantedGetSkillRespDto> mySkills;
         private Integer likeCount;
-        private LikeDto mylikes;
+        // private LikeDto mylikes;
         private Timestamp created;
         private Timestamp enddate;
 
