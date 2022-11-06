@@ -10,14 +10,13 @@ public class WantedsReqDto {
     @Setter
     @Getter
     public static class WantedsSaveReqDto {
-        private Integer companysId;
         private String wantedTitle;
         private String wantedDetail;
         private Integer positionCodeId;
         private Integer careerCodeId;
         private String pay;
         private Timestamp endDate;
-       
+        private Integer companysId;
     }
 
     @Setter
@@ -29,6 +28,7 @@ public class WantedsReqDto {
         private Integer careerCodeId;
         private String pay;
         private Timestamp endDate;
+        private Integer companysId;
     }
 
 }

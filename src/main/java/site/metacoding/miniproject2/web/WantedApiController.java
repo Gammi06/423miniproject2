@@ -2,6 +2,8 @@ package site.metacoding.miniproject2.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,18 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
+import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
+import site.metacoding.miniproject2.service.UsersService;
 import site.metacoding.miniproject2.service.WantedsService;
 
 @RequiredArgsConstructor
 @RestController
 public class WantedApiController {
 
+    private final HttpSession session;
     private final WantedsService wantedsService;
+    private final UsersService usersService;
     // private final LikesService likesService;
     // private final ApplyService applyService;
 
@@ -71,7 +77,7 @@ public class WantedApiController {
 
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
-        wantedsService.update(wantedId, wantedsUpdateReqDto);
+        wantedsService.update(wantedsUpdateReqDto);
         return new CMRespDto<>(1, "성공", null);
     }
 

@@ -33,12 +33,11 @@ public class WantedsService {
 
     /* 수현 작업 시작 */
     public void save(WantedsSaveReqDto wantedsSaveReqDto) {
-        // SessionUser에서 companysId 가져올것
         wantedsDao.save(wantedsSaveReqDto);
     }
 
-    public void update(Integer wantedId, WantedsUpdateReqDto wantedsUpdateReqDto) {
-        wantedsDao.update(wantedId, wantedsUpdateReqDto);
+    public void update(WantedsUpdateReqDto wantedsUpdateReqDto) {
+        wantedsDao.update(wantedsUpdateReqDto);
     }
 
     public void deleteById(Integer id) {

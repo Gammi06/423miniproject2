@@ -95,7 +95,7 @@ public class CompanysService {
     /* 수현 작업시작 */
 
     public void updateCompanysIntro(Integer id, CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        companysDao.updateCompanysIntro(companysUpdateIntroReqDto); // sessionUser 올라오면 수정
+        companysDao.updateCompanysIntro(companysUpdateIntroReqDto);
     }
 
     /* 수현 작업종료 */
