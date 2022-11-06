@@ -16,6 +16,7 @@ import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeInsertRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -38,9 +39,12 @@ public class LikesService {
     }
 
     public LikeInsertRespDto insert(LikesInsertReqDto likesInsertReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        likesInsertReqDto.setUserId(principal.getId());
+
         // 중복 체크
-        if (likesDao.findByLike(likesInsertReqDto) == null) {
-            throw new RuntimeException("해당 공고에 이미 좋아요를 했습니다.");
+        if (likesDao.findByLike(likesInsertReqDto) != null) {
+            throw new MyApiException("해당 공고에 이미 좋아요를 했습니다.");
         }
 
         likesDao.insert(likesInsertReqDto);
@@ -54,16 +58,12 @@ public class LikesService {
     @Transactional(rollbackFor = RuntimeException.class)
     public void delete(LikesInsertReqDto likesInsertReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        // if (likesDao.findByLike(likesInsertReqDto) != null) {
-        // throw new RuntimeException("잘못된 접근입니다. 1");
-        // }
-        // if (likesDao.findByLike(likesInsertReqDto).getUserId() != principal.getId())
-        // {
-        // throw new RuntimeException("잘못된 접근입니다.");
-        // }
-        // if (likesDao.findByLike(likesInsertReqDto) == null) {
-        // throw new RuntimeException("이미 취소되었습니다.");
-        // }
+        likesInsertReqDto.setUserId(principal.getId());
+
+        // 중복 체크
+        if (likesDao.findByLike(likesInsertReqDto) == null) {
+            throw new MyApiException("좋아요를 취소할 수 없습니다.");
+        }
         likesDao.delete(likesInsertReqDto);
     }
     /* 승현 작업 종료 */

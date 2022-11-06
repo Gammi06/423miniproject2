@@ -44,9 +44,9 @@ public class WantedApiController {
         return new CMRespDto<>(1, "성공", wantedsService.findById(wantedId));
     }
 
-    @GetMapping("/s/wanted/like")
+    @GetMapping("/s/api/wanted/like")
     public CMRespDto<?> findAllByLike() {
-        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(1));
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike());
     }
 
     @GetMapping("/wanted/position/position/{id}")
@@ -66,18 +66,16 @@ public class WantedApiController {
     }
 
     @PostMapping("/s/api/wanted/{id}/like")
-    public CMRespDto<?> insertLike(@PathVariable Integer id, @RequestBody LikesInsertReqDto likesInsertReqDto) {
-        likesInsertReqDto.setUserId(1);
+    public CMRespDto<?> insertLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
         likesInsertReqDto.setWantedId(id);
         return new CMRespDto<>(1, "성공", likesService.insert(likesInsertReqDto));
     }
 
-    // 좋아요 취소하기
     @DeleteMapping("/s/api/wanted/{id}/like")
-    public void deleteLike(@PathVariable Integer id, @RequestBody LikesInsertReqDto likesInsertReqDto) {
-        likesInsertReqDto.setUserId(1);
+    public CMRespDto<?> deleteLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
         likesInsertReqDto.setWantedId(id);
         likesService.delete(likesInsertReqDto);
+        return new CMRespDto<>(1, "성공", null);
     }
 
     @PostMapping("/s/api/wanted/{id}/apply/add")

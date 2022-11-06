@@ -25,6 +25,7 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 
 @RequiredArgsConstructor
 @Service
@@ -118,7 +119,7 @@ public class CompanysService {
 
     public SubcribesInsertRespDto insertSubcribes(SubcribesInsertReqDto insertReqDto) {
         if (companysDao.findByIdCompanyId(insertReqDto.getCompanyId()) == null) {
-            throw new RuntimeException("해당 id(" + insertReqDto.getCompanyId() + ")의 기업이 없습니다.");
+            throw new MyApiException("해당 id(" + insertReqDto.getCompanyId() + ")의 기업이 없습니다.");
         }
         subcribesDao.insert(insertReqDto);
         return SubcribesInsertRespDto.builder().userId(insertReqDto.getUserId()).companyId(insertReqDto.getCompanyId())
@@ -128,7 +129,7 @@ public class CompanysService {
     @Transactional(rollbackFor = RuntimeException.class)
     public void deleteSubcribes(Integer id) {
         if (subcribesDao.findById(id) == null) {
-            throw new RuntimeException("해당 기업을 구독하지 않았습니다.");
+            throw new MyApiException("해당 기업을 구독하지 않았습니다.");
         }
         subcribesDao.deleteById(id);
     }
