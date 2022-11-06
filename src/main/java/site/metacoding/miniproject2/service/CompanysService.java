@@ -3,15 +3,12 @@ package site.metacoding.miniproject2.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
-import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
@@ -33,8 +30,6 @@ public class CompanysService {
 
     private final SubcribesDao subcribesDao;
     private final CompanysDao companysDao;
-    private final WantedsDao wantedsDao;
-    private final HttpSession session;
 
     /* 지원 작업 시작 */
     public CompanysInsertRespDto insertCompany(CompanysInsertReqDto companysinsertReqDto) {

@@ -85,9 +85,10 @@ public class CompanysApiController {
     /* 승현 작업 시작 */
 
     @PostMapping("/s/api/companys/{id}/subscribes")
-    public CMRespDto<?> insertSubcribes(@PathVariable Integer id, @RequestBody SubcribesInsertReqDto insertReqDto) {
+    public CMRespDto<?> insertSubcribes(@PathVariable Integer id, SubcribesInsertReqDto insertReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         insertReqDto.setCompanyId(id);
-        insertReqDto.setUserId(1);
+        insertReqDto.setUserId(principal.getId());
         return new CMRespDto<>(1, "성공", companysService.insertSubcribes(insertReqDto));
     }
 

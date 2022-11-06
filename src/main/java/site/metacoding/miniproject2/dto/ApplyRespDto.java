@@ -2,9 +2,9 @@ package site.metacoding.miniproject2.dto;
 
 import java.sql.Timestamp;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 
 public class ApplyRespDto {
 
@@ -25,10 +25,9 @@ public class ApplyRespDto {
         private Integer wantedId;
         private Integer resumeId;
 
-        @Builder
-        public ApplyInsertRespDto(Integer wantedId, Integer resumeId) {
-            this.wantedId = wantedId;
-            this.resumeId = resumeId;
+        public ApplyInsertRespDto(ApplyUserReqDto applyUserReqDto) {
+            this.wantedId = applyUserReqDto.getWantedId();
+            this.resumeId = applyUserReqDto.getWantedId();
         }
     }
 

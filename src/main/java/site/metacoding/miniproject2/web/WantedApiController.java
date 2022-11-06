@@ -2,6 +2,8 @@ package site.metacoding.miniproject2.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
+import site.metacoding.miniproject2.dto.LikesRespDto.LikeInsertRespDto;
 import site.metacoding.miniproject2.dto.SearchDto;
+import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
@@ -31,6 +35,7 @@ public class WantedApiController {
     private final WantedsService wantedsService;
     private final LikesService likesService;
     private final ApplyService applyService;
+    private final HttpSession session;
 
     /* 승현 작업 시작 */
 
@@ -46,7 +51,8 @@ public class WantedApiController {
 
     @GetMapping("/s/api/wanted/like")
     public CMRespDto<?> findAllByLike() {
-        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike());
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(principal.getId()));
     }
 
     @GetMapping("/wanted/position/position/{id}")
@@ -67,12 +73,16 @@ public class WantedApiController {
 
     @PostMapping("/s/api/wanted/{id}/like")
     public CMRespDto<?> insertLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         likesInsertReqDto.setWantedId(id);
+        likesInsertReqDto.setUserId(principal.getId());
         return new CMRespDto<>(1, "성공", likesService.insert(likesInsertReqDto));
     }
 
     @DeleteMapping("/s/api/wanted/{id}/like")
     public CMRespDto<?> deleteLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        likesInsertReqDto.setUserId(principal.getId());
         likesInsertReqDto.setWantedId(id);
         likesService.delete(likesInsertReqDto);
         return new CMRespDto<>(1, "성공", null);
