@@ -69,15 +69,15 @@ public class WantedApiController {
         return new CMRespDto<>(1, "성공", null);
     }
 
-    @PutMapping("/s/api/wanted/{companysId}/edit")
-    public CMRespDto<?> update(@PathVariable Integer companysId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
-        wantedsService.update(wantedsUpdateReqDto);
+    @PutMapping("/s/api/wanted/{wantedId}/edit")
+    public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
+        wantedsService.update(wantedId, wantedsUpdateReqDto);
         return new CMRespDto<>(1, "성공", null);
     }
 
-    @DeleteMapping("/s/api/wanted/{companysId}/delete")
-    public CMRespDto<?> deleteById(@PathVariable Integer companysId) {
-        wantedsService.deleteById(companysId);
+    @DeleteMapping("/s/api/wanted/{wantedId}/delete")
+    public CMRespDto<?> deleteById(@PathVariable Integer wantedId) {
+        wantedsService.deleteById(wantedId);
         return new CMRespDto<>(1, "성공", null);
     }
     /* 수현 작업 종료 */

@@ -37,8 +37,8 @@ public class WantedsService {
         wantedsDao.save(wantedsSaveReqDto);
     }
 
-    public void update(WantedsUpdateReqDto wantedsUpdateReqDto) {
-        wantedsDao.update(wantedsUpdateReqDto);
+    public void update(Integer wantedId, WantedsUpdateReqDto wantedsUpdateReqDto) {
+        wantedsDao.update(wantedId, wantedsUpdateReqDto);
     }
 
     public void deleteById(Integer id) {

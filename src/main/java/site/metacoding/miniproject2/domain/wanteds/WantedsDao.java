@@ -30,7 +30,7 @@ public interface WantedsDao {
 
     public void save(WantedsSaveReqDto wantedsSaveReqDto);
 
-    public void update(WantedsUpdateReqDto wantedsUpdateReqDto);
+    public void update(@Param("wantedId") Integer wantedId,@Param("wantedsUpdateReqDto") WantedsUpdateReqDto wantedsUpdateReqDto);
 
     public void deleteById(Integer id);
 

@@ -4,14 +4,14 @@
 	<!-- 수현 작업 시작 -->
 
 	<insert id="save">
-		INSERT INTO wanteds(title, detail, position_code_id, career_code_id, pay, enddate, created)
-		VALUES(#{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay},#{enddate}, NOW())
+		INSERT INTO wanteds(company_id, title, detail, position_code_id, career_code_id, pay, enddate, created)
+		VALUES(#{companysId}, #{wantedTitle},#{wantedDetail},#{positionCodeId},#{careerCodeId},#{pay}, #{endDate}, NOW())
 	</insert>
 
 	<update id="update">
-		Update wanteds SET title = #{wantedTitle}, detail = #{wantedDetail},
+		UPDATE wanteds SET title = #{wantedTitle}, detail = #{wantedDetail},
 		position_code_id = #{positionCodeId}, career_code_id = #{careerCodeId},
-		pay = #{pay}, enddate = #{enddate}
+		pay = #{pay}, enddate = #{endDate}
 		WHERE id = #{id}
 	</update>
 
@@ -20,7 +20,7 @@
 	</delete>
 
 	<select id="findByCompanysId" resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedsRecruitsManageRespDto">
-		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id, w.career_code_id, p.name positionName, c.name careerName, if(w.enddate > NOW(), '채용중', '마감') state
+		SELECT w.company_id companyId, w.id id, w.title title, w.detail detail, w.position_code_id positionCodeId, w.career_code_id careerCodeId, p.name positionName, c.name careerName, if(w.enddate > NOW(), '채용중', '마감') state
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code p
 		ON p.id = w.position_code_id
@@ -30,7 +30,7 @@
 	</select>
 
 	<select id="findByCareersId" resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedsRecruitsManageCareersRespDto">
-		SELECT w.company_id, w.id, w.title, w.detail, w.career_code_id, c.name, if(w.enddate > NOW(), '채용중', '마감') state
+		SELECT w.company_id companyId, w.id id, w.title title, w.detail detail, w.career_code_id careerCodeId, c.name careerName, if(w.enddate > NOW(), '채용중', '마감') state
 		FROM wanteds w
 		INNER JOIN careers_code c
 		ON c.id = w.career_code_id
@@ -39,7 +39,7 @@
 	</select>
 
 	<select id="findByPositionsId" resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedsRecruitsManagePositionsRespDto">
-		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id , p.name, if(w.enddate > NOW(), '모집중', '마감') state
+		SELECT w.company_id companyId, w.id id, w.title title, w.detail detail, w.position_code_id positionCodeId, p.name positionName, if(w.enddate > NOW(), '모집중', '마감') state
 		FROM wanteds w
 		INNER JOIN positions_code p
 		ON p.id = w.position_code_id
@@ -48,7 +48,7 @@
 	</select>
 
 	<select id="findByBothIds" resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedsRecruitsManageRespDto">
-		SELECT w.company_id, w.id, w.title, w.detail, w.position_code_id, w.career_code_id, c.name, p.name, if(w.enddate > NOW(), '모집중', '마감') state
+		SELECT w.company_id companyId, w.id id, w.title title, w.detail detail, w.position_code_id positionCodeId, w.career_code_id careerCodeId, c.name careerName, p.name positionName, if(w.enddate > NOW(), '모집중', '마감') state
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code p
 		ON p.id = w.position_code_id

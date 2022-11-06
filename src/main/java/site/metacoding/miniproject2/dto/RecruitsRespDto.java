@@ -16,7 +16,7 @@ public class RecruitsRespDto {
         private Integer id;
         private Integer companysId;
         private String wantedTitle;
-        private Timestamp endDate;
+        private Timestamp created;
         private String state;
     }
 
