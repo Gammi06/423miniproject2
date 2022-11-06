@@ -45,7 +45,7 @@ public class WantedsRespDto {
         private String regionCodeName;
         private List<WantedGetSkillRespDto> mySkills;
         private Integer likeCount;
-        private LikeDto mylikes;
+        // private LikeDto mylikes;
         private Timestamp created;
         private Timestamp enddate;
 
@@ -95,5 +95,20 @@ public class WantedsRespDto {
         private String detail;
         private String state;
     }
+
+    /* 지원 작업 */
+    @Setter
+    @Getter
+    public static class WantedLisLikestRespDto {// likes
+        private Integer companyId;
+        private Integer userId;
+        private String title;
+        private String detail;
+        private String companyName;
+        private Timestamp created;
+        private Timestamp enddate;
+        private String status;
+    }
+    /* 지원 작업 종료*/
 
 }

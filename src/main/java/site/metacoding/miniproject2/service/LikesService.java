@@ -1,5 +1,7 @@
 package site.metacoding.miniproject2.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeInsertRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,6 +26,13 @@ public class LikesService {
     private final LikesDao likesDao;
     private final HttpSession session;
 
+    /* 지원 작업 */
+    public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
+        return wantedsDao.findLikeList(userId);
+    }
+    /* 지원 작업종료 */
+
+    /* 승현 작업 시작 */
     public LikeFindByIdRespDto findById(LikesInsertReqDto likesInsertReqDto) {
         return likesDao.findByLike(likesInsertReqDto);
     }
@@ -56,5 +66,6 @@ public class LikesService {
         // }
         likesDao.delete(likesInsertReqDto);
     }
+    /* 승현 작업 종료 */
 
 }

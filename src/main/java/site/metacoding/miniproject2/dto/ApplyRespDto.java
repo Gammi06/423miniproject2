@@ -9,7 +9,6 @@ import lombok.Setter;
 public class ApplyRespDto {
 
     /* >>>> 승현 작업함 <<<< */
-
     @Getter
     @Setter
     public static class ApplyFindByIdRespDto {

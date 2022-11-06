@@ -18,6 +18,7 @@ import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailWithWantedsListRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
@@ -52,11 +53,14 @@ public class CompanysService {
         return companysTitleReqDtoPS;
     }
 
-    public void deleteCompanys(Integer id) {
-        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
-        if (companysTitleReqDtoPS == null) {
+    public CompanysDeleteRespDto deleteCompanys(Integer id) {
+        CompanysDeleteRespDto companysDeleteRespDto = companysDao.findWantedCompanys(id);
+        companysDeleteRespDto.setWantedNameListCompany(companysDao.deleteWantedTitleCompanys(id));
+        if (companysDeleteRespDto != null) {
+            companysDao.deleteWantedCompanys(id);
             companysDao.deleteCompanys(id);
         }
+        return companysDeleteRespDto;
     }
 
     public CompanyDetailRespDto findByIdToDetail(Integer id) {
@@ -77,8 +81,8 @@ public class CompanysService {
         }
     }
 
-    public List<SubscribesListRespDto> subcribesListPage(Integer id) {
-        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(id);
+    public List<SubscribesListRespDto> subcribesListPage(Integer userId) {
+        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(userId);
 
         List<SubscribesListRespDto> subscribesListRespDto = new ArrayList<>();
         for (SubscribesListRespDto subcribes : subcribesList) {
@@ -87,8 +91,8 @@ public class CompanysService {
         return subcribesList;
     }
     // SubcribesService 삭제후 CompanysService로 옮김
-
     /* 지원 작업 종료 */
+
     public CompanyDetailWithWantedsListRespDto findByIdToDetailWithWantedsList(Integer id) {
         if (findByIdToDetail(id) == null)
             return null;
