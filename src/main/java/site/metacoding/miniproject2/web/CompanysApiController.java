@@ -31,7 +31,7 @@ public class CompanysApiController {
 
     /* 지원 작업 */
     // 회사가입
-    @PostMapping("/s/api/companys/{id}")
+    @PostMapping("/s/api/companys/{id}/add")
     public CMRespDto<?> insert(@PathVariable Integer id, @RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         companysInsertReqDto.setUsersId(id);
@@ -54,19 +54,18 @@ public class CompanysApiController {
         return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(id, companysUpdateReqDto));
     }
 
-    // 회사 정보 삭제 /인증 필요.
-    @DeleteMapping("/s/api/companys/{id}")
+    // 회사 정보 삭제 /인증 필요. -> 공고 삭제
+    @DeleteMapping("/s/api/companys/{id}/delete")
     public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        companysService.deleteCompanys(id);
-        return new CMRespDto<>(1, "회사정보삭제", null);
+        return new CMRespDto<>(1, "회사정보삭제", companysService.deleteCompanys(id));
     }
 
     /* 구독페이지 */
-    @GetMapping("/s/subscribes/{id}")
-    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer id) {// id는 테스트할려고 넣음
+    @GetMapping("/s/mypage/{userId}/subscribes")
+    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer userId) {// userId는 테스트할려고 넣음
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(id);
+        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(userId);
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }// 로그인 해서 테스트 돌리기
 

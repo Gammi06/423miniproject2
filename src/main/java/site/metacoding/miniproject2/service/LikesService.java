@@ -1,21 +1,27 @@
 package site.metacoding.miniproject2.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.likes.LikesDao;
+import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
-import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 
 @RequiredArgsConstructor
 @Service
 public class LikesService {
 
     private final LikesDao likesDao;
+    private final WantedsDao wantedsDao;
 
-    public LikeFindByIdRespDto findById(LikesInsertReqDto likesInsertReqDto) {
-        return likesDao.findByLike(likesInsertReqDto);
+    /* 지원 작업 */
+    public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
+        return wantedsDao.findLikeList(userId);
     }
+    /* 지원 작업종료 */
 
     public void insert(LikesInsertReqDto likesInsertReqDto) {
         if (likesInsertReqDto.getUserId() == null) {

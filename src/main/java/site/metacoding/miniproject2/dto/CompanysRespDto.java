@@ -34,6 +34,14 @@ public class CompanysRespDto {
 
     @Getter
     @Setter
+    public static class CompanysDeleteRespDto {
+        private Integer id;
+        private String companyName;
+        List <String> wantedNameListCompany;
+    }
+
+    @Getter
+    @Setter
     public static class CompanyDetailRespDto {
         private Integer id;
         private String companyName;
@@ -56,7 +64,6 @@ public class CompanysRespDto {
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
         private List<WantedListRespDto> wantedsListRespDtos;
-
     }
 
     @NoArgsConstructor
@@ -90,19 +97,18 @@ public class CompanysRespDto {
     @Setter
     public static class SubscribesListRespDto {
         private Integer id;
-        private Integer usersId;
-        private Integer companysId;
-        private Integer wantedsId;
+        private Integer userId;
+        private Integer companyId;
+        private Integer wantedId;
         private String companyName;
         private Timestamp created;// 공고시작시간
         private Timestamp enddate;// 공고끝나는시간
         private String state;
 
         public SubscribesListRespDto(SubscribesListRespDto subscribesListRespDto) {
-            this.id = subscribesListRespDto.getId();
-            this.usersId = subscribesListRespDto.getUsersId();
-            this.companysId = subscribesListRespDto.getCompanysId();
-            this.wantedsId = subscribesListRespDto.getWantedsId();
+            this.userId = subscribesListRespDto.getUserId();
+            this.companyId = subscribesListRespDto.getCompanyId();
+            this.wantedId = subscribesListRespDto.getWantedId();
             this.companyName = subscribesListRespDto.getCompanyName();
             this.created = subscribesListRespDto.getCreated();
             this.enddate = subscribesListRespDto.getEnddate();
