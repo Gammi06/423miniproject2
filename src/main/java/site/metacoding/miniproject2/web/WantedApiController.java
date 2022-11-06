@@ -13,60 +13,81 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
-import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
+import site.metacoding.miniproject2.dto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
-import site.metacoding.miniproject2.service.UsersService;
+import site.metacoding.miniproject2.service.ApplyService;
+import site.metacoding.miniproject2.service.LikesService;
 import site.metacoding.miniproject2.service.WantedsService;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class WantedApiController {
 
     private final HttpSession session;
     private final WantedsService wantedsService;
-    private final UsersService usersService;
-    // private final LikesService likesService;
-    // private final ApplyService applyService;
+    private final LikesService likesService;
+    private final ApplyService applyService;
 
-    @GetMapping("/api/wanted")
-    public List<WantedListRespDto> findAll(SearchDto searchDto) {
-        return wantedsService.findAll(searchDto);
+    /* 승현 작업 시작 */
+
+    @GetMapping("/wanted")
+    public List<WantedListRespDto> findAll() {
+        return wantedsService.findAll();
     }
 
-    @GetMapping("/api/wanted/{wantedId}")
-    public WantedDetailRespDto findById(@PathVariable Integer wantedId) {
-        return wantedsService.findById(wantedId);
+    @GetMapping("/wanted/{wantedId}")
+    public CMRespDto<?> findById(@PathVariable Integer wantedId) {
+        return new CMRespDto<>(1, "성공", wantedsService.findById(wantedId));
     }
 
-    @GetMapping("/s/api/wanted/{userId}/like")
-    public List<WantedListRespDto> findAllByLike(@PathVariable Integer userId) {
-        return wantedsService.findAllByLike(userId);
+    @GetMapping("/s/api/wanted/like")
+    public CMRespDto<?> findAllByLike() {
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike());
     }
 
-    @GetMapping("/api/wanted/position/{positionCodeName}")
-    public List<WantedListRespDto> findAllByPositionCodeName(@PathVariable String positionCodeName) {
-        return wantedsService.findAllByPositionCodeName(positionCodeName);
+    @GetMapping("/wanted/position/position/{id}")
+    public CMRespDto<?> findAllByPositionCodeId(@PathVariable Integer id) {
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByPositionCodeId(id));
     }
 
-    @GetMapping("/api/wanted/position/{companyId}")
-    public List<WantedListRespDto> findAllByCompanyId(@PathVariable Integer companyId) {
-        return wantedsService.findAllByCompanyId(companyId);
+    // 검색하기
+    @GetMapping("/wanted/search")
+    public List<WantedListRespDto> findAllBySearch(@RequestBody SearchDto searchDto) {
+        return wantedsService.findAllBySearch(searchDto);
     }
 
-    @PostMapping("/s/api/wanted/{userId}/like")
-    public void wantedInsertLike(@PathVariable Integer userId) {
-        // userId에 유저 아이디값 넣어주기
+    @GetMapping("/wanted/position/company/{companyId}")
+    public CMRespDto<?> findAllByCompanyId(@PathVariable Integer companyId) {
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByCompanyId(companyId));
     }
 
-    @PostMapping("/s/api/wanted/{userId}/apply")
-    public void wantedInsertApply(@PathVariable Integer userId) {
-        // userId에 유저 아이디값 넣어주기
+    @PostMapping("/s/api/wanted/{id}/like")
+    public CMRespDto<?> insertLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
+        likesInsertReqDto.setWantedId(id);
+        return new CMRespDto<>(1, "성공", likesService.insert(likesInsertReqDto));
     }
+
+    @DeleteMapping("/s/api/wanted/{id}/like")
+    public CMRespDto<?> deleteLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
+        likesInsertReqDto.setWantedId(id);
+        likesService.delete(likesInsertReqDto);
+        return new CMRespDto<>(1, "성공", null);
+    }
+
+    @PostMapping("/s/api/wanted/{id}/apply/add")
+    public CMRespDto<?> insertApply(@PathVariable Integer id, @RequestBody ApplyUserReqDto applyUserReqDto) {
+        applyUserReqDto.setWantedId(id);
+        return new CMRespDto<>(1, "성공", applyService.insert(applyUserReqDto));
+    }
+
+    /* 승현 작업 종료 */
 
     /* 수현 작업 시작 */
     @PostMapping("/s/api/wanted/{companysId}/add")

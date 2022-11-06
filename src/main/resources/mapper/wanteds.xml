@@ -61,10 +61,17 @@
 
 	<!-- 수현 작업 완료 이 밑으로는 쿼리 안건드렸습니다~!-->
 
+	<!-- 승현 작업 시작 -->
+
+	<update id="updateViewCount">
+		UPDATE wanteds SET wanteds.view_count = wanteds.view_count + 1 WHERE id = #{wantedId}
+	</update>
+
 	<select id="findById"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedDetailRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, IF(w.enddate > NOW(), '모집중', '마감') AS status,
+		pc.name positionCodeName, cc.name careerCodeName, w.title, w.detail, w.view_count,
+		c.company_name, c.region_code_name, w.created, w.enddate
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
@@ -72,15 +79,13 @@
 		ON cc.id = w.career_code_id
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
-		WHERE w.enddate > NOW()
-		AND w.id = #{id}
-		ORDER BY w.created DESC
+		WHERE w.id = #{wantedId}
 	</select>
 
 	<select id="findAll"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
@@ -92,17 +97,32 @@
 		ORDER BY w.created DESC
 	</select>
 
-	<!--
-	구현예정
-	<select id="findAllOrdered"
-		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
+	<select id="findAllBySearch"
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
+		FROM wanteds w
+		LEFT OUTER JOIN positions_code pc
+		ON pc.id = w.position_code_id
+		LEFT OUTER JOIN careers_code cc
+		ON cc.id = w.career_code_id
+		LEFT OUTER JOIN companys c
+		ON c.id = w.company_id
+		WHERE w.enddate > NOW()
+		<if test="searchDto.sortType != null">
+			<if test="searchDto.sortType == 2">
+				ORDER BY w.view_count DESC
+			</if>
+			<if test="searchDto.sortType == 1">
+				ORDER BY w.created DESC
+			</if>
+		</if>
 	</select>
-	-->
 
 	<select id="findAllByCompanyId"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
@@ -115,10 +135,10 @@
 		ORDER BY w.created DESC
 	</select>
 
-	<select id="findAllByPositionCodeName"
+	<select id="findAllByPositionCodeId"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
@@ -126,15 +146,14 @@
 		ON cc.id = w.career_code_id
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
-		WHERE w.enddate > NOW()
-		AND pc.name = #{positionCodeName}
+		WHERE pc.id = #{id}
 		ORDER BY w.created DESC
 	</select>
 
 	<select id="findAllByLike"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
-		SELECT w.id, pc.name, cc.name, w.title,
-		c.company_name, '지역', IF(w.enddate > NOW(), '모집중', '마감') AS status
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
 		FROM wanteds w
 		LEFT OUTER JOIN positions_code pc
 		ON pc.id = w.position_code_id
@@ -148,5 +167,19 @@
 		AND lk.user_id = #{userId}
 		ORDER BY w.created DESC
 	</select>
+
+	<!-- 승현 작업 종료 -->
+
+	<!--지원작업!-->
+	<select id="findLikeList"
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedLisLikestRespDto">
+		SELECT w.company_id,w.title,w.detail,w.company_id,w.created,w.enddate,if(enddate>NOW(),'모집중','마감') status,
+		c.company_name,l.user_id
+		FROM wanteds w LEFT OUTER JOIN companys c
+		ON w.company_id = c.id
+		LEFT OUTER JOIN likes l
+		ON l.wanted_id= w.id
+		WHERE l.user_id = #{id}
+		</select>
 
 </mapper>
