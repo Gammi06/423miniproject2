@@ -16,7 +16,6 @@ public class Users {
     private Integer age;
     private String phoneNumber;
     private String email;
-    private String photo;
     private Integer positionCodeId;
     private Integer mycareerId;
     private Timestamp created;
