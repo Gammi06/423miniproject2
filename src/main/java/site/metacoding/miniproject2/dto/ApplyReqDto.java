@@ -12,12 +12,6 @@ public class ApplyReqDto {
     public static class ApplyUserReqDto {
         private Integer wantedId;
         private Integer resumeId;
-
-        @Builder
-        public ApplyUserReqDto(Integer wantedId, Integer resumeId) {
-            this.wantedId = wantedId;
-            this.resumeId = resumeId;
-        }
     }
 
     @Getter

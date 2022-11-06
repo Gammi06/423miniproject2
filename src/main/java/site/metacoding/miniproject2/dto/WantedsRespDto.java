@@ -13,15 +13,6 @@ public class WantedsRespDto {
     // ////////////////// 승현 사용 Dto /////////////////////
     @Setter
     @Getter
-    public static class SearchDto {
-        private Integer sortType;
-        private Integer regionCodeId;
-        private Integer careerCodeId;
-        private List<Integer> skillCode;
-    }
-
-    @Setter
-    @Getter
     @AllArgsConstructor
     public static class MyLikeWantedRespDto {
         private Integer wantedId;

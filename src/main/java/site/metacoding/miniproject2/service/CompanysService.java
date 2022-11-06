@@ -3,7 +3,10 @@ package site.metacoding.miniproject2.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
@@ -20,6 +23,7 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
+import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
 
 @RequiredArgsConstructor
@@ -29,7 +33,7 @@ public class CompanysService {
     private final SubcribesDao subcribesDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
-    private final WantedsService wantedsService; // 쌤이 서비스에서 서비스 쓰지 말랬다고 알려주기
+    private final HttpSession session;
 
     /* 지원 작업 시작 */
     public CompanysInsertRespDto insertCompany(CompanysInsertReqDto companysinsertReqDto) {
@@ -112,12 +116,20 @@ public class CompanysService {
         return subcribesDao.findById(id);
     }
 
-    public void insertSubcribes(SubcribesInsertReqDto insertReqDto) {
-        // if 파인드 어쩌고해서 있는지 체크하기
+    public SubcribesInsertRespDto insertSubcribes(SubcribesInsertReqDto insertReqDto) {
+        if (companysDao.findByIdCompanyId(insertReqDto.getCompanyId()) == null) {
+            throw new RuntimeException("해당 id(" + insertReqDto.getCompanyId() + ")의 기업이 없습니다.");
+        }
         subcribesDao.insert(insertReqDto);
+        return SubcribesInsertRespDto.builder().userId(insertReqDto.getUserId()).companyId(insertReqDto.getCompanyId())
+                .build();
     }
 
+    @Transactional(rollbackFor = RuntimeException.class)
     public void deleteSubcribes(Integer id) {
+        if (subcribesDao.findById(id) == null) {
+            throw new RuntimeException("해당 기업을 구독하지 않았습니다.");
+        }
         subcribesDao.deleteById(id);
     }
 
