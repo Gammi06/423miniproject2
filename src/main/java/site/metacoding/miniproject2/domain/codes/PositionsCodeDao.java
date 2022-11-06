@@ -10,4 +10,6 @@ public interface PositionsCodeDao {
 
     public PositionsCodeRespDto findById(Integer id);
 
+    public PositionsCodeRespDto findByCodename(String codename);
+
 }
