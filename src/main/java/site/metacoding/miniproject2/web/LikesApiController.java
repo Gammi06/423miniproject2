@@ -24,7 +24,7 @@ public class LikesApiController {
     /* 지원 작업 */
     @GetMapping("/s/mypage/{userId}/likes")
     public CMRespDto<?> findLikeList(@PathVariable Integer userId) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         List<WantedLisLikestRespDto> WantedListRespDto = likesService.findLikeList(userId);
         return new CMRespDto<>(1, "좋아요페이지 보기", WantedListRespDto);
     }
