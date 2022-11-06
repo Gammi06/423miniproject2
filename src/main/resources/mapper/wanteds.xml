@@ -80,7 +80,6 @@
 		LEFT OUTER JOIN companys c
 		ON c.id = w.company_id
 		WHERE w.id = #{wantedId}
-		ORDER BY w.created DESC
 	</select>
 
 	<select id="findAll"
@@ -98,11 +97,27 @@
 		ORDER BY w.created DESC
 	</select>
 
-	<!--
-	<select id="findAllOrdered"
-		resultType="site.metacoding.miniproject2.dto.WantedListRespDto">
+	<select id="findAllBySearch"
+		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
+		SELECT w.id, pc.name positionCodeName, cc.name careerCodeName,
+		w.title, c.company_name, c.region_code_name, IF(w.enddate > NOW(), '모집중', '마감') AS status
+		FROM wanteds w
+		LEFT OUTER JOIN positions_code pc
+		ON pc.id = w.position_code_id
+		LEFT OUTER JOIN careers_code cc
+		ON cc.id = w.career_code_id
+		LEFT OUTER JOIN companys c
+		ON c.id = w.company_id
+		WHERE w.enddate > NOW()
+		<if test="searchDto.sortType != null">
+			<if test="searchDto.sortType == 2">
+				ORDER BY w.view_count DESC
+			</if>
+			<if test="searchDto.sortType == 1">
+				ORDER BY w.created DESC
+			</if>
+		</if>
 	</select>
-	-->
 
 	<select id="findAllByCompanyId"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedListRespDto">
@@ -154,6 +169,7 @@
 	</select>
 
 	<!-- 승현 작업 종료 -->
+
 	<!--지원작업!-->
 	<select id="findLikeList"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedLisLikestRespDto">
