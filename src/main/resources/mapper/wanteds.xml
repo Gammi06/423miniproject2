@@ -12,7 +12,7 @@
 		UPDATE wanteds SET title = #{wantedTitle}, detail = #{wantedDetail},
 		position_code_id = #{positionCodeId}, career_code_id = #{careerCodeId},
 		pay = #{pay}, enddate = #{endDate}
-		WHERE id = #{wantedId}
+		WHERE id = #{id}
 	</update>
 
 	<delete id="deleteById">
