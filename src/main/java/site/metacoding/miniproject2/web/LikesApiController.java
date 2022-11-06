@@ -28,6 +28,6 @@ public class LikesApiController {
         List<WantedLisLikestRespDto> WantedListRespDto = likesService.findLikeList(userId);
         return new CMRespDto<>(1, "좋아요페이지 보기", WantedListRespDto);
     }
-    /* 지원 작업 완료! */
+    /*  지원 작업 완료! */
 
 }
