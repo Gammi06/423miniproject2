@@ -9,13 +9,17 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.users.Users;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.JoinReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto;
+import site.metacoding.miniproject2.dto.UsersReqDto.PasswordEditReqDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.EditRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoAllRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.JoinRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.PasswordEditRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
@@ -51,21 +55,31 @@ public class UsersService {
         }
     }
 
-    public List<UsersInfoRespDto> findById(Integer id) {
+    public UsersInfoRespDto findById(Integer id) {
         return usersDao.findById(id);
     }
 
-    public void update() {
-        usersDao.update();
+    public EditRespDto update(EditReqDto editReqDto) {
+        UsersInfoRespDto usersPS = usersDao.findById(editReqDto.getId());
+        if (usersPS == null) {
+            throw new RuntimeException("잘못된 아이디값입니다.");
+        }
+        usersDao.update(editReqDto);
+        return new EditRespDto(usersPS);
     }
 
-    public void updateByPassword() {
-        usersDao.updateByPassword(null);
+    public PasswordEditRespDto updatePassword(PasswordEditReqDto passwordEditReqDto) {
+        UsersInfoRespDto usersPS = usersDao.findById(passwordEditReqDto.getId());
+        if (usersPS == null) {
+            throw new RuntimeException("잘못된 아이디값입니다.");
+        }
+        usersDao.updatePassword(passwordEditReqDto);
+        return new PasswordEditRespDto(usersPS);
     }
 
     @Transactional
     public void deleteById(Integer id) {
-        List<UsersInfoRespDto> usersPS = usersDao.findById(id);
+        UsersInfoRespDto usersPS = usersDao.findById(id);
         if (usersPS == null) {
             throw new RuntimeException("아이디 값이 잘못 됐습니다.");
         }

@@ -4,7 +4,7 @@
 	<!-- 성유 작업 시작 -->
 	<select id="findByUserId"
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$AuthRespDto">
-		SELECT user_id, user_password FROM users WHERE user_id = #{userId}
+		SELECT id, user_id, user_password FROM users WHERE user_id = #{userId}
 	</select>
 
 	<select id="findById"
@@ -20,7 +20,7 @@
 		WHERE id = #{id}
 	</update>
 
-	<update id="updateByPassword">
+	<update id="updatePassword">
 		UPDATE users SET user_password = #{userPassword}
 		WHERE id = #{id}
 	</update>

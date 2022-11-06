@@ -2,18 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.likes.LikesDao">
 
-	<select id="findById"
+	<select id="findByLike"
 		resultType="site.metacoding.miniproject2.dto.LikesRespDto$LikeFindByIdRespDto">
-		SELECT * FROM likes
-		WHERE id = #{id}
+		SELECT user_id, wanted_id FROM likes WHERE user_id = #{userId} AND wanted_id = #{wantedId}
 	</select>
 
 	<insert id="insert">
 		INSERT INTO likes(user_id, wanted_id, created) VALUES(#{userId}, #{wantedId}, NOW())
 	</insert>
 
-	<delete id="deleteById">
-		DELETE FROM likes WHERE user_id = #{userId} AND wanted_id = #{wantedId}
+	<delete id="delete">
+		DELETE FROM likes
+		WHERE user_id = #{userId}
+		AND wanted_id = #{wantedId}
 	</delete>
 
 </mapper>

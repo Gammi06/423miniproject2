@@ -26,7 +26,7 @@ public class UsersRespDto {
 
     @Getter
     @Setter
-    public static class UsersInfoRespDto { // findById (이것만 Users 적음)
+    public static class UsersInfoRespDto {
         private Integer id;
         private String userId;
         private String userPassword;
@@ -68,6 +68,27 @@ public class UsersRespDto {
         private String userName;
         private String email;
         private String phoneNumber;
+
+        public EditRespDto(UsersInfoRespDto infoRespDto) {
+            this.id = infoRespDto.getId();
+            this.userName = infoRespDto.getUserName();
+            this.email = infoRespDto.getEmail();
+            this.phoneNumber = infoRespDto.getPhoneNumber();
+        }
+
+    }
+
+    @Getter
+    @Setter
+    public static class PasswordEditRespDto {
+        private Integer id;
+        private String userPassword;
+
+        public PasswordEditRespDto(UsersInfoRespDto infoRespDto) {
+            this.id = infoRespDto.getId();
+            this.userPassword = infoRespDto.getUserPassword();
+        }
+
     }
 
     @Getter

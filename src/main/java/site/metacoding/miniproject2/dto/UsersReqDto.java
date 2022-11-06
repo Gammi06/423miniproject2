@@ -86,7 +86,7 @@ public class UsersReqDto {
 
     @Getter
     @Setter
-    public static class PasswordReqDto { // 비밀번호 변경 (추후에 암호화 할 예정)
+    public static class PasswordEditReqDto {
         private Integer id;
         private String userPassword;
     }

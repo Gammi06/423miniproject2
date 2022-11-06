@@ -9,8 +9,9 @@ import site.metacoding.miniproject2.dto.CMRespDto;
 @ControllerAdvice
 public class GlobalExceptionHanlder {
 
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(MyApiException.class)
     public @ResponseBody CMRespDto<?> apiError(Exception e) {
         return new CMRespDto<>(-1, e.getMessage(), null);
     }
+
 }

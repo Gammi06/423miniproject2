@@ -6,14 +6,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.JoinReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto;
+import site.metacoding.miniproject2.dto.UsersReqDto.PasswordEditReqDto;
 import site.metacoding.miniproject2.service.UsersService;
 
 @RequiredArgsConstructor
@@ -33,6 +36,18 @@ public class UsersApiController {
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
         return new CMRespDto<>(1, "로그인 성공", sessionUsers.getUserId());
+    }
+
+    @PutMapping("/s/api/{id}/edit")
+    public CMRespDto<?> update(@PathVariable Integer id,
+            @RequestBody EditReqDto editReqDto) {
+        return new CMRespDto<>(1, "ok", usersService.update(editReqDto));
+    }
+
+    @PutMapping("/s/api/{id}/edit/password")
+    public CMRespDto<?> updatePassword(@PathVariable Integer id,
+            @RequestBody PasswordEditReqDto passwordEditReqDto) {
+        return new CMRespDto<>(1, "ok", usersService.updatePassword(passwordEditReqDto));
     }
 
     @DeleteMapping("/s/{id}/delete")

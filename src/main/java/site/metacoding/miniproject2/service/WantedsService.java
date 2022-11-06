@@ -2,7 +2,10 @@ package site.metacoding.miniproject2.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.validation.FieldError;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,14 +14,16 @@ import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
+import site.metacoding.miniproject2.dto.SearchDto;
+import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCareersRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -29,6 +34,7 @@ public class WantedsService {
     private final MySkillsDao mySkillsDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
+    private final HttpSession session;
 
     /* 수현 작업 시작 */
     public void save(WantedsSaveReqDto wantedsSaveReqDto) {
@@ -79,7 +85,7 @@ public class WantedsService {
     public WantedDetailRespDto findById(Integer id) {
         WantedDetailRespDto wantedPS = wantedsDao.findById(id);
         if (wantedPS == null) {
-            throw new RuntimeException("해당 아이디의 공고가 없습니다.");
+            throw new MyApiException("해당 아이디의 공고가 없습니다.");
         }
         wantedsDao.updateViewCount(id);
         wantedPS.setMySkills(mySkillsDao.findAll(id));
@@ -88,7 +94,7 @@ public class WantedsService {
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId) {
         if (companysDao.findByIdToDetail(companyId) == null) {
-            throw new RuntimeException("해당 아이디의 기업(" + companyId + ")이 존재하지 않습니다.");
+            throw new MyApiException("해당 아이디의 기업(" + companyId + ")이 존재하지 않습니다.");
         }
         List<WantedListRespDto> wantedList = wantedsDao.findAllByCompanyId(companyId);
         return wantedList;
@@ -100,7 +106,7 @@ public class WantedsService {
 
     public List<WantedListRespDto> findAllByPositionCodeId(Integer id) {
         if (positionsCodeDao.findById(id) == null) {
-            throw new RuntimeException("해당 포지션(" + id + ")이 존재하지 않습니다.");
+            throw new MyApiException("해당 포지션(" + id + ")이 존재하지 않습니다.");
         }
         List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeId(id);
         return wantedList;
@@ -110,8 +116,12 @@ public class WantedsService {
         return wantedsDao.findAllBySearch(searchDto);
     }
 
-    public List<WantedListRespDto> findAllByLike(Integer userId) {
-        return wantedsDao.findAllByLike(userId);
+    public List<WantedListRespDto> findAllByLike() {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal == null) {
+            throw new MyApiException("로그인이 필요합니다");
+        }
+        return wantedsDao.findAllByLike(principal.getId());
     }
 
     /* 승현 작업 종료 */

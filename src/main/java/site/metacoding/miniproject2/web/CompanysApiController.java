@@ -21,11 +21,13 @@ import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @RequiredArgsConstructor
 @RestController
 public class CompanysApiController {
+
     private final CompanysService companysService;
     private final HttpSession session;
 
@@ -79,4 +81,22 @@ public class CompanysApiController {
         return new CMRespDto<>(1, "성공", null);
     }
     /* 수현 작업 완료 */
+
+    /* 승현 작업 시작 */
+
+    @PostMapping("/s/api/companys/{id}/subscribes")
+    public CMRespDto<?> insertSubcribes(@PathVariable Integer id, @RequestBody SubcribesInsertReqDto insertReqDto) {
+        insertReqDto.setCompanyId(id);
+        insertReqDto.setUserId(1);
+        return new CMRespDto<>(1, "성공", companysService.insertSubcribes(insertReqDto));
+    }
+
+    @DeleteMapping("/s/api/companys/{id}/subscribes")
+    public CMRespDto<?> deleteSubcribes(@PathVariable Integer id) {
+        companysService.deleteSubcribes(id);
+        return new CMRespDto<>(1, "성공", null);
+    }
+
+    /* 승현 작업 종료 */
+
 }

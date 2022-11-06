@@ -2,6 +2,8 @@ package site.metacoding.miniproject2.domain.users;
 
 import java.util.List;
 
+import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
+import site.metacoding.miniproject2.dto.UsersReqDto.PasswordEditReqDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
@@ -15,11 +17,11 @@ public interface UsersDao {
     // 성유 작업 시작
     public AuthRespDto findByUserId(String usersId); // 로그인
 
-    public List<UsersInfoRespDto> findById(Integer id);
+    public UsersInfoRespDto findById(Integer id);
 
-    public void update(); // 계정설정-기본정보 수정
+    public void update(EditReqDto editReqDto); // 계정설정-기본정보 수정
 
-    public void updateByPassword(String password); // 비밀번호 변경
+    public void updatePassword(PasswordEditReqDto passwordEditReqDto); // 비밀번호 변경
 
     public void deleteById(Integer id); // 회원탈퇴
 

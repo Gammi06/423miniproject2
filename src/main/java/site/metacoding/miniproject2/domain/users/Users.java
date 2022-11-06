@@ -23,7 +23,7 @@ public class Users {
 
     @Builder
     public Users(Integer id, String userId, String userPassword, String userName, Integer age, String phoneNumber,
-            String email, String photo, String positionCodeName, Integer positionCodeId,
+            String email, String positionCodeName, Integer positionCodeId,
             Integer mycareerId, Timestamp created, String role) {
         this.id = id;
         this.userId = userId;
@@ -32,7 +32,6 @@ public class Users {
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.photo = photo;
         this.positionCodeId = positionCodeId;
         this.mycareerId = mycareerId;
         this.created = created;
