@@ -1,8 +1,12 @@
 package site.metacoding.miniproject2.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.domain.resumes.Resumes;
+import site.metacoding.miniproject2.dto.EducationsReqDto.EducationsResumeReqDto;
+import site.metacoding.miniproject2.dto.MyCareersReqDto.MyCareersResumeReqDto;
+import site.metacoding.miniproject2.dto.MySkillsReqDto.MySkillsResumeReqDto;
 
 /* >>>> 연지 작업함 <<<< */
 public class ResumesReqDto {
@@ -12,33 +16,20 @@ public class ResumesReqDto {
     public static class ResumeWriteReqDto {
         private String title;
         private String intro;
-        private Integer myCareersId;
-        private Integer educationsId;
-        private Integer skillsCodeId;
-
-        public Resumes toEntity() {
-            return Resumes.builder()
-                    .title(title)
-                    .intro(intro)
-                    .build();
-        }
+        private List<MyCareersResumeReqDto> myCareers;
+        private List<EducationsResumeReqDto> myEducations;
+        private List<MySkillsResumeReqDto> mySkills;
     }
 
     @Setter
     @Getter
     public static class ResumeUpdateReqDto {
+        private Integer id;
         private String title;
         private String intro;
-        private Integer myCareersId;
-        private Integer educationsId;
-        private Integer skillsCodeId;
-
-        public Resumes toEntity() {
-            return Resumes.builder()
-                    .title(title)
-                    .intro(intro)
-                    .build();
-        }
+        private List<MyCareersResumeReqDto> myCareers;
+        private List<EducationsResumeReqDto> myEducations;
+        private List<MySkillsResumeReqDto> mySkills;
     }
 
 }

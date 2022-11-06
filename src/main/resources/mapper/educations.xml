@@ -3,15 +3,21 @@
 <mapper namespace="site.metacoding.miniproject2.domain.educations.EducationsDao">
 
 	<!-- >>>> 연지 작업함 <<<< -->
+	
 	<insert id="insert"></insert>
-
-	<select id="findAll" resultType="site.metacoding.miniproject2.dto.EducationsRespDto$EducationsListRespDto"></select>
-
-	<select id="findById" resultType="site.metacoding.miniproject2.dto.EducationsRespDto$EducationsListRespDto"></select>
 
 	<update id="updateById"></update>
 
 	<delete id="deleteById"></delete>
+
+	<!-- 연지 작업 시작함 -->
+	<select id="findAllByResumeId"
+		resultType="site.metacoding.miniproject2.dto.EducationsRespDto$EducationsResumeRespDto">
+		SELECT user_id, startdate, enddate, instruction, state
+		FROM educations WHERE resume_id = #{resumeId}
+	</select>
+	<!-- 연지 작업 종료함 -->
+
 	<!-- >>>> 연지 작업함 <<<< -->
 
 </mapper>

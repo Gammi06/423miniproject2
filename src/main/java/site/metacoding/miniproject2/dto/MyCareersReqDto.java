@@ -10,7 +10,7 @@ public class MyCareersReqDto {
     /* >>>> 성유 작업함 <<<< */
     @Getter
     @Setter
-    public static class MyCareersResumReqDto { // 이력서 작성 내 학력
+    public static class MyCareersResumeReqDto { // 이력서 작성 내 경력
 
         private Integer userId;
         private Timestamp startdate;

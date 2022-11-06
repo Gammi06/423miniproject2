@@ -2,7 +2,6 @@ package site.metacoding.miniproject2.web;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.miniproject2.domain.resumes.Resumes;
 import site.metacoding.miniproject2.domain.resumes.ResumesDao;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.ResumesReqDto.ResumeUpdateReqDto;
+import site.metacoding.miniproject2.dto.ResumesReqDto.ResumeWriteReqDto;
+import site.metacoding.miniproject2.dto.ResumesRespDto.ResumeDetailRespDto;
 import site.metacoding.miniproject2.dto.ResumesRespDto.ResumeListRespDto;
 import site.metacoding.miniproject2.service.ResumesService;
 
@@ -29,44 +29,54 @@ public class ResumesApiController {
     private final ResumesDao resumesDao;
     private final UsersDao usersDao;
 
-    @GetMapping("/resume")
-    public String 이력서메인페이지() {
-        return "/resume/resume_main";
+    /* 연지 작업 시작 */
+
+    // 이력서 상세 조회
+    @GetMapping("/s/api/resume/{id}")
+    public ResumeDetailRespDto findById(@PathVariable Integer id) {
+        return resumesService.findById(id);
     }
 
-    // [Create] Insert
-    @PostMapping("/s/api/resume/write")
-    public int insert(@RequestBody Resumes resumes) {
-        int resumeWrite = resumesDao.insert(resumes);
+    // 이력서 목록 조회
+    @GetMapping("/s/api/resume/{userId}/list")
+    public List<ResumeListRespDto> findAllByUserId(@PathVariable Integer userId) {
+        List<ResumeListRespDto> resumeList = resumesService.findAllByUserId(userId);
+        return resumeList;
+    }
+
+    // 이력서 추가
+    @PostMapping("/s/api/resume/add")
+    public ResumeWriteReqDto insert(@RequestBody ResumeWriteReqDto resumeWriteReqDto) {
+        ResumeWriteReqDto resumeWrite = resumesService.insert(resumeWriteReqDto);
         return resumeWrite;
     }
 
-    // [Read] Selcet (findAll)
-    @GetMapping("/s/resume/list")
-    public String 이력서관리페이지() {
-        return "/resume/resume_list";
-    }
+    // 이력서 수정
 
-    // [Read] Selcet (findById)
-    @GetMapping("/s/resume/{id}/list")
-    public String 이력서관리(@PathVariable Integer id, Model model) {
-        List<ResumeListRespDto> resumeListRespDtoPS = resumesService.findById(id);
-        model.addAttribute("resumeList", resumeListRespDtoPS);
-        return "/resume/resume_list";
-    }
-
-    // [Update] Update
-    @PutMapping("/s/api/resume/{id}/update")
-    public CMRespDto<?> updateById(@PathVariable Integer id, @RequestBody ResumeUpdateReqDto resumeUpdateReqDto) {
-        resumesService.updateById(resumeUpdateReqDto);
-        return new CMRespDto<>(1, "성공", null);
-    }
-
+    // 이력서 삭제
     // [Delete] Delete
+    // 이력서id를 찾아서 해당 이력서 삭제하기
     @DeleteMapping("/s/api/resume/{id}/delete")
     public CMRespDto<?> deleteById(@PathVariable Integer id) {
         resumesService.deleteById(id);
         return new CMRespDto<>(1, "성공", null);
     }
+
+    /* 연지 작업 완료 */
+
+    // [Read] Selcet (findAllByUserId)
+    // 유저id를 찾아서 그 유저의 이력서 목록 보여주기
+
+    // [Update] Update
+    // 이력서id를 찾아서 해당 이력서의
+    // 제목/자기소개 수정되게, 경력/학력/스킬 추가/삭제되게 하고
+    // 이력서 수정내용을 해당 이력서id에 반영하기
+    @PutMapping("/s/api/resume/{id}/update")
+    public void updateById(@PathVariable Integer id, @RequestBody ResumeUpdateReqDto resumeUpdateReqDto) {
+        resumeUpdateReqDto.setId(id);
+        resumesService.updateById(resumeUpdateReqDto);
+        // return new CMRespDto<>(1, "성공", null);
+    }
+
 }
 /* >>>> 연지 작업종료 <<<< */

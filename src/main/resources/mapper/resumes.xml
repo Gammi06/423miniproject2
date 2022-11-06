@@ -3,16 +3,34 @@
 <mapper namespace="site.metacoding.miniproject2.domain.resumes.ResumesDao">
 
 	<!-- >>>> 연지 작업함 <<<< -->
-	<insert id="insert"></insert>
-
-	<select id="findAll" resultType="site.metacoding.miniproject2.dto.ResumesRespDto$ResumeListRespDto">
-		SELECT id, title, created FROM resumes
-		WHERE user_id = #{id}
+	<select id="findById"
+		resultType="site.metacoding.miniproject2.dto.ResumesRespDto$ResumeDetailRespDto">
+		SELECT r.id, r.title, u.user_name, u.email, u.phone_number, r.intro
+		FROM resumes r
+		LEFT OUTER JOIN users u
+		ON u.id = r.user_id
+		WHERE r.id = #{id}
 	</select>
 
-	<select id="findById" resultType="site.metacoding.miniproject2.dto.ResumesRespDto$ResumeListRespDto"></select>
+	<insert id="insert"></insert>
 
-	<update id="updateById"></update>
+	<select id="findByUserId">
+		SELECT id, user_id
+		FROM resumes
+		WHERE user_id = #{userId}
+	</select>
+
+	<select id="findAllByUserId" resultType="site.metacoding.miniproject2.dto.ResumesRespDto$ResumeListRespDto">
+		SELECT id, title, created
+		FROM resumes
+		WHERE user_id = #{userId}
+	</select>
+
+	<update id="updateById">
+		UPDATE resumes
+		SET title = #{title}, intro = #{intro}, myCareersId = #{myCareersId}, educationsId = #{educationsId}, skillsCodeId = #{skillsCodeId}
+		WHERE id = #{id}
+	</update>
 
 	<delete id="deleteById">
 		DELETE FROM resumes WHERE id = #{id}
