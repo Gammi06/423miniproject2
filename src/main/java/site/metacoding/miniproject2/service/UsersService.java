@@ -11,6 +11,7 @@ import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersReqDto.JoinReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoAllRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
@@ -42,9 +43,9 @@ public class UsersService {
     // }
 
     public SessionUsers findByUserId(LoginReqDto loginReqDto) {
-        Users usersPS = usersDao.findByUserId(loginReqDto.getId());
-        if (usersPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
-            return null;
+        AuthRespDto userPS = usersDao.findByUserId(loginReqDto.getUserId());
+        if (userPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
+            return new SessionUsers(userPS);
         } else {
             throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
         }

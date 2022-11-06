@@ -2,7 +2,7 @@ package site.metacoding.miniproject2.domain.users;
 
 import java.util.List;
 
-import site.metacoding.miniproject2.dto.UsersReqDto.AuthReqDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
@@ -13,7 +13,7 @@ public interface UsersDao {
     // 이름 규칙에 맞는 메서드명으로 생성해주세요.
 
     // 성유 작업 시작
-    public Users findByUserId(Integer usersId); // 로그인
+    public AuthRespDto findByUserId(String usersId); // 로그인
 
     public List<UsersInfoRespDto> findById(Integer id);
 
@@ -25,7 +25,7 @@ public interface UsersDao {
 
     public void updateProfile();// 프로필 수정
 
-    public List<AuthReqDto> findAllUserId(String userId);
+    // public List<AuthReqDto> findAllUserId(String userId);
 
     public void insert(Users users);
     // 성유 작업 종료

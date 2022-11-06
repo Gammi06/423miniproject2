@@ -14,6 +14,16 @@ import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 public class UsersRespDto {
 
     /* >>>>> 성유 작업함 <<<<< */
+
+    @Getter
+    @Setter
+    public static class AuthRespDto {
+        private Integer id;
+        private String userId;
+        private String userPassword; // 비밀번호 숨기기
+        private String role;
+    }
+
     @Getter
     @Setter
     public static class UsersInfoRespDto { // findById (이것만 Users 적음)

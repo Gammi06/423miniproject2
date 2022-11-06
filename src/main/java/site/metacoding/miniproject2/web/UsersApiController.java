@@ -24,15 +24,15 @@ public class UsersApiController {
 
     // 성유 작업
     @PostMapping("/join")
-    public CMRespDto<?> joinUser(@RequestBody JoinReqDto joinReqDto) { // 회원가입
+    public CMRespDto<?> join(@RequestBody JoinReqDto joinReqDto) { // 회원가입
         return new CMRespDto<>(1, "ok", usersService.insert(joinReqDto));
     }
 
-    @PostMapping("/login")
+    @PostMapping("/s/login")
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
-        return new CMRespDto<>(1, "ok", sessionUsers);
+        return new CMRespDto<>(1, "로그인 성공", sessionUsers.getUserId());
     }
 
     @DeleteMapping("/s/{id}/delete")
