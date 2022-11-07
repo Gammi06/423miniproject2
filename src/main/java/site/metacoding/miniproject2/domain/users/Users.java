@@ -37,10 +37,5 @@ public class Users {
         this.created = created;
         this.role = role;
     }
-    /*
-     * //////////////////////////////////
-     * positionCodeName이 원래 존재했지만 중복으로 필요하지 않기 때문에 삭제
-     * //////////////////////////////////
-     */
 
 }
