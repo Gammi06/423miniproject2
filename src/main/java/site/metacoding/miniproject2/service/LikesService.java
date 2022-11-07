@@ -10,14 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.likes.LikesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
-<<<<<<< HEAD
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeInsertRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
-=======
-import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
->>>>>>> 6c1f647bbe8a5d1d6c33944ee290394b075faa76
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,20 +22,16 @@ public class LikesService {
 
     private final WantedsDao wantedsDao;
     private final LikesDao likesDao;
-    private final WantedsDao wantedsDao;
 
     /* 지원 작업 */
     public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
         return wantedsDao.findLikeList(userId);
-<<<<<<< HEAD
     }
     /* 지원 작업종료 */
 
     /* 승현 작업 시작 */
     public LikeFindByIdRespDto findById(LikesInsertReqDto likesInsertReqDto) {
         return likesDao.findByLike(likesInsertReqDto);
-=======
->>>>>>> 6c1f647bbe8a5d1d6c33944ee290394b075faa76
     }
     /* 지원 작업종료 */
 

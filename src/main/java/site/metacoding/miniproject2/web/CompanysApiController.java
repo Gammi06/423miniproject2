@@ -36,10 +36,9 @@ public class CompanysApiController {
 
     /* 지원 작업 */
     // 회사가입
-    @PostMapping("/s/api/companys/{id}/add")
-    public CMRespDto<?> insert(@PathVariable Integer id, @RequestBody CompanysInsertReqDto companysInsertReqDto) {
+    @PostMapping("/s/api/companys/add")
+    public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        companysInsertReqDto.setUsersId(id);
         CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
         return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
     }
@@ -52,18 +51,18 @@ public class CompanysApiController {
     }// 마지막 테스트 / ajax -> 쿼리스트림으로 테스트 완료
 
     // 회사정보 수정/인증 필요
-    @PutMapping("/s/api/companys/{id}")
-    public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
+    @PutMapping("/s/api/companys")
+    public @ResponseBody CMRespDto<?> updateCompanyId(
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(id, companysUpdateReqDto));
+        return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(principal.getId() ,companysUpdateReqDto));
     }
 
     // 회사 정보 삭제 /인증 필요. -> 공고 삭제
-    @DeleteMapping("/s/api/companys/{id}/delete")
-    public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
+    @DeleteMapping("/s/api/companys/delete")
+    public @ResponseBody CMRespDto<?> deleteCompanysId() {
         SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        return new CMRespDto<>(1, "회사정보삭제", companysService.deleteCompanys(id));
+        return new CMRespDto<>(1, "회사정보삭제", companysService);
     }
 
     /* 구독페이지 */
