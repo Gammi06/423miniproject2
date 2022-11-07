@@ -22,5 +22,8 @@ public class MyCareersRespDto {
     public static class MyCareersEditRespDto { // 계정 설정-프로필 수정 내 경력
         private Integer id;
         private Integer userId;
+        private Timestamp startdate;
+        private Timestamp enddate;
+        private String companyName;
     }
 }

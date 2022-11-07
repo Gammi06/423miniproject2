@@ -36,4 +36,5 @@ public class MySkillsRespDto {
         private String skillsCodeName;
     }
     /* 승현 작업 종료 */
+
 }

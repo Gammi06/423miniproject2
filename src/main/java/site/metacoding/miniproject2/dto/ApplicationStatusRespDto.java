@@ -15,7 +15,6 @@ public class ApplicationStatusRespDto {
     @Setter
     @Getter
     public static class ApplicationStatusAllCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer statusC;
         private Integer statusFinal;
@@ -55,7 +54,6 @@ public class ApplicationStatusRespDto {
     @Setter
     @Getter
     public static class ApplicationStatusWaitingCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer statusC;
         private Integer statusFinal;
@@ -96,7 +94,6 @@ public class ApplicationStatusRespDto {
     @Setter
     @Getter
     public static class ApplicationStatusFinalCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer statusC;
         private Integer statusFinal;

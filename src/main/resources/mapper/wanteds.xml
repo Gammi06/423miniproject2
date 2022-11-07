@@ -169,7 +169,6 @@
 	</select>
 
 	<!-- 승현 작업 종료 -->
-
 	<!--지원작업!-->
 	<select id="findLikeList"
 		resultType="site.metacoding.miniproject2.dto.WantedsRespDto$WantedLisLikestRespDto">
@@ -180,6 +179,6 @@
 		LEFT OUTER JOIN likes l
 		ON l.wanted_id= w.id
 		WHERE l.user_id = #{id}
-		</select>
+	</select>
 
 </mapper>
