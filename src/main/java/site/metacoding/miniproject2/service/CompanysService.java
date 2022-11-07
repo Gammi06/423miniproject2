@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import site.metacoding.miniproject2.domain.companys.Companys;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.subacribes.SubcribesDao;
 import site.metacoding.miniproject2.domain.subscribes.subscribesDao;
@@ -19,6 +20,7 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailWithWanteds
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysUpdateIntroRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
@@ -100,8 +102,9 @@ public class CompanysService {
 
     /* 수현 작업시작 */
 
-    public void updateCompanysIntro(Integer id, CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        companysDao.updateCompanysIntro(companysUpdateIntroReqDto); // sessionUser 올라오면 수정
+    public CompanysUpdateIntroRespDto updateCompanysIntro(CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        companysDao.updateCompanysIntro(companysUpdateIntroReqDto);
+        return new CompanysUpdateIntroRespDto(companysUpdateIntroReqDto);
     }
 
     /* 수현 작업종료 */
