@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
@@ -88,14 +89,16 @@ public class WantedApiController {
     /* 수현 작업 시작 */
     @PostMapping("/s/api/wanted/{companysId}/add")
     public CMRespDto<?> save(@PathVariable Integer companysId, @RequestBody WantedsSaveReqDto wantedsSaveReqDto) {
-        wantedsSaveReqDto.setCompanysId(companysId);
+        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
+        wantedsSaveReqDto.setCompanysId(sessionUsers.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.save(wantedsSaveReqDto));
     }
 
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
+        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
         wantedsUpdateReqDto.setId(wantedId);
-        // wantedsUpdateReqDto.setCompanysId(companysId); //세션유저에서 가져올것
+        wantedsUpdateReqDto.setCompanysId(sessionUsers.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 

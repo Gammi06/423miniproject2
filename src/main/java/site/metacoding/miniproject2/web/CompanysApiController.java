@@ -24,6 +24,7 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @Slf4j
@@ -80,8 +81,14 @@ public class CompanysApiController {
     @PutMapping("/s/api/companys/{id}/edit/intro")
     public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
             @RequestBody CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        // companysUpdateIntroReqDto.setId(id);
-        return new CMRespDto<>(1, "성공", companysService.updateCompanysIntro(companysUpdateIntroReqDto));
+        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
+        if (sessionUsers.getCompanyId().equals(id)) {
+            companysUpdateIntroReqDto.setId(sessionUsers.getCompanyId());
+            return new CMRespDto<>(1, "성공", companysService.updateCompanysIntro(companysUpdateIntroReqDto));
+        } else {
+            return new CMRespDto<>(-1, "수정에 실패했습니다", null);
+        }
+
     }
     /* 수현 작업 완료 */
 
