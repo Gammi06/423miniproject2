@@ -8,6 +8,7 @@ import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 @Setter
 @Getter
 public class SessionUsers {
+    public final String getRole = null;
     private Integer id;
     private String userId;
     private String role; // '일반' = users (디폴트값), '회사' = companys
