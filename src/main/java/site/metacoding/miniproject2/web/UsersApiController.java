@@ -28,7 +28,7 @@ public class UsersApiController {
         return new CMRespDto<>(1, "ok", usersService.insert(joinReqDto));
     }
 
-    @PostMapping("/s/login")
+    @PostMapping("/login")
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
