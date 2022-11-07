@@ -10,7 +10,8 @@ public class EducationsRespDto {
 
     @Setter
     @Getter
-    public static class EducationsListRespDto {
+    // Dto이름 EducationsListRespDto -> EducationsResumeRespDto로 수정함 : 연지
+    public static class EducationsResumeRespDto { // 이력서 작성 내 학력
         private Timestamp startDate;
         private Timestamp endDate;
         private String instruction;

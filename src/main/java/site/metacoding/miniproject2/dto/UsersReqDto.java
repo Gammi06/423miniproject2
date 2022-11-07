@@ -5,7 +5,7 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
+import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsResumeRespDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersEditRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
@@ -51,18 +51,22 @@ public class UsersReqDto {
         private String careersCodeName;
         private List<WantedsSkillsRespDto> wantedsSkillsRespDtos;
         private List<MyCareersEditRespDto> myCareersEditRespDtos;
-        private List<EducationsListRespDto> educationsListRespDtos;
+        private List<EducationsResumeRespDto> educationsResumeRespDtos; // educationsListRespDto ->
+                                                                        // educationsResumeRespDto로 수정됨 : 연지
         private String intro;
 
         public ProfileEditRepDto(Integer id, String positionCodeName, String careersCodeName,
                 List<WantedsSkillsRespDto> wantedsSkillsRespDtos, List<MyCareersEditRespDto> myCareersEditRespDtos,
-                List<EducationsListRespDto> educationsListRespDtos, String intro) {
+                List<EducationsResumeRespDto> educationsListRespDtos, String intro) { // educationsListRespDto ->
+                                                                                      // educationsResumeRespDto로 수정됨 :
+                                                                                      // 연지
             this.id = id;
             this.positionCodeName = positionCodeName;
             this.careersCodeName = careersCodeName;
             this.wantedsSkillsRespDtos = wantedsSkillsRespDtos;
             this.myCareersEditRespDtos = myCareersEditRespDtos;
-            this.educationsListRespDtos = educationsListRespDtos;
+            this.educationsResumeRespDtos = educationsResumeRespDtos; // educationsListRespDto ->
+                                                                      // educationsResumeRespDto로 수정됨 : 연지
             this.intro = intro;
         }
 
