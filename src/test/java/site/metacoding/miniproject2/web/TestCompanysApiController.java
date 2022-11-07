@@ -1,7 +1,5 @@
 package site.metacoding.miniproject2.web;
 
-import java.net.http.HttpResponse;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 
 @Slf4j
@@ -105,7 +104,6 @@ public class TestCompanysApiController {
         // then
     }
 
-    /* 지원 작업 시작! */
     @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
     @Test
     public void insert_test() throws Exception {
@@ -196,7 +194,7 @@ public class TestCompanysApiController {
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
 
-    }// 회사서비스 삭제 테스트
+    }/// 회사서비스 삭제 테스트
 
     @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
     @Test

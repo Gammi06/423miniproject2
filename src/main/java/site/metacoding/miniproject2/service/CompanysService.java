@@ -79,7 +79,7 @@ public class CompanysService {
         }
     }
 
-    public List<SubscribesListRespDto> subcribesListPage(Integer userId) {
+    public List<SubscribesListRespDto> subcribesListPage(String userId) {
         List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(userId);
 
         List<SubscribesListRespDto> subscribesListRespDto = new ArrayList<>();
