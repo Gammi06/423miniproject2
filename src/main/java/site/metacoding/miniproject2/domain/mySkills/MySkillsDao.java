@@ -3,6 +3,7 @@ package site.metacoding.miniproject2.domain.mySkills;
 import java.util.List;
 
 import site.metacoding.miniproject2.dto.MySkillsRespDto.MySkillsResumeRespDto;
+import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedGetSkillRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
 public interface MySkillsDao {
@@ -15,4 +16,7 @@ public interface MySkillsDao {
     public List<MySkillsResumeRespDto> findAllByResumeId(Integer resumeId);
     /* 연지 작업 종료 */
 
+    /* 승현 작업 시작 */
+    public List<WantedGetSkillRespDto> findAll(Integer wantedId);
+    /* 승현 작업 종료 */
 }

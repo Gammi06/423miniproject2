@@ -12,7 +12,10 @@
 		WHERE r.id = #{id}
 	</select>
 
-	<insert id="insert"></insert>
+	<insert id="insert">
+		INSERT INTO resumes(user_id, positions_code_id, title, intro, created)
+		VALUES (#{userId}, #{positionsCodeId}, #{title}, #{intro}, NOW())
+	</insert>
 
 	<select id="findByUserId">
 		SELECT id, user_id

@@ -2,7 +2,6 @@ package site.metacoding.miniproject2.domain.myCareers;
 
 import java.util.List;
 
-import site.metacoding.miniproject2.dto.MyCareersReqDto.MyCareersResumeReqDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersResumeRespDto;
 
 public interface MyCareersDao {
@@ -17,6 +16,6 @@ public interface MyCareersDao {
     /* 연지 작업 시작함 */
     public List<MyCareersResumeRespDto> findAllByResumeId(Integer resumeId);
 
-    public List<MyCareersResumeReqDto> insertByResumeId(Integer resumeId);
+    public void insertByResumeId();
     /* 연지 작업 종료 */
 }

@@ -2,7 +2,10 @@ package site.metacoding.miniproject2.service;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.educations.EducationsDao;
@@ -10,7 +13,6 @@ import site.metacoding.miniproject2.domain.myCareers.MyCareersDao;
 import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
 import site.metacoding.miniproject2.domain.resumes.ResumesDao;
 import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsResumeRespDto;
-import site.metacoding.miniproject2.dto.MyCareersReqDto.MyCareersResumeReqDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersResumeRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.MySkillsResumeRespDto;
 import site.metacoding.miniproject2.dto.ResumesReqDto.ResumeUpdateReqDto;
@@ -69,21 +71,12 @@ public class ResumesService {
     }
     /* 연지 작업 종료 */
 
-    public ResumeWriteReqDto insert(ResumeWriteReqDto resumeWriteReqDto) {
-        // 1. Dao(기능)에서 기능메서드 가져온다
-        // 2. List들을 제외한 값들을 Dto에 담아온다(쿼리)
-        ResumeWriteReqDto resumeWrite = resumesDao.insert(resumeWriteReqDto);
-        // 3. ListDto값 채워넣기
-        // 3-1. 경력 채워넣기
-        // 3-1-1. 경력 Dao에 메소드 선언하기
-        // 3-1-2. mapper 생성하기
-        // 3-1-3. ResumeService에서 경력 dao에 만든 메서드 호출하기
-        // 3-1-4. 호출한 값을 resumeWriteReqDto에 넣기
-        // 3-1-5. 포스트맨으로 테스트하기
-        List<MyCareersResumeReqDto> myCareers = myCareersDao.insertByResumeId(resumeId);
-        resumeWriteReqDto.getMySkills();
+    public void insert(ResumeWriteReqDto resumeWriteReqDto) {
 
-        return resumeWrite;
+        resumesDao.insert(resumeWriteReqDto);
+        myCareersDao.insertByResumeId();
+        // educationsDao.insertByResumeId();
+
     }
 
     public ResumeListRespDto findByUserId(Integer userId) {

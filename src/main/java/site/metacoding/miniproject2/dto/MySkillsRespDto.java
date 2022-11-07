@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
 
-/*>>>>>>지원 작업함<<<<<<< */
 /*기존 작업자 승현 */
 public class MySkillsRespDto {
 
@@ -19,6 +18,7 @@ public class MySkillsRespDto {
     }
     /* 연지 작업끝 */
 
+    /* >>>>>>>>지원 작업 시작<<<<<<<<<<<< */
     @Setter
     @Getter
     public static class WantedsSkillsRespDto {
@@ -27,6 +27,13 @@ public class MySkillsRespDto {
         private Integer skillsCodeId;
         private String skillsCodeName;
     }
+    /* >>>>>>>>지원 작업 종료<<<<<<<<<<<< */
 
+    /* 승현 작업 시작 */
+    @Getter
+    @Setter
+    public static class WantedGetSkillRespDto {
+        private String skillsCodeName;
+    }
+    /* 승현 작업 종료 */
 }
-/* >>>>>>>>지원 작업 종료<<<<<<<<<<<< */

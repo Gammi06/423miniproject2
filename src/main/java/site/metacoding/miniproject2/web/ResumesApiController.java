@@ -46,9 +46,8 @@ public class ResumesApiController {
 
     // 이력서 추가
     @PostMapping("/s/api/resume/add")
-    public ResumeWriteReqDto insert(@RequestBody ResumeWriteReqDto resumeWriteReqDto) {
-        ResumeWriteReqDto resumeWrite = resumesService.insert(resumeWriteReqDto);
-        return resumeWrite;
+    public void insert(@RequestBody ResumeWriteReqDto resumeWriteReqDto) {
+        resumesService.insert(resumeWriteReqDto);
     }
 
     // 이력서 수정

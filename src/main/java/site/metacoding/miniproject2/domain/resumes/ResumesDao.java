@@ -12,7 +12,7 @@ public interface ResumesDao {
 
     public ResumeDetailRespDto findById(Integer id);
 
-    public ResumeWriteReqDto insert(ResumeWriteReqDto resumeWriteReqDto);
+    public void insert(ResumeWriteReqDto resumeWriteReqDto);
 
     public ResumeListRespDto findByUserId(Integer userId);
 

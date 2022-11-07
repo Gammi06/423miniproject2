@@ -4,14 +4,14 @@
 
 	<!--지원 작업-->
 	<select id="subcribesListPage"
-	resultType="site.metacoding.miniproject2.dto.CompanysRespDto$SubscribesListRespDto">
-	  SELECT w.company_id,w.* ,if(enddate>NOW(),'모집중','마감') state,
-		c.company_name, s.user_id
-		FROM wanteds w LEFT OUTER JOIN companys c
-		ON w.company_id = c.id
-		LEFT OUTER JOIN subscribes s
-		ON s.company_id= w.id
-		WHERE s.user_id = #{id}
+		resultType="site.metacoding.miniproject2.dto.CompanysRespDto$SubscribesListRespDto">
+		SELECT s.id,w.company_id,w.created,w.enddate,if(enddate>NOW(),'모집중','마감') state,
+		w.id wantedid, c.company_name, s.user_id
+	   FROM wanteds w LEFT OUTER JOIN companys c
+	   ON w.company_id = c.id
+	   LEFT OUTER JOIN subscribes s
+	   ON s.company_id= w.id
+	   WHERE s.user_id = #{id}
 	</select>
 	<!--지원 작업 종료-->
 
@@ -19,15 +19,15 @@
 
 	<select id="findById"
 		resultType="site.metacoding.miniproject2.dto.SubribesRespDto$SubribesFindByIdRespDto">
-		SELECT * FROM subcribes WHERE id = #{id}
+		SELECT id, user_id, company_id, created FROM subscribes WHERE user_id = #{userId} AND company_id = #{companyId}
 	</select>
 
 	<insert id="insert">
-		INSERT INTO subcribes(user_id, company_id, created) VALUES (#{userId}, #{wantedId}, NOW())
+		INSERT INTO subscribes(user_id, company_id, created) VALUES(#{userId}, #{companyId}, NOW())
 	</insert>
 
 	<delete id="deleteById">
-		DELETE FROM subcribes WHERE id = #{id}
+		DELETE FROM subscribes WHERE id = #{id}
 	</delete>
 
 	<!-- 승현 작업 종료-->

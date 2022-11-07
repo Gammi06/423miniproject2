@@ -15,9 +15,9 @@ resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersEditRespD
     FROM mycareers WHERE resume_id = #{resumeId}
 </select>
 
-<insert id="insert">
+<insert id="insertByResumeId">
     INSERT INTO mycareers(user_id, resume_id, startdate, enddate, company_name)
-    VALUES (#{userId}, #{resumeId}, NOW(), MAKEDATE(#{careerEndyear}, #{careerEnddate}), '#{companyName}')
+    VALUES (#{userId}, #{resumeId}, #{startdate}, #{enddate}, #{companyName})
 </insert>
 
 <!-- 연지 작업 종료함 -->

@@ -14,6 +14,8 @@ public class ResumesReqDto {
     @Setter
     @Getter
     public static class ResumeWriteReqDto {
+        private Integer userId; // 추가됨 : 연지
+        private Integer positionsCodeId; // 추가됨 : 연지
         private String title;
         private String intro;
         private List<MyCareersResumeReqDto> myCareers;

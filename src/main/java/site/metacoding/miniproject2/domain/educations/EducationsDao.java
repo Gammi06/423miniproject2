@@ -19,6 +19,8 @@ public interface EducationsDao {
 
     /* 연지 작업 시작함 */
     public List<EducationsResumeRespDto> findAllByResumeId(Integer resumeId);
+
+    public void insertByResumeId();
     /* 연지 작업 종료 */
 }
 /* >>>> 연지 작업종료 <<<< */

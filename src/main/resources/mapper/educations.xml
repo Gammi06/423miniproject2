@@ -3,14 +3,17 @@
 <mapper namespace="site.metacoding.miniproject2.domain.educations.EducationsDao">
 
 	<!-- >>>> 연지 작업함 <<<< -->
-	
-	<insert id="insert"></insert>
 
 	<update id="updateById"></update>
 
 	<delete id="deleteById"></delete>
 
 	<!-- 연지 작업 시작함 -->
+	<insert id="insertByResumeId">
+		INSERT INTO educations(user_id, resume_id, startdate, enddate, instruction, state)
+		VALUES (#{userId}, #{resumeId}, #{startdate}, #{enddate}, #{instruction}, #{state})
+	</insert>
+
 	<select id="findAllByResumeId"
 		resultType="site.metacoding.miniproject2.dto.EducationsRespDto$EducationsResumeRespDto">
 		SELECT user_id, startdate, enddate, instruction, state
