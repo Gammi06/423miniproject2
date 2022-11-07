@@ -76,9 +76,9 @@ public class CompanysApiController {
     /* 수현 작업 시작 */
     @PutMapping("/s/api/companys/{id}/edit/intro")
     public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
-            CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        companysService.updateCompanysIntro(id, companysUpdateIntroReqDto);
-        return new CMRespDto<>(1, "성공", null);
+            @RequestBody CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        // companysUpdateIntroReqDto.setId(id);
+        return new CMRespDto<>(1, "성공", companysService.updateCompanysIntro(companysUpdateIntroReqDto));
     }
     /* 수현 작업 완료 */
 

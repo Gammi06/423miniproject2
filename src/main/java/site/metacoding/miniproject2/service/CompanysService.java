@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.miniproject2.domain.companys.Companys;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
@@ -21,6 +22,7 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailWithWanteds
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysUpdateIntroRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
@@ -105,8 +107,10 @@ public class CompanysService {
 
     /* 수현 작업시작 */
 
-    public void updateCompanysIntro(Integer id, CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+    public CompanysUpdateIntroRespDto updateCompanysIntro(CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        Companys companys = companysUpdateIntroReqDto.toEntity();
         companysDao.updateCompanysIntro(companysUpdateIntroReqDto);
+        return new CompanysUpdateIntroRespDto(companys);
     }
 
     /* 수현 작업종료 */

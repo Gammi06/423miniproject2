@@ -103,6 +103,7 @@ public class CompanysReqDto {
     @Setter
     @Getter
     public static class CompanysUpdateIntroReqDto {
+        private Integer id;
         private String intro;
 
         public CompanysUpdateIntroReqDto(String intro) {

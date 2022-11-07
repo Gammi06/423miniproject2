@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import site.metacoding.miniproject2.domain.companys.Companys;
 //import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 
@@ -37,7 +38,7 @@ public class CompanysRespDto {
     public static class CompanysDeleteRespDto {
         private Integer id;
         private String companyName;
-        List <String> wantedNameListCompany;
+        List<String> wantedNameListCompany;
     }
 
     @Getter
@@ -115,6 +116,16 @@ public class CompanysRespDto {
             this.state = subscribesListRespDto.getState();
         }
 
+    }
+
+    @Setter
+    @Getter
+    public static class CompanysUpdateIntroRespDto {
+        private String intro;
+
+        public CompanysUpdateIntroRespDto(Companys companys) {
+            this.intro = intro;
+        }
     }
 
 }
