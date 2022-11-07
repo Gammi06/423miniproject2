@@ -11,7 +11,7 @@ public interface SubcribesDao {
 
     /* >>>>>>지원 작업함<<<<<<< */
 
-    public List<SubscribesListRespDto> subcribesListPage(Integer id);
+    public List<SubscribesListRespDto> subcribesListPage(Integer userId);
 
     /* >>>>>>>>지원 작업 종료<<<<<<<<<<<< */
 

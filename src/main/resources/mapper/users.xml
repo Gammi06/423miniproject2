@@ -3,13 +3,15 @@
 <mapper namespace="site.metacoding.miniproject2.domain.users.UsersDao">
 	<!-- 성유 작업 시작 -->
 	<select id="findByUserId"
-		resultType="site.metacoding.miniproject2.dto.UsersReqDto$LoginReqDto">
-		SELECT * FROM users WHERE user_id = #{userId}
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$AuthRespDto">
+		SELECT id, user_id, user_password FROM users WHERE user_id = #{userId}
 	</select>
 
 	<select id="findById"
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$UsersInfoRespDto">
-		SELECT * FROM users WHERE id = #{id}
+		SELECT id, user_id, user_password, user_name, age, phone_number, email, position_code_id, mycareer_id, created 
+		FROM users WHERE id = #{id}
+
 	</select>
 
 	<update id="update">
@@ -27,13 +29,13 @@
 		DELETE FROM users WHERE id = #{id}
 	</delete>
 
-	<select id="findAllUserId" resultType="site.metacoding.miniproject2.dto.UsersReqDto$AuthReqDto">
+	<!--<select id="findAllUserId" resultType="site.metacoding.miniproject2.dto.UsersReqDto$AuthReqDto">
 		SELECT c.id companyId, c.company_name, u.id usersId, u.user_id
 		FROM companys c
 		INNER JOIN users u 
 		ON c.users_id = u.id
 		where u.id = #{userId}
-	</select>
+	</select>-->
 
 	<update id="updateProfile"></update>
 

@@ -20,39 +20,43 @@ import site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStat
 @Service
 public class ApplicationStatusService {
 
-    private final ApplicationStatusDao applicationStatusDao;
+        private final ApplicationStatusDao applicationStatusDao;
 
-    public ApplicationStatusAllListRespDto findAllList(Integer id, String keyword) {
-        List<ApplicationStatusAllCountRespDto> applicationStatusAllCountRespDtos = applicationStatusDao
-                .findAllCounts(id);
-        List<ApplicationStatusAllInfoRespDto> applicationStatusAllInfoRespDtos = applicationStatusDao.findAllInfos(id,
-                keyword);
-        ApplicationStatusAllListRespDto applicationsStatusAllListRespDto = new ApplicationStatusAllListRespDto(
-                applicationStatusAllCountRespDtos, applicationStatusAllInfoRespDtos);
-        applicationsStatusAllListRespDto.setKeyword(keyword);
-        return applicationsStatusAllListRespDto;
-    }
+        public ApplicationStatusAllListRespDto findAllList(Integer id, String keyword) {
+                List<ApplicationStatusAllCountRespDto> applicationStatusAllCountRespDtos = applicationStatusDao
+                                .findAllCounts(id);
+                List<ApplicationStatusAllInfoRespDto> applicationStatusAllInfoRespDtos = applicationStatusDao
+                                .findAllInfos(id,
+                                                keyword);
+                ApplicationStatusAllListRespDto applicationsStatusAllListRespDto = new ApplicationStatusAllListRespDto(
+                                applicationStatusAllCountRespDtos, applicationStatusAllInfoRespDtos);
+                applicationsStatusAllListRespDto.setId(id);
+                applicationsStatusAllListRespDto.setKeyword(keyword);
+                return applicationsStatusAllListRespDto;
+        }
 
-    public ApplicationStatusWaitingListRespDto findWaitingList(Integer id, String keyword) {
-        List<ApplicationStatusWaitingCountRespDto> applicationStatusWaitingCountRespDtos = applicationStatusDao
-                .findWaitingCounts(id);
-        List<ApplicationStatusWaitingInfoRespDto> applicationStatusAllInfoRespDtos = applicationStatusDao
-                .findWaitingInfos(id, keyword);
-        ApplicationStatusWaitingListRespDto applicationStautsWaitingListRespDto = new ApplicationStatusWaitingListRespDto(
-                applicationStatusWaitingCountRespDtos, applicationStatusAllInfoRespDtos);
-        applicationStautsWaitingListRespDto.setKeyword(keyword);
-        return applicationStautsWaitingListRespDto;
-    }
+        public ApplicationStatusWaitingListRespDto findWaitingList(Integer id, String keyword) {
+                List<ApplicationStatusWaitingCountRespDto> applicationStatusWaitingCountRespDtos = applicationStatusDao
+                                .findWaitingCounts(id);
+                List<ApplicationStatusWaitingInfoRespDto> applicationStatusAllInfoRespDtos = applicationStatusDao
+                                .findWaitingInfos(id, keyword);
+                ApplicationStatusWaitingListRespDto applicationStautsWaitingListRespDto = new ApplicationStatusWaitingListRespDto(
+                                applicationStatusWaitingCountRespDtos, applicationStatusAllInfoRespDtos);
+                applicationStautsWaitingListRespDto.setId(id);
+                applicationStautsWaitingListRespDto.setKeyword(keyword);
+                return applicationStautsWaitingListRespDto;
+        }
 
-    public ApplicationStatusFinalListRespDto findFinalList(Integer id, String keyword) {
-        List<ApplicationStatusFinalCountRespDto> applicationStatusFinalCountRespDtos = applicationStatusDao
-                .findFinalCounts(id);
-        List<ApplicationStatusFinalInfoRespDto> applicationStatusFinalInfoRespDtos = applicationStatusDao
-                .findFinalInfos(id, keyword);
-        ApplicationStatusFinalListRespDto applicationStautsFinalListRespDto = new ApplicationStatusFinalListRespDto(
-                applicationStatusFinalCountRespDtos, applicationStatusFinalInfoRespDtos);
-        applicationStautsFinalListRespDto.setKeyword(keyword);
-        return applicationStautsFinalListRespDto;
-    }
+        public ApplicationStatusFinalListRespDto findFinalList(Integer id, String keyword) {
+                List<ApplicationStatusFinalCountRespDto> applicationStatusFinalCountRespDtos = applicationStatusDao
+                                .findFinalCounts(id);
+                List<ApplicationStatusFinalInfoRespDto> applicationStatusFinalInfoRespDtos = applicationStatusDao
+                                .findFinalInfos(id, keyword);
+                ApplicationStatusFinalListRespDto applicationStautsFinalListRespDto = new ApplicationStatusFinalListRespDto(
+                                applicationStatusFinalCountRespDtos, applicationStatusFinalInfoRespDtos);
+                applicationStautsFinalListRespDto.setId(id);
+                applicationStautsFinalListRespDto.setKeyword(keyword);
+                return applicationStautsFinalListRespDto;
+        }
 
 }

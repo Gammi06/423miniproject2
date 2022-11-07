@@ -18,6 +18,7 @@ public class RequestsService {
     public RequestsListRespDto findRequests(Integer id, String keyword) {
         List<RequestsInfoRespDto> requestsInfoRespDtos = requestsDao.findRequests(id, keyword);
         RequestsListRespDto requestsListRespDto = new RequestsListRespDto(requestsInfoRespDtos);
+        requestsListRespDto.setId(id);
         requestsListRespDto.setKeyword(keyword);
         return requestsListRespDto;
     }
