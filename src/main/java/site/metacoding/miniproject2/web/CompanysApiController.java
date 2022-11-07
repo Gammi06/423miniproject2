@@ -22,8 +22,6 @@ import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @Slf4j
@@ -92,17 +90,20 @@ public class CompanysApiController {
         return new CMRespDto<>(1, "성공", companysService.findByCompanyIdInfo(id));
     }
 
-    @PostMapping("/s/api/companys/{id}/subscribes/add")
-    public SubcribesInsertRespDto insertSubcribes(@PathVariable Integer id) {
-        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        return companysService.insertSubcribes(new SubcribesInsertReqDto(principal.getId(), id));
-    }
-
-    @DeleteMapping("/s/api/companys/{id}/subscribes")
-    public CMRespDto<?> deleteSubcribes(@PathVariable Integer id) {
-        companysService.deleteSubcribes(id);
-        return new CMRespDto<>(1, "성공", null);
-    }
+    /*
+     * @PostMapping("/companys/{id}/subscribes/add")
+     * public void insertSubcribes(@PathVariable Integer id, @PathVariable
+     * SubcribesInsertReqDto subcribesInsertReqDto) {
+     * SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+     * companysService.insertSubcribes(subcribesInsertReqDto);
+     * }
+     * 
+     * @DeleteMapping("/s/api/companys/{id}/subscribes")
+     * public CMRespDto<?> deleteSubcribes(@PathVariable Integer id) {
+     * companysService.deleteSubcribes(id);
+     * return new CMRespDto<>(1, "성공", null);
+     * }
+     */
 
     /* 승현 작업 종료 */
 

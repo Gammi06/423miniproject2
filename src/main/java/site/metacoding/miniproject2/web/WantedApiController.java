@@ -22,6 +22,7 @@ import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
 import site.metacoding.miniproject2.service.WantedsService;
@@ -51,6 +52,9 @@ public class WantedApiController {
     @GetMapping("/s/api/wanted/like")
     public CMRespDto<?> findAllByLike() {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(principal.getId()));
     }
 
@@ -67,6 +71,9 @@ public class WantedApiController {
     @PostMapping("/s/api/wanted/{id}/like")
     public CMRespDto<?> insertLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         likesInsertReqDto.setWantedId(id);
         likesInsertReqDto.setUserId(principal.getId());
         return new CMRespDto<>(1, "성공", likesService.insert(likesInsertReqDto));
@@ -75,6 +82,9 @@ public class WantedApiController {
     @DeleteMapping("/s/api/wanted/{id}/like")
     public CMRespDto<?> deleteLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         likesInsertReqDto.setUserId(principal.getId());
         likesInsertReqDto.setWantedId(id);
         likesService.delete(likesInsertReqDto);
@@ -83,6 +93,10 @@ public class WantedApiController {
 
     @PostMapping("/s/api/wanted/{id}/apply/add")
     public CMRespDto<?> insertApply(@PathVariable Integer id, @RequestBody ApplyUserReqDto applyUserReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         applyUserReqDto.setWantedId(id);
         return new CMRespDto<>(1, "성공", applyService.insert(applyUserReqDto));
     }
