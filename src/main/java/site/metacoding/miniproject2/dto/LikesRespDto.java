@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
 
 public class LikesRespDto {
     /*
@@ -33,10 +34,15 @@ public class LikesRespDto {
         private Integer userId;
         private Integer wantedId;
 
-        @Builder
-        public LikeInsertRespDto(Integer userId, Integer wantedId) {
-            this.userId = userId;
-            this.wantedId = wantedId;
+        // @Builder
+        // public LikeInsertRespDto(Integer userId, Integer wantedId) {
+        // this.userId = userId;
+        // this.wantedId = wantedId;
+        // }
+
+        public LikeInsertRespDto(LikesInsertReqDto likesInsertReqDto) {
+            this.userId = likesInsertReqDto.getUserId();
+            this.wantedId = likesInsertReqDto.getWantedId();
         }
     }
 }

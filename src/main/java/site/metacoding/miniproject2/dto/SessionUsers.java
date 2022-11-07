@@ -1,5 +1,6 @@
 package site.metacoding.miniproject2.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
@@ -17,4 +18,10 @@ public class SessionUsers {
         this.role = authRespDto.getRole();
     }
 
+    @Builder
+    public SessionUsers(Integer id, String userId, String role) {
+        this.id = id;
+        this.userId = userId;
+        this.role = role;
+    }
 }

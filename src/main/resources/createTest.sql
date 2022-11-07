@@ -1,44 +1,23 @@
-# 미니 프로젝트 2
+USE test9doitdb;
 
-### 의존성 주입
-```sql
-Spring Boot DevTools
-Lombok
-MyBatis Framework
-MariaDB Driver
-Spring Web
-```
-
-### 라이브러리 추가
-```sql
-implementation 'com.auth0:java-jwt:3.10.3'
-testImplementation 'org.springframework.boot:spring-boot-starter-test'
-implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.4'
-testImplementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter-test', version: '2.2.2'
-```
-
-### 테이블 생성 (MariaDB)
-```sql
-USE 9doitdb;
-
-DROP TABLE users;
-DROP TABLE companys;
-DROP TABLE resumes;
-DROP TABLE wanteds;
-DROP TABLE positions_code;
-DROP TABLE skills_code;
-DROP TABLE regions_code;
-DROP TABLE careers_code;
-DROP TABLE application_status;
-DROP TABLE matchings;
-DROP TABLE applys;
-DROP TABLE subscribes;
-DROP TABLE likes;
-DROP TABLE myskills;
-DROP TABLE mycareers;
-DROP TABLE educations;
-DROP TABLE requests;
-DROP TABLE recruits;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS companys;
+DROP TABLE IF EXISTS resumes;
+DROP TABLE IF EXISTS wanteds;
+DROP TABLE IF EXISTS positions_code;
+DROP TABLE IF EXISTS skills_code;
+DROP TABLE IF EXISTS regions_code;
+DROP TABLE IF EXISTS careers_code;
+DROP TABLE IF EXISTS application_status;
+DROP TABLE IF EXISTS matchings;
+DROP TABLE IF EXISTS applys;
+DROP TABLE IF EXISTS subscribes;
+DROP TABLE IF EXISTS likes;
+DROP TABLE IF EXISTS myskills;
+DROP TABLE IF EXISTS mycareers;
+DROP TABLE IF EXISTS educations;
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS recruits;
 
 CREATE TABLE users (
    id INT PRIMARY KEY AUTO_INCREMENT,
@@ -194,10 +173,7 @@ CREATE TABLE recruits (
    wanted_id INT,
    created TIMESTAMP
 );
-```
 
-### 더미데이터 생성 (MariaDB)
-```sql
 INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, position_code_id, mycareer_id, created)
 VALUES('garam1234', '1234', '박가람', 26, '01011112222', 'garam12@naver.com', 3, NULL, NOW());
 INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, position_code_id, mycareer_id, created)
@@ -244,6 +220,9 @@ INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created
 VALUES(10, 3, '프론트 개발자인 한동아입니다.', '한동아씨의 자기소개서, 우리 회사에 입사시키면 일을 무난히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
 INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created)
 VALUES(11, 1, '백앤드 개발자인 신류이수입니다.', '신류이수씨의 자기소개서, 우리 회사에 입사시키면 일을 무난히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
+INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created)
+VALUES(1, 3, '프론트 개발자인 박가람입니다. 2', '박가람씨의 잘 쓰여진 자기소개서, 우리 회사에 입사시키면 일을 열심히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
+
 
 INSERT INTO wanteds(position_code_id, career_code_id, pay, company_id, title, detail, view_count, created, enddate, checked)
 VALUES(1, 1, 5000, 1, '서버 개발자 구인', '이재모 피자 홈페이지를 개발하실 서버 개발자를 구인합니다. 회사에 대한 설명이 쓰여있다.', 0, NOW(), LAST_DAY(NOW()), FALSE);
@@ -562,6 +541,11 @@ VALUES(11, 1, 1 , NOW());
 INSERT INTO application_status(wanted_id, resume_id, state, created)
 VALUES(12, 1, 2 , NOW());
 
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(1, 1, '대기중', NOW());
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(2, 2, '대기중', NOW());
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(1, 7, '대기중', NOW());
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(2, 1, '대기중', NOW());
+
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 1, '마감',  NOW());
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 3, '마감', NOW());
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 13, '모집중', NOW());
@@ -573,6 +557,3 @@ UPDATE users SET role='회사' WHERE id = 6;
 UPDATE users SET role='회사' WHERE id = 7;
 UPDATE users SET role='회사' WHERE id = 8;
 UPDATE users SET role='회사' WHERE id = 3;
-
-COMMIT;
-```
