@@ -1,4 +1,3 @@
-SET REFERENTIAL_INTEGRITY FALSE;
 truncate table users;
 truncate table companys;
 truncate table resumes;
@@ -17,4 +16,3 @@ truncate table mycareers;
 truncate table educations;
 truncate table requests;
 truncate table recruits;
-SET REFERENTIAL_INTEGRITY TRUE;
