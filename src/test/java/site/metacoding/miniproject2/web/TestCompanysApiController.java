@@ -11,6 +11,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,10 +55,18 @@ public class TestCompanysApiController {
     public void findByCompanyIdInfo_test() throws Exception {
 
         // given
+        Integer companyId = 1;
 
         // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.get("/companys/info/" + companyId)
+                        .accept(APPLICATION_JSON)
+                        .session(session));
 
         // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.companyName").value("이재모피자"));
     }
 
     @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
