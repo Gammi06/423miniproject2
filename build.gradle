@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
 	implementation 'com.auth0:java-jwt:3.10.3'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	compileOnly 'org.projectlombok:lombok'
@@ -27,6 +28,9 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.4'
+	testImplementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter-test', version: '2.2.2'
+
 }
 
 tasks.named('test') {

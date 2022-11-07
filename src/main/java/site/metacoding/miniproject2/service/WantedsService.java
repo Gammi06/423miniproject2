@@ -2,8 +2,6 @@ package site.metacoding.miniproject2.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,6 @@ import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.SearchDto;
-import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
@@ -36,7 +33,6 @@ public class WantedsService {
     private final MySkillsDao mySkillsDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
-    private final HttpSession session;
 
     /* 수현 작업 시작 */
     public WantedsSaveRespDto save(WantedsSaveReqDto wantedsSaveReqDto) {
@@ -122,12 +118,8 @@ public class WantedsService {
         return wantedsDao.findAllBySearch(searchDto);
     }
 
-    public List<WantedListRespDto> findAllByLike() {
-        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        if (principal == null) {
-            throw new MyApiException("로그인이 필요합니다");
-        }
-        return wantedsDao.findAllByLike(principal.getId());
+    public List<WantedListRespDto> findAllByLike(Integer id) {
+        return wantedsDao.findAllByLike(id);
     }
 
     /* 승현 작업 종료 */

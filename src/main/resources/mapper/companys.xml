@@ -73,4 +73,14 @@
 		where id=#{id}
 	</update>
 	<!-- 수현 작업완료 -->
+
+	<!-- 승현 작업 시작 -->
+	<select id="findByCompanyIdInfo"
+		resultType="site.metacoding.miniproject2.dto.CompanysRespDto$CompanyDetailRespDto">
+		SELECT c.id, c.company_name, c.address, c.email, c.region_code_name, c.member_count, c.intro
+		FROM companys c WHERE id = #{id}
+	</select>
+
+	<!-- 승현 작업 종료 -->
+
 </mapper>
