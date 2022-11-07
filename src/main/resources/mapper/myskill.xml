@@ -3,9 +3,22 @@
 <mapper namespace="site.metacoding.miniproject2.domain.mySkills.MySkillsDao">
 
 	<insert id="insertMySkills">
-	INSERT INTO myskills(user_id, resume_id, wanted_id, skills_code_id) 
-	VALUES (#{userId},#{resumeId},#{wantedId},#{skillsCodeId})
+		INSERT INTO myskills(user_id, resume_id, wanted_id, skills_code_id) 
+		VALUES (#{userId},#{resumeId},#{wantedId},#{skillsCodeId})
 	</insert>
+
+	<!-- 연지 작업 시작함 -->
+	<insert id="insertByResumeId">
+		INSERT INTO myskills(user_id, resume_id, skills_code_id)
+		VALUES (#{userId}, #{resumeId}, #{skillsCodeId})
+	</insert>
+
+	<select id="findAllByResumeId"
+		resultType="site.metacoding.miniproject2.dto.MySkillsRespDto$MySkillsResumeRespDto">
+		SELECT m.user_id, m.skills_code_id, s.name skillsCodeName
+		FROM myskills m, skills_code s WHERE resume_id = #{resumeId}
+	</select>
+	<!-- 연지 작업 종료함 -->
 
 	<!-- 승현 작업 시작 -->
 
@@ -17,6 +30,6 @@
 		ON sc.id = ms.skills_code_id
 		WHERE ms.wanted_id = #{id}
 	</select>
-
 	<!-- 승현 작업 종료 -->
+
 </mapper>

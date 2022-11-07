@@ -1,6 +1,7 @@
 package site.metacoding.miniproject2.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.SessionCompanyRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
+import site.metacoding.miniproject2.util.SHA256;
 
 @RequiredArgsConstructor
 @Service
@@ -88,6 +90,16 @@ public class UsersService {
     }
 
     // 서현 작업
+    public Optional<AuthRespDto> findByUserIdOP(LoginReqDto loginReqDto) {
+        try {
+            Optional<AuthRespDto> usersOP = Optional.of(
+                    usersDao.findByUserId(loginReqDto.getUserId()));
+            return usersOP;
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
     public InfoAllRespDto findAllInfo(Integer id) {
         List<InfoRespDto> infoRespDtos = usersDao.findInfo(id);
         List<InfoCountRespDto> infoCountRespDtos = usersDao.findInfoCounts(id);

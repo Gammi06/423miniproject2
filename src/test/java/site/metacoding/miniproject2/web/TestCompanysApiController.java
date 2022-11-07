@@ -1,5 +1,7 @@
 package site.metacoding.miniproject2.web;
 
+import java.net.http.HttpResponse;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+import site.metacoding.miniproject2.domain.companys.CompanysDao;
+import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
-import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 
 @Slf4j
@@ -35,8 +38,16 @@ public class TestCompanysApiController {
     // header json
     private static final String APPLICATION_JSON = "application/json; charset=utf-8";
 
+    private static final Object CompanysInsertReqDto = null;
+
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    private CompanysDao companysDao;
+
+    @Autowired
+    private UsersDao usersDao;
 
     @Autowired
     private ObjectMapper om;
