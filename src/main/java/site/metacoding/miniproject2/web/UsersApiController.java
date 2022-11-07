@@ -26,7 +26,7 @@ public class UsersApiController {
     private final HttpSession session;
 
     // 성유 작업
-    @PostMapping("/s/login")
+    @PostMapping("/login")
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
