@@ -14,8 +14,8 @@ public class MyCareersService {
         myCareersDao.findAll();
     }
 
-    public void findById() {
-        myCareersDao.findById(null);
+    public void findById(Integer id) {
+        myCareersDao.findById(id);
     }
 
     public void insert() {

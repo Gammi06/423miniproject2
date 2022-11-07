@@ -12,7 +12,10 @@ resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersEditRespD
 
 </select>
 
-<insert id="insert"></insert>
+<insert id="insert">
+    INSERT INTO mycareers(user_id, resume_id, startdate, enddate, company_name)
+    VALUES(#{userId}, #{resumeId}, NOW(), MAKEDATE(#{startdate}, #{enddate}), #{companyName})
+</insert>
 
 
 </mapper>
