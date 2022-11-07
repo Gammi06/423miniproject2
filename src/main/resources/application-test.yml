@@ -1,16 +1,21 @@
 server:
-  port: 8000
+  port: 8001
   servlet:
     encoding:
       charset: utf-8
 
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3306/9doitdb
+    url: jdbc:mariadb://localhost:3306/test9doitdb
     driver-class-name: org.mariadb.jdbc.Driver
-    username: 9doit
+    username: test9doit
     password: 423206
+
+    output:
+    ansi:
+      enabled: always
 
 logging:
   level:
     '[org.springframework.boot.web]': INFO
+    '[site.metacoding.miniproject2]': DEBUG
