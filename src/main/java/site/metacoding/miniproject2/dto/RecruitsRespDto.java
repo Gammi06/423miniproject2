@@ -16,8 +16,14 @@ public class RecruitsRespDto {
         private Integer id;
         private Integer companysId;
         private String wantedTitle;
-        private Timestamp endDate;
+        private Timestamp created;
         private String state;
+
+        public RecruitsApplyManageRespDto(SessionUsers sessionUsers) {
+            this.companysId = sessionUsers.getId(); //companysId 어떻게가져오지..?
+        }
+
+        
     }
 
     @Setter

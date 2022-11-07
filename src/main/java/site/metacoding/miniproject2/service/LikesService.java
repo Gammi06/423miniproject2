@@ -38,6 +38,9 @@ public class LikesService {
     public LikeInsertRespDto insert(LikesInsertReqDto likesInsertReqDto) {
 
         // 중복 체크
+        if (wantedsDao.findById(likesInsertReqDto.getWantedId()) == null) {
+            throw new MyApiException("공고가 없습니다.");
+        }
         if (likesDao.findByLike(likesInsertReqDto) != null) {
             throw new MyApiException("해당 공고에 이미 좋아요를 했습니다.");
         }

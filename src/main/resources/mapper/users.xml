@@ -10,9 +10,9 @@
 	</select>
 
 	<select id="findByCompanyId" resultType="site.metacoding.miniproject2.dto.UsersRespDto$SessionCompanyRespDto">
-		select id FROM companys where users_id = #{id}
+		select id as companyId FROM companys where users_id = #{id}
 	</select>
-	
+
 	<select id="findByUserId"
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$AuthRespDto">
 		SELECT id, user_id, user_password, role, NULL AS companyId FROM users WHERE user_id = #{userId}
@@ -60,7 +60,7 @@
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoRespDto">
 		SELECT us.id, us.user_id, us.user_password,
 		us.user_name, US.AGE,
-		us.phone_number, us.email, us.photo,
+		us.phone_number, us.email,
 		us.position_code_id,
 		us.mycareer_id, us.created, pc.name positionCodeName
 		FROM users us
@@ -93,7 +93,7 @@
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$RecommendByPositionRespDto">
 		SELECT @ROWNUM :=@ROWNUM+1 AS no, comrec.*
 		FROM (SELECT com.id, com.company_name, com.address, com.email,
-		com.company_number, com.photo,
+		com.company_number, 
 		com.region_code_name, com.intro,
 		com.years, com.member_count, com.created,
 		wan.id wanted_id,

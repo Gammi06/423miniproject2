@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
+import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.SearchDto;
@@ -19,6 +20,8 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCareersRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsSaveRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsUpdateRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
 @Slf4j
@@ -32,13 +35,15 @@ public class WantedsService {
     private final WantedsDao wantedsDao;
 
     /* 수현 작업 시작 */
-    public void save(WantedsSaveReqDto wantedsSaveReqDto) {
-        // SessionUser에서 companysId 가져올것
+    public WantedsSaveRespDto save(WantedsSaveReqDto wantedsSaveReqDto) {
         wantedsDao.save(wantedsSaveReqDto);
+        return new WantedsSaveRespDto(wantedsSaveReqDto);
+
     }
 
-    public void update(WantedsUpdateReqDto wantedsUpdateReqDto) {
+    public WantedsUpdateRespDto update(WantedsUpdateReqDto wantedsUpdateReqDto) {
         wantedsDao.update(wantedsUpdateReqDto);
+        return new WantedsUpdateRespDto(wantedsUpdateReqDto);
     }
 
     public void deleteById(Integer id) {
