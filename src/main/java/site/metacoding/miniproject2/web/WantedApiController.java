@@ -92,6 +92,7 @@ public class WantedApiController {
     /* 수현 작업 시작 */
     @PostMapping("/s/api/wanted/{companysId}/add")
     public CMRespDto<?> save(@PathVariable Integer companysId, @RequestBody WantedsSaveReqDto wantedsSaveReqDto) {
+        wantedsSaveReqDto.setCompanysId(companysId);
         return new CMRespDto<>(1, "성공", wantedsService.save(wantedsSaveReqDto));
     }
 
