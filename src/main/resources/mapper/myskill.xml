@@ -17,6 +17,5 @@
 		ON sc.id = ms.skills_code_id
 		WHERE ms.wanted_id = #{id}
 	</select>
-
 	<!-- 승현 작업 종료 -->
 </mapper>
