@@ -89,16 +89,16 @@ public class WantedApiController {
     /* 수현 작업 시작 */
     @PostMapping("/s/api/wanted/{companysId}/add")
     public CMRespDto<?> save(@PathVariable Integer companysId, @RequestBody WantedsSaveReqDto wantedsSaveReqDto) {
-        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
-        wantedsSaveReqDto.setCompanysId(sessionUsers.getCompanyId());
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        wantedsSaveReqDto.setCompanysId(principal.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.save(wantedsSaveReqDto));
     }
 
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
-        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         wantedsUpdateReqDto.setId(wantedId);
-        wantedsUpdateReqDto.setCompanysId(sessionUsers.getCompanyId());
+        wantedsUpdateReqDto.setCompanysId(principal.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 

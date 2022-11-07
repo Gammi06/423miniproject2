@@ -30,9 +30,6 @@ public class UsersApiController {
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
-        System.out.println(sessionUsers.getUserId());
-        System.out.println(sessionUsers.getId());
-        System.out.println(sessionUsers.getRole());
         return new CMRespDto<>(1, "로그인 성공", sessionUsers.getUserId());
 
     }
@@ -64,6 +61,10 @@ public class UsersApiController {
     // 서현 작업
     @GetMapping("/s/mypage/{id}")
     public CMRespDto<?> findAllInfo(@PathVariable Integer id) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() != id) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
         return new CMRespDto<>(1, "성공", usersService.findAllInfo(id));
     }
     // 서현 작업 종료

@@ -31,8 +31,8 @@ public class RecruitsApiController {
 
     @GetMapping("/s/recruits/{companysId}/info/recommends")
     public CMRespDto<?> findRecommend(@PathVariable Integer companysId) {
-        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
-        if (sessionUsers.getCompanyId().equals(companysId)) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getCompanyId().equals(companysId)) {
             return new CMRespDto<>(1, "성공", recruitsService.findRecommend(companysId));
         } else {
             return new CMRespDto<>(-1, "올바른 접근이 아닙니다", null);
@@ -41,8 +41,8 @@ public class RecruitsApiController {
 
     @GetMapping("/s/recruits/{companysId}/info/positions")
     public CMRespDto<?> findRecommendByPosition(@PathVariable Integer companysId, Integer positionsCodeId) {
-        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
-        if (sessionUsers.getCompanyId().equals(companysId)) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getCompanyId().equals(companysId)) {
             if (positionsCodeId != null) {
                 return new CMRespDto<>(1, "성공", recruitsService.findRecommendByPosition(companysId, positionsCodeId));
             } else {
