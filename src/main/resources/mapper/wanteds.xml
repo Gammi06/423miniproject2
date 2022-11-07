@@ -179,7 +179,7 @@
 		LEFT OUTER JOIN likes l
 		ON l.wanted_id= w.id
 		WHERE l.user_id = #{id}
-		</select>
+	</select>
 
 	<!--지원작업!-->
 

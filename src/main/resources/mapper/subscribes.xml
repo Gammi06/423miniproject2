@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.metacoding.miniproject2.domain.subscribes.subscribesDao">
+
+    <!-- 승현 작업함 -->
+
+    <select id="findBySub"
+        resultType="site.metacoding.miniproject2.dto.SubribesRespDto$SubribesFindByIdRespDto">
+        SELECT id, user_id, company_id, created FROM subscribes WHERE user_id = #{userId} AND company_id = #{companyId}
+    </select>
+
+	<insert id="insertSub">
+		INSERT INTO subscribes(user_id, company_id, created) VALUES(#{userId}, #{companyId}, NOW())
+	</insert>
+
+	<delete id="deleteById">
+		DELETE FROM subscribes WHERE id = #{id}
+	</delete>
+
+	<!-- 승현 작업 종료-->
+
+</mapper>
