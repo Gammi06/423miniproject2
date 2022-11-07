@@ -27,7 +27,7 @@ public interface CompanysDao {
 
     public CompanysDeleteRespDto findWantedCompanys(Integer id);// 회사할때 공고 같이 삭제
 
-    public List <String> deleteWantedTitleCompanys (Integer id);// 회사할때 공고 같이 삭제
+    public List<String> deleteWantedTitleCompanys(Integer id);// 회사할때 공고 같이 삭제
 
     public CompanysTitleReqDto findByIdCompanyId(Integer id);
 
@@ -38,4 +38,8 @@ public interface CompanysDao {
     public CompanysInsertRespDto findById(Integer id);
 
     public void updateCompanysIntro(CompanysUpdateIntroReqDto companysUpdateIntroReqDto);
+
+    // 승현 작업 시작
+    public CompanyDetailRespDto findByCompanyIdInfo(Integer id);
+    // 승현 작업 종료
 }

@@ -2,8 +2,6 @@ package site.metacoding.miniproject2.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +12,6 @@ import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeFindByIdRespDto;
 import site.metacoding.miniproject2.dto.LikesRespDto.LikeInsertRespDto;
-import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
@@ -25,7 +22,6 @@ public class LikesService {
 
     private final WantedsDao wantedsDao;
     private final LikesDao likesDao;
-    private final HttpSession session;
 
     /* 지원 작업 */
     public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
@@ -39,8 +35,6 @@ public class LikesService {
     }
 
     public LikeInsertRespDto insert(LikesInsertReqDto likesInsertReqDto) {
-        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        likesInsertReqDto.setUserId(principal.getId());
 
         // 중복 체크
         if (likesDao.findByLike(likesInsertReqDto) != null) {
@@ -48,17 +42,11 @@ public class LikesService {
         }
 
         likesDao.insert(likesInsertReqDto);
-        return LikeInsertRespDto.builder()
-                .userId(likesInsertReqDto
-                        .getUserId())
-                .wantedId(likesInsertReqDto.getWantedId())
-                .build();
+        return new LikeInsertRespDto(likesInsertReqDto);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
     public void delete(LikesInsertReqDto likesInsertReqDto) {
-        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        likesInsertReqDto.setUserId(principal.getId());
 
         // 중복 체크
         if (likesDao.findByLike(likesInsertReqDto) == null) {

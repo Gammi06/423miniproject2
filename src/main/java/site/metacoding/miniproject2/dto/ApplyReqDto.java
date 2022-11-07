@@ -1,7 +1,8 @@
 package site.metacoding.miniproject2.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class ApplyReqDto {
@@ -9,7 +10,10 @@ public class ApplyReqDto {
     /* >>>> 승현 작업함 <<<< */
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ApplyUserReqDto {
+        private Integer userId;
         private Integer wantedId;
         private Integer resumeId;
     }
@@ -20,11 +24,11 @@ public class ApplyReqDto {
         private Integer userId;
         private Integer wantedId;
 
-        @Builder
-        public ApplyFindReqDto(Integer userId, Integer wantedId) {
-            this.userId = userId;
-            this.wantedId = wantedId;
+        public ApplyFindReqDto(ApplyUserReqDto applyUserReqDto) {
+            this.userId = applyUserReqDto.getUserId();
+            this.wantedId = applyUserReqDto.getWantedId();
         }
+
     }
 
     /* >>>> <<<< */
