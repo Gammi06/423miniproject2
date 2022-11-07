@@ -93,16 +93,6 @@ public class UsersRespDto {
 
     }
 
-    // @Getter
-    // @Setter
-    // public static class ProfileEditRespDto {
-    // // 포지션 경력 스킬 경력2 학력 소개글
-    // private Integer id;
-    // private Integer positionCodeId; // 포지션
-    // private Integer mycareerId; // 경력2
-    // private String intro; // 소개글
-    // }
-
     @Getter
     @Setter
     public static class ProfileEditAllRespDto {

@@ -5,7 +5,6 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.domain.users.Users;
 import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersEditRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
@@ -42,15 +41,6 @@ public class UsersReqDto {
         private String userName;
         private String email;
         private String phoneNumber;
-
-        public Users toEntity() {
-            return Users.builder()
-                    .id(id)
-                    .userName(userName)
-                    .email(email)
-                    .phoneNumber(phoneNumber)
-                    .build();
-        }
     }
 
     @Getter

@@ -33,6 +33,7 @@ public class LikesService {
     public LikeFindByIdRespDto findById(LikesInsertReqDto likesInsertReqDto) {
         return likesDao.findByLike(likesInsertReqDto);
     }
+    /* 지원 작업종료 */
 
     public LikeInsertRespDto insert(LikesInsertReqDto likesInsertReqDto) {
 

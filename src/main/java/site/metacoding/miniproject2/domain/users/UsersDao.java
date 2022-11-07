@@ -20,7 +20,7 @@ public interface UsersDao {
     // 성유 작업 시작
     public AuthRespDto findByUserId(String usersId); // 로그인
 
-    public SessionCompanyRespDto findByCompanyId(Integer id); // 세션의 컴퍼니id
+    public SessionCompanyRespDto findByCompanyId(Integer id);
 
     public JoinRespDto findAllId(Integer id);
 

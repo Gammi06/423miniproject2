@@ -14,5 +14,4 @@ public interface MySkillsDao {
     /* 승현 작업 시작 */
     public List<WantedGetSkillRespDto> findAll(Integer wantedId);
     /* 승현 작업 종료 */
-
 }
