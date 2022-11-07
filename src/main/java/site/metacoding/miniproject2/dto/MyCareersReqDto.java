@@ -13,6 +13,7 @@ public class MyCareersReqDto {
     public static class MyCareersResumeReqDto { // 이력서 작성 내 경력
 
         private Integer userId;
+        private Integer resumeId; // resumeId 추가됨 : 연지
         private Timestamp startdate;
         private Timestamp enddate;
         private String companyName;

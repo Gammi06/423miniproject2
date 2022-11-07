@@ -10,6 +10,7 @@ import site.metacoding.miniproject2.domain.myCareers.MyCareersDao;
 import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
 import site.metacoding.miniproject2.domain.resumes.ResumesDao;
 import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsResumeRespDto;
+import site.metacoding.miniproject2.dto.MyCareersReqDto.MyCareersResumeReqDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersResumeRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.MySkillsResumeRespDto;
 import site.metacoding.miniproject2.dto.ResumesReqDto.ResumeUpdateReqDto;
@@ -38,7 +39,7 @@ public class ResumesService {
         // 3-1. 경력 채워넣기
         // 3-1-1. 경력 Dao에 메소드 선언하기
         // 3-1-2. mapper 생성하기
-        // 3-1-3. ResumeService에서 dao에 만든 메서드 호출하기
+        // 3-1-3. ResumeService에서 경력 dao에 만든 메서드 호출하기
         // 3-1-4. 호출한 값을 resumeDetailRespDto에 넣기
         // 3-1-5. 포스트맨으로 테스트하기
         List<MyCareersResumeRespDto> myCareers = myCareersDao.findAllByResumeId(id);
@@ -48,7 +49,7 @@ public class ResumesService {
         // 4-1. 교육 채워넣기
         // 4-1-1. 교육 Dao에 메소드 선언하기
         // 4-1-2. mapper 생성하기
-        // 4-1-3. ResumeService에서 dao에 만든 메서드 호출하기
+        // 4-1-3. ResumeService에서 교육 dao에 만든 메서드 호출하기
         // 4-1-4. 호출한 값을 resumeDetailRespDto에 넣기
         // 4-1-5. 포스트맨으로 테스트하기
         List<EducationsResumeRespDto> myEducations = educationsDao.findAllByResumeId(id);
@@ -58,7 +59,7 @@ public class ResumesService {
         // 5-1. 스킬 채워넣기
         // 5-1-1. 스킬 Dao에 메소드 선언하기
         // 5-1-2. mapper 생성하기
-        // 5-1-3. ResumeService에서 dao에 만든 메서드 호출하기
+        // 5-1-3. ResumeService에서 스킬 dao에 만든 메서드 호출하기
         // 5-1-4. 호출한 값을 resumeDetailRespDto에 넣기
         // 5-1-5. 포스트맨으로 테스트하기
         List<MySkillsResumeRespDto> mySkills = mySkillsDao.findAllByResumeId(id);
@@ -68,16 +69,22 @@ public class ResumesService {
     }
     /* 연지 작업 종료 */
 
-    // public ResumeWriteReqDto insert(ResumeWriteReqDto resumeWriteReqDto) {
+    public ResumeWriteReqDto insert(ResumeWriteReqDto resumeWriteReqDto) {
+        // 1. Dao(기능)에서 기능메서드 가져온다
+        // 2. List들을 제외한 값들을 Dto에 담아온다(쿼리)
+        ResumeWriteReqDto resumeWrite = resumesDao.insert(resumeWriteReqDto);
+        // 3. ListDto값 채워넣기
+        // 3-1. 경력 채워넣기
+        // 3-1-1. 경력 Dao에 메소드 선언하기
+        // 3-1-2. mapper 생성하기
+        // 3-1-3. ResumeService에서 경력 dao에 만든 메서드 호출하기
+        // 3-1-4. 호출한 값을 resumeWriteReqDto에 넣기
+        // 3-1-5. 포스트맨으로 테스트하기
+        List<MyCareersResumeReqDto> myCareers = myCareersDao.insertByResumeId(resumeId);
+        resumeWriteReqDto.getMySkills();
 
-    // ResumeWriteReqDto resumeWriteReqDto = resumesDao.insert(resumeWriteReqDto);
-
-    // List<MyCareersResumeRespDto> myCareers = myCareersDao.findAllByResumeId(id);
-    // resumeDetailRespDto.setMyCareers(myCareers);
-
-    // return resumeWriteReqDto;
-    // }
-    // insert 기능 구현중 ... ...
+        return resumeWrite;
+    }
 
     public ResumeListRespDto findByUserId(Integer userId) {
         return resumesDao.findByUserId(userId);
