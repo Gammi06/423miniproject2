@@ -30,21 +30,10 @@ public class UsersService {
     private final UsersDao usersDao;
 
     public JoinRespDto insert(JoinReqDto joinReqDto) {
-        Users users = joinReqDto.toEntity();
-        usersDao.insert(users);
-        return new JoinRespDto(users);
+        JoinRespDto joinRespDto = usersDao.findAllId(joinReqDto.getId());
+        usersDao.insert(joinReqDto);
+        return joinRespDto;
     }
-
-    // public JoinRespDto insert(JoinReqDto joinReqDto) {
-    // Optional<AuthReqDto> usersPS =
-    // usersDao.findAllUserId(joinReqDto.getUserId());
-    // if (usersPS.isPresent()) {
-    // throw new RuntimeException("중복된 아이디 입니다.");
-    // }
-    // Users users = joinReqDto.toEntity();
-    // usersDao.insert(users);
-    // return new JoinRespDto(users);
-    // }
 
     public SessionUsers findByUserId(LoginReqDto loginReqDto) {
         AuthRespDto userPS = usersDao.findByUserId(loginReqDto.getUserId());

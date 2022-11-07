@@ -2,6 +2,7 @@ package site.metacoding.miniproject2.domain.mySkills;
 
 import java.util.List;
 
+import site.metacoding.miniproject2.dto.MySkillsRespDto.UsersgGetSkillRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedGetSkillRespDto;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedsSkillsRespDto;
 
@@ -14,4 +15,8 @@ public interface MySkillsDao {
     /* 승현 작업 시작 */
     public List<WantedGetSkillRespDto> findAll(Integer wantedId);
     /* 승현 작업 종료 */
+
+    /* 성유 작업 시작 */
+    public List<UsersgGetSkillRespDto> findAllUsers(Integer usesId);
+    /* 성유 작업 종료 */
 }

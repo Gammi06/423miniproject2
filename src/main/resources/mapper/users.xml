@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.users.UsersDao">
 	<!-- 성유 작업 시작 -->
+
+	<select id="findAllId"
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$JoinRespDto">
+		SELECT id, user_id, user_password, user_name, age, phone_number, email
+		FROM users WHERE id = #{id}
+	</select>
+	
 	<select id="findByUserId"
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$AuthRespDto">
 		SELECT id, user_id, user_password FROM users WHERE user_id = #{userId}
@@ -40,9 +47,9 @@
 	<update id="updateProfile"></update>
 
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="userId">
-		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{photo}, #{positionCodeId}, #{companyId}, #{mycareerId}, NOW())
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, position_code_id, mycareer_id, created)
+		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{positionCodeId}, #{mycareerId}, NOW())
 	</insert>
 	<!-- 성유 작업 완료 -->
 

@@ -3,10 +3,12 @@ package site.metacoding.miniproject2.domain.users;
 import java.util.List;
 
 import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
+import site.metacoding.miniproject2.dto.UsersReqDto.JoinReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.PasswordEditReqDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.JoinRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
@@ -16,6 +18,8 @@ public interface UsersDao {
 
     // 성유 작업 시작
     public AuthRespDto findByUserId(String usersId); // 로그인
+
+    public JoinRespDto findAllId(Integer id);
 
     public UsersInfoRespDto findById(Integer id);
 
@@ -27,9 +31,7 @@ public interface UsersDao {
 
     public void updateProfile();// 프로필 수정
 
-    // public List<AuthReqDto> findAllUserId(String userId);
-
-    public void insert(Users users);
+    public void insert(JoinReqDto joinReqDto);
     // 성유 작업 종료
 
     // 서현 작업 시작

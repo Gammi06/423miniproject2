@@ -26,11 +26,6 @@ public class UsersApiController {
     private final HttpSession session;
 
     // 성유 작업
-    @PostMapping("/join")
-    public CMRespDto<?> join(@RequestBody JoinReqDto joinReqDto) { // 회원가입
-        return new CMRespDto<>(1, "ok", usersService.insert(joinReqDto));
-    }
-
     @PostMapping("/s/login")
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
@@ -48,6 +43,14 @@ public class UsersApiController {
     public CMRespDto<?> updatePassword(@PathVariable Integer id,
             @RequestBody PasswordEditReqDto passwordEditReqDto) {
         return new CMRespDto<>(1, "ok", usersService.updatePassword(passwordEditReqDto));
+    }
+
+    // @PutMapping("/s/api/{id}/edit/profile")
+
+    @PostMapping("/join")
+    public CMRespDto<?> join(@RequestBody JoinReqDto joinReqDto) {
+        System.out.println("나 찍힘????" + usersService.insert(joinReqDto));
+        return new CMRespDto<>(1, "ok", usersService.insert(joinReqDto));
     }
 
     @DeleteMapping("/s/{id}/delete")
