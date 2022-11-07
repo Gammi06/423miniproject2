@@ -81,9 +81,9 @@ public class CompanysApiController {
     @PutMapping("/s/api/companys/{id}/edit/intro")
     public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
             @RequestBody CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        AuthRespDto sessionUsers = (AuthRespDto) session.getAttribute("principal");
+        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("principal");
         if (sessionUsers.getCompanyId().equals(id)) {
-            companysUpdateIntroReqDto.setId(sessionUsers.getCompanyId());
+            companysUpdateIntroReqDto.setId(id);
             return new CMRespDto<>(1, "성공", companysService.updateCompanysIntro(companysUpdateIntroReqDto));
         } else {
             return new CMRespDto<>(-1, "수정에 실패했습니다", null);

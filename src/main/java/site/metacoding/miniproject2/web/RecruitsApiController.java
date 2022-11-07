@@ -21,8 +21,8 @@ public class RecruitsApiController {
 
     @GetMapping("/s/recruits/{companysId}/info/companys")
     public CMRespDto<?> findApplyManage(@PathVariable Integer companysId) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("principal");
-        if (sessionUsers.getCompanyId().equals(companysId)) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getCompanyId().equals(companysId)) {
             return new CMRespDto<>(1, "성공", recruitsService.findApplyManage(companysId));
         } else {
             return new CMRespDto<>(-1, "올바른 접근이 아닙니다", null);
