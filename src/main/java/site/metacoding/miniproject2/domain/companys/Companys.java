@@ -15,7 +15,6 @@ public class Companys {
     private String address;
     private String email;
     private String companyNumber;
-    private String photo;
     private String regionCodeName;
     private String intro;
     private Integer years;
@@ -32,7 +31,6 @@ public class Companys {
         this.address = address;
         this.email = email;
         this.companyNumber = companyNumber;
-        this.photo = photo;
         this.regionCodeName = regionCodeName;
         this.intro = intro;
         this.years = years;

@@ -22,7 +22,6 @@ import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @Slf4j
@@ -37,7 +36,7 @@ public class CompanysApiController {
     // 회사가입
     @PostMapping("/s/api/companys/{id}/add")
     public CMRespDto<?> insert(@PathVariable Integer id, @RequestBody CompanysInsertReqDto companysInsertReqDto) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         companysInsertReqDto.setUsersId(id);
         CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
         return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
@@ -54,7 +53,7 @@ public class CompanysApiController {
     @PutMapping("/s/api/companys/{id}")
     public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(id, companysUpdateReqDto));
     }
 
@@ -68,7 +67,7 @@ public class CompanysApiController {
     /* 구독페이지 */
     @GetMapping("/s/mypage/{userId}/subscribes")
     public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer userId) {// userId는 테스트할려고 넣음
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(userId);
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }// 로그인 해서 테스트 돌리기

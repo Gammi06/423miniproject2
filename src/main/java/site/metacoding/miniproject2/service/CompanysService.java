@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,6 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
-import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
 @Slf4j
@@ -109,18 +107,6 @@ public class CompanysService {
     /* 수현 작업종료 */
 
     /* 승현 작업 시작 */
-
-    public void insertSubcribes(SubcribesInsertReqDto subcribesInsertReqDto) {
-        subscribesDao.insertSub(subcribesInsertReqDto);
-    }
-
-    @Transactional(rollbackFor = RuntimeException.class)
-    public void deleteSubcribes(Integer id) {
-        if (subscribesDao.findById(id) == null) {
-            throw new MyApiException("해당 기업을 구독하지 않았습니다.");
-        }
-        subscribesDao.deleteById(id);
-    }
 
     public CompanyDetailRespDto findByCompanyIdInfo(Integer id) {
         CompanyDetailRespDto companyDetailRespDto = companysDao.findByCompanyIdInfo(id);
