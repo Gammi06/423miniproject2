@@ -62,7 +62,7 @@ public class CompanysApiController {
     // 회사 정보 삭제 /인증 필요. -> 공고 삭제
     @DeleteMapping("/s/api/companys/{id}/delete")
     public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
-        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
         return new CMRespDto<>(1, "회사정보삭제", companysService.deleteCompanys(id));
     }
 
