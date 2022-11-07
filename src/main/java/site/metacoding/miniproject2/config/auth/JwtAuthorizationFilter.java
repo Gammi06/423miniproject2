@@ -47,15 +47,16 @@ public class JwtAuthorizationFilter implements Filter {
             DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("구해줘용")).build().verify(jwtToken);
             Integer id = decodedJWT.getClaim("id").asInt();
             String userId = decodedJWT.getClaim("userId").asString();
-            AuthRespDto authRespDto = new AuthRespDto();
-            authRespDto.setId(id);
-            authRespDto.setUserId(userId);
-            SessionUsers sessionUsers = new SessionUsers(authRespDto);
-            HttpSession session = req.getSession();
-            session.setAttribute("sessionUsers", sessionUsers);
             log.debug("디버그 : userId : " + userId);
-        } catch (Exception e) {
+            AuthRespDto authRespDto = new AuthRespDto(id, userId);
+            SessionUsers jwtUsers = new SessionUsers(authRespDto);
+            HttpSession session = req.getSession();
+            session.setAttribute("jwtUsers", jwtUsers);
+            log.debug("디버그 : id : " + jwtUsers.getId());
+            log.debug("디버그 : userId : " + jwtUsers.getUserId());
+        } catch (RuntimeException e) {
             customResponse("토큰 검증 실패", resp);
+            return;
         }
 
         chain.doFilter(req, resp);

@@ -45,6 +45,10 @@ public class UsersApiController {
     // 서현 작업
     @GetMapping("/s/mypage/{id}")
     public CMRespDto<?> findAllInfo(@PathVariable Integer id) {
+        SessionUsers jwtUsers = (SessionUsers) session.getAttribute("jwtUsers");
+        if (jwtUsers.getId() != id) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
         return new CMRespDto<>(1, "성공", usersService.findAllInfo(id));
     }
     // 서현 작업 종료

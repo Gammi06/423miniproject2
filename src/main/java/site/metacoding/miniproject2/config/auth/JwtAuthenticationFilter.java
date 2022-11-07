@@ -73,7 +73,7 @@ public class JwtAuthenticationFilter implements Filter {
                 .withSubject("구해줘용")
                 .withExpiresAt(expire)
                 .withClaim("id", usersPS.getId())
-                .withClaim("username", usersPS.getUserId())
+                .withClaim("userId", usersPS.getUserId())
                 .sign(Algorithm.HMAC512("구해줘용"));
         log.debug("디버그 : " + jwtToken);
 

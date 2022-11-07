@@ -15,6 +15,7 @@ public class UsersRespDto {
 
     /* >>>>> 성유 작업함 <<<<< */
 
+    @NoArgsConstructor // 서현 추가함
     @Getter
     @Setter
     public static class AuthRespDto {
@@ -22,6 +23,13 @@ public class UsersRespDto {
         private String userId;
         private String userPassword; // 비밀번호 숨기기
         private String role;
+
+        // 서현 추가함
+        public AuthRespDto(Integer id, String userId) {
+            this.id = id;
+            this.userId = userId;
+        }
+        // 서현 추가함
     }
 
     @Getter

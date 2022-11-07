@@ -56,7 +56,6 @@ public class TestRequestsApiController {
 
         // given
         Integer id = 1;
-        String keyword = null;
 
         // when
         ResultActions resultActions = mvc.perform(
