@@ -2,34 +2,39 @@ package site.metacoding.miniproject2.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.validation.FieldError;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.miniproject2.domain.applys.ApplysDao;
+import lombok.extern.slf4j.Slf4j;
+import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
-import site.metacoding.miniproject2.domain.likes.LikesDao;
+import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
-import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.ApplyRespDto.ApplyFindByIdRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
-import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
+import site.metacoding.miniproject2.dto.SearchDto;
+import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCareersRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class WantedsService {
 
+    private final PositionsCodeDao positionsCodeDao;
+    private final MySkillsDao mySkillsDao;
     private final CompanysDao companysDao;
     private final WantedsDao wantedsDao;
-    private final ApplysDao applysDao;
-    private final LikesDao likesDao;
+    private final HttpSession session;
 
     /* 수현 작업 시작 */
     public void save(WantedsSaveReqDto wantedsSaveReqDto) {
@@ -72,22 +77,25 @@ public class WantedsService {
     /* 수현 작업 종료 */
 
     /* 승현 작업 시작 */
-    public List<WantedListRespDto> findAll(SearchDto searchDto) {
-        if (searchDto == null) {
-            List<WantedListRespDto> wantedList = wantedsDao.findAll();
-            return wantedList;
-        }
-        List<WantedListRespDto> wantedList = wantedsDao.findAllOrdered(searchDto);
-        return wantedList;
+
+    public List<WantedListRespDto> findAll() {
+        return wantedsDao.findAll();
     }
 
     public WantedDetailRespDto findById(Integer id) {
         WantedDetailRespDto wantedPS = wantedsDao.findById(id);
+        if (wantedPS == null) {
+            throw new MyApiException("해당 아이디의 공고가 없습니다.");
+        }
+        wantedsDao.updateViewCount(id);
+        wantedPS.setMySkills(mySkillsDao.findAll(id));
         return wantedPS;
     }
 
     public List<WantedListRespDto> findAllByCompanyId(Integer companyId) {
-        // company의 findById 추가하기
+        if (companysDao.findByIdToDetail(companyId) == null) {
+            throw new MyApiException("해당 아이디의 기업(" + companyId + ")이 존재하지 않습니다.");
+        }
         List<WantedListRespDto> wantedList = wantedsDao.findAllByCompanyId(companyId);
         return wantedList;
     }
@@ -96,23 +104,24 @@ public class WantedsService {
         return companysDao.findByIdToDetail(id);
     }
 
-    public List<WantedListRespDto> findAllByPositionCodeName(String positionCodeId) {
-        // position의 findById 추가하기
-        // id를 string으로 바꾸는 코드 추가하기
-        String positionCodeName = null;
-        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeName(positionCodeName);
+    public List<WantedListRespDto> findAllByPositionCodeId(Integer id) {
+        if (positionsCodeDao.findById(id) == null) {
+            throw new MyApiException("해당 포지션(" + id + ")이 존재하지 않습니다.");
+        }
+        List<WantedListRespDto> wantedList = wantedsDao.findAllByPositionCodeId(id);
         return wantedList;
     }
 
-    public List<WantedListRespDto> findAllByLike(Integer userId) {
-        // 유저있는지 확인
-        // SessionUsers principal =
-        List<WantedListRespDto> wantedList = wantedsDao.findAllByLike(userId);
-        return wantedList;
+    public List<WantedListRespDto> findAllBySearch(SearchDto searchDto) {
+        return wantedsDao.findAllBySearch(searchDto);
     }
 
-    public ApplyFindByIdRespDto findByApplyId(Integer id) {
-        return applysDao.findById(id);
+    public List<WantedListRespDto> findAllByLike() {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal == null) {
+            throw new MyApiException("로그인이 필요합니다");
+        }
+        return wantedsDao.findAllByLike(principal.getId());
     }
 
     /* 승현 작업 종료 */

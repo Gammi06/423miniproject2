@@ -34,6 +34,14 @@ public class CompanysRespDto {
 
     @Getter
     @Setter
+    public static class CompanysDeleteRespDto {
+        private Integer id;
+        private String companyName;
+        List <String> wantedNameListCompany;
+    }
+
+    @Getter
+    @Setter
     public static class CompanyDetailRespDto {
         private Integer id;
         private String companyName;
@@ -46,7 +54,7 @@ public class CompanysRespDto {
 
     @Getter
     @Setter
-    public static class CompanysNumberCheckDto {
+    public static class CompanysNumberCheckRespDto {
         private String companyNumber;
 
     }
@@ -56,7 +64,6 @@ public class CompanysRespDto {
     public static class CompanyDetailWithWantedsListRespDto {
         private CompanyDetailRespDto companyDetailRespDto;
         private List<WantedListRespDto> wantedsListRespDtos;
-
     }
 
     @NoArgsConstructor
@@ -85,25 +92,27 @@ public class CompanysRespDto {
         private boolean isFirst; // getter가 만들어지면 isFirst() 이름으로 만들어짐. -> el에서는 first로 찾음
     }
 
+    @NoArgsConstructor
     @Getter
     @Setter
     public static class SubscribesListRespDto {
         private Integer id;
-        private Integer companysId;
-        private Integer wantedsId;
+        private Integer userId;
+        private Integer companyId;
+        private Integer wantedId;
         private String companyName;
         private Timestamp created;// 공고시작시간
         private Timestamp enddate;// 공고끝나는시간
         private String state;
 
-        public SubscribesListRespDto(SubscribesListRespDto subcribes) {
-            this.id = id;
-            this.companysId = companysId;
-            this.wantedsId = wantedsId;
-            this.companyName = companyName;
-            this.created = created;
-            this.enddate = enddate;
-            this.state = state;
+        public SubscribesListRespDto(SubscribesListRespDto subscribesListRespDto) {
+            this.userId = subscribesListRespDto.getUserId();
+            this.companyId = subscribesListRespDto.getCompanyId();
+            this.wantedId = subscribesListRespDto.getWantedId();
+            this.companyName = subscribesListRespDto.getCompanyName();
+            this.created = subscribesListRespDto.getCreated();
+            this.enddate = subscribesListRespDto.getEnddate();
+            this.state = subscribesListRespDto.getState();
         }
 
     }

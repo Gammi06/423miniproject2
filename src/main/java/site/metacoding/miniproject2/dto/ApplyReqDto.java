@@ -1,8 +1,8 @@
 package site.metacoding.miniproject2.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import site.metacoding.miniproject2.domain.applys.Applys;
 
 public class ApplyReqDto {
 
@@ -12,12 +12,18 @@ public class ApplyReqDto {
     public static class ApplyUserReqDto {
         private Integer wantedId;
         private Integer resumeId;
+    }
 
-        public Applys toEntity() {
-            return Applys.builder()
-                    .wantedId(wantedId)
-                    .resumeId(resumeId)
-                    .build();
+    @Getter
+    @Setter
+    public static class ApplyFindReqDto {
+        private Integer userId;
+        private Integer wantedId;
+
+        @Builder
+        public ApplyFindReqDto(Integer userId, Integer wantedId) {
+            this.userId = userId;
+            this.wantedId = wantedId;
         }
     }
 

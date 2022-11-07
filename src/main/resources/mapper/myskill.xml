@@ -7,4 +7,16 @@
 	VALUES (#{userId},#{resumeId},#{wantedId},#{skillsCodeId})
 	</insert>
 
+	<!-- 승현 작업 시작 -->
+
+	<select id="findAll"
+		resultType="site.metacoding.miniproject2.dto.MySkillsRespDto$WantedGetSkillRespDto">
+		SELECT sc.name skillsCodeName
+		FROM myskills ms
+		LEFT OUTER JOIN skills_code sc
+		ON sc.id = ms.skills_code_id
+		WHERE ms.wanted_id = #{id}
+	</select>
+
+	<!-- 승현 작업 종료 -->
 </mapper>
