@@ -50,7 +50,6 @@
 
 	<update id="updateProfile"></update>
 
-
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, position_code_id, mycareer_id, created)
 		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{positionCodeId}, #{mycareerId}, NOW())
