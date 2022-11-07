@@ -30,7 +30,11 @@ public class UsersApiController {
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
+        System.out.println(sessionUsers.getUserId());
+        System.out.println(sessionUsers.getId());
+        System.out.println(sessionUsers.getRole());
         return new CMRespDto<>(1, "로그인 성공", sessionUsers.getUserId());
+
     }
 
     @PutMapping("/s/api/{id}/edit")
@@ -45,11 +49,8 @@ public class UsersApiController {
         return new CMRespDto<>(1, "ok", usersService.updatePassword(passwordEditReqDto));
     }
 
-    // @PutMapping("/s/api/{id}/edit/profile")
-
     @PostMapping("/join")
     public CMRespDto<?> join(@RequestBody JoinReqDto joinReqDto) {
-        System.out.println("나 찍힘????" + usersService.insert(joinReqDto));
         return new CMRespDto<>(1, "ok", usersService.insert(joinReqDto));
     }
 

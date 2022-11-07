@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import site.metacoding.miniproject2.dto.CodesRespDto.CareersCodeRespDto;
 import site.metacoding.miniproject2.dto.CodesRespDto.PositionsCodeRespDto;
+import site.metacoding.miniproject2.dto.CodesRespDto.SkillsCodeRespDto;
 import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersEditRespDto;
-import site.metacoding.miniproject2.dto.MySkillsRespDto.UsersgGetSkillRespDto;
 
 public class UsersRespDto {
 
@@ -23,6 +23,14 @@ public class UsersRespDto {
         private String userId;
         private String userPassword; // 비밀번호 숨기기
         private String role;
+        private Integer companyId;
+    }
+
+    @Getter
+    @Setter
+    public static class SessionCompanyRespDto {
+        private Integer id;
+        private Integer companyId;
     }
 
     @Getter
@@ -100,7 +108,7 @@ public class UsersRespDto {
     public static class ProfileEditAllRespDto {
         private List<PositionsCodeRespDto> positionCodes; // 포지션
         private List<CareersCodeRespDto> careersCodeRes; // 경력
-        private List<UsersgGetSkillRespDto> mySkills; // 스킬
+        private List<SkillsCodeRespDto> skillsCo; // 스킬
         private List<MyCareersEditRespDto> myCareers; // 경력2
         private List<EducationsListRespDto> educations; // 학력
     }

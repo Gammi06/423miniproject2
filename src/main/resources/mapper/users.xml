@@ -8,10 +8,14 @@
 		SELECT id, user_id, user_password, user_name, age, phone_number, email
 		FROM users WHERE id = #{id}
 	</select>
+
+	<select id="findByCompanyId" resultType="site.metacoding.miniproject2.dto.UsersRespDto$SessionCompanyRespDto">
+		select id FROM companys where users_id = #{id}
+	</select>
 	
 	<select id="findByUserId"
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$AuthRespDto">
-		SELECT id, user_id, user_password FROM users WHERE user_id = #{userId}
+		SELECT id, user_id, user_password, role, NULL AS companyId FROM users WHERE user_id = #{userId}
 	</select>
 
 	<select id="findById"

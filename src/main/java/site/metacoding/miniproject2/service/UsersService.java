@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.miniproject2.domain.users.Users;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
@@ -21,6 +20,7 @@ import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.JoinRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.PasswordEditRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.SessionCompanyRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
 
@@ -30,15 +30,23 @@ public class UsersService {
     private final UsersDao usersDao;
 
     public JoinRespDto insert(JoinReqDto joinReqDto) {
-        JoinRespDto joinRespDto = usersDao.findAllId(joinReqDto.getId());
         usersDao.insert(joinReqDto);
+        JoinRespDto joinRespDto = usersDao.findAllId(joinReqDto.getId());
         return joinRespDto;
     }
 
     public SessionUsers findByUserId(LoginReqDto loginReqDto) {
         AuthRespDto userPS = usersDao.findByUserId(loginReqDto.getUserId());
         if (userPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
-            return new SessionUsers(userPS);
+            if (userPS.getRole().equals("회사")) {
+                SessionCompanyRespDto sessionCompanyRespDto = usersDao.findByCompanyId(userPS.getId());
+                sessionCompanyRespDto.setId(userPS.getId());
+                userPS.setCompanyId(sessionCompanyRespDto.getCompanyId());
+                return new SessionUsers(userPS);
+            } else {
+                return new SessionUsers(userPS);
+            }
+
         } else {
             throw new RuntimeException("아이디 혹은 패스워드가 잘못 입력되었습니다.");
         }

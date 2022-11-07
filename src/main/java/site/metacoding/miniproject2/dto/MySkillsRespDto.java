@@ -37,11 +37,4 @@ public class MySkillsRespDto {
     }
     /* 승현 작업 종료 */
 
-    /* 성유 작업 시작 */
-    @Getter
-    @Setter
-    public static class UsersgGetSkillRespDto {
-        private String skillsCodeName;
-    }
-    /* 성유 작업 종료 */
 }

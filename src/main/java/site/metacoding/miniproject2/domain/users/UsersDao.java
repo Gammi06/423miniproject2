@@ -10,6 +10,7 @@ import site.metacoding.miniproject2.dto.UsersRespDto.InfoCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.InfoRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.JoinRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.SessionCompanyRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
 
@@ -18,6 +19,8 @@ public interface UsersDao {
 
     // 성유 작업 시작
     public AuthRespDto findByUserId(String usersId); // 로그인
+
+    public SessionCompanyRespDto findByCompanyId(Integer id); // 세션의 컴퍼니id
 
     public JoinRespDto findAllId(Integer id);
 
