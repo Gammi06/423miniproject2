@@ -56,15 +56,17 @@ public class TestRequestsApiController {
 
         // given
         Integer id = 1;
+        String keyword = "삼성";
 
         // when
         ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.get("/s/proposal/" + id)
+                MockMvcRequestBuilders.get("/s/proposal/" + id + "?keyword=" + keyword)
                         .accept(APPLICATION_JSON)
                         .session(session));
 
         // then
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.keyword").value("삼성"));
     }
 }

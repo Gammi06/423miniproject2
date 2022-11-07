@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.service.UsersService;
 
 @Slf4j
 @ActiveProfiles("test") // 테스트 어플리케이션 실행
@@ -38,9 +37,6 @@ public class TestApplicationStatusApiController {
 
     @Autowired
     private ObjectMapper om;
-
-    @Autowired
-    private UsersService usersService;
 
     private MockHttpSession session;
 
@@ -60,17 +56,18 @@ public class TestApplicationStatusApiController {
 
         // given
         Integer id = 1;
-        String keyword = null;
+        String keyword = "";
 
         // when
         ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.get("/s/allapplicationstatus/" + id)
+                MockMvcRequestBuilders.get("/s/allapplicationstatus/" + id + "?keyword=" + keyword)
                         .accept(APPLICATION_JSON)
                         .session(session));
 
         // then
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.keyword").value(""));
     }
 
     @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -83,13 +80,14 @@ public class TestApplicationStatusApiController {
 
         // when
         ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.get("/s/waitingapplicationstatus/" + id)
+                MockMvcRequestBuilders.get("/s/waitingapplicationstatus/" + id + "?keyword=" + keyword)
                         .accept(APPLICATION_JSON)
                         .session(session));
 
         // then
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.keyword").value("삼성"));
     }
 
     @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -98,16 +96,17 @@ public class TestApplicationStatusApiController {
 
         // given
         Integer id = 1;
-        String keyword = null;
+        String keyword = "";
 
         // when
         ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.get("/s/finalapplicationstatus/" + id)
+                MockMvcRequestBuilders.get("/s/finalapplicationstatus/" + id + "?keyword=" + keyword)
                         .accept(APPLICATION_JSON)
                         .session(session));
 
         // then
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.keyword").value(""));
     }
 }
