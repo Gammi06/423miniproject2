@@ -61,7 +61,7 @@
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoRespDto">
 		SELECT us.id, us.user_id, us.user_password,
 		us.user_name, US.AGE,
-		us.phone_number, us.email, us.photo,
+		us.phone_number, us.email,
 		us.position_code_id,
 		us.mycareer_id, us.created, pc.name positionCodeName
 		FROM users us
@@ -94,7 +94,7 @@
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$RecommendByPositionRespDto">
 		SELECT @ROWNUM :=@ROWNUM+1 AS no, comrec.*
 		FROM (SELECT com.id, com.company_name, com.address, com.email,
-		com.company_number, com.photo,
+		com.company_number, 
 		com.region_code_name, com.intro,
 		com.years, com.member_count, com.created,
 		wan.id wanted_id,

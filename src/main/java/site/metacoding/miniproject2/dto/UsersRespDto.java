@@ -16,6 +16,7 @@ public class UsersRespDto {
 
     /* >>>>> 성유 작업함 <<<<< */
 
+    @NoArgsConstructor // 서현 추가함
     @Getter
     @Setter
     public static class AuthRespDto {
@@ -24,6 +25,14 @@ public class UsersRespDto {
         private String userPassword; // 비밀번호 숨기기
         private String role;
         private Integer companyId;
+
+        // 서현 추가함
+        public AuthRespDto(Integer id, String userId, Integer companyId) {
+            this.id = id;
+            this.userId = userId;
+            this.companyId = companyId;
+        }
+        // 서현 추가함
     }
 
     @Getter
@@ -120,7 +129,6 @@ public class UsersRespDto {
     @Setter
     @Getter
     public static class InfoCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer likesCount;
         private Integer subscribesCount;
@@ -140,7 +148,6 @@ public class UsersRespDto {
     @Setter
     @Getter
     public static class StatusCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer statusC;
         private Integer statusFinal;
