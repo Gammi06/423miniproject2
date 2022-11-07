@@ -220,6 +220,9 @@ INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created
 VALUES(10, 3, '프론트 개발자인 한동아입니다.', '한동아씨의 자기소개서, 우리 회사에 입사시키면 일을 무난히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
 INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created)
 VALUES(11, 1, '백앤드 개발자인 신류이수입니다.', '신류이수씨의 자기소개서, 우리 회사에 입사시키면 일을 무난히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
+INSERT INTO resumes(user_id, positions_code_id, title, intro, status_id, created)
+VALUES(1, 3, '프론트 개발자인 박가람입니다. 2', '박가람씨의 잘 쓰여진 자기소개서, 우리 회사에 입사시키면 일을 열심히 할 것 같은 내용이 쓰여있다.', NULL, NOW());
+
 
 INSERT INTO wanteds(position_code_id, career_code_id, pay, company_id, title, detail, view_count, created, enddate, checked)
 VALUES(1, 1, 5000, 1, '서버 개발자 구인', '이재모 피자 홈페이지를 개발하실 서버 개발자를 구인합니다. 회사에 대한 설명이 쓰여있다.', 0, NOW(), LAST_DAY(NOW()), FALSE);
@@ -537,6 +540,11 @@ INSERT INTO application_status(wanted_id, resume_id, state, created)
 VALUES(11, 1, 1 , NOW());
 INSERT INTO application_status(wanted_id, resume_id, state, created)
 VALUES(12, 1, 2 , NOW());
+
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(1, 1, '대기중', NOW());
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(2, 2, '대기중', NOW());
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(1, 7, '대기중', NOW());
+INSERT INTO applys(wanted_id, resume_id, status, created) VALUES(2, 1, '대기중', NOW());
 
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 1, '마감',  NOW());
 INSERT INTO requests(resume_id, wanted_id, status, created) VALUES(1, 3, '마감', NOW());

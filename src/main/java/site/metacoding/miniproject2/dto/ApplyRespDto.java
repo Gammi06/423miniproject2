@@ -27,7 +27,7 @@ public class ApplyRespDto {
 
         public ApplyInsertRespDto(ApplyUserReqDto applyUserReqDto) {
             this.wantedId = applyUserReqDto.getWantedId();
-            this.resumeId = applyUserReqDto.getWantedId();
+            this.resumeId = applyUserReqDto.getResumeId();
         }
     }
 

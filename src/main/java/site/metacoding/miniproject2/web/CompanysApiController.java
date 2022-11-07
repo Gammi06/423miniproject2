@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
@@ -22,8 +23,10 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
+import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class CompanysApiController {
@@ -84,12 +87,15 @@ public class CompanysApiController {
 
     /* 승현 작업 시작 */
 
-    @PostMapping("/s/api/companys/{id}/subscribes")
-    public CMRespDto<?> insertSubcribes(@PathVariable Integer id, SubcribesInsertReqDto insertReqDto) {
+    @GetMapping("/companys/info/{id}")
+    public CMRespDto<?> findByCompanyIdInfo(@PathVariable Integer id) {
+        return new CMRespDto<>(1, "성공", companysService.findByCompanyIdInfo(id));
+    }
+
+    @PostMapping("/s/api/companys/{id}/subscribes/add")
+    public SubcribesInsertRespDto insertSubcribes(@PathVariable Integer id) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        insertReqDto.setCompanyId(id);
-        insertReqDto.setUserId(principal.getId());
-        return new CMRespDto<>(1, "성공", companysService.insertSubcribes(insertReqDto));
+        return companysService.insertSubcribes(new SubcribesInsertReqDto(principal.getId(), id));
     }
 
     @DeleteMapping("/s/api/companys/{id}/subscribes")

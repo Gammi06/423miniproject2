@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
-import site.metacoding.miniproject2.domain.subcribes.SubcribesDao;
+import site.metacoding.miniproject2.domain.subacribes.SubcribesDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
@@ -21,9 +22,9 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespD
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubribesFindByIdRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CompanysService {
@@ -108,17 +109,12 @@ public class CompanysService {
 
     /* 승현 작업 시작 */
 
-    public SubribesFindByIdRespDto findBySubcribesId(Integer id) {
-        return subcribesDao.findById(id);
-    }
-
     public SubcribesInsertRespDto insertSubcribes(SubcribesInsertReqDto insertReqDto) {
-        if (companysDao.findByIdCompanyId(insertReqDto.getCompanyId()) == null) {
-            throw new MyApiException("해당 id(" + insertReqDto.getCompanyId() + ")의 기업이 없습니다.");
+        if (insertReqDto.getUserId() == null) {
+            throw new MyApiException("로그인 후 이용 가능합니다.");
         }
         subcribesDao.insert(insertReqDto);
-        return SubcribesInsertRespDto.builder().userId(insertReqDto.getUserId()).companyId(insertReqDto.getCompanyId())
-                .build();
+        return new SubcribesInsertRespDto(insertReqDto);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
@@ -127,6 +123,14 @@ public class CompanysService {
             throw new MyApiException("해당 기업을 구독하지 않았습니다.");
         }
         subcribesDao.deleteById(id);
+    }
+
+    public CompanyDetailRespDto findByCompanyIdInfo(Integer id) {
+        CompanyDetailRespDto companyDetailRespDto = companysDao.findByCompanyIdInfo(id);
+        if (companyDetailRespDto == null) {
+            throw new MyApiException("해당 기업의 페이지가 없습니다.");
+        }
+        return companyDetailRespDto;
     }
 
     /* 승현 작업 종료 */

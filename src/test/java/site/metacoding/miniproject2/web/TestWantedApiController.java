@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -16,8 +17,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.extern.slf4j.Slf4j;
-import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
+import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 
 @Slf4j
@@ -34,10 +37,10 @@ public class TestWantedApiController {
     @Autowired
     private MockMvc mvc;
 
-    private MockHttpSession session;
-
     @Autowired
-    private WantedsDao wantedsDao;
+    private ObjectMapper om;
+
+    private MockHttpSession session;
 
     @BeforeEach
     public void sessionInit() {
@@ -66,5 +69,129 @@ public class TestWantedApiController {
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.title").value("서버 개발자 구인"));
+
     }
+
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void findAllByLike_test() throws Exception {
+
+        // given
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.get("/s/api/wanted/like")
+                        .accept(APPLICATION_JSON)
+                        .session(session));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data[0].title").value("프론트 개발자 구인"));
+
+    }
+
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void findAllByPositionCodeId_test() throws Exception {
+
+        // given
+        Integer positionCodeId = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.get("/wanted/position/" + positionCodeId)
+                        .accept(APPLICATION_JSON)
+                        .session(session));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data[0].positionCodeName").value("백앤드개발자"));
+
+    }
+
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void findAllByCompanyId_test() throws Exception {
+
+        // given
+        Integer companyId = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.get("/wanted/company/" + companyId)
+                        .accept(APPLICATION_JSON)
+                        .session(session));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data[0].companyName").value("이재모피자"));
+
+    }
+
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void insertLike_test() throws Exception {
+
+        // given
+        Integer wantedId = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.post("/s/api/wanted/" + wantedId + "/like")
+                        .accept(APPLICATION_JSON)
+                        .session(session));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.userId").value(1));
+    }
+
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void deleteLike_test() throws Exception {
+
+        // given
+        Integer wantedId = 2;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.delete("/s/api/wanted/" + wantedId + "/like")
+                        .accept(APPLICATION_JSON)
+                        .session(session));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+
+    }
+
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void insertApply_test() throws Exception {
+
+        // given
+        Integer wantedId = 9;
+        Integer resumeId = 1;
+        String applyUserReqDto = om.writeValueAsString(new ApplyUserReqDto(0, wantedId, resumeId));
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.post("/s/api/wanted/" + wantedId + "/apply/add")
+                        .session(session)
+                        .content(applyUserReqDto)
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON)
+                        .session(session));
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.resumeId").value(1));
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package site.metacoding.miniproject2.domain.subcribes;
+package site.metacoding.miniproject2.domain.subacribes;
 
 import java.util.List;
 

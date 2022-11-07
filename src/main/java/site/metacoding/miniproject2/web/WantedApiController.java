@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
-import site.metacoding.miniproject2.dto.LikesRespDto.LikeInsertRespDto;
 import site.metacoding.miniproject2.dto.SearchDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
@@ -40,8 +39,8 @@ public class WantedApiController {
     /* 승현 작업 시작 */
 
     @GetMapping("/wanted")
-    public List<WantedListRespDto> findAll() {
-        return wantedsService.findAll();
+    public CMRespDto<?> findAll() {
+        return new CMRespDto<>(1, "성공", wantedsService.findAll());
     }
 
     @GetMapping("/wanted/{wantedId}")
@@ -55,18 +54,12 @@ public class WantedApiController {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(principal.getId()));
     }
 
-    @GetMapping("/wanted/position/position/{id}")
+    @GetMapping("/wanted/position/{id}")
     public CMRespDto<?> findAllByPositionCodeId(@PathVariable Integer id) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByPositionCodeId(id));
     }
 
-    // 검색하기
-    @GetMapping("/wanted/search")
-    public List<WantedListRespDto> findAllBySearch(@RequestBody SearchDto searchDto) {
-        return wantedsService.findAllBySearch(searchDto);
-    }
-
-    @GetMapping("/wanted/position/company/{companyId}")
+    @GetMapping("/wanted/company/{companyId}")
     public CMRespDto<?> findAllByCompanyId(@PathVariable Integer companyId) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByCompanyId(companyId));
     }
