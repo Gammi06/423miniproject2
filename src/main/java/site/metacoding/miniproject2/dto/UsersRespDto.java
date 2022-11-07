@@ -99,7 +99,6 @@ public class UsersRespDto {
     @Setter
     @Getter
     public static class InfoCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer likesCount;
         private Integer subscribesCount;
@@ -119,7 +118,6 @@ public class UsersRespDto {
     @Setter
     @Getter
     public static class StatusCountRespDto {
-        private Integer id;
         private Integer statusAll;
         private Integer statusC;
         private Integer statusFinal;
