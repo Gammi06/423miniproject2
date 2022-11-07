@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedGetSkillRespDto;
 
 public class WantedsRespDto {
@@ -58,6 +59,53 @@ public class WantedsRespDto {
     }
 
     // ////////////////// 수현 사용 Dto /////////////////////
+
+    @Setter
+    @Getter
+    public static class WantedsSaveRespDto {
+        private String wantedTitle;
+        private String wantedDetail;
+        private Integer positionCodeId;
+        private Integer careerCodeId;
+        private String pay;
+        private Timestamp endDate;
+        private Integer companysId;
+        
+        public WantedsSaveRespDto(Wanteds wanteds) {
+            this.wantedTitle = wanteds.getTitle();
+            this.wantedDetail = wanteds.getDetail();
+            this.positionCodeId = wanteds.getPositionCodeId();
+            this.careerCodeId = wanteds.getCareerCodeId();
+            this.pay = wanteds.getPay();
+            this.endDate = wanteds.getEnddate();
+            this.companysId = wanteds.getCompanyId();
+        }
+    }
+
+    @Setter
+    @Getter
+    public static class WantedsUpdateRespDto {
+        private String wantedTitle;
+        private String wantedDetail;
+        private Integer positionCodeId;
+        private Integer careerCodeId;
+        private String pay;
+        private Timestamp endDate;
+        private Integer companysId;
+        
+        public WantedsUpdateRespDto(Wanteds wanteds) {
+            this.wantedTitle = wanteds.getTitle();
+            this.wantedDetail = wanteds.getDetail();
+            this.positionCodeId = wanteds.getPositionCodeId();
+            this.careerCodeId = wanteds.getCareerCodeId();
+            this.pay = wanteds.getPay();
+            this.endDate = wanteds.getEnddate();
+            this.companysId = wanteds.getCompanyId();
+        }
+
+        
+    }
+
     @Setter
     @Getter
     public static class WantedsRecruitsManageRespDto {

@@ -2,6 +2,8 @@ package site.metacoding.miniproject2.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,7 @@ import site.metacoding.miniproject2.service.WantedsService;
 @RestController
 public class WantedApiController {
 
+    private final HttpSession session;
     private final WantedsService wantedsService;
     private final LikesService likesService;
     private final ApplyService applyService;
@@ -89,19 +92,17 @@ public class WantedApiController {
     /* 수현 작업 시작 */
     @PostMapping("/s/api/wanted/{companysId}/add")
     public CMRespDto<?> save(@PathVariable Integer companysId, @RequestBody WantedsSaveReqDto wantedsSaveReqDto) {
-        wantedsService.save(wantedsSaveReqDto);
-        return new CMRespDto<>(1, "성공", null);
+        return new CMRespDto<>(1, "성공", wantedsService.save(wantedsSaveReqDto));
     }
 
-    @PutMapping("/s/api/wanted/{companysId}/edit")
-    public CMRespDto<?> update(@PathVariable Integer companysId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
-        wantedsService.update(wantedsUpdateReqDto);
-        return new CMRespDto<>(1, "성공", null);
+    @PutMapping("/s/api/wanted/{wantedId}/edit")
+    public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
+        return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 
-    @DeleteMapping("/s/api/wanted/{companysId}/delete")
-    public CMRespDto<?> deleteById(@PathVariable Integer companysId) {
-        wantedsService.deleteById(companysId);
+    @DeleteMapping("/s/api/wanted/{wantedId}/delete")
+    public CMRespDto<?> deleteById(@PathVariable Integer wantedId) {
+        wantedsService.deleteById(wantedId);
         return new CMRespDto<>(1, "성공", null);
     }
     /* 수현 작업 종료 */
