@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.subacribes.SubcribesDao;
+import site.metacoding.miniproject2.domain.subscribes.subscribesDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
@@ -21,7 +22,6 @@ import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysNumberCheckRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
 @Slf4j
@@ -30,6 +30,7 @@ import site.metacoding.miniproject2.handler.MyApiException;
 public class CompanysService {
 
     private final SubcribesDao subcribesDao;
+    private final subscribesDao subscribesDao;
     private final CompanysDao companysDao;
 
     /* 지원 작업 시작 */
@@ -109,20 +110,16 @@ public class CompanysService {
 
     /* 승현 작업 시작 */
 
-    public SubcribesInsertRespDto insertSubcribes(SubcribesInsertReqDto insertReqDto) {
-        if (insertReqDto.getUserId() == null) {
-            throw new MyApiException("로그인 후 이용 가능합니다.");
-        }
-        subcribesDao.insert(insertReqDto);
-        return new SubcribesInsertRespDto(insertReqDto);
+    public void insertSubcribes(SubcribesInsertReqDto subcribesInsertReqDto) {
+        subscribesDao.insertSub(subcribesInsertReqDto);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
     public void deleteSubcribes(Integer id) {
-        if (subcribesDao.findById(id) == null) {
+        if (subscribesDao.findById(id) == null) {
             throw new MyApiException("해당 기업을 구독하지 않았습니다.");
         }
-        subcribesDao.deleteById(id);
+        subscribesDao.deleteById(id);
     }
 
     public CompanyDetailRespDto findByCompanyIdInfo(Integer id) {
