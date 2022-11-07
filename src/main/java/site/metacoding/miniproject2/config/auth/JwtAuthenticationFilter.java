@@ -56,12 +56,14 @@ public class JwtAuthenticationFilter implements Filter {
         }
 
         AuthRespDto usersPS = usersOP.get();
+
         // SHA256 sh = new SHA256();
         // String encPassword = sh.encrypt(loginReqDto.getUserPassword());
         // if (!usersPS.getUserPassword().equals(encPassword)) {
         // customResponse("패스워드가 틀렸습니다.", resp);
         // return;
         // }
+
         if (!usersPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
             customResponse("패스워드가 틀렸습니다.", resp);
             return;
@@ -74,6 +76,7 @@ public class JwtAuthenticationFilter implements Filter {
                 .withExpiresAt(expire)
                 .withClaim("id", usersPS.getId())
                 .withClaim("userId", usersPS.getUserId())
+                .withClaim("companyId", usersPS.getCompanyId())
                 .sign(Algorithm.HMAC512("구해줘용"));
         log.debug("디버그 : " + jwtToken);
 

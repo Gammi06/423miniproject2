@@ -24,11 +24,13 @@ public class UsersRespDto {
         private String userId;
         private String userPassword; // 비밀번호 숨기기
         private String role;
+        private Integer companyId;
 
         // 서현 추가함
-        public AuthRespDto(Integer id, String userId) {
+        public AuthRespDto(Integer id, String userId, Integer companyId) {
             this.id = id;
             this.userId = userId;
+            this.companyId = companyId;
         }
         // 서현 추가함
     }
