@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.Profile;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -24,6 +26,7 @@ import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 
+@Profile("dev")
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter implements Filter {
@@ -49,11 +52,11 @@ public class JwtAuthorizationFilter implements Filter {
             String userId = decodedJWT.getClaim("userId").asString();
             log.debug("디버그 : userId : " + userId);
             AuthRespDto authRespDto = new AuthRespDto(id, userId);
-            SessionUsers jwtUsers = new SessionUsers(authRespDto);
+            SessionUsers principal = new SessionUsers(authRespDto);
             HttpSession session = req.getSession();
-            session.setAttribute("jwtUsers", jwtUsers);
-            log.debug("디버그 : id : " + jwtUsers.getId());
-            log.debug("디버그 : userId : " + jwtUsers.getUserId());
+            session.setAttribute("principal", principal);
+            log.debug("디버그 : id : " + principal.getId());
+            log.debug("디버그 : userId : " + principal.getUserId());
         } catch (RuntimeException e) {
             customResponse("토큰 검증 실패", resp);
             return;

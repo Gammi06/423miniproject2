@@ -20,8 +20,8 @@ public class ApplicationStatusApiController {
 
     @GetMapping("/s/allapplicationstatus/{id}")
     public CMRespDto<?> findAllList(@PathVariable Integer id, String keyword) {
-        SessionUsers jwtUsers = (SessionUsers) session.getAttribute("jwtUsers");
-        if (jwtUsers.getId() != id) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() != id) {
             throw new RuntimeException("권한이 없습니다.");
         }
         return new CMRespDto<>(1, "성공", applicationStatusService.findAllList(id, keyword));
@@ -29,8 +29,8 @@ public class ApplicationStatusApiController {
 
     @GetMapping("/s/waitingapplicationstatus/{id}")
     public CMRespDto<?> findWaitingList(@PathVariable Integer id, String keyword) {
-        SessionUsers jwtUsers = (SessionUsers) session.getAttribute("jwtUsers");
-        if (jwtUsers.getId() != id) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() != id) {
             throw new RuntimeException("권한이 없습니다.");
         }
         return new CMRespDto<>(1, "성공", applicationStatusService.findWaitingList(id, keyword));
@@ -38,8 +38,8 @@ public class ApplicationStatusApiController {
 
     @GetMapping("/s/finalapplicationstatus/{id}")
     public CMRespDto<?> findFinalList(@PathVariable Integer id, String keyword) {
-        SessionUsers jwtUsers = (SessionUsers) session.getAttribute("jwtUsers");
-        if (jwtUsers.getId() != id) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() != id) {
             throw new RuntimeException("권한이 없습니다.");
         }
         return new CMRespDto<>(1, "성공", applicationStatusService.findFinalList(id, keyword));

@@ -20,8 +20,8 @@ public class RequestsApiController {
 
     @GetMapping("/s/proposal/{id}")
     public CMRespDto<?> findRequests(@PathVariable Integer id, String keyword) {
-        SessionUsers jwtUsers = (SessionUsers) session.getAttribute("jwtUsers");
-        if (jwtUsers.getId() != id) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() != id) {
             throw new RuntimeException("권한이 없습니다.");
         }
         return new CMRespDto<>(1, "성공", requestsService.findRequests(id, keyword));

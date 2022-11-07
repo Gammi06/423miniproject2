@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.SessionUsers;
+import site.metacoding.miniproject2.service.UsersService;
 
 @Slf4j
 @ActiveProfiles("test") // 테스트 어플리케이션 실행
@@ -37,6 +38,9 @@ public class TestApplicationStatusApiController {
 
     @Autowired
     private ObjectMapper om;
+
+    @Autowired
+    private UsersService usersService;
 
     private MockHttpSession session;
 
