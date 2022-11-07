@@ -27,7 +27,11 @@ public interface CompanysDao {
 
     public CompanysDeleteRespDto findWantedCompanys(Integer id);// 회사할때 공고 같이 삭제
 
+<<<<<<< HEAD
     public List<String> deleteWantedTitleCompanys(Integer id);// 회사할때 공고 같이 삭제
+=======
+    public List <String> deleteWantedTitleCompanys (Integer id);// 회사할때 공고 같이 삭제
+>>>>>>> 6c1f647bbe8a5d1d6c33944ee290394b075faa76
 
     public CompanysTitleReqDto findByIdCompanyId(Integer id);
 
