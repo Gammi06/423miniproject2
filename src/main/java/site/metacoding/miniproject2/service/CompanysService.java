@@ -104,9 +104,8 @@ public class CompanysService {
     /* 수현 작업시작 */
 
     public CompanysUpdateIntroRespDto updateCompanysIntro(CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        Companys companys = companysUpdateIntroReqDto.toEntity();
         companysDao.updateCompanysIntro(companysUpdateIntroReqDto);
-        return new CompanysUpdateIntroRespDto(companys);
+        return new CompanysUpdateIntroRespDto(companysUpdateIntroReqDto);
     }
 
     /* 수현 작업종료 */

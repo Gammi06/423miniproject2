@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import site.metacoding.miniproject2.domain.companys.Companys;
+import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 //import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 
@@ -123,8 +123,8 @@ public class CompanysRespDto {
     public static class CompanysUpdateIntroRespDto {
         private String intro;
 
-        public CompanysUpdateIntroRespDto(Companys companys) {
-            this.intro = intro;
+        public CompanysUpdateIntroRespDto(CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+            this.intro = companysUpdateIntroReqDto.getIntro();
         }
     }
 

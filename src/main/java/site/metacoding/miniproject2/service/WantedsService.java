@@ -36,16 +36,14 @@ public class WantedsService {
 
     /* 수현 작업 시작 */
     public WantedsSaveRespDto save(WantedsSaveReqDto wantedsSaveReqDto) {
-        Wanteds wanteds = wantedsSaveReqDto.toEntity();
         wantedsDao.save(wantedsSaveReqDto);
-        return new WantedsSaveRespDto(wanteds);
+        return new WantedsSaveRespDto(wantedsSaveReqDto);
 
     }
 
     public WantedsUpdateRespDto update(WantedsUpdateReqDto wantedsUpdateReqDto) {
-        Wanteds wanteds = wantedsUpdateReqDto.toEntity();
         wantedsDao.update(wantedsUpdateReqDto);
-        return new WantedsUpdateRespDto(wanteds);
+        return new WantedsUpdateRespDto(wantedsUpdateReqDto);
     }
 
     public void deleteById(Integer id) {

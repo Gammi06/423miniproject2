@@ -109,12 +109,6 @@ public class CompanysReqDto {
         public CompanysUpdateIntroReqDto(String intro) {
             this.intro = intro;
         }
-
-        public Companys toEntity() {
-            return Companys.builder()
-                    .intro(intro)
-                    .build();
-        }
     }
     /* 수현 작업 종료 */
 
