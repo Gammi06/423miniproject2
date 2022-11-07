@@ -98,6 +98,8 @@ public class WantedApiController {
 
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
+        wantedsUpdateReqDto.setId(wantedId);
+        // wantedsUpdateReqDto.setCompanysId(companysId); //세션유저에서 가져올것
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 

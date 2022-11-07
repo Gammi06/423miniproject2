@@ -99,10 +99,15 @@ public class CompanysReqDto {
     }/* 지원 작업 종료 */
 
     /* 수현 작업함 */
+    @NoArgsConstructor
     @Setter
     @Getter
     public static class CompanysUpdateIntroReqDto {
         private String intro;
+
+        public CompanysUpdateIntroReqDto(String intro) {
+            this.intro = intro;
+        }
 
         public Companys toEntity() {
             return Companys.builder()

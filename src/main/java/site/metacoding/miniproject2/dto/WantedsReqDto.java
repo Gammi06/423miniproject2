@@ -46,6 +46,7 @@ public class WantedsReqDto {
 
     }
 
+    @NoArgsConstructor
     @Setter
     @Getter
     public static class WantedsUpdateReqDto {
