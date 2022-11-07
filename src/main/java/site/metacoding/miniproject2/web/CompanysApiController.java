@@ -19,6 +19,7 @@ import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
@@ -55,21 +56,21 @@ public class CompanysApiController {
     public @ResponseBody CMRespDto<?> updateCompanyId(
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(principal.getId() ,companysUpdateReqDto));
+        return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(principal.getId(), companysUpdateReqDto));
     }
 
     // 회사 정보 삭제 /인증 필요. -> 공고 삭제
     @DeleteMapping("/s/api/companys/delete")
     public @ResponseBody CMRespDto<?> deleteCompanysId() {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        return new CMRespDto<>(1, "회사정보삭제", companysService);
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        return new CMRespDto<>(1, "회사정보삭제", companysService.deleteCompanys(principal.getId()));
     }
 
     /* 구독페이지 */
-    @GetMapping("/s/mypage/{userId}/subscribes")
-    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer userId) {// userId는 테스트할려고 넣음
+    @GetMapping("/s/mypage/subscribes")
+    public @ResponseBody CMRespDto<?> subscribesform() {// userId는 테스트할려고 넣음
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(userId);
+        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(principal.getUserId());
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }// 로그인 해서 테스트 돌리기
 

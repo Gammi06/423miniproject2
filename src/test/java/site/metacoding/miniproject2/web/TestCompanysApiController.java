@@ -20,8 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
-import site.metacoding.miniproject2.domain.companys.CompanysDao;
-import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
@@ -37,16 +35,8 @@ public class TestCompanysApiController {
     // header json
     private static final String APPLICATION_JSON = "application/json; charset=utf-8";
 
-    private static final Object CompanysInsertReqDto = null;
-
     @Autowired
     private MockMvc mvc;
-
-    @Autowired
-    private CompanysDao companysDao;
-
-    @Autowired
-    private UsersDao usersDao;
 
     @Autowired
     private ObjectMapper om;
@@ -181,15 +171,17 @@ public class TestCompanysApiController {
     @Test
     public void deleteCompanysId_test() throws Exception {
 
-        // given
-        Integer companysId = 1;
         // when
         ResultActions resultActions = mvc.perform(
                 MockMvcRequestBuilders.delete("/s/api/companys/delete")
-                        .accept(APPLICATION_JSON)
-                        .session(session));
+                        .contentType(APPLICATION_JSON)
+                        .session(session)
+                        .accept(APPLICATION_JSON));
 
         // then
+        MvcResult mvcResult = resultActions.andReturn();
+        System.out.println("debugggg:" + mvcResult.getResponse().getContentAsString());
+
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
 
@@ -199,19 +191,20 @@ public class TestCompanysApiController {
     @Test
     public void subscribesform_test() throws Exception {
 
-        // given
-        Integer userId = 1;
+        Integer UserId = 1;
+
         // when
         ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.delete("/s/mypage/subscribes")
+                MockMvcRequestBuilders.get("/s/mypage/subscribes")
                         .accept(APPLICATION_JSON)
                         .session(session));
 
         // then
+        MvcResult mvcResult = resultActions.andReturn();
+        System.out.println("debugggg:" + mvcResult.getResponse().getContentAsString());
+
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
-        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.data.userId").value(1));
-
     }
 
 }
