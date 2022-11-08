@@ -11,7 +11,7 @@ import site.metacoding.miniproject2.dto.RecruitsRespDto.RecruitsRecommendRespDto
 public interface RecruitsDao {
     public List<RecruitsApplyManageRespDto> findApplyManage(Integer companysId);
 
-    public List<RecruitsRecommendRespDto> findRecommend(Integer companysId);
+    public List<RecruitsRecommendRespDto> findRecommend();
 
     public List<RecruitsRecommendByPositionRespDto> findRecommendByPosition(@Param("companysId") Integer companysId,
             @Param("positionsCodeId") Integer positionsCodeId);

@@ -20,18 +20,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.SessionCompanyRespDto;
 import site.metacoding.miniproject2.service.UsersService;
-import site.metacoding.miniproject2.util.SHA256;
 
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter implements Filter {
 
     private final UsersService usersService;
+    private final UsersDao usersDao;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -57,6 +59,14 @@ public class JwtAuthenticationFilter implements Filter {
 
         AuthRespDto usersPS = usersOP.get();
 
+        log.debug("디버그2 : 1");
+        if (usersPS.getRole().equals("회사")) {
+            log.debug("디버그2 : 2");
+            SessionCompanyRespDto sessionCompanyRespDto = usersDao.findByCompanyId(usersPS.getId());
+            // sessionCompanyRespDto.setId(userPS.getId());
+            usersPS.setCompanyId(sessionCompanyRespDto.getCompanyId());
+        }
+
         // SHA256 sh = new SHA256();
         // String encPassword = sh.encrypt(loginReqDto.getUserPassword());
         // if (!usersPS.getUserPassword().equals(encPassword)) {
@@ -70,7 +80,7 @@ public class JwtAuthenticationFilter implements Filter {
         }
 
         Date expire = new Date(System.currentTimeMillis() + (1000 * 60 * 60));
-
+        log.debug("디버그 : " + expire);
         String jwtToken = JWT.create()
                 .withSubject("구해줘용")
                 .withExpiresAt(expire)
