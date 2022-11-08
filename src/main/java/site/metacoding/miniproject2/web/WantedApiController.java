@@ -111,13 +111,15 @@ public class WantedApiController {
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        wantedsUpdateReqDto.setId(wantedId);
-        wantedsUpdateReqDto.setCompanysId(principal.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 
     @DeleteMapping("/s/api/wanted/{wantedId}/delete")
     public CMRespDto<?> deleteById(@PathVariable Integer wantedId) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getCompanyId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         wantedsService.deleteById(wantedId);
         return new CMRespDto<>(1, "성공", null);
     }
