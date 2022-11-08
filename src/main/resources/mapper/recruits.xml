@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.recruits.RecruitsDao">
     <select id="findApplyManage" resultType="site.metacoding.miniproject2.dto.RecruitsRespDto$RecruitsApplyManageRespDto">
-        SELECT w.title wantedTitle, w.created created, IF(enddate>NOW(), '모집중', '마감') AS state
+        SELECT w.id id, w.title wantedTitle, w.created created, if(enddate > NOW(), '모집중', '마감') state
         FROM wanteds w
         INNER JOIN companys c
         ON c.id = w.company_id

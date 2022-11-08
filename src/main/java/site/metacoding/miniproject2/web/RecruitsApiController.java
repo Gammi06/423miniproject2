@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 import site.metacoding.miniproject2.service.RecruitsService;
 
 @Slf4j
@@ -18,28 +19,28 @@ import site.metacoding.miniproject2.service.RecruitsService;
 @RestController
 public class RecruitsApiController {
 
-    HttpSession session;
+    private final HttpSession session;
     private final RecruitsService recruitsService;
 
     @GetMapping("/s/recruits/{companysId}/info/companys")
     public CMRespDto<?> findApplyManage(@PathVariable Integer companysId) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        if (principal.getCompanyId() != 0) {
+        log.debug("디버그 principal : " + principal.getCompanyId());
+        if (principal.getCompanyId().equals(companysId)) {
             return new CMRespDto<>(1, "성공",
                     recruitsService.findApplyManage(principal.getCompanyId()));
         } else {
-            throw new RuntimeException();
+            throw new MyApiException("로그인이 필요합니다.");
         }
     }
 
     @GetMapping("/s/recruits/{companysId}/info/recommends")
     public CMRespDto<?> findRecommend(@PathVariable Integer companysId) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        log.debug("디버그 principal : " + principal.getCompanyId());
         if (principal.getCompanyId().equals(companysId)) {
             return new CMRespDto<>(1, "성공", recruitsService.findRecommend());
         } else {
-            return new CMRespDto<>(-1, "올바른 접근이 아닙니다", null);
+            throw new MyApiException("로그인이 필요합니다.");
         }
     }
 
@@ -53,7 +54,7 @@ public class RecruitsApiController {
                 return new CMRespDto<>(1, "성공", recruitsService.findRecommend());
             }
         } else {
-            return new CMRespDto<>(-1, "올바른 접근이 아닙니다", null);
+            throw new MyApiException("로그인이 필요합니다.");
         }
     }
 

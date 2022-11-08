@@ -1,5 +1,6 @@
 package site.metacoding.miniproject2.web;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,11 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
-import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
-import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
@@ -112,13 +111,15 @@ public class WantedApiController {
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        wantedsUpdateReqDto.setId(wantedId);
-        wantedsUpdateReqDto.setCompanysId(principal.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 
     @DeleteMapping("/s/api/wanted/{wantedId}/delete")
     public CMRespDto<?> deleteById(@PathVariable Integer wantedId) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getCompanyId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         wantedsService.deleteById(wantedId);
         return new CMRespDto<>(1, "성공", null);
     }
