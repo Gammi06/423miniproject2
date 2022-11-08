@@ -15,21 +15,4 @@
 	</select>
 	<!--지원 작업 종료-->
 
-	<!-- 승현 작업함 -->
-
-	<select id="findById"
-		resultType="site.metacoding.miniproject2.dto.SubribesRespDto$SubribesFindByIdRespDto">
-		SELECT id, user_id, company_id, created FROM subscribes WHERE id = #{id}
-	</select>
-
-	<insert id="insert">
-		INSERT INTO subscribes(user_id, company_id, created) VALUES (#{userId}, #{companyId}, NOW())
-	</insert>
-
-	<delete id="deleteById">
-		DELETE FROM subscribes WHERE id = #{id}
-	</delete>
-
-	<!-- 승현 작업 종료-->
-
 </mapper>

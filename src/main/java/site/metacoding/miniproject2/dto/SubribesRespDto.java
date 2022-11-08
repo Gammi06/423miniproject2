@@ -2,9 +2,9 @@ package site.metacoding.miniproject2.dto;
 
 import java.sql.Timestamp;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
 
 /*기존 작업자 지원 */
 public class SubribesRespDto {
@@ -24,10 +24,9 @@ public class SubribesRespDto {
                 private Integer userId;
                 private Integer companyId;
 
-                @Builder
-                public SubcribesInsertRespDto(Integer userId, Integer companyId) {
-                        this.userId = userId;
-                        this.companyId = companyId;
+                public SubcribesInsertRespDto(SubcribesInsertReqDto subcribesInsertReqDto) {
+                        this.userId = subcribesInsertReqDto.getUserId();
+                        this.companyId = subcribesInsertReqDto.getCompanyId();
                 }
         }
         /* 승현 작업 종료 */

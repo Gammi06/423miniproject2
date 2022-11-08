@@ -99,15 +99,15 @@ public class CompanysReqDto {
     }/* 지원 작업 종료 */
 
     /* 수현 작업함 */
+    @NoArgsConstructor
     @Setter
     @Getter
     public static class CompanysUpdateIntroReqDto {
+        private Integer id;
         private String intro;
 
-        public Companys toEntity() {
-            return Companys.builder()
-                    .intro(intro)
-                    .build();
+        public CompanysUpdateIntroReqDto(String intro) {
+            this.intro = intro;
         }
     }
     /* 수현 작업 종료 */

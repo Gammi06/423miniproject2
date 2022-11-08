@@ -1,6 +1,6 @@
 package site.metacoding.miniproject2.web;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,10 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
-import site.metacoding.miniproject2.dto.SearchDto;
+import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
+import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
+import site.metacoding.miniproject2.handler.MyApiException;
 import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
 import site.metacoding.miniproject2.service.WantedsService;
@@ -38,8 +40,8 @@ public class WantedApiController {
     /* 승현 작업 시작 */
 
     @GetMapping("/wanted")
-    public List<WantedListRespDto> findAll() {
-        return wantedsService.findAll();
+    public CMRespDto<?> findAll() {
+        return new CMRespDto<>(1, "성공", wantedsService.findAll());
     }
 
     @GetMapping("/wanted/{wantedId}")
@@ -49,33 +51,41 @@ public class WantedApiController {
 
     @GetMapping("/s/api/wanted/like")
     public CMRespDto<?> findAllByLike() {
-        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike());
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
+        return new CMRespDto<>(1, "성공", wantedsService.findAllByLike(principal.getId()));
     }
 
-    @GetMapping("/wanted/position/position/{id}")
+    @GetMapping("/wanted/position/{id}")
     public CMRespDto<?> findAllByPositionCodeId(@PathVariable Integer id) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByPositionCodeId(id));
     }
 
-    // 검색하기
-    @GetMapping("/wanted/search")
-    public List<WantedListRespDto> findAllBySearch(@RequestBody SearchDto searchDto) {
-        return wantedsService.findAllBySearch(searchDto);
-    }
-
-    @GetMapping("/wanted/position/company/{companyId}")
+    @GetMapping("/wanted/company/{companyId}")
     public CMRespDto<?> findAllByCompanyId(@PathVariable Integer companyId) {
         return new CMRespDto<>(1, "성공", wantedsService.findAllByCompanyId(companyId));
     }
 
     @PostMapping("/s/api/wanted/{id}/like")
     public CMRespDto<?> insertLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         likesInsertReqDto.setWantedId(id);
+        likesInsertReqDto.setUserId(principal.getId());
         return new CMRespDto<>(1, "성공", likesService.insert(likesInsertReqDto));
     }
 
     @DeleteMapping("/s/api/wanted/{id}/like")
     public CMRespDto<?> deleteLike(@PathVariable Integer id, LikesInsertReqDto likesInsertReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
+        likesInsertReqDto.setUserId(principal.getId());
         likesInsertReqDto.setWantedId(id);
         likesService.delete(likesInsertReqDto);
         return new CMRespDto<>(1, "성공", null);
@@ -83,6 +93,10 @@ public class WantedApiController {
 
     @PostMapping("/s/api/wanted/{id}/apply/add")
     public CMRespDto<?> insertApply(@PathVariable Integer id, @RequestBody ApplyUserReqDto applyUserReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
         applyUserReqDto.setWantedId(id);
         return new CMRespDto<>(1, "성공", applyService.insert(applyUserReqDto));
     }
@@ -92,11 +106,16 @@ public class WantedApiController {
     /* 수현 작업 시작 */
     @PostMapping("/s/api/wanted/{companysId}/add")
     public CMRespDto<?> save(@PathVariable Integer companysId, @RequestBody WantedsSaveReqDto wantedsSaveReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        wantedsSaveReqDto.setCompanysId(principal.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.save(wantedsSaveReqDto));
     }
 
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        wantedsUpdateReqDto.setId(wantedId);
+        wantedsUpdateReqDto.setCompanysId(principal.getCompanyId());
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 

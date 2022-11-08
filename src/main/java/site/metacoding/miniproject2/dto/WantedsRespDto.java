@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 import site.metacoding.miniproject2.dto.MySkillsRespDto.WantedGetSkillRespDto;
+import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
+import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 
 public class WantedsRespDto {
 
@@ -70,15 +72,15 @@ public class WantedsRespDto {
         private String pay;
         private Timestamp endDate;
         private Integer companysId;
-        
-        public WantedsSaveRespDto(Wanteds wanteds) {
-            this.wantedTitle = wanteds.getTitle();
-            this.wantedDetail = wanteds.getDetail();
-            this.positionCodeId = wanteds.getPositionCodeId();
-            this.careerCodeId = wanteds.getCareerCodeId();
-            this.pay = wanteds.getPay();
-            this.endDate = wanteds.getEnddate();
-            this.companysId = wanteds.getCompanyId();
+
+        public WantedsSaveRespDto(WantedsSaveReqDto wantedsSaveReqDto) {
+            this.wantedTitle = wantedsSaveReqDto.getWantedTitle();
+            this.wantedDetail = wantedsSaveReqDto.getWantedDetail();
+            this.positionCodeId = wantedsSaveReqDto.getPositionCodeId();
+            this.careerCodeId = wantedsSaveReqDto.getCareerCodeId();
+            this.pay = wantedsSaveReqDto.getPay();
+            this.endDate = wantedsSaveReqDto.getEndDate();
+            this.companysId = wantedsSaveReqDto.getCompanysId();
         }
     }
 
@@ -92,18 +94,17 @@ public class WantedsRespDto {
         private String pay;
         private Timestamp endDate;
         private Integer companysId;
-        
-        public WantedsUpdateRespDto(Wanteds wanteds) {
-            this.wantedTitle = wanteds.getTitle();
-            this.wantedDetail = wanteds.getDetail();
-            this.positionCodeId = wanteds.getPositionCodeId();
-            this.careerCodeId = wanteds.getCareerCodeId();
-            this.pay = wanteds.getPay();
-            this.endDate = wanteds.getEnddate();
-            this.companysId = wanteds.getCompanyId();
+
+        public WantedsUpdateRespDto(WantedsUpdateReqDto wantedsUpdateReqDto) {
+            this.wantedTitle = wantedsUpdateReqDto.getWantedTitle();
+            this.wantedDetail = wantedsUpdateReqDto.getWantedDetail();
+            this.positionCodeId = wantedsUpdateReqDto.getPositionCodeId();
+            this.careerCodeId = wantedsUpdateReqDto.getCareerCodeId();
+            this.pay = wantedsUpdateReqDto.getPay();
+            this.endDate = wantedsUpdateReqDto.getEndDate();
+            this.companysId = wantedsUpdateReqDto.getCompanysId();
         }
 
-        
     }
 
     @Setter
@@ -157,6 +158,6 @@ public class WantedsRespDto {
         private Timestamp enddate;
         private String status;
     }
-    /* 지원 작업 종료*/
+    /* 지원 작업 종료 */
 
 }

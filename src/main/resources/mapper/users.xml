@@ -2,9 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.users.UsersDao">
 	<!-- 성유 작업 시작 -->
+
+	<select id="findAllId"
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$JoinRespDto">
+		SELECT id, user_id, user_password, user_name, age, phone_number, email
+		FROM users WHERE id = #{id}
+	</select>
+
+	<select id="findByCompanyId" resultType="site.metacoding.miniproject2.dto.UsersRespDto$SessionCompanyRespDto">
+		select id as companyId FROM companys where users_id = #{id}
+	</select>
+
 	<select id="findByUserId"
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$AuthRespDto">
-		SELECT id, user_id, user_password FROM users WHERE user_id = #{userId}
+		SELECT id, user_id, user_password, role, NULL AS companyId FROM users WHERE user_id = #{userId}
 	</select>
 
 	<select id="findById"
@@ -20,7 +31,7 @@
 		WHERE id = #{id}
 	</update>
 
-	<update id="updateByPassword">
+	<update id="updatePassword">
 		UPDATE users SET user_password = #{userPassword}
 		WHERE id = #{id}
 	</update>
@@ -39,18 +50,17 @@
 
 	<update id="updateProfile"></update>
 
-
-	<insert id="insert" useGeneratedKeys="true" keyProperty="userId">
-		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, photo, position_code_id, company_id, mycareer_id, created)
-		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{photo}, #{positionCodeId}, #{companyId}, #{mycareerId}, NOW())
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO users(user_id, user_password, user_name, age, phone_number, email, position_code_id, mycareer_id, created)
+		VALUES(#{userId}, #{userPassword}, #{userName}, #{age}, #{phoneNumber}, #{email}, #{positionCodeId}, #{mycareerId}, NOW())
 	</insert>
 	<!-- 성유 작업 완료 -->
 
 	<select id="findInfo"
-	resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoRespDto">
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoRespDto">
 		SELECT us.id, us.user_id, us.user_password,
 		us.user_name, US.AGE,
-		us.phone_number, us.email, us.photo,
+		us.phone_number, us.email,
 		us.position_code_id,
 		us.mycareer_id, us.created, pc.name positionCodeName
 		FROM users us
@@ -60,7 +70,7 @@
 	</select>
 
 	<select id="findInfoCounts"
-	resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoCountRespDto">
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$InfoCountRespDto">
 		SELECT count((IFNULL(state, 0))) AS statusAll,
 		(SELECT count((IFNULL(wanted_id, 0))) AS likesCount
 		FROM likes
@@ -83,7 +93,7 @@
 		resultType="site.metacoding.miniproject2.dto.UsersRespDto$RecommendByPositionRespDto">
 		SELECT @ROWNUM :=@ROWNUM+1 AS no, comrec.*
 		FROM (SELECT com.id, com.company_name, com.address, com.email,
-		com.company_number, com.photo,
+		com.company_number, 
 		com.region_code_name, com.intro,
 		com.years, com.member_count, com.created,
 		wan.id wanted_id,
@@ -120,7 +130,7 @@
 	</select>
 
 	<select id="findStatusCounts"
-        resultType="site.metacoding.miniproject2.dto.UsersRespDto$StatusCountRespDto">
+		resultType="site.metacoding.miniproject2.dto.UsersRespDto$StatusCountRespDto">
         SELECT count((IFNULL(state, 0))) AS statusAll,
         (SELECT
         count((IFNULL(state, 0))) AS statusC
