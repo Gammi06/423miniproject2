@@ -80,7 +80,7 @@ public class JwtAuthenticationFilter implements Filter {
         }
 
         Date expire = new Date(System.currentTimeMillis() + (1000 * 60 * 60));
-
+        log.debug("디버그 : " + expire);
         String jwtToken = JWT.create()
                 .withSubject("구해줘용")
                 .withExpiresAt(expire)
