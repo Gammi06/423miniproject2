@@ -26,13 +26,13 @@ public class UsersApiController {
     private final HttpSession session;
 
     // 성유 작업
-    @PostMapping("/s/login")
+    @PostMapping("/login")
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
-        System.out.println(sessionUsers.getUserId());
-        System.out.println(sessionUsers.getId());
-        System.out.println(sessionUsers.getRole());
+        System.out.println("UserId : " + sessionUsers.getUserId());
+        System.out.println("Id : " + sessionUsers.getId());
+        System.out.println("CompanyId : " + sessionUsers.getCompanyId());
         return new CMRespDto<>(1, "로그인 성공", sessionUsers.getUserId());
 
     }

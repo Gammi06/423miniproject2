@@ -10,7 +10,7 @@ public class SubribesReqDto {
     public static class SubcribesInsertReqDto {
         private Integer userId;
         private Integer companyId;
-
+        
         public SubcribesInsertReqDto(Integer userId, Integer companyId) {
             this.userId = userId;
             this.companyId = companyId;

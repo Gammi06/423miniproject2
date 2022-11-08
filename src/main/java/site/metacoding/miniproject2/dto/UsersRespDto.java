@@ -9,7 +9,7 @@ import lombok.Setter;
 import site.metacoding.miniproject2.dto.CodesRespDto.CareersCodeRespDto;
 import site.metacoding.miniproject2.dto.CodesRespDto.PositionsCodeRespDto;
 import site.metacoding.miniproject2.dto.CodesRespDto.SkillsCodeRespDto;
-import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsListRespDto;
+import site.metacoding.miniproject2.dto.EducationsRespDto.EducationsResumeRespDto;
 import site.metacoding.miniproject2.dto.MyCareersRespDto.MyCareersEditRespDto;
 
 public class UsersRespDto {
@@ -109,7 +109,7 @@ public class UsersRespDto {
         private List<CareersCodeRespDto> careersCodeRes; // 경력
         private List<SkillsCodeRespDto> skillsCo; // 스킬
         private List<MyCareersEditRespDto> myCareers; // 경력2
-        private List<EducationsListRespDto> educations; // 학력
+        private List<EducationsResumeRespDto> educations; // 학력
     }
 
     /* >>>>> 성유 작업 종료<<<<< */

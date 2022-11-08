@@ -19,11 +19,10 @@ import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
+import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.SubribesReqDto.SubcribesInsertReqDto;
-import site.metacoding.miniproject2.dto.SubribesRespDto.SubcribesInsertRespDto;
 import site.metacoding.miniproject2.service.CompanysService;
 
 @Slf4j
@@ -36,10 +35,9 @@ public class CompanysApiController {
 
     /* 지원 작업 */
     // 회사가입
-    @PostMapping("/s/api/companys/{id}/add")
-    public CMRespDto<?> insert(@PathVariable Integer id, @RequestBody CompanysInsertReqDto companysInsertReqDto) {
+    @PostMapping("/s/api/companys/add")
+    public CMRespDto<?> insert(@RequestBody CompanysInsertReqDto companysInsertReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        companysInsertReqDto.setUsersId(id);
         CompanysInsertRespDto companysInsertRespDto = companysService.insertCompany(companysInsertReqDto);
         return new CMRespDto<>(1, "회사정보등록성공", companysInsertRespDto);
     }
@@ -52,25 +50,25 @@ public class CompanysApiController {
     }// 마지막 테스트 / ajax -> 쿼리스트림으로 테스트 완료
 
     // 회사정보 수정/인증 필요
-    @PutMapping("/s/api/companys/{id}")
-    public @ResponseBody CMRespDto<?> updateCompanyId(@PathVariable Integer id,
+    @PutMapping("/s/api/companys")
+    public @ResponseBody CMRespDto<?> updateCompanyId(
             @RequestBody CompanysUpdateReqDto companysUpdateReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(id, companysUpdateReqDto));
+        return new CMRespDto<>(1, "회사정보수정성공", companysService.updateCompany(principal.getId(), companysUpdateReqDto));
     }
 
     // 회사 정보 삭제 /인증 필요. -> 공고 삭제
-    @DeleteMapping("/s/api/companys/{id}/delete")
-    public @ResponseBody CMRespDto<?> deleteCompanysId(@PathVariable Integer id) {
-        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("sessionUsers");
-        return new CMRespDto<>(1, "회사정보삭제", companysService.deleteCompanys(id));
+    @DeleteMapping("/s/api/companys/delete")
+    public @ResponseBody CMRespDto<?> deleteCompanysId() {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        return new CMRespDto<>(1, "회사정보삭제", companysService.deleteCompanys(principal.getId()));
     }
 
     /* 구독페이지 */
-    @GetMapping("/s/mypage/{userId}/subscribes")
-    public @ResponseBody CMRespDto<?> subscribesform(@PathVariable Integer userId) {// userId는 테스트할려고 넣음
+    @GetMapping("/s/mypage/subscribes")
+    public @ResponseBody CMRespDto<?> subscribesform() {// userId는 테스트할려고 넣음
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(userId);
+        List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(principal.getUserId());
         return new CMRespDto<>(1, "구독페이지 보기", subcribesList);
     }// 로그인 해서 테스트 돌리기
 
@@ -79,9 +77,15 @@ public class CompanysApiController {
     /* 수현 작업 시작 */
     @PutMapping("/s/api/companys/{id}/edit/intro")
     public CMRespDto<?> updateCompanysIntro(@PathVariable Integer id,
-            CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
-        companysService.updateCompanysIntro(id, companysUpdateIntroReqDto);
-        return new CMRespDto<>(1, "성공", null);
+            @RequestBody CompanysUpdateIntroReqDto companysUpdateIntroReqDto) {
+        SessionUsers sessionUsers = (SessionUsers) session.getAttribute("principal");
+        if (sessionUsers.getCompanyId().equals(id)) {
+            companysUpdateIntroReqDto.setId(id);
+            return new CMRespDto<>(1, "성공", companysService.updateCompanysIntro(companysUpdateIntroReqDto));
+        } else {
+            return new CMRespDto<>(-1, "수정에 실패했습니다", null);
+        }
+
     }
     /* 수현 작업 완료 */
 
@@ -92,17 +96,20 @@ public class CompanysApiController {
         return new CMRespDto<>(1, "성공", companysService.findByCompanyIdInfo(id));
     }
 
-    @PostMapping("/s/api/companys/{id}/subscribes/add")
-    public SubcribesInsertRespDto insertSubcribes(@PathVariable Integer id) {
-        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        return companysService.insertSubcribes(new SubcribesInsertReqDto(principal.getId(), id));
-    }
-
-    @DeleteMapping("/s/api/companys/{id}/subscribes")
-    public CMRespDto<?> deleteSubcribes(@PathVariable Integer id) {
-        companysService.deleteSubcribes(id);
-        return new CMRespDto<>(1, "성공", null);
-    }
+    /*
+     * @PostMapping("/companys/{id}/subscribes/add")
+     * public void insertSubcribes(@PathVariable Integer id, @PathVariable
+     * SubcribesInsertReqDto subcribesInsertReqDto) {
+     * SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+     * companysService.insertSubcribes(subcribesInsertReqDto);
+     * }
+     * 
+     * @DeleteMapping("/s/api/companys/{id}/subscribes")
+     * public CMRespDto<?> deleteSubcribes(@PathVariable Integer id) {
+     * companysService.deleteSubcribes(id);
+     * return new CMRespDto<>(1, "성공", null);
+     * }
+     */
 
     /* 승현 작업 종료 */
 
