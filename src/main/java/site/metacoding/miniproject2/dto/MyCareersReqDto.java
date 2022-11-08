@@ -1,6 +1,6 @@
 package site.metacoding.miniproject2.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,9 +10,10 @@ public class MyCareersReqDto {
     /* >>>> 성유 작업함 <<<< */
     @Getter
     @Setter
-    public static class MyCareersResumReqDto { // 이력서 작성 내 학력
+    public static class MyCareersResumeReqDto { // 이력서 작성 내 경력
 
-        private Integer userId;
+        private Integer userId; // userId 추가됨 : 연지
+        private Integer resumeId; // resumeId 추가됨 : 연지
         private Timestamp startdate;
         private Timestamp enddate;
         private String companyName;

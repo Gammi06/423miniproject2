@@ -17,6 +17,7 @@ public class RecruitsRespDto {
         private String wantedTitle;
         private Timestamp created;
         private String state;
+
     }
 
     @Setter
