@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.applys.ApplysDao">
 
-	<select id="findById" 
+	<select id="findApply" 
         resultType="site.metacoding.miniproject2.dto.ApplyRespDto$ApplyFindByIdRespDto">
-        SELECT id, wanted_id, resume_id, status, created FROM applys WHERE id = #{id}
+        SELECT id, wanted_id, resume_id, status, created FROM applys WHERE wanted_id = #{wantedId} and resume_id = #{resumeId}
     </select>
 
     <insert id="insert">

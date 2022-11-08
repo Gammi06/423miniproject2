@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Resumes {
     private Integer id;
-    private Integer userId;
+    private String userId;
     private Integer positionsCodeId;
     private String title;
     private String intro;
@@ -18,7 +18,7 @@ public class Resumes {
     private Timestamp created;
 
     @Builder
-    public Resumes(Integer id, Integer userId, Integer positionsCodeId, String title, String intro, Integer statusId,
+    public Resumes(Integer id, String userId, Integer positionsCodeId, String title, String intro, Integer statusId,
             Timestamp created) {
         this.id = id;
         this.userId = userId;

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import lombok.Getter;
 import lombok.Setter;
+import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 
 public class ApplyRespDto {
 
@@ -17,5 +18,18 @@ public class ApplyRespDto {
         private String status;
         private Timestamp created;
     }
+
+    @Getter
+    @Setter
+    public static class ApplyInsertRespDto {
+        private Integer wantedId;
+        private Integer resumeId;
+
+        public ApplyInsertRespDto(ApplyUserReqDto applyUserReqDto) {
+            this.wantedId = applyUserReqDto.getWantedId();
+            this.resumeId = applyUserReqDto.getResumeId();
+        }
+    }
+
     /* >>>> <<<< */
 }

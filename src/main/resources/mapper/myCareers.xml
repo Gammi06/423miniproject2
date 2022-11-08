@@ -2,17 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.metacoding.miniproject2.domain.myCareers.MyCareersDao">
 
-<select id="findAll" 
-resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersResumRespDto">
-
-</select>
-
 <select id="findById" 
 resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersEditRespDto">
 
 </select>
 
-<insert id="insert"></insert>
+<!-- 연지 작업 시작함 -->
 
+<select id="findAllByResumeId"
+    resultType="site.metacoding.miniproject2.dto.MyCareersRespDto$MyCareersResumeRespDto">
+    SELECT user_id, startdate, enddate, company_name
+    FROM mycareers WHERE resume_id = #{resumeId}
+</select>
 
+<insert id="insertByResumeId">
+    INSERT INTO mycareers(user_id, resume_id, startdate, enddate, company_name)
+    VALUES (#{userId}, #{resumeId}, #{startdate}, #{enddate}, #{companyName})
+</insert>
+
+<!-- 연지 작업 종료함 -->
 </mapper>
