@@ -215,5 +215,5 @@ public class TestCompanysApiController {
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
     }
-
+    // subscribesform junit 테스트 완료
 }
