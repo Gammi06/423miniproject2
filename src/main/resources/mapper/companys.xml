@@ -46,7 +46,7 @@
 
 	<!-- 회사삭제-->
 	<delete id="deleteCompanys">
-		DELETE FROM companys WHERE id = #{id}
+		DELETE FROM companys WHERE users_id= #{usersId}
 	</delete>
 
 	<delete id="deleteWantedCompanys">
@@ -54,11 +54,11 @@
 	</delete>
 
 	<select id="findWantedCompanys" resultType="site.metacoding.miniproject2.dto.CompanysRespDto$CompanysDeleteRespDto">
-		SELECT id, Company_name FROM companys WHERE id =#{id}
+		SELECT id, Company_name FROM companys WHERE users_id =#{usersId}
 	</select>
 
 	<select id="deleteWantedTitleCompanys" resultType="String">
-		SELECT title FROM wanteds WHERE company_id = #{id}
+		SELECT title FROM wanteds WHERE company_id = #{companyId}
 	</select>
 	<!-- 회사삭제 완료 -->
 
