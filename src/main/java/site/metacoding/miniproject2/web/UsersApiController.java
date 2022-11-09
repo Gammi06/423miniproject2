@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
@@ -19,6 +20,7 @@ import site.metacoding.miniproject2.dto.UsersReqDto.LoginReqDto;
 import site.metacoding.miniproject2.dto.UsersReqDto.PasswordEditReqDto;
 import site.metacoding.miniproject2.service.UsersService;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class UsersApiController {
@@ -30,9 +32,9 @@ public class UsersApiController {
     public CMRespDto<?> login(@RequestBody LoginReqDto loginReqDto) { // 로그인
         SessionUsers sessionUsers = usersService.findByUserId(loginReqDto);
         session.setAttribute("principal", sessionUsers);
-        System.out.println("UserId : " + sessionUsers.getUserId());
-        System.out.println("Id : " + sessionUsers.getId());
-        System.out.println("CompanyId : " + sessionUsers.getCompanyId());
+        log.debug("UserId : " + sessionUsers.getUserId());
+        log.debug("Id : " + sessionUsers.getId());
+        log.debug("CompanyId : " + sessionUsers.getCompanyId());
         return new CMRespDto<>(1, "로그인 성공", sessionUsers.getUserId());
 
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
@@ -26,6 +27,7 @@ import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
 import site.metacoding.miniproject2.util.SHA256;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UsersService {
@@ -37,12 +39,16 @@ public class UsersService {
         return joinRespDto;
     }
 
+    @Transactional
     public SessionUsers findByUserId(LoginReqDto loginReqDto) {
         AuthRespDto userPS = usersDao.findByUserId(loginReqDto.getUserId());
+        log.debug("디버그2 : user의 Id " + userPS.getId());
         if (userPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
+            log.debug("디버그2 : 1");
             if (userPS.getRole().equals("회사")) {
+                log.debug("디버그2 : 2");
                 SessionCompanyRespDto sessionCompanyRespDto = usersDao.findByCompanyId(userPS.getId());
-                sessionCompanyRespDto.setId(userPS.getId());
+                // sessionCompanyRespDto.setId(userPS.getId());
                 userPS.setCompanyId(sessionCompanyRespDto.getCompanyId());
                 return new SessionUsers(userPS);
             } else {
