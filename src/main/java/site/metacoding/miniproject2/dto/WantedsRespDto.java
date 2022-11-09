@@ -92,7 +92,7 @@ public class WantedsRespDto {
         private Integer careerCodeId;
         private String pay;
         private Timestamp endDate;
-        private Integer companysId;
+        // private Integer companysId;
 
         public WantedsUpdateRespDto(WantedsUpdateReqDto wantedsUpdateReqDto) {
             this.wantedTitle = wantedsUpdateReqDto.getWantedTitle();
@@ -101,7 +101,7 @@ public class WantedsRespDto {
             this.careerCodeId = wantedsUpdateReqDto.getCareerCodeId();
             this.pay = wantedsUpdateReqDto.getPay();
             this.endDate = wantedsUpdateReqDto.getEndDate();
-            this.companysId = wantedsUpdateReqDto.getCompanysId();
+            // this.companysId = wantedsUpdateReqDto.getCompanysId();
         }
 
     }
