@@ -21,8 +21,8 @@ public class RecruitsService {
         return recruitsApplyManageList;
     }
 
-    public List<RecruitsRecommendRespDto> findRecommend(Integer companysId) {
-        List<RecruitsRecommendRespDto> recruitsRecommendList = recruitsDao.findRecommend(companysId);
+    public List<RecruitsRecommendRespDto> findRecommend() {
+        List<RecruitsRecommendRespDto> recruitsRecommendList = recruitsDao.findRecommend();
         return recruitsRecommendList;
     }
 
