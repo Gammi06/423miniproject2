@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.companys.Companys;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.subacribes.SubcribesDao;
+import site.metacoding.miniproject2.domain.subscribes.subscribes;
 import site.metacoding.miniproject2.domain.subscribes.subscribesDao;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysTitleReqDto;
@@ -79,8 +80,8 @@ public class CompanysService {
         }
     }
 
-    public List<SubscribesListRespDto> subcribesListPage(String userId) {
-        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(userId);
+    public List<SubscribesListRespDto> subcribesListPage(Integer Id) {
+        List<SubscribesListRespDto> subcribesList = subcribesDao.subcribesListPage(Id);
 
         List<SubscribesListRespDto> subscribesListRespDto = new ArrayList<>();
         for (SubscribesListRespDto subcribes : subcribesList) {
@@ -117,6 +118,10 @@ public class CompanysService {
             throw new MyApiException("해당 기업의 페이지가 없습니다.");
         }
         return companyDetailRespDto;
+    }
+
+    public CompanyDetailRespDto companysUpdateReqDto(Integer id) {
+        return null;
     }
 
     /* 승현 작업 종료 */

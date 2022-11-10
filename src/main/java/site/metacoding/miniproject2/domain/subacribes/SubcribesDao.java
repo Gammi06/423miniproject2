@@ -9,7 +9,7 @@ public interface SubcribesDao {
 
     /* >>>>>>지원 작업함<<<<<<< */
 
-    public List<SubscribesListRespDto> subcribesListPage(String userId);
+    public List<SubscribesListRespDto> subcribesListPage(Integer Id);
 
     /* >>>>>>>>지원 작업 종료<<<<<<<<<<<< */
 }

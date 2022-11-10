@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="site.metacoding.miniproject2.domain.subcribes.SubcribesDao">
+<mapper namespace="site.metacoding.miniproject2.domain.subacribes.SubcribesDao">
 
 	<!--지원 작업-->
 	<select id="subcribesListPage"
 		resultType="site.metacoding.miniproject2.dto.CompanysRespDto$SubscribesListRespDto">
-		SELECT s.id,w.company_id,w.created,w.enddate,if(enddate>NOW(),'모집중','마감') state,
-		w.id wantedid, c.company_name, s.user_id
-	   FROM wanteds w LEFT OUTER JOIN companys c
-	   ON w.company_id = c.id
-	   LEFT OUTER JOIN subscribes s
-	   ON s.company_id= w.id
-	   WHERE s.user_id = #{id}
+		SELECT s.id,
+		w.company_id,
+		w.created,
+		w.enddate,
+		if(enddate>NOW(),'모집중','마감') state,
+		w.id wantedid, 
+		c.company_name,
+	    s.user_id
+	    FROM wanteds w LEFT OUTER JOIN companys c
+	    ON w.company_id = c.id
+	    LEFT OUTER JOIN subscribes s
+	    ON s.company_id= w.id
+	    WHERE s.user_id = #{userId}
 	</select>
 	<!--지원 작업 종료-->
 

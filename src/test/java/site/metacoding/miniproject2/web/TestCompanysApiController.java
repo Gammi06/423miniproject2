@@ -196,24 +196,26 @@ public class TestCompanysApiController {
 
     }/// 회사서비스 삭제 테스트
 
-    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-    @Test
-    public void subscribesform_test() throws Exception {
+    // @Sql(scripts = "classpath:createTest.sql", executionPhase =
+    // ExecutionPhase.BEFORE_TEST_METHOD)
+    // @Test
+    // public void subscribesform_test() throws Exception {
 
-        Integer UserId = 1;
+    // Integer UserId = 1;
 
-        // when
-        ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.get("/s/mypage/subscribes")
-                        .accept(APPLICATION_JSON)
-                        .session(session));
+    // // when
+    // ResultActions resultActions = mvc.perform(
+    // MockMvcRequestBuilders.get("/s/mypage/subscribes")
+    // .accept(APPLICATION_JSON)
+    // .session(session));
 
-        // then
-        MvcResult mvcResult = resultActions.andReturn();
-        System.out.println("debugggg:" + mvcResult.getResponse().getContentAsString());
+    // // then
+    // MvcResult mvcResult = resultActions.andReturn();
+    // System.out.println("debugggg:" +
+    // mvcResult.getResponse().getContentAsString());
 
-        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
-        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
-    }
+    // resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    // resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+    // }
 
 }
