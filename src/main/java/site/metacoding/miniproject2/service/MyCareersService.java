@@ -1,10 +1,12 @@
 package site.metacoding.miniproject2.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.myCareers.MyCareersDao;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class MyCareersService {
@@ -18,6 +20,7 @@ public class MyCareersService {
         myCareersDao.findById(id);
     }
 
+    @Transactional
     public void insert() {
         myCareersDao.insert();
     }

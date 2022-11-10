@@ -3,12 +3,14 @@ package site.metacoding.miniproject2.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.requests.RequestsDao;
 import site.metacoding.miniproject2.dto.RequestsRespDto.RequestsInfoRespDto;
 import site.metacoding.miniproject2.dto.RequestsRespDto.RequestsListRespDto;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class RequestsService {

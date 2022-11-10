@@ -1,6 +1,7 @@
 package site.metacoding.miniproject2.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.applys.ApplysDao;
@@ -8,6 +9,7 @@ import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.ApplyRespDto.ApplyInsertRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class ApplyService {
@@ -16,6 +18,7 @@ public class ApplyService {
 
     /* 승현 작업 시작 */
 
+    @Transactional
     public ApplyInsertRespDto insert(ApplyUserReqDto applyUserReqDto) {
         if (applyUserReqDto.getResumeId() == null) {
             throw new MyApiException("신청하실 이력서가 없습니다.");

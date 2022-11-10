@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 
-@Slf4j
 @ActiveProfiles("test") // 테스트 어플리케이션 실행
 @Sql("classpath:truncate.sql")
 @Transactional

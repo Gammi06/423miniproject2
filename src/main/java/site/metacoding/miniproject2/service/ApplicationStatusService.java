@@ -3,6 +3,7 @@ package site.metacoding.miniproject2.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject2.domain.applicationStatus.ApplicationStatusDao;
@@ -16,6 +17,7 @@ import site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStat
 import site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusWaitingInfoRespDto;
 import site.metacoding.miniproject2.dto.ApplicationStatusRespDto.ApplicationStatusWaitingListRespDto;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class ApplicationStatusService {

@@ -1,6 +1,7 @@
 package site.metacoding.miniproject2.web;
 
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.ApplyReqDto.ApplyUserReqDto;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
@@ -25,7 +25,6 @@ import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
 import site.metacoding.miniproject2.service.WantedsService;
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class WantedApiController {

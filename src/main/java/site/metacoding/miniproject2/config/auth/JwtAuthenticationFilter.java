@@ -13,13 +13,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
@@ -28,10 +30,10 @@ import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.SessionCompanyRespDto;
 import site.metacoding.miniproject2.service.UsersService;
 
-@Slf4j
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter implements Filter {
 
+    private final Logger logger = LoggerFactory.getLogger("JwtAuthenticationFilter의 로그");
     private final UsersService usersService;
     private final UsersDao usersDao;
 
@@ -48,8 +50,6 @@ public class JwtAuthenticationFilter implements Filter {
 
         ObjectMapper om = new ObjectMapper();
         LoginReqDto loginReqDto = om.readValue(req.getInputStream(), LoginReqDto.class);
-        log.debug("디버그 : " + loginReqDto.getUserId());
-        log.debug("디버그 : " + loginReqDto.getUserPassword());
 
         Optional<AuthRespDto> usersOP = usersService.findByUserIdOP(loginReqDto);
         if (usersOP.isEmpty()) {
@@ -59,9 +59,7 @@ public class JwtAuthenticationFilter implements Filter {
 
         AuthRespDto usersPS = usersOP.get();
 
-        log.debug("디버그2 : 1");
         if (usersPS.getRole().equals("회사")) {
-            log.debug("디버그2 : 2");
             SessionCompanyRespDto sessionCompanyRespDto = usersDao.findByCompanyId(usersPS.getId());
             // sessionCompanyRespDto.setId(userPS.getId());
             usersPS.setCompanyId(sessionCompanyRespDto.getCompanyId());
@@ -80,7 +78,7 @@ public class JwtAuthenticationFilter implements Filter {
         }
 
         Date expire = new Date(System.currentTimeMillis() + (1000 * 60 * 60));
-        log.debug("디버그 : " + expire);
+        logger.debug("디버그 : " + expire);
         String jwtToken = JWT.create()
                 .withSubject("구해줘용")
                 .withExpiresAt(expire)
@@ -88,7 +86,7 @@ public class JwtAuthenticationFilter implements Filter {
                 .withClaim("userId", usersPS.getUserId())
                 .withClaim("companyId", usersPS.getCompanyId())
                 .sign(Algorithm.HMAC512("구해줘용"));
-        log.debug("디버그 : " + jwtToken);
+        logger.debug("디버그 : " + jwtToken);
 
         // JWT토큰 응답
         customJwtResponse(jwtToken, usersPS, resp);

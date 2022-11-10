@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
-import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 import site.metacoding.miniproject2.service.RecruitsService;
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class RecruitsApiController {
@@ -25,7 +22,6 @@ public class RecruitsApiController {
     @GetMapping("/s/recruits/{companysId}/info/companys")
     public CMRespDto<?> findApplyManage(@PathVariable Integer companysId) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
-        log.debug("디버그 principal : " + principal.getCompanyId());
         if (principal.getCompanyId().equals(companysId)) {
             return new CMRespDto<>(1, "성공",
                     recruitsService.findApplyManage(principal.getCompanyId()));

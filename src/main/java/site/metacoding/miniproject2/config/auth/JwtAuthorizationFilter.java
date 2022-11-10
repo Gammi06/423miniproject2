@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 
 import com.auth0.jwt.JWT;
@@ -21,15 +23,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersRespDto.AuthRespDto;
 
 @Profile("dev")
-@Slf4j
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter implements Filter {
+
+    private final Logger logger = LoggerFactory.getLogger("JwtAuthorizationFilter 로그");
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -38,7 +40,7 @@ public class JwtAuthorizationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String jwtToken = req.getHeader("Authorization");
-        log.debug("디버그 토큰 : " + jwtToken);
+        logger.debug("디버그 토큰 : " + jwtToken);
         if (jwtToken == null) {
             customResponse("JWT 토큰이 없어서 인가할 수 없습니다", resp);
             return;
@@ -46,22 +48,16 @@ public class JwtAuthorizationFilter implements Filter {
 
         jwtToken = jwtToken.replace("Bearer ", "");
         jwtToken = jwtToken.trim();
-        log.debug("디버그 jwtToken:" + jwtToken.trim());
         try {
             DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("구해줘용")).build().verify(jwtToken);
 
             Integer id = decodedJWT.getClaim("id").asInt();
             String userId = decodedJWT.getClaim("userId").asString();
             Integer companyId = decodedJWT.getClaim("companyId").asInt();
-            log.debug("디버그 : userId : " + userId);
             AuthRespDto authRespDto = new AuthRespDto(id, userId, companyId);
             SessionUsers principal = new SessionUsers(authRespDto);
             HttpSession session = req.getSession();
-            log.debug("디버그 세션: " + req.getSession());
             session.setAttribute("principal", principal);
-            log.debug("디버그 : id : " + principal.getId());
-            log.debug("디버그 : userId : " + principal.getUserId());
-            log.debug("디버그 : companyId : " + principal.getCompanyId());
         } catch (RuntimeException e) {
             e.printStackTrace();
             customResponse("토큰 검증 실패 : " + e.getMessage(), resp);
