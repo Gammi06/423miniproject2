@@ -23,11 +23,7 @@ public class LikesService {
     private final WantedsDao wantedsDao;
     private final LikesDao likesDao;
 
-    /* 지원 작업 */
-    public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
-        return wantedsDao.findLikeList(userId);
-    }
-    /* 지원 작업종료 */
+
 
     /* 승현 작업 시작 */
     public LikeFindByIdRespDto findById(LikesInsertReqDto likesInsertReqDto) {

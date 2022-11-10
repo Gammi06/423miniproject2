@@ -41,22 +41,25 @@ public class CompanysService {
         return companysInsertRespDto;
     }
 
-    public CompanysTitleReqDto updateCompany(Integer id, CompanysUpdateReqDto companysUpdateReqDto) {
+    public CompanysTitleReqDto updateCompany(Integer userid, CompanysUpdateReqDto companysUpdateReqDto) {
 
-        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
+        CompanysTitleReqDto companysTitleReqDtoPS = companysDao.findByIdCompanyId(userid);
         if (companysTitleReqDtoPS == null) {
-            throw new RuntimeException(id + "의 회사정보를 찾을 수 없습니다.");
+            throw new RuntimeException(userid + "의 회사정보를 찾을 수 없습니다.");
         }
+        System.out.println("디버그" + companysTitleReqDtoPS + "1111111111111111111111111111");
         companysDao.updateCompanys(companysUpdateReqDto);// 변경
-        companysTitleReqDtoPS = companysDao.findByIdCompanyId(id);
+        companysTitleReqDtoPS = companysDao.findByIdCompanyId(userid);
+        System.out.println("디버그" + companysTitleReqDtoPS + "2222222222222222222222222222222");
         return companysTitleReqDtoPS;
     }
 
     public CompanysDeleteRespDto deleteCompanys(Integer id) {
         CompanysDeleteRespDto companysDeleteRespDto = companysDao.findWantedCompanys(id);
-        companysDeleteRespDto.setWantedNameListCompany(companysDao.deleteWantedTitleCompanys(id));
+        companysDeleteRespDto
+                .setWantedNameListCompany(companysDao.deleteWantedTitleCompanys(companysDeleteRespDto.getId()));
         if (companysDeleteRespDto != null) {
-            companysDao.deleteWantedCompanys(id);
+            companysDao.deleteWantedCompanys(companysDeleteRespDto.getId());
             companysDao.deleteCompanys(id);
         }
         return companysDeleteRespDto;

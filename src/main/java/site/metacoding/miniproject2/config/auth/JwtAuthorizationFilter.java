@@ -46,8 +46,10 @@ public class JwtAuthorizationFilter implements Filter {
 
         jwtToken = jwtToken.replace("Bearer ", "");
         jwtToken = jwtToken.trim();
+        log.debug("디버그 jwtToken:" + jwtToken.trim());
         try {
             DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("구해줘용")).build().verify(jwtToken);
+
             Integer id = decodedJWT.getClaim("id").asInt();
             String userId = decodedJWT.getClaim("userId").asString();
             Integer companyId = decodedJWT.getClaim("companyId").asInt();
@@ -55,12 +57,14 @@ public class JwtAuthorizationFilter implements Filter {
             AuthRespDto authRespDto = new AuthRespDto(id, userId, companyId);
             SessionUsers principal = new SessionUsers(authRespDto);
             HttpSession session = req.getSession();
+            log.debug("디버그 세션: " + req.getSession());
             session.setAttribute("principal", principal);
             log.debug("디버그 : id : " + principal.getId());
             log.debug("디버그 : userId : " + principal.getUserId());
             log.debug("디버그 : companyId : " + principal.getCompanyId());
         } catch (RuntimeException e) {
-            customResponse("토큰 검증 실패", resp);
+            e.printStackTrace();
+            customResponse("토큰 검증 실패 : " + e.getMessage(), resp);
             return;
         }
 

@@ -214,8 +214,15 @@ public class TestCompanysApiController {
     // System.out.println("debugggg:" +
     // mvcResult.getResponse().getContentAsString());
 
+<<<<<<< HEAD
     // resultActions.andExpect(MockMvcResultMatchers.status().isOk());
     // resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
     // }
 
+=======
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
+    }
+    // subscribesform junit 테스트 완료
+>>>>>>> ff0a1a7a6a93ae3b356db4c320d5a96435ed9d38
 }

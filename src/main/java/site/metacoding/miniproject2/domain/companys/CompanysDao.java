@@ -21,13 +21,13 @@ public interface CompanysDao {
 
     public void updateCompanys(CompanysUpdateReqDto companysUpdateReqDto);// 수행
 
-    public void deleteCompanys(Integer id);
+    public void deleteCompanys(Integer usersId);
 
     public void deleteWantedCompanys(Integer id);// 회사할때 공고 같이 삭제
 
     public CompanysDeleteRespDto findWantedCompanys(Integer id);// 회사할때 공고 같이 삭제
 
-    public List<String> deleteWantedTitleCompanys(Integer id);// 회사할때 공고 같이 삭제
+    public List<String> deleteWantedTitleCompanys(Integer companyId);// 회사할때 공고 같이 삭제
 
     public CompanysTitleReqDto findByIdCompanyId(Integer id);
 

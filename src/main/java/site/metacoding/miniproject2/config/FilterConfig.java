@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.config.auth.JwtAuthenticationFilter;
 import site.metacoding.miniproject2.config.auth.JwtAuthorizationFilter;
+import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.service.UsersService;
 
 @Slf4j
@@ -17,12 +18,13 @@ import site.metacoding.miniproject2.service.UsersService;
 public class FilterConfig {
 
     private final UsersService usersService;
+    private final UsersDao usersDao;
 
     @Bean
     public FilterRegistrationBean<JwtAuthenticationFilter> jwtAuthenticationFilterRegister() {
         log.debug("디버그 : 인증 필터 등록");
         FilterRegistrationBean<JwtAuthenticationFilter> bean = new FilterRegistrationBean<>(
-                new JwtAuthenticationFilter(usersService));
+                new JwtAuthenticationFilter(usersService, usersDao));
         bean.addUrlPatterns("/login");
         bean.setOrder(1);
         return bean;

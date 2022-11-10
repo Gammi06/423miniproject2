@@ -72,7 +72,7 @@ public class CompanysApiController {
 
     /* 구독페이지 */
     @GetMapping("/s/mypage/subscribes")
-    public @ResponseBody CMRespDto<?> subscribesform() {// userId는 테스트할려고 넣음
+    public @ResponseBody CMRespDto<?> subscribesform() {// userId는 테스트할려고 넣음.
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
         List<SubscribesListRespDto> subcribesList = companysService.subcribesListPage(principal.getId());
         System.out.println(principal.getUserId());
