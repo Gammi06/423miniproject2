@@ -9,13 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
-import site.metacoding.miniproject2.domain.wanteds.Wanteds;
 import site.metacoding.miniproject2.domain.wanteds.WantedsDao;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject2.dto.SearchDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedDetailRespDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedListRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManageCareersRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsRecruitsManagePositionsRespDto;
@@ -121,4 +121,10 @@ public class WantedsService {
     }
 
     /* 승현 작업 종료 */
+
+    /* 지원 작업 */
+    public List<WantedLisLikestRespDto> findLikeList(Integer userId) {
+        return wantedsDao.findLikeList(userId);
+    }
+    /* 지원 작업종료 */
 }

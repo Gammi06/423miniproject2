@@ -1,5 +1,6 @@
 package site.metacoding.miniproject2.web;
 
+import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import site.metacoding.miniproject2.dto.LikesReqDto.LikesInsertReqDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsSaveReqDto;
 import site.metacoding.miniproject2.dto.WantedsReqDto.WantedsUpdateReqDto;
+import site.metacoding.miniproject2.dto.WantedsRespDto.WantedLisLikestRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 import site.metacoding.miniproject2.service.ApplyService;
 import site.metacoding.miniproject2.service.LikesService;
@@ -128,4 +130,14 @@ public class WantedApiController {
         return new CMRespDto<>(1, "성공", null);
     }
     /* 수현 작업 종료 */
+
+    /* 지원 작업 */
+    @GetMapping("/s/mypage/likes")
+    public CMRespDto<?> findLikeList() {
+        SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        List<WantedLisLikestRespDto> WantedListRespDto = wantedsService.findLikeList(principal.getId());
+        return new CMRespDto<>(1, "좋아요페이지 보기", WantedListRespDto);
+    }
+    /* 지원 작업 완료! */
+
 }

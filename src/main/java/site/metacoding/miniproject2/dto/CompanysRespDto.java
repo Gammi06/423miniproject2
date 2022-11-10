@@ -107,6 +107,7 @@ public class CompanysRespDto {
         private String state;
 
         public SubscribesListRespDto(SubscribesListRespDto subscribesListRespDto) {
+            this.id = subscribesListRespDto.getId();
             this.userId = subscribesListRespDto.getUserId();
             this.companyId = subscribesListRespDto.getCompanyId();
             this.wantedId = subscribesListRespDto.getWantedId();
