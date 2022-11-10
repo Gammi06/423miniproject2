@@ -196,33 +196,24 @@ public class TestCompanysApiController {
 
     }/// 회사서비스 삭제 테스트
 
-    // @Sql(scripts = "classpath:createTest.sql", executionPhase =
-    // ExecutionPhase.BEFORE_TEST_METHOD)
-    // @Test
-    // public void subscribesform_test() throws Exception {
+    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void subscribesform_test() throws Exception {
 
-    // Integer UserId = 1;
+        Integer UserId = 1;
 
-    // // when
-    // ResultActions resultActions = mvc.perform(
-    // MockMvcRequestBuilders.get("/s/mypage/subscribes")
-    // .accept(APPLICATION_JSON)
-    // .session(session));
+        // when
+        ResultActions resultActions = mvc.perform(
+                MockMvcRequestBuilders.get("/s/mypage/subscribes")
+                        .accept(APPLICATION_JSON)
+                        .session(session));
 
-    // // then
-    // MvcResult mvcResult = resultActions.andReturn();
-    // System.out.println("debugggg:" +
-    // mvcResult.getResponse().getContentAsString());
+        // then
+        MvcResult mvcResult = resultActions.andReturn();
+        System.out.println("debugggg:" + mvcResult.getResponse().getContentAsString());
 
-<<<<<<< HEAD
-    // resultActions.andExpect(MockMvcResultMatchers.status().isOk());
-    // resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
-    // }
-
-=======
         resultActions.andExpect(MockMvcResultMatchers.status().isOk());
         resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
     }
     // subscribesform junit 테스트 완료
->>>>>>> ff0a1a7a6a93ae3b356db4c320d5a96435ed9d38
 }
