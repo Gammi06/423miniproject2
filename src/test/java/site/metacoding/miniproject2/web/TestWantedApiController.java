@@ -194,24 +194,4 @@ public class TestWantedApiController {
 
     }
 
-    @Sql(scripts = "classpath:createTest.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-    @Test
-    public void likesform_test() throws Exception {
-
-        Integer Id = 1;
-
-        // when
-        ResultActions resultActions = mvc.perform(
-                MockMvcRequestBuilders.get("/s/mypage/likes")
-                        .accept(APPLICATION_JSON)
-                        .session(session));
-
-        // then
-        MvcResult mvcResult = resultActions.andReturn();
-        System.out.println("debugggg:" + mvcResult.getResponse().getContentAsString());
-
-        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
-        resultActions.andExpect(MockMvcResultMatchers.jsonPath("$.code").value(1));
-    }
-
 }
