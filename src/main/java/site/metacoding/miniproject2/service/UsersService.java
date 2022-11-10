@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.users.UsersDao;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.dto.UsersReqDto.EditReqDto;
@@ -25,28 +24,24 @@ import site.metacoding.miniproject2.dto.UsersRespDto.RecommendByPositionRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.SessionCompanyRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.StatusCountRespDto;
 import site.metacoding.miniproject2.dto.UsersRespDto.UsersInfoRespDto;
-import site.metacoding.miniproject2.util.SHA256;
 
-@Slf4j
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class UsersService {
     private final UsersDao usersDao;
 
+    @Transactional
     public JoinRespDto insert(JoinReqDto joinReqDto) {
         usersDao.insert(joinReqDto);
         JoinRespDto joinRespDto = usersDao.findAllId(joinReqDto.getId());
         return joinRespDto;
     }
 
-    @Transactional
     public SessionUsers findByUserId(LoginReqDto loginReqDto) {
         AuthRespDto userPS = usersDao.findByUserId(loginReqDto.getUserId());
-        log.debug("디버그2 : user의 Id " + userPS.getId());
         if (userPS.getUserPassword().equals(loginReqDto.getUserPassword())) {
-            log.debug("디버그2 : 1");
             if (userPS.getRole().equals("회사")) {
-                log.debug("디버그2 : 2");
                 SessionCompanyRespDto sessionCompanyRespDto = usersDao.findByCompanyId(userPS.getId());
                 // sessionCompanyRespDto.setId(userPS.getId());
                 userPS.setCompanyId(sessionCompanyRespDto.getCompanyId());
@@ -64,6 +59,7 @@ public class UsersService {
         return usersDao.findById(id);
     }
 
+    @Transactional
     public EditRespDto update(EditReqDto editReqDto) {
         UsersInfoRespDto usersPS = usersDao.findById(editReqDto.getId());
         if (usersPS == null) {
@@ -73,6 +69,7 @@ public class UsersService {
         return new EditRespDto(usersPS);
     }
 
+    @Transactional
     public PasswordEditRespDto updatePassword(PasswordEditReqDto passwordEditReqDto) {
         UsersInfoRespDto usersPS = usersDao.findById(passwordEditReqDto.getId());
         if (usersPS == null) {

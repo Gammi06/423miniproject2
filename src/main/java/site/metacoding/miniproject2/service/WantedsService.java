@@ -3,9 +3,9 @@ package site.metacoding.miniproject2.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.domain.codes.PositionsCodeDao;
 import site.metacoding.miniproject2.domain.companys.CompanysDao;
 import site.metacoding.miniproject2.domain.mySkills.MySkillsDao;
@@ -24,7 +24,7 @@ import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsSaveRespDto;
 import site.metacoding.miniproject2.dto.WantedsRespDto.WantedsUpdateRespDto;
 import site.metacoding.miniproject2.handler.MyApiException;
 
-@Slf4j
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class WantedsService {
@@ -35,17 +35,20 @@ public class WantedsService {
     private final WantedsDao wantedsDao;
 
     /* 수현 작업 시작 */
+    @Transactional
     public WantedsSaveRespDto save(WantedsSaveReqDto wantedsSaveReqDto) {
         wantedsDao.save(wantedsSaveReqDto);
         return new WantedsSaveRespDto(wantedsSaveReqDto);
 
     }
 
+    @Transactional
     public WantedsUpdateRespDto update(WantedsUpdateReqDto wantedsUpdateReqDto) {
         wantedsDao.update(wantedsUpdateReqDto);
         return new WantedsUpdateRespDto(wantedsUpdateReqDto);
     }
 
+    @Transactional
     public void deleteById(Integer id) {
         wantedsDao.deleteById(id);
     }

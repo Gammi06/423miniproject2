@@ -14,20 +14,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject2.dto.CMRespDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysInsertReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysTitleReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateIntroReqDto;
 import site.metacoding.miniproject2.dto.CompanysReqDto.CompanysUpdateReqDto;
-import site.metacoding.miniproject2.dto.CompanysRespDto.CompanyDetailRespDto;
-import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysDeleteRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.CompanysInsertRespDto;
 import site.metacoding.miniproject2.dto.CompanysRespDto.SubscribesListRespDto;
 import site.metacoding.miniproject2.dto.SessionUsers;
 import site.metacoding.miniproject2.service.CompanysService;
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class CompanysApiController {
@@ -61,7 +57,6 @@ public class CompanysApiController {
         companysService.updateCompany(principal.getId(), companysUpdateReqDto);
         CompanysTitleReqDto companysTitleReqDto = companysService.updateCompany(principal.getId(),
                 companysUpdateReqDto);
-
         return new CMRespDto<>(1, "회사정보수정성공", null);
     }
 
