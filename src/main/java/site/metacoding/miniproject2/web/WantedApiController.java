@@ -1,6 +1,5 @@
 package site.metacoding.miniproject2.web;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -111,6 +110,11 @@ public class WantedApiController {
     @PutMapping("/s/api/wanted/{wantedId}/edit")
     public CMRespDto<?> update(@PathVariable Integer wantedId, @RequestBody WantedsUpdateReqDto wantedsUpdateReqDto) {
         SessionUsers principal = (SessionUsers) session.getAttribute("principal");
+        if (principal.getCompanyId() == null) {
+            throw new MyApiException("로그인이 필요합니다.");
+        }
+        // wantedsUpdateReqDto.setCompanysId(principal.getCompanyId());
+        wantedsUpdateReqDto.setId(wantedId);
         return new CMRespDto<>(1, "성공", wantedsService.update(wantedsUpdateReqDto));
     }
 
