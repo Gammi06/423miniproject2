@@ -123,9 +123,5 @@ public class CompanysService {
         return companyDetailRespDto;
     }
 
-    public CompanyDetailRespDto companysUpdateReqDto(Integer id) {
-        return null;
-    }
-
     /* 승현 작업 종료 */
 }
